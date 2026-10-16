@@ -1,0 +1,68 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app_build\engine.py. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -412,6 +412,39 @@
+     return frames
+ 
+ 
++def _normalize_input_code(custom_input_code: str) -> str:
++    """
++    Splits top-level comma-separated assignments (e.g., `arr = [1, 3, 5], target = 5`)
++    into newline-separated statements while preserving list literals.
++    """
++    raw = custom_input_code.strip()
++    if not raw:
++        return ""
++    segments: List[str] = []
++    cur = ""
++    depth = 0
++    in_single = False
++    in_double = False
++    for ch in raw:
++        if ch == "'" and not in_double:
++            in_single = not in_single
++        elif ch == '"' and not in_single:
++            in_double = not in_double
++        elif not in_single and not in_double:
++            if ch in "([{":
++                depth += 1
++            elif ch in ")]}":
++                depth -= 1
++            elif ch == "," and depth == 0 and "=" in cur:
++                segments.append(cur.strip())
++                cur = ""
++                continue
++        cur += ch
++    if cur.strip():
++        segments.append(cur.strip())
++    return "\n".join(segments)
++
++
+ def trace_python_program(
+     source_code: str,
+     custom_input_code: str = "",
+@@ -432,10 +432,18 @@
+             "steps": [],
+         }
+ 
+-    normalized_input = custom_input_code.strip()
+-    if normalized_input and "," in normalized_input and "=" in normalized_input:
+-        # Support `arr = [1, 2, 3], target = 2` syntax in Python runner
+-        pass
++    normalized_input = _normalize_input_code(custom_input_code)
++    if normalized_input:
++        in_valid, in_err, in_line = validate_python_support(normalized_input)
++        if not in_valid:
++            return {
++                "ok": False,
++                "errorType": "INPUT_ERROR",
++                "errorMessage": f"Invalid Input Playground value: {in_err}",
++                "errorLine": in_line,
++                "rawLines": raw_lines,
++                "steps": [],
++            }
+ 
+     full_code = _build_auto_invocation_code(source_code, normalized_input)
+     full_raw_lines = full_code.replace("\r\n", "\n").split("\n")
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

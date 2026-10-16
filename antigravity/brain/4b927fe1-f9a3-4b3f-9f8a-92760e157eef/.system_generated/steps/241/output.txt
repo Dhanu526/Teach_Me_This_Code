@@ -1,0 +1,45 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app_build\styles.css. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -1053,6 +1053,39 @@
+   text-align: center;
+ }
+ 
++.code-header-actions {
++  display: flex;
++  align-items: center;
++  gap: 8px;
++}
++
++.editor-input-bar {
++  display: flex;
++  flex-direction: column;
++  gap: 4px;
++  margin-top: 8px;
++  padding-top: 8px;
++  border-top: 1px dashed var(--border-medium);
++}
++
++.editor-input-bar .drawer-input {
++  width: 100%;
++}
++
++.stdout-box {
++  font-family: var(--font-mono);
++  font-size: 13px;
++  line-height: 1.55;
++  background: #0f172a;
++  color: #f8fafc;
++  padding: 10px 14px;
++  border-radius: var(--radius-sm);
++  border: 1px solid #334155;
++  white-space: pre-wrap;
++  max-height: 140px;
++  overflow-y: auto;
++}
++
+ .hidden {
+   display: none !important;
+ }
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

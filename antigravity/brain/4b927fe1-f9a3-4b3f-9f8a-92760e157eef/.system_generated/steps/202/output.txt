@@ -1,0 +1,28 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app_build\explainer.js. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -498,22 +498,6 @@
+     return matches.length ? matches.slice(0, 3).join("<br>") : "• Standard Python statement.";
+   }
+ 
+-  buildPracticeChallenge(step, nextStep) {
+-    if (!nextStep) return null;
+-    if (nextStep.eventType === "CONDITION" && nextStep.condition) {
+-      const c = nextStep.condition;
+-      return {
+-        prompt: `Quick Check: On the next line (\`${nextStep.codeText}\`), will \`${c.expr}\` be True or False?`,
+-        options: [
+-          { label: `True (${c.leftVal} ${c.operator} ${c.rightVal})`, correct: c.result === true },
+-          { label: `False (${c.leftVal} ${c.operator} ${c.rightVal})`, correct: c.result === false }
+-        ],
+-        explanation: `With \`${c.leftExpr} = ${c.leftVal}\` and \`${c.rightExpr} = ${c.rightVal}\`, the answer is **${c.result ? "True" : "False"}**.`
+-      };
+-    }
+-    return null;
+-  }
+-
+   buildExecutionSummary(traceResult) {
+     if (!traceResult.ok || !traceResult.steps.length) {
+       return `Stopped: ${traceResult.errorMessage || "Check syntax or input."}`;
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

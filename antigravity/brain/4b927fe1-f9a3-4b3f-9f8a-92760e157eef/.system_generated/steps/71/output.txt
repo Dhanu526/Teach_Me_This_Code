@@ -1,0 +1,59 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app.js. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -549,9 +549,37 @@
+       this.practiceCard.classList.add("hidden");
+     }
+ 
++    this.renderTimelineStrip();
+     this.renderFlowchartSVG(step);
+   }
+ 
++  renderTimelineStrip() {
++    this.timelineStrip = document.getElementById("timelineStrip");
++    if (!this.timelineStrip || !this.traceResult || !this.traceResult.steps) return;
++    this.timelineStrip.innerHTML = "";
++
++    this.traceResult.steps.forEach((s, idx) => {
++      const pill = document.createElement("button");
++      pill.className = "timeline-step-pill";
++      if (idx === this.currentStepIdx) pill.classList.add("current");
++      else if (idx < this.currentStepIdx) pill.classList.add("visited");
++
++      pill.textContent = `#${s.stepIndex} L${s.line}`;
++      pill.title = `Step ${s.stepIndex} (Line ${s.line}): ${s.codeText}`;
++      pill.addEventListener("click", () => {
++        this.pausePlayback(false);
++        this.goToStep(idx);
++      });
++      this.timelineStrip.appendChild(pill);
++
++      if (idx === this.currentStepIdx) {
++        setTimeout(() => {
++          pill.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
++        }, 10);
++      }
++    });
++  }
++
+   renderFlowchartSVG(step) {
+     const cfg = this.traceResult.cfg;
+     if (!cfg || !cfg.nodes.length) return;
+@@ -558,12 +558,12 @@
+     const nodeW = 195;
+     const nodeH = 32;
+-    const vGap = 46;
++    const vGap = 48;
+     const svgW = 360;
+-    const svgH = Math.max(190, cfg.nodes.length * vGap + 26);
++    const svgH = Math.max(220, cfg.nodes.length * vGap + 40);
+ 
+     const positions = {};
+     cfg.nodes.forEach((n, idx) => {
+-      positions[n.id] = { x: svgW / 2, y: 22 + idx * vGap };
++      positions[n.id] = { x: svgW / 2, y: 32 + idx * vGap };
+     });
+ 
+     const activeId = `L${step.line}`;
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

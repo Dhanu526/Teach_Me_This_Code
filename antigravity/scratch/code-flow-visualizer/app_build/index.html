@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Teach Me This Code — Thonny-Style Visual Execution & DSA Iteration Explorer</title>
+  <link rel="icon" href="data:,">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- Clean, Simple Top Navigation Bar -->
+  <header class="top-bar">
+    <div class="brand-area">
+      <span class="teacher-badge">Teach Me This Code</span>
+      <span id="stepProgressLabel" class="step-progress-label">Step 1 of 50</span>
+      <span id="activeScopeBadge" class="scope-pill scope-global">GLOBAL SCOPE</span>
+    </div>
+
+    <!-- Simple Navigation Controls + Thonny Sub-Expression Stepper -->
+    <nav class="nav-controls" aria-label="Step Navigation">
+      <button id="btnPrev" class="btn-nav" title="Go back one step (Left Arrow)">← Previous</button>
+      <button id="btnSubStep" class="btn-nav btn-substep" title="Step through internal sub-expressions on this line (F7)">🔍 Sub-Expr (F7)</button>
+      <button id="btnNext" class="btn-nav btn-next-prominent" title="Explain the next step (Right Arrow)">Next Step →</button>
+      <button id="btnAutoPlay" class="btn-nav" title="Automatically step through the code">▶ Auto Play</button>
+      <button id="btnRestart" class="btn-nav" title="Start over from Step 1">↺ Restart</button>
+    </nav>
+
+    <div class="secondary-actions">
+      <button id="btnEditCode" class="btn-small-primary">✏️ Paste / Edit Code</button>
+      <button id="btnToggleIterations" class="btn-subtle active" title="Show or hide the full Iteration & All-Steps Dry-Run panel below">📋 All Steps / Iterations</button>
+      <button id="btnToggleAdvanced" class="btn-subtle">Advanced View</button>
+    </div>
+  </header>
+
+  <!-- Error / Validation Banner (Hidden unless there is an error) -->
+  <div id="validationBanner" class="validation-banner hidden"></div>
+
+  <!-- Dynamic Overview Banner -->
+  <div class="overview-strip">
+    <span class="overview-label">Goal:</span>
+    <span id="overviewText">Paste or edit any Python program on the left to visualize every step, iteration, variable scope, and memory address.</span>
+  </div>
+
+  <!-- =========================================================
+       MAIN 3-AREA THONNY-STYLE WORKSPACE
+       1. Your Code (Left)
+       2. Step-by-Step Teaching, Iteration Bar & Sub-Expression Evaluator (Center)
+       3. Scope Isolation & Stack/Heap Reference Visualizer (Right)
+       ========================================================= -->
+  <main class="three-area-workspace">
+
+    <!-- AREA 1: YOUR CODE (LEFT) -->
+    <section class="area-card area-code" aria-label="Your Code">
+      <div class="area-header-row">
+        <h2 class="area-heading">Your Code</h2>
+        <div class="code-header-actions">
+          <span id="codeScopeIndicator" class="code-scope-tag">Scope: Global</span>
+          <button id="btnAnalyzeCode" class="btn-small-primary hidden">▶ Run Code</button>
+        </div>
+      </div>
+
+      <div id="codeLinesContainer" class="code-view"></div>
+
+      <!-- Code Editor Textarea when user clicks "Paste / Edit Code" -->
+      <div id="liveEditorWrap" class="live-editor-wrap hidden">
+        <textarea id="codeTextarea" class="code-textarea" placeholder="Paste any Python code here and click ▶ Run Code..." spellcheck="false"></textarea>
+      </div>
+    </section>
+
+    <!-- AREA 2: TEACHING AREA, ITERATION JUMP BAR & THONNY EXPRESSION STEPPER (CENTER) -->
+    <section class="area-card area-teaching" aria-label="Step-by-Step Explanation">
+      <div class="teaching-card-inner">
+
+        <!-- Quick Iteration / Call Phase Jump Bar -->
+        <div class="iteration-jump-strip">
+          <div class="iteration-jump-header">
+            <span class="iteration-jump-label">🔄 Iterations & Execution Phases (Click to Jump):</span>
+            <span id="activeIterationBadge" class="iteration-active-badge">Phase 1</span>
+          </div>
+          <div id="iterationPillsBar" class="iteration-pills-bar"></div>
+        </div>
+
+        <!-- Step Heading -->
+        <div class="teach-header-row">
+          <h1 id="teachStepTitle" class="teach-step-title">Step 1: Create the variable</h1>
+          <span id="teachScopeBadge" class="scope-pill scope-global">GLOBAL SCOPE</span>
+        </div>
+
+        <!-- Current Code Line Box -->
+        <div class="teach-section">
+          <div class="teach-label">Code:</div>
+          <div id="teachCodeBox" class="teach-code-box">c = 0</div>
+        </div>
+
+        <!-- TASK 2.1, 2.2, 2.3: THONNY-STYLE STEP-BY-STEP SUB-EXPRESSION EVALUATOR -->
+        <div id="thonnyExprBox" class="thonny-expr-card">
+          <div class="thonny-expr-header">
+            <span class="thonny-badge">Thonny Expression Evaluator</span>
+            <span id="thonnySubStepCounter" class="thonny-subcounter">Evaluation 1 of 1</span>
+          </div>
+          <div id="thonnyLiveCode" class="thonny-live-code"></div>
+          <div id="thonnyFocusNote" class="thonny-focus-note"></div>
+          <div id="thonnyTrailChips" class="thonny-trail-chips"></div>
+        </div>
+
+        <!-- Step Calculation Breakdown (Shown on arithmetic / condition / loop steps) -->
+        <div id="teachCalculationBox" class="teach-calc-box hidden">
+          <div id="calcCurrentNumRow" class="calc-row hidden">
+            <span class="calc-label">Current number:</span>
+            <code id="calcCurrentNumVal" class="calc-val"></code>
+          </div>
+          <div class="calc-row">
+            <span class="calc-label">Before:</span>
+            <code id="calcBeforeVal" class="calc-val"></code>
+          </div>
+          <div class="calc-row">
+            <span class="calc-label">Calculation:</span>
+            <code id="calcFormulaVal" class="calc-val calc-highlight"></code>
+          </div>
+          <div class="calc-row">
+            <span class="calc-label">After:</span>
+            <code id="calcAfterVal" class="calc-val calc-after"></code>
+          </div>
+        </div>
+
+        <!-- What does this mean? -->
+        <div class="teach-section">
+          <div class="teach-label">What does this mean?</div>
+          <p id="teachMeaningText" class="teach-meaning-text"></p>
+        </div>
+
+        <!-- Variable values now -->
+        <div class="teach-section">
+          <div class="teach-label">Variable values now:</div>
+          <div id="teachVarsNowBox" class="teach-vars-now"></div>
+        </div>
+
+        <!-- What happens next? -->
+        <div class="teach-section teach-next-box">
+          <div class="teach-label">What happens next?</div>
+          <p id="teachNextText" class="teach-next-text"></p>
+        </div>
+
+        <!-- Final Answer Celebration Banner (Shown on final return or final print step) -->
+        <div id="finalAnswerBanner" class="final-answer-banner hidden">
+          <div id="finalAnswerHeading" class="final-answer-heading">Final answer: 6</div>
+          <div id="finalAnswerDetail" class="final-answer-detail"></div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- AREA 3: SCOPE ISOLATION & STACK/HEAP MEMORY VISUALIZER (RIGHT) -->
+    <section class="area-card area-variables" aria-label="Scopes and Memory Reference Model">
+      <div class="area-header-row">
+        <h2 class="area-heading">Scopes & Memory Model</h2>
+        <span class="ref-legend-pill" title="Python variables store memory addresses pointing to Heap objects">Name → @Addr → Value</span>
+      </div>
+
+      <!-- TASK 4.1 & 4.2: ISOLATED STACK SCOPES (GLOBAL vs. LOCAL) -->
+      <div class="memory-section-block">
+        <div class="memory-section-title">1. Stack Frames (Global vs. Local Scope Isolation)</div>
+        <div id="scopeFramesContainer" class="scope-frames-container"></div>
+      </div>
+
+      <!-- TASK 3.1, 3.2 & 3.3: HEAP MEMORY OBJECTS + VISUAL GARBAGE COLLECTION -->
+      <div class="memory-section-block">
+        <div class="heap-header-row">
+          <span class="memory-section-title">2. Heap Memory (@Address → Object Value)</span>
+          <button id="btnToggleGC" class="btn-gc-toggle" title="Toggle unreferenced / garbage-collected objects from earlier loop steps">
+            Show GC'd (0)
+          </button>
+        </div>
+        <div id="heapObjectsContainer" class="heap-objects-container"></div>
+      </div>
+
+      <!-- Clean Visual List Box for `nums` / `arr` / `s.items` -->
+      <div id="visualListsContainer" class="visual-list-wrap"></div>
+
+      <!-- Live Console Output (`print`) when program prints values -->
+      <div id="stdoutSection" class="memory-section-block hidden">
+        <div class="memory-section-title">3. Console Output (print)</div>
+        <pre id="stdoutBox" class="stdout-box"></pre>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =========================================================
+       AREA 4: COMPLETE CODE ITERATION & ALL-STEPS DRY-RUN EXPLORER
+       Visible by default so the whole code execution is clear at a glance
+       ========================================================= -->
+  <section id="allIterationsSection" class="iterations-explorer-section" aria-label="All Iterations and Steps Dry-Run">
+    <div class="iterations-explorer-header">
+      <div class="iterations-title-group">
+        <h2 class="iterations-main-title">📋 Complete Code Iteration & Step-by-Step Dry-Run</h2>
+        <span id="iterationsSummaryBadge" class="iterations-summary-badge">All Steps Visible</span>
+      </div>
+
+      <div class="iterations-controls-group">
+        <div class="view-mode-tabs" role="tablist">
+          <button id="tabViewGrouped" type="button" class="view-tab-btn active" role="tab" aria-selected="true">
+            🔄 Grouped by Iterations / Calls
+          </button>
+          <button id="tabViewTable" type="button" class="view-tab-btn" role="tab" aria-selected="false">
+            📊 All Steps Table (1 → N)
+          </button>
+        </div>
+        <button id="btnExpandAllIter" type="button" class="btn-subtle">Expand / Collapse All</button>
+      </div>
+    </div>
+
+    <p class="iterations-helper-note">
+      Every iteration, function call, and line execution from start to finish is listed below. <strong>Click any step or iteration card</strong> to jump the visualizer to that exact moment.
+    </p>
+
+    <!-- View 1: Grouped by Loop Iterations / Method Calls -->
+    <div id="iterationsGroupedContainer" class="iterations-grouped-container"></div>
+
+    <!-- View 2: Full Dry-Run Table (Every Step 1 -> N) -->
+    <div id="iterationsTableContainer" class="iterations-table-container hidden">
+      <div class="dryrun-table-scroll">
+        <table class="dryrun-table" aria-label="Complete Execution Dry-Run Table">
+          <thead>
+            <tr>
+              <th>Step</th>
+              <th>Line</th>
+              <th>Iteration / Phase</th>
+              <th>Scope</th>
+              <th>Code Executed</th>
+              <th>What Happened / Calculation</th>
+              <th>Variables Snapshot</th>
+            </tr>
+          </thead>
+          <tbody id="dryrunTableBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       OPTIONAL ADVANCED VIEW DRAWER (Hidden by Default)
+       ========================================================= -->
+  <section id="advancedViewPanel" class="advanced-drawer hidden" aria-label="Advanced Debugging View">
+    <div class="advanced-header">
+      <strong>Advanced Debugging Details</strong>
+      <span id="advMetadataLabel" class="adv-meta"></span>
+    </div>
+    <div class="advanced-grid">
+      <div class="adv-box">
+        <div class="adv-title">Technical Explanation</div>
+        <div id="advTechnicalText" class="adv-body"></div>
+      </div>
+      <div class="adv-box">
+        <div class="adv-title">Python Symbols on This Line</div>
+        <div id="advSymbolsText" class="adv-body"></div>
+      </div>
+      <div class="adv-box">
+        <div class="adv-title">Variables Before → After (With Addresses & Types)</div>
+        <div id="advFullVarsText" class="adv-body"></div>
+      </div>
+      <div class="adv-box">
+        <div class="adv-title">Execution Flowchart</div>
+        <div id="flowchartSvgWrap" class="adv-flowchart"></div>
+      </div>
+    </div>
+  </section>
+
+  <script src="engine.js"></script>
+  <script src="explainer.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

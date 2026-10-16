@@ -1,0 +1,20 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app.js. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -239,6 +239,14 @@
+     const rawTrace = this.engine.trace(this.sourceCode, this.inputCode);
+     this.traceResult = this.explainer.enrichTraceWithExplanations(rawTrace);
+ 
++    if (this.sourceCode.includes("binary_search")) {
++      this.overviewText.textContent =
++        "This code searches a sorted list for a target number by checking the middle index (mid) and cutting the search range (left to right) in half.";
++    } else if (this.sourceCode.includes("maxSubArray")) {
++      this.overviewText.textContent =
++        "This code finds the largest sum you can get from a continuous section of the list.";
++    }
++
+     if (!this.traceResult.ok) {
+       this.validationBanner.textContent = `⚠ ${this.traceResult.errorMessage}`;
+       this.validationBanner.classList.remove("hidden");
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

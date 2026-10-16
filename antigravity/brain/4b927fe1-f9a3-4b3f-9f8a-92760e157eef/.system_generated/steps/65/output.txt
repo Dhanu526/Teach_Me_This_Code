@@ -1,0 +1,20 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\index.html. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -169,7 +169,7 @@
+           </div>
+         </div>
+ 
+-        <!-- Visual Execution Path Flowchart -->
++        <!-- Visual Execution Path Flowchart & Timeline -->
+         <div class="flowchart-box">
+           <div class="panel-header" style="height:30px;">
+             <div class="panel-title">Visual Execution Path &amp; Timeline</div>
+@@ -176,4 +176,5 @@
+           </div>
++          <div id="timelineStrip" class="timeline-strip"></div>
+           <div id="flowchartSvgWrap" class="flowchart-svg-wrap"></div>
+         </div>
+       </div>
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

@@ -1,0 +1,42 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app_build\engine.js. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -526,7 +526,7 @@
+         // Return the exact reference so Global and Local scopes share the heap address @0x2000!
+         return globalVars[paramName];
+       }
+-      if (["arr", "nums", "items", "numbers", "a"].includes(paramName)) {
++      if (["arr", "nums", "items", "numbers", "a", "prices", "height", "values"].includes(paramName)) {
+         if (fnNode.funcName.toLowerCase().includes("binary")) {
+           const isSorted = firstArray.every((v, i, a) => i === 0 || a[i - 1] <= v);
+           if (!isSorted) {
+@@ -537,8 +537,14 @@
+         globalVars[paramName] = firstArray;
+         return firstArray;
+       }
+-      if (["target", "val", "key", "x", "k"].includes(paramName)) {
++      if (["s", "text", "word", "str_val", "pattern"].includes(paramName)) {
++        const strVal = inputValues.find((v) => typeof v === "string") || "racecar";
++        globalVars[paramName] = strVal;
++        return strVal;
++      }
++      if (["target", "val", "key", "x", "k", "n", "m"].includes(paramName)) {
+         if ("target" in globalVars) return globalVars["target"];
++        if ("n" in globalVars && (paramName === "n" || paramName === "k")) return globalVars["n"];
+         const targetVal =
+           firstArray.length > 0 ? firstArray[Math.floor(firstArray.length / 2)] : 4;
+         globalVars[paramName] = targetVal;
+@@ -545,5 +545,10 @@
+       }
+-      return inputValues[idx] !== undefined ? inputValues[idx] : 0;
++      if (inputValues[idx] !== undefined) {
++        globalVars[paramName] = inputValues[idx];
++        return inputValues[idx];
++      }
++      globalVars[paramName] = firstArray;
++      return firstArray;
+     });
+   }
+ 
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

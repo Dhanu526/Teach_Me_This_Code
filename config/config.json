@@ -1,0 +1,15 @@
+{
+  "plugins": {
+    "flutter": {
+      "installedFrom": {
+        "id": "antigravity-plugins-official/plugin/flutter",
+        "marketplace": "antigravity-plugins-official",
+        "version": "1.0.5"
+      }
+    }
+  },
+  "userSettings": {
+    "remoteControlHostname": "desktop-ncfl7j6-astral-galaxy",
+    "themeMode": "THEME_MODE_INHERIT"
+  }
+}

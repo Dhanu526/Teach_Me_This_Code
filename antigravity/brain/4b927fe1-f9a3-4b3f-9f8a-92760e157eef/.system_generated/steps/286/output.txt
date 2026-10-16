@@ -1,0 +1,75 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app_build\app.js. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -39,7 +39,6 @@
+     this.initDOM();
+     this.bindEvents();
+     this.codeTextarea.value = this.sourceCode;
+-    this.inputPlaygroundField.value = this.inputCode;
+     this.analyzeAndRun();
+   }
+ 
+@@ -60,8 +60,6 @@
+     this.advancedViewPanel = document.getElementById("advancedViewPanel");
+ 
+     // Validation & Overview
+-    this.inputPlaygroundField = document.getElementById("inputPlaygroundField");
+-    this.templateChips = document.querySelectorAll(".chip-template");
+     this.validationBanner = document.getElementById("validationBanner");
+     this.overviewText = document.getElementById("overviewText");
+ 
+@@ -216,7 +216,7 @@
+     this.btnEditCode.addEventListener("click", () => {
+       if (this.isEditing) {
+         this.sourceCode = this.codeTextarea.value;
+-        this.inputCode = this.inputPlaygroundField.value;
++        this.inputCode = "";
+         this.setEditMode(false);
+         this.analyzeAndRun();
+       } else {
+@@ -225,7 +225,7 @@
+ 
+     this.btnAnalyzeCode.addEventListener("click", () => {
+       this.sourceCode = this.codeTextarea.value;
+-      this.inputCode = this.inputPlaygroundField.value;
++      this.inputCode = "";
+       this.setEditMode(false);
+       this.analyzeAndRun();
+     });
+@@ -232,33 +232,6 @@
+-    this.templateChips.forEach((chip) => {
+-      chip.addEventListener("click", () => {
+-        const key = chip.dataset.template;
+-        const prog = window.PRELOADED_PROGRAMS[key];
+-        if (prog) {
+-          this.sourceCode = prog.code;
+-          this.inputCode = prog.defaultInput || "";
+-          this.codeTextarea.value = this.sourceCode;
+-          this.inputPlaygroundField.value = this.inputCode;
+-          this.setEditMode(false);
+-          this.analyzeAndRun();
+-        }
+-      });
+-    });
+-
+-    this.inputPlaygroundField.addEventListener("keydown", (e) => {
+-      if (e.key === "Enter") {
+-        this.sourceCode = this.codeTextarea.value;
+-        this.inputCode = this.inputPlaygroundField.value;
+-        this.setEditMode(false);
+-        this.analyzeAndRun();
+-      }
+-    });
+-
+     // Keyboard shortcuts: Left / Right arrows + F7 for Thonny sub-expression stepping
+     window.addEventListener("keydown", (e) => {
+-      if (
+-        document.activeElement === this.codeTextarea ||
+-        document.activeElement === this.inputPlaygroundField
+-      ) {
++      if (document.activeElement === this.codeTextarea) {
+         return;
+       }
+       if (e.key === "ArrowRight") {
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

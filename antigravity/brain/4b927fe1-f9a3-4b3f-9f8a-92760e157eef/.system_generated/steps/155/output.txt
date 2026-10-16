@@ -1,0 +1,211 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app_build\engine.js. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -898,11 +898,36 @@
+ 
+         const beforeMap = this.cloneVarsMap(activeFrame.vars);
+         const itemVal = listItems[idx];
+-        const prevVal = activeFrame.vars[node.iterVar];
+-        const isCreated = !(node.iterVar in activeFrame.vars);
+-
+-        activeFrame.prevVars[node.iterVar] = prevVal;
+-        activeFrame.vars[node.iterVar] = itemVal;
++        const iterTargets = this.splitTopLevelArgs(node.iterVar);
++        const changedVarsList = [];
++        const summaryParts = [];
++
++        if (iterTargets.length > 1 && Array.isArray(itemVal)) {
++          iterTargets.forEach((tName, tIdx) => {
++            const subVal = itemVal[tIdx];
++            const prevV = activeFrame.vars[tName];
++            const isCr = !(tName in activeFrame.vars);
++            activeFrame.prevVars[tName] = prevV;
++            activeFrame.vars[tName] = subVal;
++            changedVarsList.push({ name: tName, status: isCr ? "created" : "updated", prevValue: prevV });
++            summaryParts.push(`${tName} = ${this.formatVal(subVal)}`);
++          });
++        } else {
++          const prevVal = activeFrame.vars[node.iterVar];
++          const isCreated = !(node.iterVar in activeFrame.vars);
++          activeFrame.prevVars[node.iterVar] = prevVal;
++          activeFrame.vars[node.iterVar] = itemVal;
++          changedVarsList.push({
++            name: node.iterVar,
++            status: isCreated ? "created" : "updated",
++            prevValue: prevVal
++          });
++          summaryParts.push(
++            isCreated
++              ? `${node.iterVar}: (created) → ${this.formatVal(itemVal)}`
++              : `${node.iterVar}: ${this.formatVal(prevVal)} → ${this.formatVal(itemVal)}`
++          );
++        }
+ 
+         const topLoop = loopStack[loopStack.length - 1];
+         topLoop.currentIteration = idx + 1;
+@@ -925,12 +925,6 @@
+           };
+         }
+ 
+-        const changeObj = {
+-          name: node.iterVar,
+-          status: isCreated ? "created" : "updated",
+-          prevValue: prevVal
+-        };
+-
+         const loopFrames = [
+           { expr: node.text, focus: `Loop pass ${idx + 1} of ${listItems.length}`, shortCircuited: false },
+           ...iterEval.frames.slice(1),
+@@ -946,10 +946,8 @@
+           eventType: "LOOP_ITER",
+           callStack,
+           beforeVars: beforeMap,
+-          changedVars: [changeObj],
+-          changedSummary: isCreated
+-            ? `${node.iterVar}: (created) → ${this.formatVal(itemVal)}`
+-            : `${node.iterVar}: ${this.formatVal(prevVal)} → ${this.formatVal(itemVal)}`,
++          changedVars: changedVarsList,
++          changedSummary: summaryParts.join(", "),
+           condition: {
+             expr: `${node.iterVar} in ${node.iterExpr}`,
+             leftExpr: `Iteration ${idx + 1} of ${listItems.length}`,
+@@ -1147,8 +1147,9 @@
+     const text = node.text;
+     const beforeMap = this.cloneVarsMap(activeFrame.vars);
+ 
+-    // 1. break
+-    if (text === "break") {
++    // 1. break / pass
++    if (text === "break" || text === "pass") {
++      if (text === "pass") return null;
+       this.pushStepSnapshot(steps, {
+         line: node.line,
+         codeText: text,
+@@ -1272,8 +1272,59 @@
+       return null;
+     }
+ 
+-    // 5. Augmented assignment (+=, -=, *=, //=)
+-    const augMatch = text.match(/^([a-zA-Z_]\w*)\s*(\+=|-=|\*=|\/\/=)\s*(.+)$/);
++    // 4b. List / Set mutating methods (`arr.append(x)`, `arr.pop()`, `arr.sort()`, `arr.reverse()`, `seen.add(x)`)
++    const listMethodMatch = text.match(/^([a-zA-Z_]\w*)\.(append|pop|sort|reverse|add)\((.*)\)$/);
++    if (listMethodMatch) {
++      const objName = listMethodMatch[1];
++      const methodName = listMethodMatch[2];
++      const argStr = listMethodMatch[3].trim();
++      const targetObj = activeFrame.vars[objName];
++      if (Array.isArray(targetObj)) {
++        const prevArr = [...targetObj];
++        let argVal = null;
++        if (argStr) {
++          argVal = this.evalExpr(argStr, activeFrame.vars, functions, classes, callStack, steps, stdout, loopStack, node.line);
++        }
++        if (methodName === "append" || methodName === "add") targetObj.push(argVal);
++        else if (methodName === "pop") {
++          if (argStr && typeof argVal === "number") targetObj.splice(argVal, 1);
++          else targetObj.pop();
++        } else if (methodName === "sort") targetObj.sort((a, b) => (a > b ? 1 : a < b ? -1 : 0));
++        else if (methodName === "reverse") targetObj.reverse();
++
++        const changeObj = { name: objName, status: "updated", prevValue: prevArr };
++        this.pushStepSnapshot(steps, {
++          line: node.line,
++          codeText: text,
++          eventType: "ASSIGN",
++          callStack,
++          beforeVars: beforeMap,
++          changedVars: [changeObj],
++          changedSummary: `${objName}.${methodName}(${argVal !== null ? this.formatVal(argVal) : ""}) → ${this.formatVal(targetObj)}`,
++          condition: null,
++          loop: this.getCurrentLoopSnapshot(loopStack),
++          operationDetail: {
++            kind: "assign",
++            target: objName,
++            isCreated: false,
++            beforeVal: this.formatVal(prevArr),
++            rhsExpr: text,
++            substituted: this.formatVal(targetObj),
++            afterVal: this.formatVal(targetObj)
++          },
++          exprFrames: [
++            { expr: text, focus: `Mutate ${objName} in-place on the Heap via .${methodName}()`, shortCircuited: false },
++            { expr: `${objName} = ${this.formatVal(targetObj)}`, focus: `Updated heap object ${objName}`, shortCircuited: false }
++          ],
++          returnValue: null,
++          stdout: [...stdout]
++        });
++        return null;
++      }
++    }
++
++    // 5. Augmented assignment (+=, -=, *=, //=, %=)
++    const augMatch = text.match(/^([a-zA-Z_]\w*)\s*(\+=|-=|\*=|\/\/=|%=)\s*(.+)$/);
+     if (augMatch) {
+       const varName = augMatch[1];
+       const augOp = augMatch[2];
+@@ -1307,6 +1307,7 @@
+       else if (baseOp === "-") newVal = prevVal - rhsVal;
+       else if (baseOp === "*") newVal = prevVal * rhsVal;
+       else if (baseOp === "//") newVal = Math.floor(prevVal / rhsVal);
++      else if (baseOp === "%") newVal = prevVal % rhsVal;
+ 
+       activeFrame.prevVars[varName] = prevVal;
+       activeFrame.vars[varName] = newVal;
+@@ -1446,7 +1446,7 @@
+         return null;
+       }
+ 
+-      // Single assignment (`varName = expr` or `arr[i] = expr`)
++      // Single assignment (`varName = expr` or `arr[i] = expr` or `seen[k] = v`)
+       const cleanTarget = lhsRaw.split(":")[0].trim();
+       const indexAssignMatch = cleanTarget.match(/^([a-zA-Z_]\w*)\[(.+)\]$/);
+       if (indexAssignMatch) {
+@@ -1475,10 +1475,12 @@
+           node.line
+         );
+         const newVal = evalRes.value;
+-        if (Array.isArray(activeFrame.vars[arrName])) {
+-          const prevArr = [...activeFrame.vars[arrName]];
+-          activeFrame.vars[arrName][idxVal] = newVal;
+-          const changeObj = { name: arrName, status: "updated", prevValue: prevArr };
++        const container = activeFrame.vars[arrName];
++        if (Array.isArray(container) || (container && typeof container === "object")) {
++          const prevCopy = Array.isArray(container) ? [...container] : { ...container };
++          const prevElem = container[idxVal];
++          container[idxVal] = newVal;
++          const changeObj = { name: arrName, status: "updated", prevValue: prevCopy };
+           this.pushStepSnapshot(steps, {
+             line: node.line,
+             codeText: text,
+@@ -1485,7 +1485,7 @@
+             callStack,
+             beforeVars: beforeMap,
+             changedVars: [changeObj],
+-            changedSummary: `${arrName}[${idxVal}] = ${this.formatVal(newVal)}`,
++            changedSummary: `${arrName}[${this.formatVal(idxVal)}] = ${this.formatVal(newVal)}`,
+             condition: null,
+             loop: this.getCurrentLoopSnapshot(loopStack),
+             operationDetail: {
+@@ -1492,6 +1492,6 @@
+-              target: `${arrName}[${idxVal}]`,
++              target: `${arrName}[${this.formatVal(idxVal)}]`,
+               isCreated: false,
+-              beforeVal: this.formatVal(prevArr[idxVal]),
++              beforeVal: prevElem !== undefined ? this.formatVal(prevElem) : "—",
+               rhsExpr: rhsRaw,
+               substituted: this.formatVal(newVal),
+               afterVal: this.formatVal(newVal)
+@@ -1563,6 +1563,11 @@
+       return null;
+     }
+ 
++    // 7. Standalone function call expression (`helper(arr)`)
++    if (/^[a-zA-Z_]\w*\(.*\)$/.test(text)) {
++      this.evalExpr(text, activeFrame.vars, functions, classes, callStack, steps, stdout, loopStack, node.line);
++    }
++
+     return null;
+   }
+ 
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

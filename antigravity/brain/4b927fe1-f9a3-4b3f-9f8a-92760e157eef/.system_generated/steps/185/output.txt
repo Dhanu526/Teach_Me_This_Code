@@ -1,0 +1,202 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app_build\engine.js. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -2207,13 +2207,20 @@
+       return arr;
+     }
+ 
+-    const builtinMatch = trimmed.match(/^(len|min|max|abs|sum)\(([^()]*)\)$/);
++    const builtinMatch = trimmed.match(/^(len|min|max|abs|sum|enumerate|sorted|reversed|set|dict)\((.*)\)$/);
+     if (builtinMatch) {
+       const fnName = builtinMatch[1];
+-      const args = this.splitTopLevelArgs(builtinMatch[2]).map((a) =>
+-        this.evalExpr(a, scopeVars, functions, classes, callStack, steps, stdout, loopStack, lineNum)
+-      );
+-      if (fnName === "len") return args[0] && typeof args[0].length === "number" ? args[0].length : 0;
++      const args = builtinMatch[2].trim()
++        ? this.splitTopLevelArgs(builtinMatch[2]).map((a) =>
++            this.evalExpr(a, scopeVars, functions, classes, callStack, steps, stdout, loopStack, lineNum)
++          )
++        : [];
++      if (fnName === "len") {
++        const x = args[0];
++        if (x && typeof x.length === "number") return x.length;
++        if (x && typeof x === "object") return Object.keys(x).length;
++        return 0;
++      }
+       if (fnName === "abs") return Math.abs(args[0]);
+       if (fnName === "sum") return Array.isArray(args[0]) ? args[0].reduce((a, b) => a + b, 0) : 0;
+       if (fnName === "min") return Array.isArray(args[0]) ? Math.min(...args[0]) : Math.min(...args);
+@@ -2220,3 +2220,60 @@
++      if (fnName === "enumerate") {
++        const seq = Array.isArray(args[0]) ? args[0] : Array.from(args[0] || []);
++        const start = typeof args[1] === "number" ? args[1] : 0;
++        return seq.map((v, i) => [start + i, v]);
++      }
++      if (fnName === "sorted") {
++        const seq = Array.isArray(args[0]) ? [...args[0]] : Array.from(args[0] || []);
++        return seq.sort((a, b) => (a > b ? 1 : a < b ? -1 : 0));
++      }
++      if (fnName === "reversed") {
++        const seq = Array.isArray(args[0]) ? [...args[0]] : Array.from(args[0] || []);
++        return seq.reverse();
++      }
++      if (fnName === "set") {
++        const seq = Array.isArray(args[0]) ? args[0] : Array.from(args[0] || []);
++        return Array.from(new Set(seq));
++      }
++      if (fnName === "dict") {
++        return args[0] && typeof args[0] === "object" ? { ...args[0] } : {};
++      }
++    }
++
++    // Membership check (`x in arr`, `x not in seen`, `ch in s`)
++    const notInMatch = trimmed.match(/^(.+?)\s+not\s+in\s+(.+)$/);
++    if (notInMatch) {
++      const leftVal = this.evalExpr(notInMatch[1], scopeVars, functions, classes, callStack, steps, stdout, loopStack, lineNum);
++      const rightVal = this.evalExpr(notInMatch[2], scopeVars, functions, classes, callStack, steps, stdout, loopStack, lineNum);
++      if (Array.isArray(rightVal)) return !rightVal.includes(leftVal);
++      if (typeof rightVal === "string") return !rightVal.includes(String(leftVal));
++      if (rightVal && typeof rightVal === "object") return !(leftVal in rightVal);
++      return true;
++    }
++
++    const inMatch = trimmed.match(/^(.+?)\s+in\s+(.+)$/);
++    if (inMatch) {
++      const leftVal = this.evalExpr(inMatch[1], scopeVars, functions, classes, callStack, steps, stdout, loopStack, lineNum);
++      const rightVal = this.evalExpr(inMatch[2], scopeVars, functions, classes, callStack, steps, stdout, loopStack, lineNum);
++      if (Array.isArray(rightVal)) return rightVal.includes(leftVal);
++      if (typeof rightVal === "string") return rightVal.includes(String(leftVal));
++      if (rightVal && typeof rightVal === "object") return leftVal in rightVal;
++      return false;
++    }
++
++    // List / String slicing (`arr[a:b]`, `s[::-1]`)
++    const sliceMatch = trimmed.match(/^([a-zA-Z_]\w*)\[([^\[\]]*:[^\[\]]*)\]$/);
++    if (sliceMatch) {
++      const seqObj = scopeVars[sliceMatch[1]];
++      if (Array.isArray(seqObj) || typeof seqObj === "string") {
++        const parts = sliceMatch[2].split(":").map((p) => p.trim());
++        const len = seqObj.length;
++        if (parts.length === 3 && parts[2] === "-1" && !parts[0] && !parts[1]) {
++          return Array.isArray(seqObj) ? [...seqObj].reverse() : Array.from(seqObj).reverse().join("");
++        }
++        const start = parts[0] ? Number(this.evalExpr(parts[0], scopeVars, functions, classes, callStack, steps, stdout, loopStack, lineNum)) : 0;
++        const end = parts[1] ? Number(this.evalExpr(parts[1], scopeVars, functions, classes, callStack, steps, stdout, loopStack, lineNum)) : len;
++        return seqObj.slice(start, end);
++      }
+     }
+ 
+     const indexMatch = trimmed.match(/^([a-zA-Z_]\w*)\[([^\[\]]+)\]$/);
+@@ -2223,17 +2223,23 @@
+       const arrName = indexMatch[1];
+       const idxVal = this.evalExpr(indexMatch[2], scopeVars, functions, classes, callStack, steps, stdout, loopStack, lineNum);
+       const arrObj = scopeVars[arrName];
+-      if (!Array.isArray(arrObj)) {
+-        throw { line: lineNum, message: `TypeError: '${arrName}' is not a list` };
+-      }
+-      const normalizedIdx = idxVal < 0 ? arrObj.length + idxVal : idxVal;
+-      if (normalizedIdx < 0 || normalizedIdx >= arrObj.length) {
+-        throw {
+-          line: lineNum,
+-          message: `IndexError: list index [${idxVal}] out of range for '${arrName}' (length ${arrObj.length})`
+-        };
+-      }
+-      return arrObj[normalizedIdx];
++      if (Array.isArray(arrObj) || typeof arrObj === "string") {
++        const normalizedIdx = idxVal < 0 ? arrObj.length + idxVal : idxVal;
++        if (normalizedIdx < 0 || normalizedIdx >= arrObj.length) {
++          throw {
++            line: lineNum,
++            message: `IndexError: index [${idxVal}] out of range for '${arrName}' (length ${arrObj.length})`
++          };
++        }
++        return arrObj[normalizedIdx];
++      }
++      if (arrObj && typeof arrObj === "object") {
++        if (!(idxVal in arrObj)) {
++          throw { line: lineNum, message: `KeyError: ${this.formatVal(idxVal)} not found in '${arrName}'` };
++        }
++        return arrObj[idxVal];
++      }
++      throw { line: lineNum, message: `TypeError: '${arrName}' is not subscriptable` };
+     }
+ 
+     const methodCallMatch = trimmed.match(/^(?:[a-zA-Z_]\w*\(\)\.)?([a-zA-Z_]\w*)\((.*)\)$/);
+@@ -2258,7 +2258,7 @@
+     }
+ 
+     // Pre-validate any array indexing inside compound expressions (`arr[mid] == target`, `nums[i] + nums[j]`)
+-    const subIndexRegex = /\b([a-zA-Z_]\w*)\[([^\[\]]+)\]/g;
++    const subIndexRegex = /\b([a-zA-Z_]\w*)\[([^\[\]:]+)\]/g;
+     let idxMatch;
+     while ((idxMatch = subIndexRegex.exec(trimmed)) !== null) {
+       const aName = idxMatch[1];
+@@ -2293,7 +2293,11 @@
+ 
+     // Provide Python built-ins directly inside the JS evaluation context so nested calls like `len(arr) - 1` always work!
+     const pyBuiltins = {
+-      len: (x) => (x && typeof x.length === "number" ? x.length : 0),
++      len: (x) => {
++        if (x && typeof x.length === "number") return x.length;
++        if (x && typeof x === "object") return Object.keys(x).length;
++        return 0;
++      },
+       abs: (x) => Math.abs(x),
+       min: (...args) => (args.length === 1 && Array.isArray(args[0]) ? Math.min(...args[0]) : Math.min(...args)),
+       max: (...args) => (args.length === 1 && Array.isArray(args[0]) ? Math.max(...args[0]) : Math.max(...args)),
+@@ -2302,7 +2302,12 @@
+       str: (x) => String(x),
+       bool: (x) => Boolean(x),
+       round: (x) => Math.round(x),
+-      list: (x) => (Array.isArray(x) ? [...x] : Array.from(x || []))
++      list: (x) => (Array.isArray(x) ? [...x] : Array.from(x || [])),
++      set: (x) => Array.from(new Set(Array.isArray(x) ? x : Array.from(x || []))),
++      dict: (x) => (x && typeof x === "object" ? { ...x } : {}),
++      sorted: (x) => (Array.isArray(x) ? [...x] : Array.from(x || [])).sort((a, b) => (a > b ? 1 : a < b ? -1 : 0)),
++      reversed: (x) => (Array.isArray(x) ? [...x] : Array.from(x || [])).reverse(),
++      enumerate: (x, start = 0) => (Array.isArray(x) ? x : Array.from(x || [])).map((v, i) => [start + i, v])
+     };
+ 
+     const combinedScope = { ...pyBuiltins, ...scopeVars };
+@@ -2351,7 +2351,7 @@
+         address,
+         previous: prevStr,
+         current: this.formatVal(val),
+-        rawValue: Array.isArray(val) ? [...val] : val,
++        rawValue: Array.isArray(val) ? [...val] : val && typeof val === "object" ? { ...val } : val,
+         type: this.getPythonType(val),
+         status
+       };
+@@ -2370,8 +2370,8 @@
+       if (ch === "'" && !inDouble) inSingle = !inSingle;
+       else if (ch === '"' && !inSingle) inDouble = !inDouble;
+       else if (!inSingle && !inDouble) {
+-        if (ch === "(" || ch === "[") depth++;
+-        else if (ch === ")" || ch === "]") depth--;
++        if (ch === "(" || ch === "[" || ch === "{") depth++;
++        else if (ch === ")" || ch === "]" || ch === "}") depth--;
+         else if (ch === "," && depth === 0) {
+           res.push(current.trim());
+           current = "";
+@@ -2386,6 +2386,7 @@
+   getPythonType(val) {
+     if (val === null || val === undefined) return "NoneType";
+     if (Array.isArray(val)) return "list";
++    if (typeof val === "object") return "dict";
+     if (typeof val === "boolean") return "bool";
+     if (typeof val === "number") return Number.isInteger(val) ? "int" : "float";
+     if (typeof val === "string") return "str";
+@@ -2396,6 +2396,10 @@
+     if (typeof val === "boolean") return val ? "True" : "False";
+     if (typeof val === "string") return `"${val}"`;
+     if (Array.isArray(val)) return `[${val.map((v) => this.formatVal(v)).join(", ")}]`;
++    if (typeof val === "object") {
++      const entries = Object.entries(val).map(([k, v]) => `${k}: ${this.formatVal(v)}`);
++      return `{${entries.join(", ")}}`;
++    }
+     return String(val);
+   }
+ 
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

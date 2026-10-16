@@ -1,0 +1,39 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app_build\app.js. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -261,9 +261,30 @@
+     }
+   }
+ 
+-  analyzeAndRun() {
+-    this.stopAutoPlay();
+-    const rawTrace = this.engine.trace(this.sourceCode, this.inputCode);
++  async analyzeAndRun() {
++    this.stopAutoPlay();
++    let rawTrace = this.engine.trace(this.sourceCode, this.inputCode);
++
++    // Hybrid execution: if running via server.py (http/https) and the browser engine hits complex Python syntax,
++    // automatically use the real Python `sys.settrace` + `ast` backend (`/api/trace`)!
++    if (!rawTrace.ok && window.location.protocol.startsWith("http")) {
++      try {
++        const resp = await fetch("/api/trace", {
++          method: "POST",
++          headers: { "Content-Type": "application/json" },
++          body: JSON.stringify({ sourceCode: this.sourceCode, inputCode: this.inputCode })
++        });
++        if (resp.ok) {
++          const backendTrace = await resp.json();
++          if (backendTrace && (backendTrace.ok || (backendTrace.steps && backendTrace.steps.length > 0))) {
++            rawTrace = backendTrace;
++          }
++        }
++      } catch (_) {
++        // Offline / static file mode: keep local browser trace result
++      }
++    }
++
+     this.traceResult = this.explainer.enrichTraceWithExplanations(rawTrace);
+ 
+     if (this.sourceCode.includes("binary_search")) {
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

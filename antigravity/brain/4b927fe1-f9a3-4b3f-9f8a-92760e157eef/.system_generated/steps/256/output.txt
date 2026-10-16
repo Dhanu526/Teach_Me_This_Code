@@ -1,0 +1,37 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app_build\engine.py. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -130,6 +130,13 @@
+         return repr(val)
+     if isinstance(val, (int, float, bool, list, dict, tuple, set)) or val is None:
+         return repr(val)
++    if hasattr(val, "__dict__"):
++        attrs = ", ".join(
++            f"{k}={format_py_val(v)}"
++            for k, v in vars(val).items()
++            if not k.startswith("__")
++        )
++        return f"{type(val).__name__}({attrs})"
+     return f"<{type(val).__name__} instance>"
+ 
+ 
+@@ -155,7 +155,7 @@
+         py_type = get_py_type(val)
+         val_repr = format_py_val(val)
+ 
+-        if isinstance(val, (list, dict, set, tuple)):
++        if isinstance(val, (list, dict, set, tuple)) or hasattr(val, "__dict__"):
+             obj_id = id(val)
+             if obj_id not in self.container_id_map:
+                 addr = f"@0x{self.container_counter:04X}"
+@@ -167,7 +167,7 @@
+                 "address": addr,
+                 "type": py_type,
+                 "repr": val_repr,
+-                "isMutable": isinstance(val, (list, dict, set)),
++                "isMutable": True,
+                 "elements": [format_py_val(x) for x in val] if isinstance(val, (list, tuple)) else None,
+                 "lastTouchedStep": step_idx,
+             }
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

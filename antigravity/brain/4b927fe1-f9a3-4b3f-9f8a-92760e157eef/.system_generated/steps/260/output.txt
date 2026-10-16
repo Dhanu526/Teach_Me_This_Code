@@ -1,0 +1,51 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\test_engine.py. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -185,6 +185,45 @@
+         self.assertIn("memoryModel", sample_step)
+         self.assertGreaterEqual(len(sample_step["scopeFrames"]), 2)  # Global + Local
+ 
++    def test_16_oop_stack_class_execution(self):
++        stack_code = """class Stack:
++    def __init__(self):
++        self.items = []
++
++    def push(self, item):
++        self.items.append(item)
++
++    def pop(self):
++        if not self.is_empty():
++            return self.items.pop()
++        return None
++
++    def peek(self):
++        if not self.is_empty():
++            return self.items[-1]
++        return None
++
++    def is_empty(self):
++        return len(self.items) == 0
++
++    def size(self):
++        return len(self.items)
++
++s = Stack()
++s.push(10)
++s.push(20)
++s.push(30)
++
++print(s.pop())
++print(s.peek())
++print(s.size())
++print(s.is_empty())
++"""
++        res = trace_python_program(stack_code, "")
++        self.assertTrue(res["ok"])
++        last_stdout = res["steps"][-1]["stdout"]
++        self.assertEqual(last_stdout, ["30", "20", "2", "False"])
++
+ 
+ if __name__ == "__main__":
+     unittest.main()
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

@@ -1,0 +1,57 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app_build\styles.css. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -1059,19 +1059,6 @@
+   gap: 8px;
+ }
+ 
+-.editor-input-bar {
+-  display: flex;
+-  flex-direction: column;
+-  gap: 4px;
+-  margin-top: 8px;
+-  padding-top: 8px;
+-  border-top: 1px dashed var(--border-medium);
+-}
+-
+-.editor-input-bar .drawer-input {
+-  width: 100%;
+-}
+-
+ .stdout-box {
+   font-family: var(--font-mono);
+   font-size: 13px;
+@@ -1085,31 +1085,6 @@
+   overflow-y: auto;
+ }
+ 
+-.editor-template-bar {
+-  display: flex;
+-  align-items: center;
+-  flex-wrap: wrap;
+-  gap: 6px;
+-  margin-bottom: 8px;
+-}
+-
+-.chip-template {
+-  font-size: 11.5px;
+-  font-weight: 600;
+-  padding: 4px 10px;
+-  border-radius: 999px;
+-  border: 1px solid #bfdbfe;
+-  background: #eff6ff;
+-  color: #1d4ed8;
+-  cursor: pointer;
+-  transition: all 0.12s ease;
+-}
+-
+-.chip-template:hover {
+-  background: #dbeafe;
+-  border-color: #93c5fd;
+-}
+-
+ /* =========================================================
+    QUICK ITERATION / PHASE JUMP STRIP (INSIDE TEACHING CARD)
+    ========================================================= */
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

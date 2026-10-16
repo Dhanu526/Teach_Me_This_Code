@@ -1,0 +1,46 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app_build\explainer.js. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -393,7 +393,31 @@
+       };
+     }
+ 
+-    // Fallback for print / break / continue / exceptions
++    // 10. Print Statement (`print(s.pop())`, `print(...)`)
++    if (step.eventType === "PRINT") {
++      const allOut = (step.stdout || []).join("  |  ");
++      return {
++        title: `Step ${n}: Print output (${op.output})`,
++        calculationCard: {
++          currentNumber: null,
++          before: step.codeText,
++          calculation: `Evaluated inside print(...) → ${op.output}`,
++          after: `Printed "${op.output}" to console`
++        },
++        whatItMeans:
++          `Python finishes evaluating the expression inside \`${step.codeText}\` and prints **\`${op.output}\`** to the screen.`,
++        variableValuesNow: relevantVarsNow,
++        whatHappensNext: nextSentence,
++        finalBanner: !nextStep
++          ? {
++              answer: allOut || op.output,
++              summary: `Program finished! Console output printed: **${allOut || op.output}**`
++            }
++          : null
++      };
++    }
++
++    // Fallback for break / continue / exceptions
+     return {
+       title: `Step ${n}: Execute line ${step.line}`,
+       calculationCard: null,
+@@ -400,6 +400,4 @@
+-        step.eventType === "PRINT"
+-          ? `Python displays \`"${op.output}"\` as output.`
+-          : step.eventType === "EXCEPTION"
++        step.eventType === "EXCEPTION"
+           ? `Python stopped with an error: \`${op.message}\`.`
+           : `Python runs \`${step.codeText}\`.`,
+       variableValuesNow: relevantVarsNow,
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

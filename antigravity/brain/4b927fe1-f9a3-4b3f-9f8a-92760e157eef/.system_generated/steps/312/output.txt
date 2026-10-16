@@ -1,0 +1,446 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app_build\styles.css. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -1466,12 +1466,438 @@
+ @media (max-width: 1180px) {
+   .three-area-workspace {
+     grid-template-columns: 1fr;
+-  }
++    padding: 16px 20px;
++    gap: 16px;
++  }
++
++  .code-view {
++    max-height: 290px;
++    overflow-y: auto;
++    -webkit-overflow-scrolling: touch;
++  }
++
+   .advanced-grid {
+     grid-template-columns: 1fr 1fr;
+   }
++
+   .iter-step-row {
+     grid-template-columns: 70px 60px 1fr;
+   }
+-}
++
++  .iterations-explorer-section,
++  .advanced-drawer {
++    margin: 0 20px 24px 20px;
++  }
++
++  .overview-strip,
++  .validation-banner {
++    padding-left: 20px;
++    padding-right: 20px;
++  }
++}
++
++/* =========================================================
++   MOBILE & PHONE RESPONSIVE LAYOUT (<= 768px)
++   ========================================================= */
++@media (max-width: 768px) {
++  html,
++  body {
++    max-width: 100%;
++    overflow-x: hidden;
++    -webkit-text-size-adjust: 100%;
++  }
++
++  /* Multi-row sticky header with thumb-friendly full-width navigation controls */
++  .top-bar {
++    height: auto;
++    padding: 10px 12px;
++    flex-wrap: wrap;
++    gap: 8px;
++    align-items: center;
++  }
++
++  .brand-area {
++    order: 1;
++    flex: 1 1 auto;
++    gap: 6px;
++    flex-wrap: wrap;
++  }
++
++  .teacher-badge {
++    font-size: 13px;
++    padding: 4px 9px;
++  }
++
++  .step-progress-label {
++    font-size: 12.5px;
++    padding: 3px 8px;
++  }
++
++  .scope-pill {
++    font-size: 10.5px;
++    padding: 3px 8px;
++  }
++
++  .secondary-actions {
++    order: 2;
++    width: 100%;
++    display: flex;
++    flex-wrap: wrap;
++    gap: 6px;
++  }
++
++  .secondary-actions .btn-small-primary,
++  .secondary-actions .btn-subtle {
++    flex: 1 1 auto;
++    text-align: center;
++    justify-content: center;
++    font-size: 12px;
++    padding: 7px 8px;
++    min-height: 34px;
++  }
++
++  .nav-controls {
++    order: 3;
++    width: 100%;
++    display: grid;
++    grid-template-columns: repeat(5, minmax(0, 1fr));
++    gap: 5px;
++  }
++
++  .btn-nav {
++    width: 100%;
++    min-height: 38px;
++    padding: 6px 4px;
++    font-size: 11.5px;
++    text-align: center;
++    white-space: nowrap;
++    overflow: hidden;
++    text-overflow: ellipsis;
++    touch-action: manipulation;
++  }
++
++  /* Overview & Error Banners */
++  .overview-strip {
++    padding: 9px 12px;
++    font-size: 13px;
++    flex-wrap: wrap;
++    gap: 4px 8px;
++  }
++
++  .validation-banner {
++    padding: 10px 12px;
++    font-size: 13px;
++  }
++
++  /* Main 3-Area Workspace */
++  .three-area-workspace {
++    padding: 12px;
++    gap: 14px;
++  }
++
++  .area-card {
++    padding: 14px;
++    border-radius: var(--radius-md);
++  }
++
++  .area-header-row {
++    flex-wrap: wrap;
++    gap: 8px;
++    margin-bottom: 12px;
++    padding-bottom: 8px;
++  }
++
++  /* Area 1: Code View & Editor */
++  .code-view {
++    max-height: 250px;
++    font-size: 12.5px;
++    overflow-x: auto;
++    overflow-y: auto;
++    -webkit-overflow-scrolling: touch;
++  }
++
++  .code-row {
++    padding: 3px 8px;
++  }
++
++  .code-gutter {
++    width: 28px;
++    font-size: 11.5px;
++  }
++
++  .code-textarea {
++    min-height: 240px;
++    font-size: 13px;
++    padding: 10px;
++  }
++
++  /* Area 2: Teaching Area & Thonny Stepper */
++  .teaching-card-inner {
++    gap: 14px;
++  }
++
++  .iteration-jump-strip {
++    padding: 9px 11px;
++  }
++
++  .iteration-jump-header {
++    flex-wrap: wrap;
++    gap: 6px;
++  }
++
++  .iteration-jump-label {
++    font-size: 11px;
++  }
++
++  .iteration-pills-bar {
++    -webkit-overflow-scrolling: touch;
++    padding-bottom: 6px;
++  }
++
++  .iter-pill-btn {
++    padding: 6px 10px;
++    font-size: 11.5px;
++    touch-action: manipulation;
++  }
++
++  .teach-header-row {
++    flex-wrap: wrap;
++    gap: 8px;
++  }
++
++  .teach-step-title {
++    font-size: 18px;
++    line-height: 1.3;
++  }
++
++  .teach-code-box {
++    font-size: 14px;
++    padding: 10px 12px;
++    overflow-x: auto;
++    white-space: pre-wrap;
++    word-break: break-word;
++  }
++
++  .thonny-expr-card {
++    padding: 11px 12px;
++  }
++
++  .thonny-expr-header {
++    flex-wrap: wrap;
++    gap: 6px;
++  }
++
++  .thonny-live-code {
++    font-size: 13.5px;
++    padding: 8px 10px;
++  }
++
++  .thonny-focus-note {
++    font-size: 12.5px;
++  }
++
++  .teach-calc-box {
++    padding: 11px 12px;
++  }
++
++  .calc-row {
++    flex-direction: column;
++    align-items: flex-start;
++    gap: 3px;
++    font-size: 13px;
++  }
++
++  .calc-label {
++    width: auto;
++    font-size: 11.5px;
++    text-transform: uppercase;
++    letter-spacing: 0.3px;
++  }
++
++  .calc-val {
++    word-break: break-word;
++  }
++
++  .teach-meaning-text {
++    font-size: 15px;
++    line-height: 1.55;
++  }
++
++  .teach-vars-now {
++    font-size: 13px;
++    padding: 9px 11px;
++    word-break: break-word;
++  }
++
++  .teach-next-text {
++    font-size: 13.5px;
++  }
++
++  .final-answer-heading {
++    font-size: 18px;
++  }
++
++  .final-answer-detail {
++    font-size: 14px;
++  }
++
++  /* Area 3: Scopes & Stack/Heap Memory Model */
++  .scope-var-row {
++    grid-template-columns: 1fr auto;
++    row-gap: 4px;
++    padding: 8px 10px;
++    font-size: 12.5px;
++  }
++
++  .var-val-preview {
++    grid-column: 1 / -1;
++    text-align: left;
++    white-space: normal;
++    word-break: break-word;
++    padding-top: 2px;
++    border-top: 1px dashed var(--border-light);
++  }
++
++  .heap-header-row {
++    flex-wrap: wrap;
++    gap: 6px;
++  }
++
++  .heap-obj-card {
++    flex-wrap: wrap;
++    gap: 6px;
++    padding: 8px 10px;
++    font-size: 12px;
++  }
++
++  .heap-left {
++    flex-wrap: wrap;
++    gap: 5px;
++  }
++
++  .heap-val-text {
++    word-break: break-word;
++  }
++
++  /* Area 4: Complete Code Iteration & All-Steps Dry-Run Explorer */
++  .iterations-explorer-section,
++  .advanced-drawer {
++    margin: 0 12px 20px 12px;
++    padding: 14px;
++    border-radius: var(--radius-md);
++  }
++
++  .iterations-main-title {
++    font-size: 15.5px;
++  }
++
++  .iterations-controls-group {
++    width: 100%;
++    flex-direction: column;
++    align-items: stretch;
++  }
++
++  .view-mode-tabs {
++    width: 100%;
++    display: flex;
++  }
++
++  .view-tab-btn {
++    flex: 1;
++    text-align: center;
++    font-size: 12px;
++    padding: 7px 6px;
++  }
++
++  .iter-group-header {
++    padding: 10px 12px;
++    gap: 8px;
++  }
++
++  .iter-group-title {
++    font-size: 13.5px;
++  }
++
++  .iter-group-state-pill {
++    max-width: 100%;
++    white-space: normal;
++    word-break: break-word;
++    font-size: 11.5px;
++  }
++
++  .iter-step-row {
++    display: flex;
++    flex-wrap: wrap;
++    align-items: center;
++    gap: 6px 8px;
++    padding: 10px 12px;
++  }
++
++  .iter-step-code {
++    width: 100%;
++    white-space: pre-wrap;
++    word-break: break-word;
++    font-size: 12px;
++  }
++
++  .iter-step-meaning {
++    width: 100%;
++    font-size: 12.5px;
++    line-height: 1.45;
++  }
++
++  .iter-step-delta {
++    width: 100%;
++    text-align: left;
++    white-space: normal;
++    word-break: break-word;
++    font-size: 11.5px;
++  }
++
++  .dryrun-table-scroll {
++    max-height: 420px;
++    -webkit-overflow-scrolling: touch;
++  }
++
++  .advanced-grid {
++    grid-template-columns: 1fr;
++  }
++}
++
++/* Extra-Compact Phones (<= 480px) */
++@media (max-width: 480px) {
++  .top-bar {
++    padding: 8px 10px;
++  }
++
++  .brand-area {
++    width: 100%;
++    justify-content: space-between;
++  }
++
++  .btn-nav {
++    font-size: 11px;
++    padding: 6px 2px;
++  }
++
++  .three-area-workspace {
++    padding: 10px;
++    gap: 12px;
++  }
++
++  .area-card {
++    padding: 12px;
++  }
++
++  .teach-step-title {
++    font-size: 16.5px;
++  }
++
++  .iterations-explorer-section,
++  .advanced-drawer {
++    margin: 0 10px 16px 10px;
++    padding: 12px;
++  }
++}
++
+ 
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

@@ -1,0 +1,25 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app_build\index.html. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -67,18 +67,7 @@
+ 
+       <!-- Code Editor Textarea when user clicks "Paste / Edit Code" -->
+       <div id="liveEditorWrap" class="live-editor-wrap hidden">
+-        <div class="editor-template-bar">
+-          <span class="drawer-label">Quick DSA Templates:</span>
+-          <button type="button" class="chip-template" data-template="stack_class">Stack (OOP)</button>
+-          <button type="button" class="chip-template" data-template="max_subarray">Kadane's Max Subarray</button>
+-          <button type="button" class="chip-template" data-template="binary_search">Binary Search</button>
+-          <button type="button" class="chip-template" data-template="recursion_factorial">Recursion (Factorial)</button>
+-        </div>
+-        <textarea id="codeTextarea" class="code-textarea" placeholder="Paste any Python code here..." spellcheck="false"></textarea>
+-        <div class="editor-input-bar">
+-          <label class="drawer-label" for="inputPlaygroundField">Optional Function Input (leave empty if your code calls itself):</label>
+-          <input id="inputPlaygroundField" type="text" class="drawer-input" placeholder="e.g. nums = [-2, 1, -3, 4] or arr = [1, 3, 5, 7], target = 5" spellcheck="false" />
+-        </div>
++        <textarea id="codeTextarea" class="code-textarea" placeholder="Paste any Python code here and click ▶ Run Code..." spellcheck="false"></textarea>
+       </div>
+     </section>
+ 
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

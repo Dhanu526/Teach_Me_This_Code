@@ -1,0 +1,70 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app_build\app.js. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -614,6 +614,8 @@
+      ========================================================= */
+   renderArea1Code(step) {
+     this.codeLinesContainer.innerHTML = "";
++    let activeRowEl = null;
++
+     this.traceResult.rawLines.forEach((rawLine, idx) => {
+       const lineNum = idx + 1;
+       const isCurrent = step.line === lineNum;
+@@ -620,5 +620,8 @@
+       const row = document.createElement("div");
+       row.className = `code-row ${isCurrent ? "is-current-line" : "is-dimmed"}`;
++      if (isCurrent) {
++        activeRowEl = row;
++      }
+ 
+       row.innerHTML = `
+         <div class="code-gutter">${lineNum}</div>
+@@ -634,6 +634,14 @@
+ 
+       this.codeLinesContainer.appendChild(row);
+     });
++
++    // Keep the active line centered inside the scrollable code box on mobile/tablet
++    if (activeRowEl && this.codeLinesContainer.scrollHeight > this.codeLinesContainer.clientHeight) {
++      const container = this.codeLinesContainer;
++      const targetTop =
++        activeRowEl.offsetTop - container.offsetTop - container.clientHeight / 2 + activeRowEl.clientHeight / 2;
++      container.scrollTo({ top: Math.max(0, targetTop), behavior: "smooth" });
++    }
+   }
+ 
+   highlightPythonSyntax(line) {
+@@ -715,6 +715,7 @@
+   renderQuickIterationBar() {
+     if (!this.iterationPillsBar) return;
+     this.iterationPillsBar.innerHTML = "";
++    let activePillEl = null;
+ 
+     const activeGroupIdx = this.stepToGroupIdx.get(this.currentStepIdx) ?? 0;
+     const activeGroup = this.iterationGroups[activeGroupIdx];
+@@ -728,6 +728,9 @@
+       const isActive = gIdx === activeGroupIdx;
+       const isPast = gIdx < activeGroupIdx;
+       btn.className = `iter-pill-btn ${isActive ? "is-active-iter-pill" : isPast ? "is-past-iter-pill" : ""}`;
++      if (isActive) {
++        activePillEl = btn;
++      }
+       btn.textContent = grp.pillLabel;
+       btn.title = `${grp.title} (Steps ${grp.startStepIdx + 1}–${grp.endStepIdx + 1})`;
+       btn.addEventListener("click", () => {
+@@ -735,6 +735,13 @@
+       });
+       this.iterationPillsBar.appendChild(btn);
+     });
++
++    if (activePillEl && this.iterationPillsBar.scrollWidth > this.iterationPillsBar.clientWidth) {
++      const bar = this.iterationPillsBar;
++      const targetLeft =
++        activePillEl.offsetLeft - bar.offsetLeft - bar.clientWidth / 2 + activePillEl.clientWidth / 2;
++      bar.scrollTo({ left: Math.max(0, targetLeft), behavior: "smooth" });
++    }
+   }
+ 
+   renderThonnyExpressionStepper(step) {
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

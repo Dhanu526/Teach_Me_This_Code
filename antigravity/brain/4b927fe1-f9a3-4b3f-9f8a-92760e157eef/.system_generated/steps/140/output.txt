@@ -1,0 +1,14 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\server.py. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -34,6 +34,8 @@
+             self.send_response(204)
+             self.end_headers()
+             return
++        if self.path.startswith("/app_build/"):
++            self.path = self.path[len("/app_build") :]
+         super().do_GET()
+ 
+     def do_POST(self):
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

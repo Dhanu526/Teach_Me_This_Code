@@ -1,0 +1,33 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app_build\engine.js. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -107,7 +107,7 @@
+     const pyType = this.getType(val);
+     const valRepr = this.formatVal(val);
+ 
+-    if (Array.isArray(val)) {
++    if (Array.isArray(val) || (val && typeof val === "object")) {
+       let addr = this.containerWeakMap.get(val);
+       if (!addr) {
+         addr = `@0x${this.containerCounter.toString(16).toUpperCase().padStart(4, "0")}`;
+@@ -114,12 +114,15 @@
+         this.containerWeakMap.set(val, addr);
+       }
++      const isArr = Array.isArray(val);
+       this.heapRegistry.set(addr, {
+         address: addr,
+-        type: "list",
++        type: isArr ? "list" : "dict",
+         repr: valRepr,
+         isMutable: true,
+-        elements: val.map((item) => this.formatVal(item)),
+-        rawElements: [...val],
++        elements: isArr
++          ? val.map((item) => this.formatVal(item))
++          : Object.entries(val).map(([k, v]) => `${k}: ${this.formatVal(v)}`),
++        rawElements: isArr ? [...val] : { ...val },
+         lastTouchedStep: stepIdx
+       });
+       return addr;
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.
