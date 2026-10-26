@@ -1,0 +1,127 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app_build\styles.css. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -686,10 +686,10 @@
+   background: #f8fafc;
+   border: 1px solid var(--border-medium);
+   border-radius: var(--radius-md);
+-  padding: 13px 16px;
+-  display: flex;
+-  flex-direction: column;
+-  gap: 7px;
++  padding: 6px 11px;
++  display: flex;
++  flex-direction: column;
++  gap: 4px;
+ }
+ 
+ .calc-row {
+@@ -696,10 +696,11 @@
+   align-items: center;
+-  gap: 12px;
+-  font-size: 14.5px;
++  gap: 6px;
++  font-size: 12.5px;
+ }
+ 
+ .calc-label {
+-  width: 125px;
++  width: 95px;
++  font-size: 11.5px;
+   font-weight: 600;
+   color: var(--text-secondary);
+   flex-shrink: 0;
+@@ -706,11 +706,11 @@
+ 
+ .calc-val {
+   font-family: var(--font-mono);
+-  font-size: 14px;
+-  background: var(--bg-card);
+-  border: 1px solid var(--border-light);
+-  padding: 3px 10px;
+-  border-radius: 6px;
++  font-size: 12px;
++  background: var(--bg-card);
++  border: 1px solid var(--border-light);
++  padding: 2px 7px;
++  border-radius: 5px;
+   color: var(--text-main);
+ }
+ 
+@@ -728,8 +728,8 @@
+ }
+ 
+ .teach-meaning-text {
+-  font-size: 16.5px;
+-  line-height: 1.7;
++  font-size: 14px;
++  line-height: 1.5;
+   color: var(--text-main);
+ }
+ 
+@@ -736,9 +736,9 @@
+-  margin-top: 10px;
++  margin-top: 4px;
+   background: var(--bg-subtle);
+   border-left: 3px solid #3b82f6;
+   border-radius: 6px;
+-  padding: 9px 13px;
+-  font-size: 13.5px;
++  padding: 5px 9px;
++  font-size: 12px;
+   color: var(--text-secondary);
+ }
+ 
+@@ -745,13 +745,13 @@
+   font-weight: 700;
+-  font-size: 11.5px;
+-  text-transform: uppercase;
+-  letter-spacing: 0.05em;
+-  color: var(--primary-blue);
+-  margin-bottom: 4px;
++  font-size: 11px;
++  text-transform: uppercase;
++  letter-spacing: 0.05em;
++  color: var(--primary-blue);
++  margin-bottom: 2px;
+ }
+ 
+ .teach-symbols-body {
+-  line-height: 1.55;
++  line-height: 1.45;
+ }
+ 
+ .teach-meaning-text code,
+@@ -768,7 +768,7 @@
+ 
+ .teach-vars-now {
+   font-family: var(--font-mono);
+-  font-size: 14.5px;
++  font-size: 13.5px;
+   font-weight: 600;
+   background: var(--changed-green-bg);
+   border: 1px solid var(--changed-green-border);
+@@ -775,4 +775,4 @@
+-  padding: 10px 14px;
++  padding: 6px 10px;
+   border-radius: var(--radius-sm);
+ }
+ 
+@@ -779,6 +779,6 @@
+   background: #f0fdf4;
+   border: 1px solid #bbf7d0;
+-  padding: 11px 15px;
++  padding: 7px 12px;
+   border-radius: var(--radius-md);
+ }
+ 
+@@ -785,5 +785,5 @@
+-  font-size: 15px;
+-  line-height: 1.6;
++  font-size: 13px;
++  line-height: 1.45;
+   color: #166534;
+ }
+ 
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

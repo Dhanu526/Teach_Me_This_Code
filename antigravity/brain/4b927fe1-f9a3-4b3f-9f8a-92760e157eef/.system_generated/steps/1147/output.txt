@@ -1,0 +1,63 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app_build\explainer.js. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -1601,22 +1601,25 @@
+     // 8. RETURN STATEMENT
+     else if (step.eventType === "RETURN") {
+       const returnVal = op.returnVal !== undefined ? op.returnVal : step.returnValue !== undefined ? step.returnValue : "6";
+-      const subSummary =
+-        bestSubarrayInfo && bestSubarrayInfo.subarray
+-          ? `The continuous section \`[${bestSubarrayInfo.subarray.join(", ")}]\` has the largest sum: **${returnVal}**.`
+-          : `The function finished and returned: **${returnVal}**.`;
+-
+-      addSubstep({
+-        substepLabel: `Read return value ans = ${returnVal}`,
+-        codeSnippet: `return ans (${returnVal})`,
+-        varsBeforeStep: false,
+-        whatIsHappening: `Python evaluates the return statement: \`ans\` holds our best answer **\`${returnVal}\`**!`,
++      const retExpr = op.expr || (step.codeText.replace(/^return\s*/, '').trim()) || "ans";
++      const isKadane = (retExpr === "ans" || step.codeText.includes("ans")) && bestSubarrayInfo && bestSubarrayInfo.subarray;
++      const subSummary = isKadane
++        ? `The continuous section \`[${bestSubarrayInfo.subarray.join(", ")}]\` has the largest sum: **${returnVal}**.`
++        : `The function finished and returned: **${returnVal}**.`;
++
++      addSubstep({
++        substepLabel: `Read return value ${retExpr} = ${returnVal}`,
++        codeSnippet: `return ${retExpr} (${returnVal})`,
++        varsBeforeStep: false,
++        whatIsHappening: isKadane
++          ? `Python evaluates the return statement: \`ans\` holds our best answer **\`${returnVal}\`**!`
++          : `Python evaluates the return statement: \`${retExpr}\` resolves to **\`${returnVal}\`**!`,
+         symbolsMeaning: `\`return\` finishes the function and sends the result back to the caller.`,
+-        currentValues: `ans = ${returnVal}`,
+-        calculationCard: {
+-          currentNumber: null,
+-          before: `Finished algorithm`,
+-          calculation: `return ans`,
++        currentValues: `${retExpr} = ${returnVal}`,
++        calculationCard: {
++          currentNumber: null,
++          before: `Finished function body`,
++          calculation: `return ${retExpr}`,
+           after: `Final answer = ${returnVal}`
+         },
+         whyNecessary: `The return statement delivers the result of the function to whoever requested it.`,
+@@ -1626,10 +1626,14 @@
+         substepLabel: `Final answer: ${returnVal}`,
+         codeSnippet: `return ${returnVal}`,
+         varsBeforeStep: false,
+-        whatIsHappening: `The program is complete! The maximum continuous subarray sum is **${returnVal}**.`,
++        whatIsHappening: isKadane
++          ? `The program is complete! The maximum continuous subarray sum is **${returnVal}**.`
++          : `The program is complete! The function returned **${returnVal}**.`,
+         symbolsMeaning: `Function execution completed.`,
+         currentValues: `Final answer = ${returnVal}`,
+-        whyNecessary: `Why am I learning this? Kadane's algorithm solved this problem in linear time (O(n)), visiting each element just once!`,
++        whyNecessary: isKadane
++          ? `Why am I learning this? Kadane's algorithm solved this problem in linear time (O(n)), visiting each element just once!`
++          : `The function has reached its conclusion and returned its final computed output.`,
+         whatHappensNext: `You can click Restart to step through again or paste new code to learn!`,
+         finalBanner: {
+           answer: returnVal,
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

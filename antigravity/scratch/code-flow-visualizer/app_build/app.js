@@ -11,10 +11,10 @@ class TeachMeCodeApp {
     this.engine = new window.PythonExecutionEngine();
     this.explainer = new window.RuleBasedExplainer();
 
-    this.currentPresetKey = "stack_class";
+    this.currentPresetKey = "max_subarray";
     const defaultProg =
       window.PRELOADED_PROGRAMS[this.currentPresetKey] ||
-      window.PRELOADED_PROGRAMS["max_subarray"];
+      window.PRELOADED_PROGRAMS["stack_class"];
     this.sourceCode = defaultProg.code;
     this.inputCode = defaultProg.defaultInput || "";
 
@@ -22,13 +22,24 @@ class TeachMeCodeApp {
     this.iterationGroups = [];
     this.stepToGroupIdx = new Map();
     this.collapsedGroupIds = new Set();
-    this.allGroupsCollapsed = false;
+    this.allGroupsCollapsed = true;
     this.iterationsViewMode = "grouped"; // "grouped" | "table"
-    this.showIterationsPanel = true;
+    this.showIterationsPanel = false;
 
     this.currentStepIdx = 0;
+    this.currentSubstepIdx = 0;
     this.currentSubStepIdx = 0;
     this.showGCObjects = false;
+    this.animationsEnabled = true;
+
+    // Phase 5: Speed Modes & Reduced Motion Accessibility
+    this.speedModes = [
+      { label: "1x", ms: 1200, animFactor: 1 },
+      { label: "1.5x", ms: 750, animFactor: 0.65 },
+      { label: "2x", ms: 450, animFactor: 0.4 },
+      { label: "0.5x", ms: 2200, animFactor: 1.8 }
+    ];
+    this.currentSpeedIdx = 0;
 
     this.isPlaying = false;
     this.playInterval = null;
@@ -36,10 +47,28 @@ class TeachMeCodeApp {
     this.isEditing = false;
     this.showAdvanced = false;
 
+    // Phase 4: Interactive Learning Prediction System
+    this.predictModeEnabled = false;
+    this.stepAnswers = new Map();
+
     this.initDOM();
+    this.initAccessibility();
     this.bindEvents();
     this.codeTextarea.value = this.sourceCode;
     this.analyzeAndRun();
+  }
+
+  initAccessibility() {
+    // Phase 3 & 5: Auto-detect OS reduced motion preference
+    if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      this.animationsEnabled = false;
+      document.body.classList.add("no-animations");
+      document.documentElement.style.setProperty("--anim-speed-factor", "0.001");
+      if (this.btnToggleAnim) {
+        this.btnToggleAnim.textContent = "🛑 Reduced Motion: ON";
+        this.btnToggleAnim.classList.remove("active");
+      }
+    }
   }
 
   initDOM() {
@@ -53,11 +82,15 @@ class TeachMeCodeApp {
     this.btnRestart = document.getElementById("btnRestart");
 
     // Top Secondary Controls
+    this.btnToggleAnim = document.getElementById("btnToggleAnim");
+    this.btnToggleQuiz = document.getElementById("btnToggleQuiz");
+    this.btnSpeed = document.getElementById("btnSpeed");
     this.btnEditCode = document.getElementById("btnEditCode");
     this.btnAnalyzeCode = document.getElementById("btnAnalyzeCode");
     this.btnToggleIterations = document.getElementById("btnToggleIterations");
     this.btnToggleAdvanced = document.getElementById("btnToggleAdvanced");
     this.advancedViewPanel = document.getElementById("advancedViewPanel");
+    this.testInputChips = document.getElementById("testInputChips");
 
     // Validation & Overview
     this.validationBanner = document.getElementById("validationBanner");
@@ -73,8 +106,25 @@ class TeachMeCodeApp {
     this.activeIterationBadge = document.getElementById("activeIterationBadge");
     this.iterationPillsBar = document.getElementById("iterationPillsBar");
     this.teachStepTitle = document.getElementById("teachStepTitle");
+    this.teachSubstepPill = document.getElementById("teachSubstepPill");
     this.teachScopeBadge = document.getElementById("teachScopeBadge");
     this.teachCodeBox = document.getElementById("teachCodeBox");
+
+    // Phase 4: Interactive Prediction Elements
+    this.interactivePredictCard = document.getElementById("interactivePredictCard");
+    this.predictSubPrompt = document.getElementById("predictSubPrompt");
+    this.predictQuestionText = document.getElementById("predictQuestionText");
+    this.predictChoicesWrap = document.getElementById("predictChoicesWrap");
+    this.btnSkipPredict = document.getElementById("btnSkipPredict");
+    this.predictResultBox = document.getElementById("predictResultBox");
+    this.predictResultHeader = document.getElementById("predictResultHeader");
+    this.predictResultBody = document.getElementById("predictResultBody");
+
+    this.loopReturnBanner = document.getElementById("loopReturnBanner");
+    this.visualLoopStrip = document.getElementById("visualLoopStrip");
+    this.visualConditionGate = document.getElementById("visualConditionGate");
+    this.visualCalcStage = document.getElementById("visualCalcStage");
+    this.negativeResetVisual = document.getElementById("negativeResetVisual");
     this.thonnyExprBox = document.getElementById("thonnyExprBox");
     this.thonnySubStepCounter = document.getElementById("thonnySubStepCounter");
     this.thonnyLiveCode = document.getElementById("thonnyLiveCode");
@@ -88,6 +138,9 @@ class TeachMeCodeApp {
     this.calcFormulaVal = document.getElementById("calcFormulaVal");
     this.calcAfterVal = document.getElementById("calcAfterVal");
     this.teachMeaningText = document.getElementById("teachMeaningText");
+    this.teachSymbolsBox = document.getElementById("teachSymbolsBox");
+    this.teachWhySection = document.getElementById("teachWhySection");
+    this.teachWhyText = document.getElementById("teachWhyText");
     this.teachVarsNowBox = document.getElementById("teachVarsNowBox");
     this.teachNextText = document.getElementById("teachNextText");
     this.finalAnswerBanner = document.getElementById("finalAnswerBanner");
@@ -123,17 +176,17 @@ class TeachMeCodeApp {
   bindEvents() {
     this.btnPrev.addEventListener("click", () => {
       this.stopAutoPlay();
-      this.goToStep(this.currentStepIdx - 1);
+      this.goToPrevSubstep();
     });
 
     this.btnSubStep.addEventListener("click", () => {
       this.stopAutoPlay();
-      this.advanceSubExpression();
+      this.goToNextSubstep();
     });
 
     this.btnNext.addEventListener("click", () => {
       this.stopAutoPlay();
-      this.goToStep(this.currentStepIdx + 1);
+      this.goToNextSubstep();
     });
 
     this.btnAutoPlay.addEventListener("click", () => {
@@ -146,8 +199,103 @@ class TeachMeCodeApp {
 
     this.btnRestart.addEventListener("click", () => {
       this.stopAutoPlay();
-      this.goToStep(0);
+      this.goToStep(0, 0);
     });
+
+    if (this.btnToggleAnim) {
+      this.btnToggleAnim.addEventListener("click", () => {
+        this.animationsEnabled = !this.animationsEnabled;
+        this.btnToggleAnim.textContent = this.animationsEnabled ? "✨ Animations: ON" : "🛑 Reduced Motion (OFF)";
+        this.btnToggleAnim.classList.toggle("active", this.animationsEnabled);
+        document.body.classList.toggle("no-animations", !this.animationsEnabled);
+        const spd = this.speedModes[this.currentSpeedIdx];
+        document.documentElement.style.setProperty(
+          "--anim-speed-factor",
+          this.animationsEnabled ? String(spd.animFactor) : "0.001"
+        );
+      });
+    }
+
+    // Phase 4: Toggle Predict Mode (🎯 Predict: OFF / ON)
+    if (this.btnToggleQuiz) {
+      this.btnToggleQuiz.addEventListener("click", () => {
+        this.predictModeEnabled = !this.predictModeEnabled;
+        this.btnToggleQuiz.textContent = this.predictModeEnabled ? "🎯 Predict: ON" : "🎯 Predict: OFF";
+        this.btnToggleQuiz.classList.toggle("active", this.predictModeEnabled);
+        this.renderStep();
+      });
+    }
+
+    // Phase 4: Reveal Answer without guessing
+    if (this.btnSkipPredict) {
+      this.btnSkipPredict.addEventListener("click", () => {
+        const steps = this.traceResult && this.traceResult.steps ? this.traceResult.steps : [];
+        const step = steps[this.currentStepIdx];
+        if (!step || !step.predictQuestion) return;
+        this.stepAnswers.set(this.currentStepIdx, {
+          selectedChoice: null,
+          isCorrect: null,
+          revealed: true,
+          mode: "revealed"
+        });
+        const currentSubstep = (step.teachingSubsteps && step.teachingSubsteps[this.currentSubstepIdx]) || step.teacherLesson;
+        this.renderInteractivePredictCard(step, currentSubstep);
+        this.renderVisualConditionGate(step, currentSubstep);
+      });
+    }
+
+    // Phase 5: Speed Controls (0.5x, 1x, 1.5x, 2x)
+    if (this.btnSpeed) {
+      this.btnSpeed.addEventListener("click", () => {
+        this.currentSpeedIdx = (this.currentSpeedIdx + 1) % this.speedModes.length;
+        const spd = this.speedModes[this.currentSpeedIdx];
+        this.btnSpeed.textContent = `⚡ Speed: ${spd.label}`;
+        this.playSpeedMs = spd.ms;
+        document.documentElement.style.setProperty("--anim-speed-factor", String(spd.animFactor));
+        if (this.isPlaying) {
+          clearInterval(this.playInterval);
+          this.playInterval = setInterval(() => {
+            const steps = this.traceResult.steps;
+            const step = steps[this.currentStepIdx];
+            const substeps = step.teachingSubsteps || [step.teacherLesson];
+            const isLastStep = this.currentStepIdx >= steps.length - 1;
+            const isLastSubstep = this.currentSubstepIdx >= substeps.length - 1;
+            if (!isLastStep || !isLastSubstep) {
+              this.goToNextSubstep();
+              if (this.predictModeEnabled) {
+                const nextStep = this.traceResult.steps[this.currentStepIdx];
+                if (nextStep && nextStep.predictQuestion && !this.stepAnswers.has(this.currentStepIdx)) {
+                  this.stopAutoPlay();
+                }
+              }
+            } else {
+              this.stopAutoPlay();
+            }
+          }, this.playSpeedMs);
+        }
+      });
+    }
+
+    // Phase 5: Quick Test Inputs (All-Negative, Positive, Single-Element)
+    if (this.testInputChips) {
+      const chips = this.testInputChips.querySelectorAll(".test-chip");
+      chips.forEach((chip) => {
+        chip.addEventListener("click", () => {
+          chips.forEach((c) => c.classList.remove("active"));
+          chip.classList.add("active");
+          const chipInput = chip.getAttribute("data-input") || "";
+          this.inputCode = chipInput;
+          if (/^\s*nums\s*=\s*\[[^\]]*\]/m.test(this.sourceCode)) {
+            this.sourceCode = this.sourceCode.replace(/^\s*nums\s*=\s*\[[^\]]*\]/m, chipInput);
+            if (this.codeTextarea) {
+              this.codeTextarea.value = this.sourceCode;
+            }
+          }
+          this.stopAutoPlay();
+          this.analyzeAndRun();
+        });
+      });
+    }
 
     if (this.btnToggleGC) {
       this.btnToggleGC.addEventListener("click", () => {
@@ -207,9 +355,7 @@ class TeachMeCodeApp {
       this.btnToggleAdvanced.textContent = this.showAdvanced
         ? "Hide Advanced View"
         : "Advanced View";
-      if (this.showAdvanced) {
-        this.renderStep();
-      }
+      this.renderStep();
     });
 
     this.btnEditCode.addEventListener("click", () => {
@@ -238,15 +384,15 @@ class TeachMeCodeApp {
       if (e.key === "ArrowRight") {
         e.preventDefault();
         this.stopAutoPlay();
-        this.goToStep(this.currentStepIdx + 1);
+        this.goToNextSubstep();
       } else if (e.key === "ArrowLeft") {
         e.preventDefault();
         this.stopAutoPlay();
-        this.goToStep(this.currentStepIdx - 1);
+        this.goToPrevSubstep();
       } else if (e.key === "F7") {
         e.preventDefault();
         this.stopAutoPlay();
-        this.advanceSubExpression();
+        this.goToNextSubstep();
       }
     });
   }
@@ -328,6 +474,7 @@ class TeachMeCodeApp {
       this.validationBanner.classList.add("hidden");
     }
 
+    this.stepAnswers.clear();
     this.currentStepIdx = 0;
     this.currentSubStepIdx = 0;
     this.renderStep();
@@ -479,11 +626,13 @@ class TeachMeCodeApp {
       });
     }
 
-    // Populate end-of-iteration variable summary for each group
+    // Populate end-of-iteration variable summary for each group and collapse by default
     this.iterationGroups.forEach((grp) => {
       const lastStep = grp.steps[grp.steps.length - 1].step;
       grp.endStateSummary = this.formatCompactStateForStep(lastStep);
+      this.collapsedGroupIds.add(grp.id);
     });
+    this.allGroupsCollapsed = true;
   }
 
   formatCompactStateForStep(step) {
@@ -510,49 +659,86 @@ class TeachMeCodeApp {
       .join("  •  ");
   }
 
-  goToStep(idx) {
+  goToStep(idx, substepIdx = 0) {
     if (!this.traceResult || !this.traceResult.steps.length) return;
     this.currentStepIdx = Math.max(0, Math.min(idx, this.traceResult.steps.length - 1));
     const step = this.traceResult.steps[this.currentStepIdx];
+    const substeps = step.teachingSubsteps && step.teachingSubsteps.length > 0
+      ? step.teachingSubsteps
+      : [step.teacherLesson];
+    this.currentSubstepIdx = Math.max(0, Math.min(substepIdx, substeps.length - 1));
     const frames = step.exprFrames || [];
     this.currentSubStepIdx = Math.max(0, frames.length - 1);
     this.renderStep();
   }
 
-  advanceSubExpression() {
+  goToNextSubstep() {
     if (!this.traceResult || !this.traceResult.steps.length) return;
     const step = this.traceResult.steps[this.currentStepIdx];
-    const frames = step.exprFrames || [];
+    const substeps = step.teachingSubsteps && step.teachingSubsteps.length > 0
+      ? step.teachingSubsteps
+      : [step.teacherLesson];
 
-    if (frames.length > 1 && this.currentSubStepIdx < frames.length - 1) {
-      this.currentSubStepIdx++;
+    if (this.currentSubstepIdx < substeps.length - 1) {
+      this.currentSubstepIdx++;
       this.renderStep();
-      return;
-    }
-
-    if (this.currentStepIdx < this.traceResult.steps.length - 1) {
+    } else if (this.currentStepIdx < this.traceResult.steps.length - 1) {
       this.currentStepIdx++;
-      this.currentSubStepIdx = 0;
+      this.currentSubstepIdx = 0;
       this.renderStep();
     } else {
-      this.currentSubStepIdx = 0;
+      this.stopAutoPlay();
+    }
+  }
+
+  goToPrevSubstep() {
+    if (!this.traceResult || !this.traceResult.steps.length) return;
+
+    if (this.currentSubstepIdx > 0) {
+      this.currentSubstepIdx--;
+      this.renderStep();
+    } else if (this.currentStepIdx > 0) {
+      this.currentStepIdx--;
+      const prevStep = this.traceResult.steps[this.currentStepIdx];
+      const prevSubsteps = prevStep.teachingSubsteps && prevStep.teachingSubsteps.length > 0
+        ? prevStep.teachingSubsteps
+        : [prevStep.teacherLesson];
+      this.currentSubstepIdx = Math.max(0, prevSubsteps.length - 1);
       this.renderStep();
     }
   }
 
+  advanceSubExpression() {
+    this.goToNextSubstep();
+  }
+
   startAutoPlay() {
     if (!this.traceResult || !this.traceResult.steps.length) return;
-    if (this.currentStepIdx >= this.traceResult.steps.length - 1) {
+    const total = this.traceResult.steps.length;
+    const lastStep = this.traceResult.steps[total - 1];
+    const lastSubsteps = lastStep.teachingSubsteps || [lastStep.teacherLesson];
+    if (this.currentStepIdx >= total - 1 && this.currentSubstepIdx >= lastSubsteps.length - 1) {
       this.currentStepIdx = 0;
-      this.currentSubStepIdx = 0;
+      this.currentSubstepIdx = 0;
       this.renderStep();
     }
     this.isPlaying = true;
     this.btnAutoPlay.textContent = "⏸ Pause";
 
     this.playInterval = setInterval(() => {
-      if (this.currentStepIdx < this.traceResult.steps.length - 1) {
-        this.goToStep(this.currentStepIdx + 1);
+      const step = this.traceResult.steps[this.currentStepIdx];
+      const substeps = step.teachingSubsteps || [step.teacherLesson];
+      const isLastStep = this.currentStepIdx >= total - 1;
+      const isLastSubstep = this.currentSubstepIdx >= substeps.length - 1;
+
+      if (!isLastStep || !isLastSubstep) {
+        this.goToNextSubstep();
+        if (this.predictModeEnabled) {
+          const nextStep = this.traceResult.steps[this.currentStepIdx];
+          if (nextStep && nextStep.predictQuestion && !this.stepAnswers.has(this.currentStepIdx)) {
+            this.stopAutoPlay();
+          }
+        }
       } else {
         this.stopAutoPlay();
       }
@@ -580,13 +766,27 @@ class TeachMeCodeApp {
     }
 
     const step = steps[this.currentStepIdx];
+    const substeps = step.teachingSubsteps && step.teachingSubsteps.length > 0
+      ? step.teachingSubsteps
+      : [step.teacherLesson];
+    this.currentSubstepIdx = Math.max(0, Math.min(this.currentSubstepIdx, substeps.length - 1));
+    const currentSubstep = substeps[this.currentSubstepIdx];
+
     const isLocal = step.scopeType === "LOCAL" || (step.functionName && step.functionName !== "Global Scope");
     const scopeLabel = isLocal ? `LOCAL SCOPE: ${step.functionName.split("(")[0]}()` : "GLOBAL SCOPE";
 
-    // Update Top Bar & Scope Indicators
-    this.stepProgressLabel.textContent = `Step ${this.currentStepIdx + 1} of ${total}`;
-    this.btnPrev.disabled = this.currentStepIdx <= 0;
-    this.btnNext.disabled = this.currentStepIdx >= total - 1;
+    const isFirst = this.currentStepIdx === 0 && this.currentSubstepIdx === 0;
+    const isLast = this.currentStepIdx === total - 1 && this.currentSubstepIdx === substeps.length - 1;
+
+    // Requirement 10: Progress indicator distinguishing teaching substeps from actual execution steps
+    this.stepProgressLabel.textContent = `Step ${this.currentStepIdx + 1} of ${total} • Substep ${this.currentSubstepIdx + 1}/${substeps.length}`;
+    this.btnPrev.disabled = isFirst;
+    this.btnNext.disabled = isLast;
+
+    if (this.teachSubstepPill) {
+      this.teachSubstepPill.textContent = `Substep ${this.currentSubstepIdx + 1} of ${substeps.length}`;
+      this.teachSubstepPill.title = currentSubstep.substepLabel || "";
+    }
 
     [this.activeScopeBadge, this.teachScopeBadge].forEach((badge) => {
       if (!badge) return;
@@ -599,9 +799,9 @@ class TeachMeCodeApp {
         : "Scope: Global (<module>)";
     }
 
-    this.renderArea1Code(step);
-    this.renderArea2Teaching(step);
-    this.renderArea3MemoryAndScopes(step);
+    this.renderArea1Code(step, currentSubstep);
+    this.renderArea2Teaching(step, currentSubstep);
+    this.renderArea3MemoryAndScopes(step, currentSubstep);
     this.renderArea4AllIterations(step);
 
     if (this.showAdvanced) {
@@ -610,15 +810,29 @@ class TeachMeCodeApp {
   }
 
   /* =========================================================
-     AREA 1: YOUR CODE (Highlight ONLY the current line)
+     AREA 1: YOUR CODE (Highlight ONLY the current line & branch outcome)
      ========================================================= */
-  renderArea1Code(step) {
+  renderArea1Code(step, currentSubstep) {
     this.codeLinesContainer.innerHTML = "";
     let activeRowEl = null;
+
+    const cond = step.condition;
+    const isConditionStep = step.eventType === "CONDITION";
 
     this.traceResult.rawLines.forEach((rawLine, idx) => {
       const lineNum = idx + 1;
       const isCurrent = step.line === lineNum;
+
+      // Phase 3: Highlight the branch that executes / is skipped
+      let branchBadge = "";
+      if (isConditionStep && cond) {
+        const isBranchLine = lineNum === step.line + 1;
+        if (isBranchLine) {
+          branchBadge = cond.result
+            ? `<span class="branch-badge is-executes">✓ executes</span>`
+            : `<span class="branch-badge is-skipped">✗ skipped</span>`;
+        }
+      }
 
       const row = document.createElement("div");
       row.className = `code-row ${isCurrent ? "is-current-line" : "is-dimmed"}`;
@@ -626,16 +840,17 @@ class TeachMeCodeApp {
         activeRowEl = row;
       }
 
+      const pointerHTML = isCurrent ? `<span class="code-gutter-pointer">▶</span>` : "";
       row.innerHTML = `
-        <div class="code-gutter">${lineNum}</div>
-        <div class="code-syntax">${this.highlightPythonSyntax(rawLine)}</div>
+        <div class="code-gutter">${pointerHTML}<span>${lineNum}</span></div>
+        <div class="code-syntax">${this.highlightPythonSyntax(rawLine)}${branchBadge}</div>
       `;
 
       row.addEventListener("click", () => {
         const targetIdx = this.traceResult.steps.findIndex((s) => s.line === lineNum);
         if (targetIdx !== -1) {
           this.stopAutoPlay();
-          this.goToStep(targetIdx);
+          this.goToStep(targetIdx, 0);
         }
       });
 
@@ -684,14 +899,28 @@ class TeachMeCodeApp {
   /* =========================================================
      AREA 2: TEACHING AREA, QUICK ITERATION BAR & THONNY STEPPER
      ========================================================= */
-  renderArea2Teaching(step) {
-    const lesson = step.teacherLesson;
+  renderArea2Teaching(step, currentSubstep) {
+    const lesson = currentSubstep || step.teacherLesson;
 
     // Render Quick Iteration / Phase Pills Bar
     this.renderQuickIterationBar();
 
-    this.teachStepTitle.textContent = lesson.title;
-    this.teachCodeBox.innerHTML = this.highlightPythonSyntax(step.codeText);
+    this.teachStepTitle.textContent = lesson.title || step.teacherLesson.title;
+    this.teachCodeBox.innerHTML = this.highlightPythonSyntax(lesson.codeSnippet || step.codeText);
+
+    // Phase 4: Interactive Learning Prediction Card (Optional)
+    this.renderInteractivePredictCard(step, currentSubstep);
+
+    // Phase 3: Loop Return Indicator & Loop Array Pointer Tracker
+    this.renderLoopReturnBanner(step, currentSubstep);
+    this.renderVisualLoopStrip(step, currentSubstep);
+
+    // Phase 3: Condition Comparison Gate & Branch Selector
+    this.renderVisualConditionGate(step, currentSubstep);
+
+    // Phase 2: Variable Boxes & Number Movement / Calculation Stage
+    this.renderVisualCalcStage(step, currentSubstep);
+    this.renderNegativeResetVisual(step, currentSubstep);
 
     // Render Thonny Step-by-Step Expression Evaluator
     this.renderThonnyExpressionStepper(step);
@@ -715,8 +944,37 @@ class TeachMeCodeApp {
       this.teachCalculationBox.classList.add("hidden");
     }
 
-    this.teachMeaningText.innerHTML = this.formatMarkdown(lesson.whatItMeans);
-    this.teachVarsNowBox.textContent = lesson.variableValuesNow;
+    // Meaning / What is happening (clean beginner explanation)
+    const mainMeaning = lesson.whatIsHappening || lesson.whatItMeans || "";
+    this.teachMeaningText.innerHTML = this.formatMarkdown(mainMeaning);
+
+    // Symbols callout (clean container without raw HTML string concatenation)
+    if (this.teachSymbolsBox) {
+      if (lesson.symbolsMeaning && !mainMeaning.includes(lesson.symbolsMeaning)) {
+        this.teachSymbolsBox.classList.remove("hidden");
+        this.teachSymbolsBox.innerHTML = `
+          <div class="teach-symbols-title">Symbols on this line:</div>
+          <div class="teach-symbols-body">${this.formatMarkdown(lesson.symbolsMeaning)}</div>
+        `;
+      } else {
+        this.teachSymbolsBox.classList.add("hidden");
+        this.teachSymbolsBox.innerHTML = "";
+      }
+    }
+
+    // Why is this operation necessary? / Why am I learning this? (Requirement 4)
+    if (this.teachWhySection && this.teachWhyText) {
+      if (lesson.whyNecessary) {
+        this.teachWhySection.classList.remove("hidden");
+        this.teachWhyText.innerHTML = this.formatMarkdown(lesson.whyNecessary);
+      } else {
+        this.teachWhySection.classList.add("hidden");
+      }
+    }
+
+    // Phase 2: Show variables as labeled boxes containing their current values
+    this.renderVisualVariableBoxes(step, currentSubstep);
+
     this.teachNextText.innerHTML = this.formatMarkdown(lesson.whatHappensNext);
 
     if (lesson.finalBanner) {
@@ -726,6 +984,511 @@ class TeachMeCodeApp {
     } else {
       this.finalAnswerBanner.classList.add("hidden");
     }
+  }
+
+  /* PHASE 4: Interactive Learning Prediction Card */
+  renderInteractivePredictCard(step, currentSubstep) {
+    if (!this.interactivePredictCard) return;
+    const q = step.predictQuestion;
+
+    if (!this.predictModeEnabled || !q) {
+      this.interactivePredictCard.classList.add("hidden");
+      this.interactivePredictCard.innerHTML = "";
+      return;
+    }
+
+    this.interactivePredictCard.classList.remove("hidden");
+    const existingAnswer = this.stepAnswers.get(this.currentStepIdx);
+    const isAnswered = Boolean(existingAnswer);
+
+    const choicesHTML = (q.choices || [])
+      .map((choice, idx) => {
+        let extraClass = "";
+        let prefix = "";
+        let disabledAttr = "";
+
+        if (isAnswered) {
+          disabledAttr = "disabled";
+          const isThisCorrect = idx === q.correctIndex || choice === q.correctValue;
+          const isThisSelected = existingAnswer.selectedChoice === choice;
+
+          if (isThisCorrect) {
+            extraClass = "is-correct";
+            prefix = "✓ ";
+          } else if (isThisSelected && !existingAnswer.isCorrect) {
+            extraClass = "is-incorrect";
+            prefix = "✗ ";
+          }
+        }
+
+        return `<button type="button" class="predict-choice-btn ${extraClass}" data-choice-idx="${idx}" ${disabledAttr}>${prefix}${this.escapeHTML(choice)}</button>`;
+      })
+      .join("");
+
+    let resultBoxHTML = "";
+    if (isAnswered) {
+      let boxClass = "";
+      let headerText = "🎉 Correct Prediction!";
+      let headerColor = "#065f46";
+
+      if (existingAnswer.mode === "incorrect") {
+        boxClass = "was-wrong";
+        headerText = "💡 Close! Here is what actually happens:";
+        headerColor = "#92400e";
+      } else if (existingAnswer.mode === "revealed") {
+        boxClass = "was-revealed";
+        headerText = "📖 Revealed Explanation:";
+        headerColor = "#1d4ed8";
+      }
+
+      resultBoxHTML = `
+        <div class="predict-result-box ${boxClass}">
+          <div class="predict-result-header" style="color: ${headerColor};">${headerText}</div>
+          <div class="predict-result-body">${this.formatMarkdown(q.explanation)}</div>
+        </div>
+      `;
+    }
+
+    this.interactivePredictCard.innerHTML = `
+      <div class="predict-card-header">
+        <div class="predict-badge-group">
+          <span class="predict-badge">🎯 Predict the Outcome</span>
+          <span class="predict-subprompt">${this.escapeHTML(q.subPrompt || "")}</span>
+        </div>
+        ${!isAnswered ? `<button type="button" class="btn-predict-skip" id="btnCardSkipPredict">Reveal Answer</button>` : ""}
+      </div>
+      <div class="predict-question-text">${this.escapeHTML(q.question)}</div>
+      <div class="predict-choices-wrap">${choicesHTML}</div>
+      ${resultBoxHTML}
+    `;
+
+    // Wire choice clicks
+    if (!isAnswered) {
+      const choiceButtons = this.interactivePredictCard.querySelectorAll(".predict-choice-btn");
+      choiceButtons.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const idx = Number(btn.getAttribute("data-choice-idx"));
+          const choice = q.choices[idx];
+          const isCorrect = idx === q.correctIndex || choice === q.correctValue;
+          this.stepAnswers.set(this.currentStepIdx, {
+            selectedChoice: choice,
+            selectedIndex: idx,
+            isCorrect: isCorrect,
+            revealed: true,
+            mode: isCorrect ? "correct" : "incorrect"
+          });
+          this.renderInteractivePredictCard(step, currentSubstep);
+          this.renderVisualConditionGate(step, currentSubstep);
+        });
+      });
+
+      const cardSkipBtn = this.interactivePredictCard.querySelector("#btnCardSkipPredict");
+      if (cardSkipBtn) {
+        cardSkipBtn.addEventListener("click", () => {
+          this.stepAnswers.set(this.currentStepIdx, {
+            selectedChoice: null,
+            isCorrect: null,
+            revealed: true,
+            mode: "revealed"
+          });
+          this.renderInteractivePredictCard(step, currentSubstep);
+          this.renderVisualConditionGate(step, currentSubstep);
+        });
+      }
+    }
+  }
+
+  /* PHASE 3: Visually Return to the Loop when another iteration begins */
+  renderLoopReturnBanner(step, currentSubstep) {
+    if (!this.loopReturnBanner) return;
+    const op = step.operationDetail || {};
+    if (step.eventType === "LOOP_ITER" && op.iteration > 1) {
+      this.loopReturnBanner.classList.remove("hidden");
+      const prevPass = op.iteration - 1;
+      const iterVar = op.iterVar || "i";
+      const iterVal = op.iterVal !== undefined ? op.iterVal : "";
+      const elVal = op.indexedElementInfo ? op.indexedElementInfo.elementVal : "";
+      this.loopReturnBanner.innerHTML = `
+        <span class="loop-return-icon">↺</span>
+        <div class="loop-return-text">
+          <strong>Looping back to Line ${step.line}:</strong> Pass ${prevPass} finished! Advancing loop variable <code>${iterVar} = ${iterVal}</code> (next list element: <code>${elVal}</code>).
+        </div>
+      `;
+    } else {
+      this.loopReturnBanner.classList.add("hidden");
+      this.loopReturnBanner.innerHTML = "";
+    }
+  }
+
+  /* PHASE 3: Show the loop's current index and current list element with an active pointer */
+  renderVisualLoopStrip(step, currentSubstep) {
+    if (!this.visualLoopStrip) return;
+    const loop = step.loop || (step.eventType === "LOOP_ITER" ? step.operationDetail : null);
+    const numsRow = (step.variables || []).find((v) => Array.isArray(v.rawValue));
+    const listArr = numsRow ? numsRow.rawValue : null;
+
+    if (!listArr || !loop || loop.iterVal === undefined) {
+      this.visualLoopStrip.classList.add("hidden");
+      this.visualLoopStrip.innerHTML = "";
+      return;
+    }
+
+    this.visualLoopStrip.classList.remove("hidden");
+    const activeIdx = Number(loop.iterVal);
+    const activeVal = listArr[activeIdx];
+    const total = listArr.length;
+    const passNum = loop.iteration || activeIdx + 1;
+
+    const cellsHTML = listArr
+      .map((val, idx) => {
+        const isActive = idx === activeIdx;
+        return `
+          <div class="loop-track-item ${isActive ? "is-active-pointer" : ""}">
+            <div class="loop-track-cell">
+              <span class="loop-track-idx">[${idx}]</span>
+              <span class="loop-track-val">${val}</span>
+            </div>
+            <span class="loop-pointer-indicator">▲ pointer</span>
+          </div>
+        `;
+      })
+      .join("");
+
+    this.visualLoopStrip.innerHTML = `
+      <div class="loop-strip-header">
+        <span>Loop Pointer & List Elements (nums)</span>
+        <span class="loop-current-info-pill">Pass ${passNum}/${total} • i = ${activeIdx} • nums[${activeIdx}] = ${activeVal}</span>
+      </div>
+      <div class="loop-track-scroll">
+        ${cellsHTML}
+      </div>
+    `;
+
+    // Center active loop pointer in view
+    const activeEl = this.visualLoopStrip.querySelector(".is-active-pointer");
+    const scrollBox = this.visualLoopStrip.querySelector(".loop-track-scroll");
+    if (activeEl && scrollBox) {
+      const targetLeft =
+        activeEl.offsetLeft - scrollBox.offsetLeft - scrollBox.clientWidth / 2 + activeEl.clientWidth / 2;
+      scrollBox.scrollTo({ left: Math.max(0, targetLeft), behavior: "smooth" });
+    }
+  }
+
+  /* PHASE 3: Show comparisons using actual values, True/False badge, and highlight executing branch */
+  renderVisualConditionGate(step, currentSubstep) {
+    if (!this.visualConditionGate) return;
+    const cond = step.condition;
+    const op = step.operationDetail || {};
+    const isWhileCheck = op.kind === "while_check";
+
+    if (!cond || (step.eventType !== "CONDITION" && !isWhileCheck)) {
+      this.visualConditionGate.classList.add("hidden");
+      this.visualConditionGate.innerHTML = "";
+      return;
+    }
+
+    this.visualConditionGate.classList.remove("hidden");
+    const isTrue = Boolean(cond.result);
+    const leftName = cond.leftExpr || "Left";
+    const leftVal = cond.leftVal !== undefined ? cond.leftVal : "";
+    const rightName = cond.rightExpr || "Right";
+    const rightVal = cond.rightVal !== undefined ? cond.rightVal : "";
+    const opSym = cond.operator || "==";
+
+    const isMaxCheck = cond.expr === "c >= ans" || (leftName === "c" && rightName === "ans");
+    const isNegCheck = cond.expr === "c < 0" || (leftName === "c" && rightVal === "0" && opSym === "<");
+
+    let branch1Code = "Enter branch";
+    let branch1Desc = `Condition is True: execute indented block`;
+    let branch2Code = "Skip branch";
+    let branch2Desc = `Condition is False: skip indented block`;
+
+    if (isWhileCheck) {
+      branch1Code = `Enter loop body (Pass #${op.iteration || 1})`;
+      branch1Desc = "Condition is True: continue while loop";
+      branch2Code = "Exit loop";
+      branch2Desc = "Condition is False: terminate while loop";
+    } else if (isMaxCheck) {
+      branch1Code = "ans = c";
+      branch1Desc = `Update record: ans becomes ${leftVal}`;
+      branch2Code = "Keep ans";
+      branch2Desc = `ans preserves previous best sum of ${rightVal}`;
+    } else if (isNegCheck) {
+      branch1Code = "c = 0";
+      branch1Desc = "Reset negative sum to zero";
+      branch2Code = `Keep c = ${leftVal}`;
+      branch2Desc = "Keep running sum for future additions";
+    }
+
+    // Check if user is currently answering a prediction for this step
+    const isPredictPending = Boolean(
+      this.predictModeEnabled &&
+      step.predictQuestion &&
+      !this.stepAnswers.has(this.currentStepIdx)
+    );
+
+    let decisionBadgeHtml = '';
+    let branch1Class = '';
+    let branch1Tag = '';
+    let branch2Class = '';
+    let branch2Tag = '';
+
+    if (isPredictPending) {
+      decisionBadgeHtml = `<span class="decision-badge is-pending">🎯 Predict To Reveal</span>`;
+      branch1Class = "is-neutral-branch";
+      branch1Tag = "OPTION A";
+      branch2Class = "is-neutral-branch";
+      branch2Tag = "OPTION B";
+    } else {
+      decisionBadgeHtml = `<span class="decision-badge ${isTrue ? "is-true" : "is-false"}">
+        ${isTrue ? "✓ TRUE" : "✗ FALSE"}
+      </span>`;
+      branch1Class = isTrue ? "is-active-branch" : "is-skipped-branch";
+      branch1Tag = isTrue ? "✓ EXECUTES" : "SKIPPED";
+      branch2Class = !isTrue ? "is-active-branch" : "is-skipped-branch";
+      branch2Tag = !isTrue ? "✓ EXECUTES" : "SKIPPED";
+    }
+
+    this.visualConditionGate.innerHTML = `
+      <div class="cond-gate-header">
+        <span>Condition Comparison Gate & Decision</span>
+        ${decisionBadgeHtml}
+      </div>
+      <div class="cond-balance-row">
+        <div class="cond-val-box">
+          <span class="cond-val-name">${this.escapeHTML(leftName)}</span>
+          <span class="cond-val-num">${this.escapeHTML(leftVal)}</span>
+        </div>
+        <span class="cond-op-badge">${this.escapeHTML(opSym)}</span>
+        <div class="cond-val-box">
+          <span class="cond-val-name">${this.escapeHTML(rightName)}</span>
+          <span class="cond-val-num">${this.escapeHTML(rightVal)}</span>
+        </div>
+      </div>
+      <div class="branch-decision-wrap">
+        <div class="branch-option ${branch1Class}">
+          <span class="branch-option-tag">${branch1Tag}</span>
+          <code>${this.escapeHTML(branch1Code)}</code>
+          <span style="font-size:12px; color:var(--text-secondary);">${this.escapeHTML(branch1Desc)}</span>
+        </div>
+        <div class="branch-option ${branch2Class}">
+          <span class="branch-option-tag">${branch2Tag}</span>
+          <code>${this.escapeHTML(branch2Code)}</code>
+          <span style="font-size:12px; color:var(--text-secondary);">${this.escapeHTML(branch2Desc)}</span>
+        </div>
+      </div>
+    `;
+  }
+
+  /* PHASE 2: Animate number moving into variable & show arithmetic calculation step by step */
+  renderVisualCalcStage(step, currentSubstep) {
+    if (!this.visualCalcStage) return;
+    const op = step.operationDetail || {};
+    const isAug = step.eventType === "AUG_ASSIGN";
+    const isAssign = step.eventType === "ASSIGN";
+
+    if (!isAug && !isAssign) {
+      this.visualCalcStage.classList.add("hidden");
+      this.visualCalcStage.innerHTML = "";
+      return;
+    }
+
+    this.visualCalcStage.classList.remove("hidden");
+    const target = op.target || "c";
+    const beforeVal = op.beforeVal !== undefined ? op.beforeVal : "0";
+    const afterVal = op.afterVal !== undefined ? op.afterVal : op.rhsVal || "0";
+    const rhsVal = op.rhsVal !== undefined ? op.rhsVal : afterVal;
+    const isCreated = Boolean(op.isCreated);
+    const useBeforeVars = Boolean(currentSubstep && currentSubstep.varsBeforeStep);
+
+    let stageHTML = "";
+
+    if (isAug) {
+      const augOpMatch = step.codeText.match(/(\+=|-=|\*=|\/\/=|%=)/);
+      const augOp = augOpMatch ? augOpMatch[1] : "+=";
+      const baseOp = augOp.slice(0, -1) || "+";
+      const augOpName = baseOp === "+" ? "Addition" : baseOp === "-" ? "Subtraction" : baseOp === "*" ? "Multiplication" : "Arithmetic Calculation";
+
+      stageHTML = `
+        <div class="calc-stage-header">
+          <span>Step-by-Step Arithmetic Calculation</span>
+          <span class="calc-stage-badge">${augOpName}</span>
+        </div>
+        <div class="calc-equation-row">
+          <div class="calc-operand-chip" title="Previous value of ${target}">
+            <span style="font-size:10px; display:block; color:var(--text-muted);">${target}</span>
+            <span>${beforeVal}</span>
+          </div>
+          <span class="calc-operator-chip">${baseOp}</span>
+          <div class="calc-operand-chip" title="Operand value">
+            <span style="font-size:10px; display:block; color:var(--text-muted);">${op.rhsExpr || "number"}</span>
+            <span>(${rhsVal})</span>
+          </div>
+          <span class="calc-operator-chip">=</span>
+          <div class="calc-result-chip" title="Calculated sum">
+            <span style="font-size:10px; display:block; opacity:0.85;">New Total</span>
+            <span>${afterVal}</span>
+          </div>
+        </div>
+        <div class="assign-animation-row">
+          <span class="anim-source-val">${afterVal}</span>
+          <span class="anim-move-arrow">──► stores into ──►</span>
+          <div class="var-box-card ${!useBeforeVars ? "is-updated" : ""}" style="max-width:145px;">
+            <div class="var-box-label">Variable <strong>${target}</strong></div>
+            <div class="var-box-val-slot">
+              <span class="var-box-value">${!useBeforeVars ? afterVal : beforeVal}</span>
+              <span class="var-box-prev">${!useBeforeVars ? `(was ${beforeVal})` : ""}</span>
+            </div>
+          </div>
+        </div>
+      `;
+    } else if (op.substituted && op.substituted !== afterVal && op.substituted !== op.rhsExpr) {
+      stageHTML = `
+        <div class="calc-stage-header">
+          <span>Step-by-Step Formula Calculation</span>
+          <span class="calc-stage-badge">${isCreated ? "Create" : "Update"}</span>
+        </div>
+        <div class="calc-equation-row" style="margin-bottom:8px;">
+          <div class="calc-operand-chip" title="Formula with substituted values">
+            <span style="font-size:10px; display:block; color:var(--text-muted);">${this.escapeHTML(op.rhsExpr || "formula")}</span>
+            <span>${this.escapeHTML(op.substituted)}</span>
+          </div>
+          <span class="calc-operator-chip">=</span>
+          <div class="calc-result-chip" title="Calculated result">
+            <span style="font-size:10px; display:block; opacity:0.85;">Result</span>
+            <span>${this.escapeHTML(afterVal)}</span>
+          </div>
+        </div>
+        <div class="assign-animation-row">
+          <div style="display:flex; flex-direction:column; gap:2px;">
+            <span style="font-size:11px; color:var(--text-secondary); font-weight:700;">VALUE COMPUTED</span>
+            <span class="anim-source-val">${afterVal}</span>
+          </div>
+          <span class="anim-move-arrow">──► moves into ──►</span>
+          <div class="var-box-card ${!useBeforeVars ? "is-updated" : ""}" style="max-width:145px;">
+            <div class="var-box-label">Variable <strong>${target}</strong></div>
+            <div class="var-box-val-slot">
+              <span class="var-box-value">${!useBeforeVars ? afterVal : (beforeVal || "unbound")}</span>
+              <span class="var-box-prev">${!useBeforeVars && beforeVal ? `(was ${beforeVal})` : ""}</span>
+            </div>
+          </div>
+        </div>
+      `;
+    } else {
+      stageHTML = `
+        <div class="calc-stage-header">
+          <span>Variable Assignment & Memory Binding</span>
+          <span class="calc-stage-badge">${isCreated ? "Create" : "Update"}</span>
+        </div>
+        <div class="assign-animation-row">
+          <div style="display:flex; flex-direction:column; gap:2px;">
+            <span style="font-size:11px; color:var(--text-secondary); font-weight:700;">VALUE COMPUTED</span>
+            <span class="anim-source-val">${afterVal}</span>
+          </div>
+          <span class="anim-move-arrow">──► moves into ──►</span>
+          <div class="var-box-card ${!useBeforeVars ? "is-updated" : ""}" style="max-width:145px;">
+            <div class="var-box-label">Variable <strong>${target}</strong></div>
+            <div class="var-box-val-slot">
+              <span class="var-box-value">${!useBeforeVars ? afterVal : (beforeVal || "unbound")}</span>
+              <span class="var-box-prev">${!useBeforeVars && beforeVal ? `(was ${beforeVal})` : ""}</span>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    this.visualCalcStage.innerHTML = stageHTML;
+  }
+
+  /* PHASE 2: Visually show when a negative value causes c to reset to zero */
+  renderNegativeResetVisual(step, currentSubstep) {
+    if (!this.negativeResetVisual) return;
+    const op = step.operationDetail || {};
+    const cond = step.condition;
+    const isResetAssign = step.eventType === "ASSIGN" && op.target === "c" && op.afterVal === "0" && !op.isCreated;
+    const isNegCondition = step.eventType === "CONDITION" && cond && cond.expr === "c < 0" && cond.result;
+
+    if (!isResetAssign && !isNegCondition) {
+      this.negativeResetVisual.classList.add("hidden");
+      this.negativeResetVisual.innerHTML = "";
+      return;
+    }
+
+    this.negativeResetVisual.classList.remove("hidden");
+    const negVal = op.beforeVal || (cond ? cond.leftVal : "-2");
+
+    this.negativeResetVisual.innerHTML = `
+      <div class="neg-warning-header">
+        <span class="neg-warning-icon">⚠️</span>
+        <span>Negative Running Sum Detected (c = ${negVal} < 0)</span>
+      </div>
+      <div class="neg-reset-flow">
+        <span class="neg-discarded-val">c = ${negVal} (Discarded)</span>
+        <span class="neg-discard-arrow">──► Resetting to Zero ──►</span>
+        <span class="zero-reset-box">c = 0 (Fresh Start)</span>
+      </div>
+      <p style="font-size:13px; color:#7f1d1d; margin:0; line-height:1.45;">
+        <strong>Kadane's Reset Rule:</strong> A negative running total would reduce any subsequent continuous subarray sum. We discard the negative sum and reset <code>c</code> to <code>0</code> so the next number starts a clean subarray.
+      </p>
+    `;
+  }
+
+  /* PHASE 2: Show a variable as a labeled box containing its current value */
+  renderVisualVariableBoxes(step, currentSubstep) {
+    if (!this.teachVarsNowBox) return;
+    const vars = step.variables || [];
+    const beforeVarsMap = step.beforeVars || {};
+    const useBeforeVars = Boolean(currentSubstep && currentSubstep.varsBeforeStep);
+    const op = step.operationDetail || {};
+
+    const scalarVars = vars.filter((v) => !Array.isArray(v.rawValue));
+
+    if (!scalarVars.length) {
+      this.teachVarsNowBox.innerHTML = `<span style="color:var(--text-muted); font-size:13.5px;">No local variables created yet</span>`;
+      return;
+    }
+
+    const cardsHTML = scalarVars
+      .filter((v) => {
+        if (useBeforeVars && v.name === op.target && op.isCreated) {
+          return false;
+        }
+        return true;
+      })
+      .map((v) => {
+        const isCreated = !useBeforeVars && v.status === "created";
+        const isUpdated = !useBeforeVars && v.status === "updated";
+        const isChanged = isCreated || isUpdated;
+        const prevVal = beforeVarsMap[v.name];
+        const displayVal = useBeforeVars && prevVal !== undefined ? prevVal : v.current;
+        const isNegWarning = v.name === "c" && Number(displayVal) < 0;
+
+        let statusBadge = "";
+        if (isCreated) {
+          statusBadge = `<span class="var-status-badge is-created">+ Created</span>`;
+        } else if (isUpdated) {
+          statusBadge = `<span class="var-status-badge is-updated">Updated</span>`;
+        } else if (isNegWarning) {
+          statusBadge = `<span class="var-status-badge is-negative">⚠ Negative</span>`;
+        }
+
+        return `
+          <div class="var-box-card ${isCreated ? "is-created" : isUpdated ? "is-updated" : ""} ${isNegWarning ? "is-negative-warning" : ""}">
+            <div class="var-box-label">
+              <span>Variable</span>
+              <strong>${this.escapeHTML(v.name)}</strong>
+              ${statusBadge}
+            </div>
+            <div class="var-box-val-slot">
+              <span class="var-box-value">${this.escapeHTML(displayVal)}</span>
+              ${isUpdated && prevVal !== undefined ? `<span class="var-box-prev">(was ${prevVal})</span>` : ""}
+            </div>
+          </div>
+        `;
+      })
+      .join("");
+
+    this.teachVarsNowBox.innerHTML = `<div class="var-boxes-grid">${cardsHTML}</div>`;
   }
 
   renderQuickIterationBar() {
@@ -768,6 +1531,11 @@ class TeachMeCodeApp {
 
   renderThonnyExpressionStepper(step) {
     if (!this.thonnyExprBox) return;
+    if (!this.showAdvanced) {
+      this.thonnyExprBox.classList.add("hidden");
+      return;
+    }
+    this.thonnyExprBox.classList.remove("hidden");
     const frames =
       step.exprFrames && step.exprFrames.length
         ? step.exprFrames
@@ -813,13 +1581,15 @@ class TeachMeCodeApp {
   /* =========================================================
      AREA 3: SCOPE ISOLATION & STACK/HEAP MEMORY MODEL
      ========================================================= */
-  renderArea3MemoryAndScopes(step) {
+  renderArea3MemoryAndScopes(step, currentSubstep) {
     this.scopeFramesContainer.innerHTML = "";
     this.heapObjectsContainer.innerHTML = "";
     this.visualListsContainer.innerHTML = "";
 
     const scopeFrames = step.scopeFrames || [];
     const memoryModel = step.memoryModel || { heapObjects: [], gcObjects: [], totalUnreferencedCount: 0 };
+    const useBeforeVars = Boolean(currentSubstep && currentSubstep.varsBeforeStep);
+    const beforeVarsMap = step.beforeVars || {};
 
     // 1. Render Scope Isolation Cards (Show Local Scope on top of Global Scope, like a call stack)
     const orderedScopes = [...scopeFrames].reverse();
@@ -845,17 +1615,26 @@ class TeachMeCodeApp {
           `;
         } else {
           rowsHTML = vars
+            .filter((v) => {
+              if (useBeforeVars && sc.isActive && v.status === "created") {
+                return false;
+              }
+              return true;
+            })
             .map((v) => {
-              const isChanged = sc.isActive && (v.status === "created" || v.status === "updated");
+              const isChanged = !useBeforeVars && sc.isActive && (v.status === "created" || v.status === "updated");
               const pill =
                 isChanged && v.status === "created"
                   ? `<span class="changed-pill">New</span>`
                   : isChanged && v.status === "updated"
                   ? `<span class="changed-pill">Changed</span>`
                   : "";
+              const currentVal = useBeforeVars && sc.isActive && beforeVarsMap[v.name] !== undefined
+                ? beforeVarsMap[v.name]
+                : v.current;
               const valPreview = Array.isArray(v.rawValue)
                 ? `list[${v.rawValue.length}]`
-                : `${v.type}: ${v.current}`;
+                : `${v.type}: ${currentVal}`;
               return `
                 <div class="scope-var-row ${isChanged ? "var-row-changed" : ""}">
                   <span class="var-name-cell">${this.escapeHTML(v.name)}${pill}</span>
@@ -864,7 +1643,7 @@ class TeachMeCodeApp {
                   )}' points to Heap Address ${this.escapeHTML(v.address || "@0x1000")}">
                     ──► ${this.escapeHTML(v.address || "@0x1000")}
                   </span>
-                  <span class="var-val-preview" title="${this.escapeHTML(v.current)}">
+                  <span class="var-val-preview" title="${this.escapeHTML(currentVal)}">
                     ${this.escapeHTML(valPreview)}
                   </span>
                 </div>
@@ -1207,13 +1986,14 @@ class TeachMeCodeApp {
 
   formatMarkdown(str) {
     if (!str) return "";
-    return String(str)
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/&lt;br&gt;/g, "<br>")
-      .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
-      .replace(/`([^`]+)`/g, "<code>$1</code>");
+    let s = String(str);
+    // Convert markdown bold: **text** -> <strong>text</strong>
+    s = s.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
+    // Convert markdown inline code: `code` -> <code>code</code>
+    s = s.replace(/`([^`]+)`/g, "<code>$1</code>");
+    // Convert newlines to linebreaks
+    s = s.replace(/\r?\n/g, "<br>");
+    return s;
   }
 
   escapeHTML(str) {

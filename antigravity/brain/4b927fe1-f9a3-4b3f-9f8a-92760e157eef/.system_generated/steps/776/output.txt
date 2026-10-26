@@ -1,0 +1,52 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app_build\app.js. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -193,6 +193,46 @@
+       });
+     }
+ 
++    // Phase 5: Speed Controls (0.5x, 1x, 1.5x, 2x)
++    if (this.btnSpeed) {
++      this.btnSpeed.addEventListener("click", () => {
++        this.currentSpeedIdx = (this.currentSpeedIdx + 1) % this.speedModes.length;
++        const spd = this.speedModes[this.currentSpeedIdx];
++        this.btnSpeed.textContent = `⚡ Speed: ${spd.label}`;
++        this.playSpeedMs = spd.ms;
++        document.documentElement.style.setProperty("--anim-speed-factor", String(spd.animFactor));
++        if (this.isPlaying) {
++          clearInterval(this.playInterval);
++          this.playInterval = setInterval(() => {
++            const steps = this.traceResult.steps;
++            const step = steps[this.currentStepIdx];
++            const substeps = step.teachingSubsteps || [step.teacherLesson];
++            const isLastStep = this.currentStepIdx >= steps.length - 1;
++            const isLastSubstep = this.currentSubstepIdx >= substeps.length - 1;
++            if (!isLastStep || !isLastSubstep) {
++              this.goToNextSubstep();
++            } else {
++              this.stopAutoPlay();
++            }
++          }, this.playSpeedMs);
++        }
++      });
++    }
++
++    // Phase 5: Quick Test Inputs (All-Negative, Positive, Single-Element)
++    if (this.testInputChips) {
++      const chips = this.testInputChips.querySelectorAll(".test-chip");
++      chips.forEach((chip) => {
++        chip.addEventListener("click", () => {
++          chips.forEach((c) => c.classList.remove("active"));
++          chip.classList.add("active");
++          this.inputCode = chip.getAttribute("data-input") || "";
++          this.stopAutoPlay();
++          this.analyzeAndRun();
++        });
++      });
++    }
++
+     if (this.btnToggleGC) {
+       this.btnToggleGC.addEventListener("click", () => {
+         this.showGCObjects = !this.showGCObjects;
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

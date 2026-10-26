@@ -1,0 +1,23 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app_build\app.js. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -109,6 +109,17 @@
+     this.teachSubstepPill = document.getElementById("teachSubstepPill");
+     this.teachScopeBadge = document.getElementById("teachScopeBadge");
+     this.teachCodeBox = document.getElementById("teachCodeBox");
++
++    // Phase 4: Interactive Prediction Elements
++    this.interactivePredictCard = document.getElementById("interactivePredictCard");
++    this.predictSubPrompt = document.getElementById("predictSubPrompt");
++    this.predictQuestionText = document.getElementById("predictQuestionText");
++    this.predictChoicesWrap = document.getElementById("predictChoicesWrap");
++    this.btnSkipPredict = document.getElementById("btnSkipPredict");
++    this.predictResultBox = document.getElementById("predictResultBox");
++    this.predictResultHeader = document.getElementById("predictResultHeader");
++    this.predictResultBody = document.getElementById("predictResultBody");
++
+     this.loopReturnBanner = document.getElementById("loopReturnBanner");
+     this.visualLoopStrip = document.getElementById("visualLoopStrip");
+     this.visualConditionGate = document.getElementById("visualConditionGate");
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

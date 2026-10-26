@@ -1,0 +1,180 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app_build\explainer.js. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -1739,6 +1739,174 @@
+     return matches.length ? matches.slice(0, 3).join("<br>") : "• Standard Python statement.";
+   }
+ 
++  buildPredictQuestion(step, prevStep, nextStep) {
++    if (!step) return null;
++    const op = step.operationDetail || {};
++    const cond = step.condition;
++
++    // 1. Kadane's condition check: c >= ans (Will ans change?)
++    if (step.eventType === "CONDITION" && cond && (cond.expr === "c >= ans" || (cond.leftExpr === "c" && cond.rightExpr === "ans"))) {
++      const willUpdate = Boolean(cond.result);
++      const cVal = cond.leftVal !== undefined ? cond.leftVal : "";
++      const ansVal = cond.rightVal !== undefined ? cond.rightVal : "";
++      const question = "Will ans update to a new record sum?";
++      const subPrompt = `Comparing current sum (c = ${cVal}) with best sum (ans = ${ansVal})`;
++      const choices = ["Yes, ans will update", "No, ans stays the same"];
++      const correctIndex = willUpdate ? 0 : 1;
++      const explanation = willUpdate
++        ? `Correct! Because current sum c (${cVal}) is greater than or equal to ans (${ansVal}), the condition is True and ans will update to ${cVal}.`
++        : `Correct! Because current sum c (${cVal}) is smaller than ans (${ansVal}), the condition is False and ans keeps its current value of ${ansVal}.`;
++      return {
++        id: `q_${step.stepIndex}`,
++        type: "condition_record",
++        question,
++        subPrompt,
++        choices,
++        correctIndex,
++        correctValue: choices[correctIndex],
++        explanation
++      };
++    }
++
++    // 2. Kadane's condition check: c < 0 (Will this condition be True or False?)
++    if (step.eventType === "CONDITION" && cond && (cond.expr === "c < 0" || (cond.leftExpr === "c" && cond.operator === "<" && cond.rightVal === "0"))) {
++      const isNegative = Boolean(cond.result);
++      const cVal = cond.leftVal !== undefined ? cond.leftVal : "";
++      const question = "Will this condition be True or False?";
++      const subPrompt = `Testing if c (${cVal}) is negative (< 0)`;
++      const choices = ["True (c < 0)", "False (c >= 0)"];
++      const correctIndex = isNegative ? 0 : 1;
++      const explanation = isNegative
++        ? `True! Because c (${cVal}) is negative, the next line will reset c back to 0 so future additions start fresh.`
++        : `False! Because c (${cVal}) is zero or positive, no reset is needed.`;
++      return {
++        id: `q_${step.stepIndex}`,
++        type: "condition_negative",
++        question,
++        subPrompt,
++        choices,
++        correctIndex,
++        correctValue: choices[correctIndex],
++        explanation
++      };
++    }
++
++    // 3. General Condition (if / while)
++    if (step.eventType === "CONDITION" && cond) {
++      const isTrue = Boolean(cond.result);
++      const l = cond.leftVal !== undefined ? cond.leftVal : (cond.leftExpr || "");
++      const r = cond.rightVal !== undefined ? cond.rightVal : (cond.rightExpr || "");
++      const opSym = cond.operator || "==";
++      const question = "Will this condition evaluate to True or False?";
++      const subPrompt = `Evaluating: ${l} ${opSym} ${r}`;
++      const choices = ["True", "False"];
++      const correctIndex = isTrue ? 0 : 1;
++      const explanation = isTrue
++        ? `True! ${l} ${opSym} ${r} is True. Python will execute the indented branch.`
++        : `False! ${l} ${opSym} ${r} is False. Python will skip the indented branch.`;
++      return {
++        id: `q_${step.stepIndex}`,
++        type: "condition_general",
++        question,
++        subPrompt,
++        choices,
++        correctIndex,
++        correctValue: choices[correctIndex],
++        explanation
++      };
++    }
++
++    // 4. Augmented Assignment: c += nums[i] or target += delta
++    if (step.eventType === "AUG_ASSIGN" && op.target) {
++      const target = op.target;
++      const beforeVal = Number(op.beforeVal !== undefined ? op.beforeVal : 0);
++      const rhsVal = Number(op.rhsVal !== undefined ? op.rhsVal : 0);
++      const afterVal = Number(op.afterVal !== undefined ? op.afterVal : beforeVal + rhsVal);
++
++      const question = `What will ${target} become after this addition?`;
++      const subPrompt = `Current ${target} = ${beforeVal}, adding (${rhsVal})`;
++
++      const correctStr = String(afterVal);
++      const choicesSet = new Set([correctStr]);
++
++      if (String(beforeVal) !== correctStr) choicesSet.add(String(beforeVal));
++      if (String(rhsVal) !== correctStr && choicesSet.size < 3) choicesSet.add(String(rhsVal));
++      const wrong1 = String(beforeVal - rhsVal);
++      if (!choicesSet.has(wrong1) && choicesSet.size < 3) choicesSet.add(wrong1);
++      const wrong2 = String(afterVal + (rhsVal >= 0 ? 1 : -1));
++      if (!choicesSet.has(wrong2) && choicesSet.size < 3) choicesSet.add(wrong2);
++      const wrong3 = String(afterVal * 2);
++      if (!choicesSet.has(wrong3) && choicesSet.size < 3) choicesSet.add(wrong3);
++
++      const choices = Array.from(choicesSet).slice(0, 3);
++      choices.sort((a, b) => Number(a) - Number(b));
++      const correctIndex = choices.indexOf(correctStr);
++
++      const explanation = `${beforeVal} + (${rhsVal}) = ${correctStr}. Python adds the numbers first, then updates ${target}.`;
++      return {
++        id: `q_${step.stepIndex}`,
++        type: "addition",
++        question,
++        subPrompt,
++        choices,
++        correctIndex,
++        correctValue: correctStr,
++        explanation
++      };
++    }
++
++    // 5. Assignment resetting c to 0
++    if (step.eventType === "ASSIGN" && op.target === "c" && op.afterVal === "0" && !op.isCreated) {
++      const question = "What will c reset to because it became negative?";
++      const subPrompt = `Current c is negative (${op.beforeVal})`;
++      const choices = ["0", "-1", "Stay negative"];
++      const correctIndex = 0;
++      const explanation = `c resets to 0 so future additions start clean without being weighed down by negative sums.`;
++      return {
++        id: `q_${step.stepIndex}`,
++        type: "assign_reset",
++        question,
++        subPrompt,
++        choices,
++        correctIndex,
++        correctValue: "0",
++        explanation
++      };
++    }
++
++    // 6. Assignment with arithmetic formula (e.g. mid = (l + r) // 2)
++    if (step.eventType === "ASSIGN" && op.target && op.rhsExpr && /[+\-*/%]|\/\//.test(op.rhsExpr) && op.afterVal !== undefined) {
++      const question = `What will ${op.target} become after calculating ${op.rhsExpr}?`;
++      const subPrompt = `Evaluating ${op.substituted || op.rhsExpr}`;
++      const correctStr = String(op.afterVal);
++      const choicesSet = new Set([correctStr]);
++      const numVal = Number(correctStr);
++      if (!isNaN(numVal)) {
++        choicesSet.add(String(numVal + 1));
++        choicesSet.add(String(Math.max(0, numVal - 1)));
++      } else {
++        choicesSet.add("None");
++        choicesSet.add("0");
++      }
++      const choices = Array.from(choicesSet).slice(0, 3);
++      choices.sort((a, b) => (isNaN(Number(a)) ? 0 : Number(a) - Number(b)));
++      const correctIndex = choices.indexOf(correctStr);
++      const explanation = `${op.rhsExpr} evaluates to ${correctStr}.`;
++      return {
++        id: `q_${step.stepIndex}`,
++        type: "assign_calc",
++        question,
++        subPrompt,
++        choices,
++        correctIndex,
++        correctValue: correctStr,
++        explanation
++      };
++    }
++
++    return null;
++  }
++
+   buildExecutionSummary(traceResult) {
+     if (!traceResult.ok || !traceResult.steps.length) {
+       return `Stopped: ${traceResult.errorMessage || "Check syntax or input."}`;
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

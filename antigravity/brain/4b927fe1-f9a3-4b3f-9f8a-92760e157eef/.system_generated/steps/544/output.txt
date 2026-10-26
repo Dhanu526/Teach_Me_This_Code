@@ -1,0 +1,15 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app_build\index.html. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -101,6 +101,9 @@
+           <div id="teachCodeBox" class="teach-code-box">c = 0</div>
+         </div>
+ 
++        <!-- PHASE 4: Interactive Learning Quiz / Prediction Card (Optional) -->
++        <div id="predictQuizCard" class="predict-quiz-card hidden"></div>
++
+         <!-- PHASE 3: Loop Return Indicator (Shown when loop advances to next iteration) -->
+         <div id="loopReturnBanner" class="loop-return-banner hidden"></div>
+ 
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

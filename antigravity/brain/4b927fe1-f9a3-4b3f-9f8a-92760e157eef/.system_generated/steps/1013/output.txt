@@ -1,0 +1,25 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app_build\styles.css. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -320,7 +320,7 @@
+ }
+ 
+ /* =========================================================
+-   MAIN 3-AREA WORKSPACE
++   MAIN 3-AREA WORKSPACE (Teaching Area as Main Focus)
+    ========================================================= */
+ .three-area-workspace {
+   flex: 1;
+@@ -327,7 +327,7 @@
+-  grid-template-columns: 0.95fr 1.35fr 1.05fr;
+-  gap: 20px;
++  grid-template-columns: minmax(270px, 310px) minmax(460px, 1.6fr) minmax(280px, 320px);
++  gap: 22px;
+   padding: 22px 28px;
+-  max-width: 1620px;
++  max-width: 1680px;
+   width: 100%;
+   margin: 0 auto;
+   align-items: start;
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

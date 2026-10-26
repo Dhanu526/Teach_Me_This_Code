@@ -1,0 +1,146 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app_build\styles.css. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -1376,6 +1376,124 @@
+   100% { transform: scale(1); opacity: 1; }
+ }
+ 
++@keyframes numPopIn {
++  0% { transform: scale(0.65) translateY(-3px); opacity: 0; }
++  70% { transform: scale(1.1) translateY(1px); opacity: 1; }
++  100% { transform: scale(1) translateY(0); opacity: 1; }
++}
++
++@keyframes varCardPop {
++  0% { transform: translateY(6px); opacity: 0; }
++  100% { transform: translateY(0); opacity: 1; }
++}
++
++@keyframes varUpdatedGlow {
++  0% { transform: scale(0.96); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.6); }
++  50% { transform: scale(1.02); box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
++  100% { transform: scale(1); box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2); }
++}
++
++@keyframes varCreatedGlow {
++  0% { transform: scale(0.96); box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.6); }
++  50% { transform: scale(1.02); box-shadow: 0 0 0 8px rgba(59, 130, 246, 0); }
++  100% { transform: scale(1); box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2); }
++}
++
++@keyframes numberGlide {
++  0% { transform: translateX(-16px) scale(0.9); opacity: 0; }
++  60% { transform: translateX(2px) scale(1.04); opacity: 1; }
++  100% { transform: translateX(0) scale(1); opacity: 1; }
++}
++
++@keyframes arrowGlide {
++  0% { transform: translateX(0); opacity: 0.7; }
++  100% { transform: translateX(6px); opacity: 1; }
++}
++
++@keyframes operandAppear {
++  0% { transform: scale(0.9); opacity: 0; }
++  100% { transform: scale(1); opacity: 1; }
++}
++
++@keyframes calcResultPop {
++  0% { transform: scale(0.8); opacity: 0; box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.5); }
++  70% { transform: scale(1.08); opacity: 1; box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
++  100% { transform: scale(1); opacity: 1; }
++}
++
++@keyframes decisionSpring {
++  0% { transform: scale(0.65) rotate(-4deg); opacity: 0; }
++  70% { transform: scale(1.12) rotate(2deg); opacity: 1; }
++  100% { transform: scale(1) rotate(0deg); opacity: 1; }
++}
++
++@keyframes activeBranchPop {
++  0% { transform: scale(0.95); opacity: 0.5; }
++  70% { transform: scale(1.02); opacity: 1; }
++  100% { transform: scale(1); opacity: 1; }
++}
++
++@keyframes lineEntranceHighlight {
++  0% {
++    background-color: rgba(37, 99, 235, 0.24);
++    border-left-width: 7px;
++  }
++  100% {
++    background: linear-gradient(90deg, rgba(37, 99, 235, 0.12) 0%, rgba(37, 99, 235, 0.03) 100%);
++    border-left-width: 4px;
++  }
++}
++
++@keyframes pointerPulse {
++  0% { transform: translateX(0); opacity: 0.75; }
++  100% { transform: translateX(3px); opacity: 1; }
++}
++
++@keyframes branchGlow {
++  0% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.5); }
++  60% { transform: scale(1.05); box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
++  100% { transform: scale(1); }
++}
++
++@keyframes loopBannerSlide {
++  0% { transform: translateY(-8px); opacity: 0; }
++  100% { transform: translateY(0); opacity: 1; }
++}
++
++@keyframes loopSpin {
++  0% { transform: rotate(0deg) scale(0.85); }
++  70% { transform: rotate(380deg) scale(1.15); }
++  100% { transform: rotate(360deg) scale(1); }
++}
++
++@keyframes activeCellGlow {
++  0% { transform: translateY(0) scale(0.95); box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.5); }
++  70% { transform: translateY(-3px) scale(1.05); box-shadow: 0 0 0 8px rgba(37, 99, 235, 0); }
++  100% { transform: translateY(-2px) scale(1); }
++}
++
++@keyframes pointerBounce {
++  0% { transform: translateY(0); }
++  100% { transform: translateY(4px); }
++}
++
++@keyframes discardNegative {
++  0% { transform: scale(1); opacity: 1; }
++  50% { transform: scale(1.05) translateY(-2px); }
++  100% { transform: scale(0.95) translateY(2px); opacity: 0.75; }
++}
++
++@keyframes freshZeroPop {
++  0% { transform: scale(0.7); opacity: 0; box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.6); }
++  70% { transform: scale(1.1); opacity: 1; box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
++  100% { transform: scale(1); opacity: 1; }
++}
++
++@keyframes scopeVarFlash {
++  0% { background-color: rgba(16, 185, 129, 0.4); }
++  100% { background-color: var(--changed-green-bg); }
++}
++
+ @keyframes highlightPulse {
+   0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
+   70% { box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+@@ -1382,15 +1382,5 @@
+ }
+ 
+-@keyframes slideRightToBox {
+-  0% { transform: translateX(-12px); opacity: 0; }
+-  100% { transform: translateX(0); opacity: 1; }
+-}
+-
+-@keyframes arrowPulse {
+-  0% { transform: translateX(0); }
+-  100% { transform: translateX(4px); }
+-}
+-
+ @keyframes shake {
+   0%, 100% { transform: translateX(0); }
+   25% { transform: translateX(-4px); }
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

@@ -1,0 +1,81 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app_build\styles.css. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -405,19 +405,32 @@
+ 
+ .code-row.is-current-line {
+   opacity: 1;
+-  background-color: var(--current-line-bg);
+-  border-left-color: var(--current-line-border);
+-  font-weight: 600;
++  background: linear-gradient(90deg, rgba(37, 99, 235, 0.12) 0%, rgba(37, 99, 235, 0.03) 100%);
++  border-left-color: var(--primary-blue);
++  box-shadow: inset 0 1px 0 rgba(37, 99, 235, 0.08), inset 0 -1px 0 rgba(37, 99, 235, 0.08);
++  font-weight: 600;
++  animation: lineEntranceHighlight calc(0.35s * var(--anim-speed-factor, 1)) ease-out;
+ }
+ 
+ .code-gutter {
+-  width: 44px;
+-  text-align: right;
+-  padding-right: 12px;
+-  color: var(--text-muted);
+-  font-size: 12px;
+-  user-select: none;
+-  flex-shrink: 0;
++  width: 48px;
++  text-align: right;
++  padding-right: 10px;
++  color: var(--text-muted);
++  font-size: 12px;
++  user-select: none;
++  flex-shrink: 0;
++  display: flex;
++  align-items: center;
++  justify-content: flex-end;
++  gap: 3px;
++}
++
++.code-gutter-pointer {
++  color: var(--primary-blue);
++  font-weight: 900;
++  font-size: 10px;
++  animation: pointerPulse calc(0.8s * var(--anim-speed-factor, 1)) infinite alternate ease-in-out;
+ }
+ 
+ .is-current-line .code-gutter {
+@@ -424,6 +424,32 @@
+   font-weight: 700;
+ }
+ 
++.branch-badge {
++  font-size: 11px;
++  font-weight: 700;
++  padding: 1px 7px;
++  border-radius: 4px;
++  margin-left: 8px;
++  display: inline-flex;
++  align-items: center;
++  gap: 3px;
++  vertical-align: middle;
++}
++
++.branch-badge.is-executes {
++  color: #047857;
++  background: #ecfdf5;
++  border: 1px solid #a7f3d0;
++  animation: branchGlow calc(0.5s * var(--anim-speed-factor, 1)) ease;
++}
++
++.branch-badge.is-skipped {
++  color: #94a3b8;
++  background: #f8fafc;
++  border: 1px dashed #cbd5e1;
++  text-decoration: line-through;
++}
++
+ .code-syntax {
+   white-space: pre;
+   color: var(--text-main);
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

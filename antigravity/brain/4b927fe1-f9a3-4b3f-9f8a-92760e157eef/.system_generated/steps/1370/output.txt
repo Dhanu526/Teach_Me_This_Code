@@ -1,0 +1,29 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app_build\index.html. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -114,6 +114,23 @@
+           <div id="teachCodeBox" class="teach-code-box">c = 0</div>
+         </div>
+ 
++        <!-- PHASE 4: Interactive Learning Prediction Card (Optional) -->
++        <div id="interactivePredictCard" class="interactive-predict-card hidden">
++          <div class="predict-card-header">
++            <div class="predict-badge-group">
++              <span class="predict-badge">🎯 Predict the Outcome</span>
++              <span class="predict-subprompt" id="predictSubPrompt">c = 0, adding 1</span>
++            </div>
++            <button id="btnSkipPredict" class="btn-predict-skip" type="button" title="Reveal the correct result and explanation directly">Reveal Answer</button>
++          </div>
++          <div class="predict-question-text" id="predictQuestionText">What will c become after this addition?</div>
++          <div class="predict-choices-wrap" id="predictChoicesWrap"></div>
++          <div class="predict-result-box hidden" id="predictResultBox">
++            <div class="predict-result-header" id="predictResultHeader">🎉 Correct!</div>
++            <div class="predict-result-body" id="predictResultBody">0 + 1 = 1</div>
++          </div>
++        </div>
++
+         <!-- PHASE 3: Loop Return Indicator (Shown when loop advances to next iteration) -->
+         <div id="loopReturnBanner" class="loop-return-banner hidden"></div>
+ 
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

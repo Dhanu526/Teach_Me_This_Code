@@ -14,25 +14,32 @@
 
   <!-- Clean, Simple Top Navigation Bar -->
   <header class="top-bar">
-    <div class="brand-area">
-      <span class="teacher-badge">Teach Me This Code</span>
-      <span id="stepProgressLabel" class="step-progress-label">Step 1 of 50</span>
-      <span id="activeScopeBadge" class="scope-pill scope-global">GLOBAL SCOPE</span>
+    <div class="top-bar-primary">
+      <div class="brand-area">
+        <span class="teacher-badge">Teach Me This Code</span>
+        <span id="stepProgressLabel" class="step-progress-label">Step 1 of 50</span>
+        <span id="activeScopeBadge" class="scope-pill scope-global">GLOBAL SCOPE</span>
+      </div>
+
+      <!-- Simple Navigation Controls + Thonny Sub-Expression Stepper -->
+      <nav class="nav-controls" aria-label="Step Navigation">
+        <button id="btnPrev" class="btn-nav" title="Go back one step (Left Arrow)">← Previous</button>
+        <button id="btnSubStep" class="btn-nav btn-substep" title="Step through internal sub-expressions on this line (F7)">🔍 Sub-Expr (F7)</button>
+        <button id="btnNext" class="btn-nav btn-next-prominent" title="Explain the next step (Right Arrow)">Next Step →</button>
+        <button id="btnAutoPlay" class="btn-nav" title="Automatically step through the code">▶ Auto Play</button>
+        <button id="btnRestart" class="btn-nav" title="Start over from Step 1">↺ Restart</button>
+      </nav>
     </div>
 
-    <!-- Simple Navigation Controls + Thonny Sub-Expression Stepper -->
-    <nav class="nav-controls" aria-label="Step Navigation">
-      <button id="btnPrev" class="btn-nav" title="Go back one step (Left Arrow)">← Previous</button>
-      <button id="btnSubStep" class="btn-nav btn-substep" title="Step through internal sub-expressions on this line (F7)">🔍 Sub-Expr (F7)</button>
-      <button id="btnNext" class="btn-nav btn-next-prominent" title="Explain the next step (Right Arrow)">Next Step →</button>
-      <button id="btnAutoPlay" class="btn-nav" title="Automatically step through the code">▶ Auto Play</button>
-      <button id="btnRestart" class="btn-nav" title="Start over from Step 1">↺ Restart</button>
-    </nav>
-
-    <div class="secondary-actions">
-      <button id="btnEditCode" class="btn-small-primary">✏️ Paste / Edit Code</button>
-      <button id="btnToggleIterations" class="btn-subtle active" title="Show or hide the full Iteration & All-Steps Dry-Run panel below">📋 All Steps / Iterations</button>
-      <button id="btnToggleAdvanced" class="btn-subtle">Advanced View</button>
+    <div class="top-bar-secondary">
+      <div class="secondary-actions">
+        <button id="btnToggleAnim" class="btn-subtle active" title="Toggle visual animations on or off">✨ Animations: ON</button>
+        <button id="btnToggleQuiz" class="btn-subtle" title="Toggle interactive prediction questions on or off">🎯 Predict: OFF</button>
+        <button id="btnSpeed" class="btn-subtle" title="Adjust Auto Play & Animation Speed">⚡ Speed: 1x</button>
+        <button id="btnEditCode" class="btn-small-primary">✏️ Paste / Edit Code</button>
+        <button id="btnToggleIterations" class="btn-subtle" title="Show or hide the complete Iteration & All-Steps history">📋 Execution History</button>
+        <button id="btnToggleAdvanced" class="btn-subtle">Advanced View</button>
+      </div>
     </div>
   </header>
 
@@ -43,6 +50,18 @@
   <div class="overview-strip">
     <span class="overview-label">Goal:</span>
     <span id="overviewText">Paste or edit any Python program on the left to visualize every step, iteration, variable scope, and memory address.</span>
+  </div>
+
+  <!-- Quick Test Inputs Strip (Phase 5: Test all-negative, positive, and single-element inputs) -->
+  <div class="test-inputs-strip">
+    <span class="test-inputs-label">🧪 Quick Test Inputs:</span>
+    <div id="testInputChips" class="test-input-chips">
+      <button type="button" class="test-chip active" data-input="nums = [-2, 1, -3, 4, -1, 2, 1, -5, 4]" title="Default mixed list from LeetCode 53">Mixed [-2, 1, -3, 4...] (Max: 6)</button>
+      <button type="button" class="test-chip" data-input="nums = [-5, -2, -8, -1, -4]" title="All negative numbers">All-Negative [-5, -2, -8, -1, -4] (Max: -1)</button>
+      <button type="button" class="test-chip" data-input="nums = [1, 2, 3, 4, 5]" title="All positive numbers">All-Positive [1, 2, 3, 4, 5] (Max: 15)</button>
+      <button type="button" class="test-chip" data-input="nums = [-7]" title="Single negative element">Single Negative [-7] (Max: -7)</button>
+      <button type="button" class="test-chip" data-input="nums = [42]" title="Single positive element">Single Positive [42] (Max: 42)</button>
+    </div>
   </div>
 
   <!-- =========================================================
@@ -84,9 +103,12 @@
           <div id="iterationPillsBar" class="iteration-pills-bar"></div>
         </div>
 
-        <!-- Step Heading -->
+        <!-- Step Heading with Substep Progress Indicator -->
         <div class="teach-header-row">
-          <h1 id="teachStepTitle" class="teach-step-title">Step 1: Create the variable</h1>
+          <div class="teach-title-group">
+            <h1 id="teachStepTitle" class="teach-step-title">Step 1: Create the variable</h1>
+            <span id="teachSubstepPill" class="substep-pill">Substep 1 of 3</span>
+          </div>
           <span id="teachScopeBadge" class="scope-pill scope-global">GLOBAL SCOPE</span>
         </div>
 
@@ -96,8 +118,40 @@
           <div id="teachCodeBox" class="teach-code-box">c = 0</div>
         </div>
 
-        <!-- TASK 2.1, 2.2, 2.3: THONNY-STYLE STEP-BY-STEP SUB-EXPRESSION EVALUATOR -->
-        <div id="thonnyExprBox" class="thonny-expr-card">
+        <!-- PHASE 4: Interactive Learning Prediction Card (Optional) -->
+        <div id="interactivePredictCard" class="interactive-predict-card hidden">
+          <div class="predict-card-header">
+            <div class="predict-badge-group">
+              <span class="predict-badge">🎯 Predict the Outcome</span>
+              <span class="predict-subprompt" id="predictSubPrompt">c = 0, adding 1</span>
+            </div>
+            <button id="btnSkipPredict" class="btn-predict-skip" type="button" title="Reveal the correct result and explanation directly">Reveal Answer</button>
+          </div>
+          <div class="predict-question-text" id="predictQuestionText">What will c become after this addition?</div>
+          <div class="predict-choices-wrap" id="predictChoicesWrap"></div>
+          <div class="predict-result-box hidden" id="predictResultBox">
+            <div class="predict-result-header" id="predictResultHeader">🎉 Correct!</div>
+            <div class="predict-result-body" id="predictResultBody">0 + 1 = 1</div>
+          </div>
+        </div>
+
+        <!-- PHASE 3: Loop Return Indicator (Shown when loop advances to next iteration) -->
+        <div id="loopReturnBanner" class="loop-return-banner hidden"></div>
+
+        <!-- PHASE 3: Visual Loop Pointer & List Element Tracker -->
+        <div id="visualLoopStrip" class="visual-loop-strip hidden"></div>
+
+        <!-- PHASE 3: Visual Condition Gate & Branch Selector (-2 >= -2, True/False, Branch Highlight) -->
+        <div id="visualConditionGate" class="visual-condition-gate hidden"></div>
+
+        <!-- PHASE 2: Visual Variable Boxes, Animated Value Move & Step-by-Step Calculation Stage -->
+        <div id="visualCalcStage" class="visual-calc-stage hidden"></div>
+
+        <!-- PHASE 2: Visual Negative Warning & Reset Animation Box (when c < 0 resets c = 0) -->
+        <div id="negativeResetVisual" class="negative-reset-visual hidden"></div>
+
+        <!-- TASK 2.1, 2.2, 2.3: THONNY-STYLE STEP-BY-STEP SUB-EXPRESSION EVALUATOR (Hidden in Beginner Mode, visible in Advanced View) -->
+        <div id="thonnyExprBox" class="thonny-expr-card hidden">
           <div class="thonny-expr-header">
             <span class="thonny-badge">Thonny Expression Evaluator</span>
             <span id="thonnySubStepCounter" class="thonny-subcounter">Evaluation 1 of 1</span>
@@ -127,10 +181,17 @@
           </div>
         </div>
 
-        <!-- What does this mean? -->
+        <!-- What does this mean? / What is happening? -->
         <div class="teach-section">
-          <div class="teach-label">What does this mean?</div>
+          <div class="teach-label">💡 What is happening?</div>
           <p id="teachMeaningText" class="teach-meaning-text"></p>
+          <div id="teachSymbolsBox" class="teach-symbols-callout hidden"></div>
+        </div>
+
+        <!-- Why is this operation necessary? / Why am I learning this? -->
+        <div id="teachWhySection" class="teach-section teach-why-box hidden">
+          <div class="teach-label">Why is this necessary?</div>
+          <p id="teachWhyText" class="teach-why-text"></p>
         </div>
 
         <!-- Variable values now -->
@@ -192,9 +253,9 @@
 
   <!-- =========================================================
        AREA 4: COMPLETE CODE ITERATION & ALL-STEPS DRY-RUN EXPLORER
-       Visible by default so the whole code execution is clear at a glance
+       Collapsed by default so beginner teaching remains the primary focus
        ========================================================= -->
-  <section id="allIterationsSection" class="iterations-explorer-section" aria-label="All Iterations and Steps Dry-Run">
+  <section id="allIterationsSection" class="iterations-explorer-section hidden" aria-label="All Iterations and Steps Dry-Run">
     <div class="iterations-explorer-header">
       <div class="iterations-title-group">
         <h2 class="iterations-main-title">📋 Complete Code Iteration & Step-by-Step Dry-Run</h2>

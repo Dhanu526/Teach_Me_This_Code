@@ -1,0 +1,35 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app_build\app.js. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -877,12 +877,23 @@
+       this.teachCalculationBox.classList.add("hidden");
+     }
+ 
+-    // Meaning / What is happening
+-    const mainMeaning = lesson.whatIsHappening || lesson.whatItMeans;
+-    const symbolsNote = lesson.symbolsMeaning && !mainMeaning.includes(lesson.symbolsMeaning)
+-      ? `${mainMeaning}<br><br><span style="font-size:13.5px; color:var(--text-secondary); display:block; padding-top:4px;"><strong>Symbols in this step:</strong><br>${lesson.symbolsMeaning}</span>`
+-      : mainMeaning;
+-    this.teachMeaningText.innerHTML = this.formatMarkdown(symbolsNote);
++    // Meaning / What is happening (clean beginner explanation)
++    const mainMeaning = lesson.whatIsHappening || lesson.whatItMeans || "";
++    this.teachMeaningText.innerHTML = this.formatMarkdown(mainMeaning);
++
++    // Symbols callout (clean container without raw HTML string concatenation)
++    if (this.teachSymbolsBox) {
++      if (lesson.symbolsMeaning && !mainMeaning.includes(lesson.symbolsMeaning)) {
++        this.teachSymbolsBox.classList.remove("hidden");
++        this.teachSymbolsBox.innerHTML = `
++          <div class="teach-symbols-title">Symbols on this line:</div>
++          <div class="teach-symbols-body">${this.formatMarkdown(lesson.symbolsMeaning)}</div>
++        `;
++      } else {
++        this.teachSymbolsBox.classList.add("hidden");
++        this.teachSymbolsBox.innerHTML = "";
++      }
++    }
+ 
+     // Why is this operation necessary? / Why am I learning this? (Requirement 4)
+     if (this.teachWhySection && this.teachWhyText) {
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

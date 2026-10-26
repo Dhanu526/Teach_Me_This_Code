@@ -1,0 +1,52 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app_build\app.js. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -216,6 +216,33 @@
+       });
+     }
+ 
++    // Phase 4: Toggle Predict Mode (🎯 Predict: OFF / ON)
++    if (this.btnToggleQuiz) {
++      this.btnToggleQuiz.addEventListener("click", () => {
++        this.predictModeEnabled = !this.predictModeEnabled;
++        this.btnToggleQuiz.textContent = this.predictModeEnabled ? "🎯 Predict: ON" : "🎯 Predict: OFF";
++        this.btnToggleQuiz.classList.toggle("active", this.predictModeEnabled);
++        this.renderStep();
++      });
++    }
++
++    // Phase 4: Reveal Answer without guessing
++    if (this.btnSkipPredict) {
++      this.btnSkipPredict.addEventListener("click", () => {
++        const steps = this.traceResult && this.traceResult.steps ? this.traceResult.steps : [];
++        const step = steps[this.currentStepIdx];
++        if (!step || !step.predictQuestion) return;
++        this.stepAnswers.set(this.currentStepIdx, {
++          selectedChoice: null,
++          isCorrect: null,
++          revealed: true,
++          mode: "revealed"
++        });
++        const currentSubstep = (step.teachingSubsteps && step.teachingSubsteps[this.currentSubstepIdx]) || step.teacherLesson;
++        this.renderInteractivePredictCard(step, currentSubstep);
++      });
++    }
++
+     // Phase 5: Speed Controls (0.5x, 1x, 1.5x, 2x)
+     if (this.btnSpeed) {
+       this.btnSpeed.addEventListener("click", () => {
+@@ -233,6 +233,12 @@
+             const isLastSubstep = this.currentSubstepIdx >= substeps.length - 1;
+             if (!isLastStep || !isLastSubstep) {
+               this.goToNextSubstep();
++              if (this.predictModeEnabled) {
++                const nextStep = this.traceResult.steps[this.currentStepIdx];
++                if (nextStep && nextStep.predictQuestion && !this.stepAnswers.has(this.currentStepIdx)) {
++                  this.stopAutoPlay();
++                }
++              }
+             } else {
+               this.stopAutoPlay();
+             }
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

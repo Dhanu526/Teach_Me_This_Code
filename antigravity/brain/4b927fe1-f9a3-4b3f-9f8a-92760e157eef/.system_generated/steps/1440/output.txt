@@ -1,0 +1,132 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app_build\app.js. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -907,6 +907,9 @@
+     this.teachStepTitle.textContent = lesson.title || step.teacherLesson.title;
+     this.teachCodeBox.innerHTML = this.highlightPythonSyntax(lesson.codeSnippet || step.codeText);
+ 
++    // Phase 4: Interactive Learning Prediction Card (Optional)
++    this.renderInteractivePredictCard(step, currentSubstep);
++
+     // Phase 3: Loop Return Indicator & Loop Array Pointer Tracker
+     this.renderLoopReturnBanner(step, currentSubstep);
+     this.renderVisualLoopStrip(step, currentSubstep);
+@@ -981,6 +981,116 @@
+     }
+   }
+ 
++  /* PHASE 4: Interactive Learning Prediction Card */
++  renderInteractivePredictCard(step, currentSubstep) {
++    if (!this.interactivePredictCard) return;
++    const q = step.predictQuestion;
++
++    if (!this.predictModeEnabled || !q) {
++      this.interactivePredictCard.classList.add("hidden");
++      this.interactivePredictCard.innerHTML = "";
++      return;
++    }
++
++    this.interactivePredictCard.classList.remove("hidden");
++    const existingAnswer = this.stepAnswers.get(this.currentStepIdx);
++    const isAnswered = Boolean(existingAnswer);
++
++    const choicesHTML = (q.choices || [])
++      .map((choice, idx) => {
++        let extraClass = "";
++        let prefix = "";
++        let disabledAttr = "";
++
++        if (isAnswered) {
++          disabledAttr = "disabled";
++          const isThisCorrect = idx === q.correctIndex || choice === q.correctValue;
++          const isThisSelected = existingAnswer.selectedChoice === choice;
++
++          if (isThisCorrect) {
++            extraClass = "is-correct";
++            prefix = "✓ ";
++          } else if (isThisSelected && !existingAnswer.isCorrect) {
++            extraClass = "is-incorrect";
++            prefix = "✗ ";
++          }
++        }
++
++        return `<button type="button" class="predict-choice-btn ${extraClass}" data-choice-idx="${idx}" ${disabledAttr}>${prefix}${this.escapeHTML(choice)}</button>`;
++      })
++      .join("");
++
++    let resultBoxHTML = "";
++    if (isAnswered) {
++      let boxClass = "";
++      let headerText = "🎉 Correct Prediction!";
++      let headerColor = "#065f46";
++
++      if (existingAnswer.mode === "incorrect") {
++        boxClass = "was-wrong";
++        headerText = "💡 Close! Here is what actually happens:";
++        headerColor = "#92400e";
++      } else if (existingAnswer.mode === "revealed") {
++        boxClass = "was-revealed";
++        headerText = "📖 Revealed Explanation:";
++        headerColor = "#1d4ed8";
++      }
++
++      resultBoxHTML = `
++        <div class="predict-result-box ${boxClass}">
++          <div class="predict-result-header" style="color: ${headerColor};">${headerText}</div>
++          <div class="predict-result-body">${this.formatMarkdown(q.explanation)}</div>
++        </div>
++      `;
++    }
++
++    this.interactivePredictCard.innerHTML = `
++      <div class="predict-card-header">
++        <div class="predict-badge-group">
++          <span class="predict-badge">🎯 Predict the Outcome</span>
++          <span class="predict-subprompt">${this.escapeHTML(q.subPrompt || "")}</span>
++        </div>
++        ${!isAnswered ? `<button type="button" class="btn-predict-skip" id="btnCardSkipPredict">Reveal Answer</button>` : ""}
++      </div>
++      <div class="predict-question-text">${this.escapeHTML(q.question)}</div>
++      <div class="predict-choices-wrap">${choicesHTML}</div>
++      ${resultBoxHTML}
++    `;
++
++    // Wire choice clicks
++    if (!isAnswered) {
++      const choiceButtons = this.interactivePredictCard.querySelectorAll(".predict-choice-btn");
++      choiceButtons.forEach((btn) => {
++        btn.addEventListener("click", () => {
++          const idx = Number(btn.getAttribute("data-choice-idx"));
++          const choice = q.choices[idx];
++          const isCorrect = idx === q.correctIndex || choice === q.correctValue;
++          this.stepAnswers.set(this.currentStepIdx, {
++            selectedChoice: choice,
++            selectedIndex: idx,
++            isCorrect: isCorrect,
++            revealed: true,
++            mode: isCorrect ? "correct" : "incorrect"
++          });
++          this.renderInteractivePredictCard(step, currentSubstep);
++        });
++      });
++
++      const cardSkipBtn = this.interactivePredictCard.querySelector("#btnCardSkipPredict");
++      if (cardSkipBtn) {
++        cardSkipBtn.addEventListener("click", () => {
++          this.stepAnswers.set(this.currentStepIdx, {
++            selectedChoice: null,
++            isCorrect: null,
++            revealed: true,
++            mode: "revealed"
++          });
++          this.renderInteractivePredictCard(step, currentSubstep);
++        });
++      }
++    }
++  }
++
+   /* PHASE 3: Visually Return to the Loop when another iteration begins */
+   renderLoopReturnBanner(step, currentSubstep) {
+     if (!this.loopReturnBanner) return;
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

@@ -1,0 +1,18 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app_build\app.js. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -11,10 +11,10 @@
+     this.engine = new window.PythonExecutionEngine();
+     this.explainer = new window.RuleBasedExplainer();
+ 
+-    this.currentPresetKey = "stack_class";
++    this.currentPresetKey = "max_subarray";
+     const defaultProg =
+       window.PRELOADED_PROGRAMS[this.currentPresetKey] ||
+-      window.PRELOADED_PROGRAMS["max_subarray"];
++      window.PRELOADED_PROGRAMS["stack_class"];
+     this.sourceCode = defaultProg.code;
+     this.inputCode = defaultProg.defaultInput || "";
+ 
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

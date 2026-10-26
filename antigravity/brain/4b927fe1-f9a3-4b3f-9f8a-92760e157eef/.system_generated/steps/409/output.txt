@@ -1,0 +1,60 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app_build\app.js. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -878,7 +878,7 @@
+   /* =========================================================
+      AREA 3: SCOPE ISOLATION & STACK/HEAP MEMORY MODEL
+      ========================================================= */
+-  renderArea3MemoryAndScopes(step) {
++  renderArea3MemoryAndScopes(step, currentSubstep) {
+     this.scopeFramesContainer.innerHTML = "";
+     this.heapObjectsContainer.innerHTML = "";
+     this.visualListsContainer.innerHTML = "";
+@@ -885,5 +885,7 @@
+     const scopeFrames = step.scopeFrames || [];
+     const memoryModel = step.memoryModel || { heapObjects: [], gcObjects: [], totalUnreferencedCount: 0 };
++    const useBeforeVars = Boolean(currentSubstep && currentSubstep.varsBeforeStep);
++    const beforeVarsMap = step.beforeVars || {};
+ 
+     // 1. Render Scope Isolation Cards (Show Local Scope on top of Global Scope, like a call stack)
+     const orderedScopes = [...scopeFrames].reverse();
+@@ -908,8 +908,14 @@
+           `;
+         } else {
+           rowsHTML = vars
++            .filter((v) => {
++              if (useBeforeVars && sc.isActive && v.status === "created") {
++                return false;
++              }
++              return true;
++            })
+             .map((v) => {
+-              const isChanged = sc.isActive && (v.status === "created" || v.status === "updated");
++              const isChanged = !useBeforeVars && sc.isActive && (v.status === "created" || v.status === "updated");
+               const pill =
+                 isChanged && v.status === "created"
+                   ? `<span class="changed-pill">New</span>`
+@@ -916,8 +916,11 @@
+                   ? `<span class="changed-pill">Changed</span>`
+                   : "";
++              const currentVal = useBeforeVars && sc.isActive && beforeVarsMap[v.name] !== undefined
++                ? beforeVarsMap[v.name]
++                : v.current;
+               const valPreview = Array.isArray(v.rawValue)
+                 ? `list[${v.rawValue.length}]`
+-                : `${v.type}: ${v.current}`;
++                : `${v.type}: ${currentVal}`;
+               return `
+                 <div class="scope-var-row ${isChanged ? "var-row-changed" : ""}">
+                   <span class="var-name-cell">${this.escapeHTML(v.name)}${pill}</span>
+@@ -925,7 +925,7 @@
+                   )}' points to Heap Address ${this.escapeHTML(v.address || "@0x1000")}">
+                     ──► ${this.escapeHTML(v.address || "@0x1000")}
+                   </span>
+-                  <span class="var-val-preview" title="${this.escapeHTML(v.current)}">
++                  <span class="var-val-preview" title="${this.escapeHTML(currentVal)}">
+                     ${this.escapeHTML(valPreview)}
+                   </span>
+                 </div>
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

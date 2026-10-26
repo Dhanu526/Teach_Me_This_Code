@@ -1,0 +1,10 @@
+
+The command exited with code 0.
+Output:
+
+app_build\index.html:98:        <div class="iteration-jump-strip">
+app_build\styles.css:1999:.iteration-jump-strip {
+app_build\styles.css:2573:  .iteration-jump-strip {
+
+
+

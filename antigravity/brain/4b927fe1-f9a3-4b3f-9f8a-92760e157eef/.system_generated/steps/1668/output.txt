@@ -1,0 +1,148 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app_build\styles.css. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -74,16 +74,12 @@
+    TOP NAVIGATION BAR
+    ========================================================= */
+ .top-bar {
+-  min-height: 64px;
+-  height: auto;
+   background-color: var(--bg-card);
+   border-bottom: 1px solid var(--border-light);
+-  padding: 10px 24px;
+-  display: flex;
+-  flex-wrap: wrap;
+-  align-items: center;
+-  justify-content: space-between;
+-  gap: 12px 18px;
++  padding: 8px 24px;
++  display: flex;
++  flex-direction: column;
++  gap: 8px;
+   position: sticky;
+   top: 0;
+   z-index: 20;
+@@ -90,12 +90,20 @@
+ 
++.top-bar-primary {
++  display: flex;
++  align-items: center;
++  justify-content: space-between;
++  gap: 12px;
++  width: 100%;
++}
++
+ .brand-area {
+   display: flex;
+   align-items: center;
+-  gap: 12px;
++  gap: 10px;
+ }
+ 
+ .teacher-badge {
+-  font-size: 17px;
++  font-size: 16px;
+   font-weight: 700;
+   color: var(--text-main);
+   letter-spacing: -0.02em;
+@@ -102,6 +102,6 @@
+ 
+ .step-progress-label {
+-  font-size: 13.5px;
++  font-size: 12.5px;
+   font-weight: 600;
+   color: var(--primary-blue);
+   background: var(--primary-blue-soft);
+@@ -108,4 +108,4 @@
+-  padding: 4px 12px;
++  padding: 3px 10px;
+   border-radius: 99px;
+ }
+ 
+@@ -112,8 +112,8 @@
+ .scope-pill {
+   font-family: var(--font-mono);
+-  font-size: 11.5px;
+-  font-weight: 700;
+-  padding: 4px 10px;
++  font-size: 11px;
++  font-weight: 700;
++  padding: 3px 8px;
+   border-radius: 99px;
+   letter-spacing: 0.03em;
+   text-transform: uppercase;
+@@ -130,6 +130,16 @@
+   border: 1px solid var(--local-purple-border);
+ }
+ 
++.top-bar-secondary {
++  display: flex;
++  align-items: center;
++  justify-content: flex-end;
++  gap: 8px;
++  width: 100%;
++  padding-top: 6px;
++  border-top: 1px solid var(--border-light);
++}
++
+ .nav-controls {
+   display: flex;
+   align-items: center;
+@@ -137,9 +137,9 @@
+ 
+ .btn-nav {
+   font-family: var(--font-sans);
+-  font-size: 14px;
+-  font-weight: 600;
+-  padding: 8px 15px;
++  font-size: 13px;
++  font-weight: 600;
++  padding: 6px 13px;
+   border-radius: var(--radius-sm);
+   border: 1px solid var(--border-medium);
+   background: var(--bg-card);
+@@ -172,8 +172,8 @@
+   background: var(--primary-blue);
+   border-color: var(--primary-blue);
+   color: #ffffff;
+-  padding: 9px 22px;
+-  font-size: 14.5px;
++  padding: 7px 18px;
++  font-size: 13.5px;
+   box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+ }
+ 
+@@ -184,7 +184,7 @@
+ .secondary-actions {
+   display: flex;
+   align-items: center;
+-  gap: 8px;
++  gap: 6px;
+ }
+ 
+ .btn-subtle {
+@@ -191,6 +191,6 @@
+-  font-size: 13px;
+-  font-weight: 500;
+-  padding: 7px 12px;
++  font-size: 12px;
++  font-weight: 500;
++  padding: 5px 10px;
+   border-radius: var(--radius-sm);
+   border: 1px solid var(--border-light);
+   background: var(--bg-subtle);
+@@ -205,9 +205,9 @@
+ 
+ .btn-small-primary {
+   font-family: var(--font-sans);
+-  font-size: 13px;
+-  font-weight: 600;
+-  padding: 7px 14px;
++  font-size: 12px;
++  font-weight: 600;
++  padding: 5px 12px;
+   border-radius: var(--radius-sm);
+   border: none;
+   background: var(--primary-blue);
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

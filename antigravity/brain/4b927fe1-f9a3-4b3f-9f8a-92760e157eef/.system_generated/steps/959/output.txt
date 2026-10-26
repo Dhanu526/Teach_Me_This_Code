@@ -1,0 +1,27 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app_build\index.html. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -128,8 +128,8 @@
+         <!-- PHASE 2: Visual Negative Warning & Reset Animation Box (when c < 0 resets c = 0) -->
+         <div id="negativeResetVisual" class="negative-reset-visual hidden"></div>
+ 
+-        <!-- TASK 2.1, 2.2, 2.3: THONNY-STYLE STEP-BY-STEP SUB-EXPRESSION EVALUATOR -->
+-        <div id="thonnyExprBox" class="thonny-expr-card">
++        <!-- TASK 2.1, 2.2, 2.3: THONNY-STYLE STEP-BY-STEP SUB-EXPRESSION EVALUATOR (Hidden in Beginner Mode, visible in Advanced View) -->
++        <div id="thonnyExprBox" class="thonny-expr-card hidden">
+           <div class="thonny-expr-header">
+             <span class="thonny-badge">Thonny Expression Evaluator</span>
+             <span id="thonnySubStepCounter" class="thonny-subcounter">Evaluation 1 of 1</span>
+@@ -160,8 +160,9 @@
+ 
+         <!-- What does this mean? / What is happening? -->
+         <div class="teach-section">
+-          <div class="teach-label">What is happening?</div>
++          <div class="teach-label">💡 What is happening?</div>
+           <p id="teachMeaningText" class="teach-meaning-text"></p>
++          <div id="teachSymbolsBox" class="teach-symbols-callout hidden"></div>
+         </div>
+ 
+         <!-- Why is this operation necessary? / Why am I learning this? -->
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

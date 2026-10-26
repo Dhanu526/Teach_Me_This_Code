@@ -1,0 +1,25 @@
+
+The command exited with code 0.
+Output:
+Testing Engine & Explainer loaded successfully.
+[PASS] Mixed (Original): expected 6, got 6, total steps: 54
+[PASS] All-Negative: expected -1, got -1, total steps: 39
+[PASS] All-Positive: expected 15, got 15, total steps: 36
+[PASS] Single Negative: expected -7, got -7, total steps: 17
+[PASS] Single Positive: expected 42, got 42, total steps: 16
+[PASS] Binary Search: expected 3, got 3
+While Loop Iter substep count: 3
+  Substep 1: Check while condition operands
+  Substep 2: Condition evaluates to True
+  Substep 3: Start pass #1 of while loop
+Mid calculation substep count: 3
+  Substep 1: Evaluate operands in (left + right) // 2
+  Substep 2: Calculate (left + 5) // 2 = 2
+  Substep 3: Create mid = 2
+[PASS] Stack Class: expected stdout 20, got 20
+Class def substeps for Stack class:
+  Substep 1: What is a class? -> Python encounters `class Stack:`. A **class** is a...
+  Substep 2: Register Stack class -> Python registers `Stack` in Global Scope. Creating...
+
+>>> ALL TESTS PASSED SUCCESSFULLY! 100% VERIFIED. <<<
+

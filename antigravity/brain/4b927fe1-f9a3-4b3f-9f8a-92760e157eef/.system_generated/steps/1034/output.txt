@@ -1,0 +1,10 @@
+
+The command exited with code 0.
+Output:
+[PASS] Mixed: expected 6, got 6 (50 steps)
+[PASS] All-Negative: expected -1, got -1 (35 steps)
+[PASS] All-Positive: expected 15, got 15 (32 steps)
+[PASS] Single Negative: expected -7, got -7 (13 steps)
+[PASS] Single Positive: expected 42, got 42 (12 steps)
+ALL 5 TEST CASES VERIFIED PERFECTLY!
+

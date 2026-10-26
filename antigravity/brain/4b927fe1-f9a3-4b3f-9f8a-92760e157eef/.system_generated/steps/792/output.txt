@@ -1,0 +1,23 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app_build\styles.css. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -791,7 +791,7 @@
+   font-size: 18px;
+   font-weight: 800;
+   color: var(--text-main);
+-  animation: popIn 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
++  animation: popIn calc(0.35s * var(--anim-speed-factor, 1)) cubic-bezier(0.175, 0.885, 0.32, 1.275);
+ }
+ 
+ .var-box-prev {
+@@ -804,7 +804,7 @@
+   border-color: #10b981;
+   background: #ecfdf5;
+   box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.18);
+-  animation: highlightPulse 0.6s ease;
++  animation: highlightPulse calc(0.6s * var(--anim-speed-factor, 1)) ease;
+ }
+ 
+ .var-box-card.is-negative-warning {
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

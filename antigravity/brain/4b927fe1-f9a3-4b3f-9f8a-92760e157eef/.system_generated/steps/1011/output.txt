@@ -1,0 +1,28 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app_build\styles.css. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -74,14 +74,16 @@
+    TOP NAVIGATION BAR
+    ========================================================= */
+ .top-bar {
+-  height: 68px;
++  min-height: 64px;
++  height: auto;
+   background-color: var(--bg-card);
+   border-bottom: 1px solid var(--border-light);
+-  padding: 0 28px;
+-  display: flex;
+-  align-items: center;
+-  justify-content: space-between;
+-  gap: 16px;
++  padding: 10px 24px;
++  display: flex;
++  flex-wrap: wrap;
++  align-items: center;
++  justify-content: space-between;
++  gap: 12px 18px;
+   position: sticky;
+   top: 0;
+   z-index: 20;
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

@@ -1,0 +1,35 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app_build\styles.css. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -694,6 +694,29 @@
+   border-radius: var(--radius-sm);
+ }
+ 
++.teach-why-box {
++  background: #f0fdf4;
++  border: 1px solid #bbf7d0;
++  padding: 11px 15px;
++  border-radius: var(--radius-md);
++}
++
++.teach-why-text {
++  font-size: 15px;
++  line-height: 1.6;
++  color: #166534;
++}
++
++.teach-why-text code {
++  font-family: var(--font-mono);
++  font-size: 13.5px;
++  background: #dcfce7;
++  padding: 2px 6px;
++  border-radius: 5px;
++  color: #14532d;
++  font-weight: 600;
++}
++
+ .teach-next-box {
+   background: var(--bg-subtle);
+   padding: 11px 15px;
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

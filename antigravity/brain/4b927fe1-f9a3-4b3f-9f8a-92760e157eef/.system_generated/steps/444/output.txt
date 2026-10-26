@@ -1,0 +1,35 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app_build\index.html. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -30,6 +30,7 @@
+     </nav>
+ 
+     <div class="secondary-actions">
++      <button id="btnToggleAnim" class="btn-subtle active" title="Toggle visual animations on or off">✨ Animations: ON</button>
+       <button id="btnEditCode" class="btn-small-primary">✏️ Paste / Edit Code</button>
+       <button id="btnToggleIterations" class="btn-subtle active" title="Show or hide the full Iteration & All-Steps Dry-Run panel below">📋 All Steps / Iterations</button>
+       <button id="btnToggleAdvanced" class="btn-subtle">Advanced View</button>
+@@ -98,6 +98,21 @@
+           <div id="teachCodeBox" class="teach-code-box">c = 0</div>
+         </div>
+ 
++        <!-- PHASE 3: Loop Return Indicator (Shown when loop advances to next iteration) -->
++        <div id="loopReturnBanner" class="loop-return-banner hidden"></div>
++
++        <!-- PHASE 3: Visual Loop Pointer & List Element Tracker -->
++        <div id="visualLoopStrip" class="visual-loop-strip hidden"></div>
++
++        <!-- PHASE 3: Visual Condition Gate & Branch Selector (-2 >= -2, True/False, Branch Highlight) -->
++        <div id="visualConditionGate" class="visual-condition-gate hidden"></div>
++
++        <!-- PHASE 2: Visual Variable Boxes, Animated Value Move & Step-by-Step Calculation Stage -->
++        <div id="visualCalcStage" class="visual-calc-stage hidden"></div>
++
++        <!-- PHASE 2: Visual Negative Warning & Reset Animation Box (when c < 0 resets c = 0) -->
++        <div id="negativeResetVisual" class="negative-reset-visual hidden"></div>
++
+         <!-- TASK 2.1, 2.2, 2.3: THONNY-STYLE STEP-BY-STEP SUB-EXPRESSION EVALUATOR -->
+         <div id="thonnyExprBox" class="thonny-expr-card">
+           <div class="thonny-expr-header">
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

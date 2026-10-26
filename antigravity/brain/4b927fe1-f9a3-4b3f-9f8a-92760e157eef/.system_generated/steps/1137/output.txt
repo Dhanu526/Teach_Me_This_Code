@@ -1,0 +1,33 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app_build\explainer.js. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -1017,7 +1017,27 @@
+             : `Because the condition is False, Python skips the indented block.`,
+           symbolsMeaning: `Conditional control flow.`,
+           currentValues: varsAfter,
++          calculationCard: {
++            currentNumber: null,
++            before: `Condition was ${cond.result ? "True" : "False"}`,
++            calculation: cond.result ? `Enter indented block` : `Skip indented block`,
++            after: cond.result ? `Execute branch` : `Skip branch`
++          },
+           whyNecessary: `Enforces program logic.`,
++          whatHappensNext: `Python determines which line to execute next.`
++        });
++
++        // Substep 5: Reason program moves to next line
++        addSubstep({
++          substepLabel: `Reason to move forward`,
++          codeSnippet: step.codeText,
++          varsBeforeStep: false,
++          whatIsHappening: cond.result
++            ? `Because the condition evaluated to True, Python moves to Line ${nextStep?.line || step.line + 1} to run the statements inside this block.`
++            : `Because the condition evaluated to False, Python skips this entire branch and advances past the block.`,
++          symbolsMeaning: `Sequential control flow.`,
++          currentValues: varsAfter,
++          whyNecessary: `Understanding branch flow helps beginners see why lines are executed or skipped.`,
+           whatHappensNext: nextSentence
+         });
+       }
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

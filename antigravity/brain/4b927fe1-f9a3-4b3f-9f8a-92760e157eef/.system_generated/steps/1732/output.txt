@@ -1,0 +1,66 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app_build\app.js. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -1217,12 +1217,39 @@
+       branch2Desc = "Keep running sum for future additions";
+     }
+ 
++    // Check if user is currently answering a prediction for this step
++    const isPredictPending = Boolean(
++      this.predictModeEnabled &&
++      step.predictQuestion &&
++      !this.stepAnswers.has(this.currentStepIdx)
++    );
++
++    let decisionBadgeHtml = '';
++    let branch1Class = '';
++    let branch1Tag = '';
++    let branch2Class = '';
++    let branch2Tag = '';
++
++    if (isPredictPending) {
++      decisionBadgeHtml = `<span class="decision-badge is-pending">🎯 Predict To Reveal</span>`;
++      branch1Class = "is-neutral-branch";
++      branch1Tag = "OPTION A";
++      branch2Class = "is-neutral-branch";
++      branch2Tag = "OPTION B";
++    } else {
++      decisionBadgeHtml = `<span class="decision-badge ${isTrue ? "is-true" : "is-false"}">
++        ${isTrue ? "✓ TRUE" : "✗ FALSE"}
++      </span>`;
++      branch1Class = isTrue ? "is-active-branch" : "is-skipped-branch";
++      branch1Tag = isTrue ? "✓ EXECUTES" : "SKIPPED";
++      branch2Class = !isTrue ? "is-active-branch" : "is-skipped-branch";
++      branch2Tag = !isTrue ? "✓ EXECUTES" : "SKIPPED";
++    }
++
+     this.visualConditionGate.innerHTML = `
+       <div class="cond-gate-header">
+         <span>Condition Comparison Gate & Decision</span>
+-        <span class="decision-badge ${isTrue ? "is-true" : "is-false"}">
+-          ${isTrue ? "✓ TRUE" : "✗ FALSE"}
+-        </span>
++        ${decisionBadgeHtml}
+       </div>
+       <div class="cond-balance-row">
+         <div class="cond-val-box">
+@@ -1235,13 +1235,13 @@
+         </div>
+       </div>
+       <div class="branch-decision-wrap">
+-        <div class="branch-option ${isTrue ? "is-active-branch" : "is-skipped-branch"}">
+-          <span class="branch-option-tag">${isTrue ? "✓ EXECUTES" : "SKIPPED"}</span>
++        <div class="branch-option ${branch1Class}">
++          <span class="branch-option-tag">${branch1Tag}</span>
+           <code>${this.escapeHTML(branch1Code)}</code>
+           <span style="font-size:12px; color:var(--text-secondary);">${this.escapeHTML(branch1Desc)}</span>
+         </div>
+-        <div class="branch-option ${!isTrue ? "is-active-branch" : "is-skipped-branch"}">
+-          <span class="branch-option-tag">${!isTrue ? "✓ EXECUTES" : "SKIPPED"}</span>
++        <div class="branch-option ${branch2Class}">
++          <span class="branch-option-tag">${branch2Tag}</span>
+           <code>${this.escapeHTML(branch2Code)}</code>
+           <span style="font-size:12px; color:var(--text-secondary);">${this.escapeHTML(branch2Desc)}</span>
+         </div>
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

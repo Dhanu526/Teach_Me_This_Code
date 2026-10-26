@@ -1,0 +1,25 @@
+
+The command exited with code 1.
+Output:
+......F.........
+======================================================================
+FAIL: test_16_oop_stack_class_execution (__main__.TestExecutionEngine.test_16_oop_stack_class_execution)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\test_engine.py", line 225, in test_16_oop_stack_class_execution
+    self.assertEqual(last_stdout, ["30", "20", "2", "False"])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: ['10', 'None', '0', 'True'] != ['30', '20', '2', 'False']
+
+First differing element 0:
+'10'
+'30'
+
+- ['10', 'None', '0', 'True']
++ ['30', '20', '2', 'False']
+
+----------------------------------------------------------------------
+Ran 16 tests in 0.135s
+
+FAILED (failures=1)
+

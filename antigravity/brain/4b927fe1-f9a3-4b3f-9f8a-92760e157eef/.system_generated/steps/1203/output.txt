@@ -1,0 +1,64 @@
+
+The command exited with code 0.
+Output:
+
+> app_build\app.js:33:    this.animationsEnabled = true;
+  app_build\app.js:34:
+  app_build\app.js:35:    // Phase 5: Speed Modes & Reduced Motion Accessibility
+  app_build\app.js:36:    this.speedModes = [
+  app_build\app.js:37:      { label: "1x", ms: 1200, animFactor: 1 },
+> app_build\app.js:46:    this.playSpeedMs = 1200;
+  app_build\app.js:47:    this.isEditing = false;
+  app_build\app.js:48:    this.showAdvanced = false;
+  app_build\app.js:49:
+  app_build\app.js:50:    this.initDOM();
+> app_build\app.js:60:      this.animationsEnabled = false;
+  app_build\app.js:61:      document.body.classList.add("no-animations");
+> app_build\app.js:62:      if (this.btnToggleAnim) {
+> app_build\app.js:63:        this.btnToggleAnim.textContent = "? Reduced Motion: ON";
+> app_build\app.js:64:        this.btnToggleAnim.classList.remove("active");
+  app_build\app.js:65:      }
+  app_build\app.js:66:    }
+  app_build\app.js:67:  }
+  app_build\app.js:68:
+> app_build\app.js:80:    this.btnToggleAnim = document.getElementById("btnToggleAnim");
+> app_build\app.js:81:    this.btnSpeed = document.getElementById("btnSpeed");
+  app_build\app.js:82:    this.btnEditCode = document.getElementById("btnEditCode");
+  app_build\app.js:83:    this.btnAnalyzeCode = document.getElementById("btnAnalyzeCode");
+  app_build\app.js:84:    this.btnToggleIterations = document.getElementById("btnToggleIterations");
+  app_build\app.js:85:    this.btnToggleAdvanced = document.getElementById("btnToggleAdvanced");
+> app_build\app.js:188:    if (this.btnToggleAnim) {
+> app_build\app.js:189:      this.btnToggleAnim.addEventListener("click", () => {
+> app_build\app.js:190:        this.animationsEnabled = !this.animationsEnabled;
+> app_build\app.js:191:        this.btnToggleAnim.textContent = this.animationsEnabled ? "? Animations: ON" : "? 
+Animations: OFF";
+> app_build\app.js:192:        this.btnToggleAnim.classList.toggle("active", this.animationsEnabled);
+> app_build\app.js:193:        document.body.classList.toggle("no-animations", !this.animationsEnabled);
+  app_build\app.js:194:      });
+  app_build\app.js:195:    }
+  app_build\app.js:196:
+  app_build\app.js:197:    // Phase 5: Speed Controls (0.5x, 1x, 1.5x, 2x)
+> app_build\app.js:198:    if (this.btnSpeed) {
+> app_build\app.js:199:      this.btnSpeed.addEventListener("click", () => {
+  app_build\app.js:200:        this.currentSpeedIdx = (this.currentSpeedIdx + 1) % this.speedModes.length;
+  app_build\app.js:201:        const spd = this.speedModes[this.currentSpeedIdx];
+> app_build\app.js:202:        this.btnSpeed.textContent = `? Speed: ${spd.label}`;
+> app_build\app.js:203:        this.playSpeedMs = spd.ms;
+  app_build\app.js:204:        document.documentElement.style.setProperty("--anim-speed-factor", 
+String(spd.animFactor));
+  app_build\app.js:205:        if (this.isPlaying) {
+  app_build\app.js:206:          clearInterval(this.playInterval);
+  app_build\app.js:207:          this.playInterval = setInterval(() => {
+> app_build\app.js:218:          }, this.playSpeedMs);
+  app_build\app.js:219:        }
+  app_build\app.js:220:      });
+  app_build\app.js:221:    }
+  app_build\app.js:222:
+> app_build\app.js:682:    }, this.playSpeedMs);
+  app_build\app.js:683:  }
+  app_build\app.js:684:
+  app_build\app.js:685:  stopAutoPlay() {
+  app_build\app.js:686:    this.isPlaying = false;
+
+
+

@@ -1,0 +1,17 @@
+
+The command exited with code 0.
+Output:
+
+app_build\app.js:52:    this.stepAnswers = new Map();
+app_build\app.js:235:        this.stepAnswers.set(this.currentStepIdx, {
+app_build\app.js:266:                if (nextStep && nextStep.predictQuestion && 
+!this.stepAnswers.has(this.currentStepIdx)) {
+app_build\app.js:476:    this.stepAnswers.clear();
+app_build\app.js:737:          if (nextStep && nextStep.predictQuestion && !this.stepAnswers.has(this.currentStepIdx)) 
+{
+app_build\app.js:1000:    const existingAnswer = this.stepAnswers.get(this.currentStepIdx);
+app_build\app.js:1072:          this.stepAnswers.set(this.currentStepIdx, {
+app_build\app.js:1086:          this.stepAnswers.set(this.currentStepIdx, {
+
+
+

@@ -1,0 +1,18 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app_build\app.js. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -732,6 +732,12 @@
+ 
+       if (!isLastStep || !isLastSubstep) {
+         this.goToNextSubstep();
++        if (this.predictModeEnabled) {
++          const nextStep = this.traceResult.steps[this.currentStepIdx];
++          if (nextStep && nextStep.predictQuestion && !this.stepAnswers.has(this.currentStepIdx)) {
++            this.stopAutoPlay();
++          }
++        }
+       } else {
+         this.stopAutoPlay();
+       }
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

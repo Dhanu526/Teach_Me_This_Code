@@ -1,0 +1,49 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app_build\app.js. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -733,8 +733,8 @@
+   /* =========================================================
+      AREA 2: TEACHING AREA, QUICK ITERATION BAR & THONNY STEPPER
+      ========================================================= */
+-  renderArea2Teaching(step) {
+-    const lesson = step.teacherLesson;
++  renderArea2Teaching(step, currentSubstep) {
++    const lesson = currentSubstep || step.teacherLesson;
+ 
+     // Render Quick Iteration / Phase Pills Bar
+     this.renderQuickIterationBar();
+@@ -741,5 +741,5 @@
+-    this.teachStepTitle.textContent = lesson.title;
+-    this.teachCodeBox.innerHTML = this.highlightPythonSyntax(step.codeText);
++    this.teachStepTitle.textContent = lesson.title || step.teacherLesson.title;
++    this.teachCodeBox.innerHTML = this.highlightPythonSyntax(lesson.codeSnippet || step.codeText);
+ 
+     // Render Thonny Step-by-Step Expression Evaluator
+     this.renderThonnyExpressionStepper(step);
+@@ -762,7 +762,23 @@
+       this.teachCalculationBox.classList.add("hidden");
+     }
+ 
+-    this.teachMeaningText.innerHTML = this.formatMarkdown(lesson.whatItMeans);
++    // Meaning / What is happening
++    const mainMeaning = lesson.whatIsHappening || lesson.whatItMeans;
++    const symbolsNote = lesson.symbolsMeaning && !mainMeaning.includes(lesson.symbolsMeaning)
++      ? `${mainMeaning}<br><br><span style="font-size:13.5px; color:var(--text-secondary); display:block; padding-top:4px;"><strong>Symbols in this step:</strong><br>${lesson.symbolsMeaning}</span>`
++      : mainMeaning;
++    this.teachMeaningText.innerHTML = this.formatMarkdown(symbolsNote);
++
++    // Why is this operation necessary? / Why am I learning this? (Requirement 4)
++    if (this.teachWhySection && this.teachWhyText) {
++      if (lesson.whyNecessary) {
++        this.teachWhySection.classList.remove("hidden");
++        this.teachWhyText.innerHTML = this.formatMarkdown(lesson.whyNecessary);
++      } else {
++        this.teachWhySection.classList.add("hidden");
++      }
++    }
++
+     this.teachVarsNowBox.textContent = lesson.variableValuesNow;
+     this.teachNextText.innerHTML = this.formatMarkdown(lesson.whatHappensNext);
+ 
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

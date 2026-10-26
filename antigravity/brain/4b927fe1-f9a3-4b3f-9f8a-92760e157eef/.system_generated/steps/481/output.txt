@@ -1,0 +1,397 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app_build\app.js. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -675,12 +675,15 @@
+   }
+ 
+   /* =========================================================
+-     AREA 1: YOUR CODE (Highlight ONLY the current line)
+-     ========================================================= */
+-  renderArea1Code(step) {
++     AREA 1: YOUR CODE (Highlight ONLY the current line & branch outcome)
++     ========================================================= */
++  renderArea1Code(step, currentSubstep) {
+     this.codeLinesContainer.innerHTML = "";
+     let activeRowEl = null;
+ 
++    const cond = step.condition;
++    const isConditionStep = step.eventType === "CONDITION";
++
+     this.traceResult.rawLines.forEach((rawLine, idx) => {
+       const lineNum = idx + 1;
+       const isCurrent = step.line === lineNum;
+@@ -687,3 +687,14 @@
++      // Phase 3: Highlight the branch that executes / is skipped
++      let branchBadge = "";
++      if (isConditionStep && cond) {
++        const isBranchLine = lineNum === step.line + 1 || (step.line === 21 && lineNum === 22) || (step.line === 24 && lineNum === 25);
++        if (isBranchLine) {
++          branchBadge = cond.result
++            ? `<span style="font-size:11px; font-weight:700; color:#059669; background:#ecfdf5; border:1px solid #a7f3d0; padding:1px 6px; border-radius:4px; margin-left:8px;">✓ executes</span>`
++            : `<span style="font-size:11px; font-weight:700; color:#94a3b8; background:#f8fafc; border:1px dashed #cbd5e1; padding:1px 6px; border-radius:4px; margin-left:8px;">✗ skipped</span>`;
++        }
++      }
++
+       const row = document.createElement("div");
+       row.className = `code-row ${isCurrent ? "is-current-line" : "is-dimmed"}`;
+       if (isCurrent) {
+@@ -691,7 +691,7 @@
+ 
+       row.innerHTML = `
+         <div class="code-gutter">${lineNum}</div>
+-        <div class="code-syntax">${this.highlightPythonSyntax(rawLine)}</div>
++        <div class="code-syntax">${this.highlightPythonSyntax(rawLine)}${branchBadge}</div>
+       `;
+ 
+       row.addEventListener("click", () => {
+@@ -698,6 +698,6 @@
+         if (targetIdx !== -1) {
+           this.stopAutoPlay();
+-          this.goToStep(targetIdx);
++          this.goToStep(targetIdx, 0);
+         }
+       });
+ 
+@@ -754,6 +754,17 @@
+     this.teachStepTitle.textContent = lesson.title || step.teacherLesson.title;
+     this.teachCodeBox.innerHTML = this.highlightPythonSyntax(lesson.codeSnippet || step.codeText);
+ 
++    // Phase 3: Loop Return Indicator & Loop Array Pointer Tracker
++    this.renderLoopReturnBanner(step, currentSubstep);
++    this.renderVisualLoopStrip(step, currentSubstep);
++
++    // Phase 3: Condition Comparison Gate & Branch Selector
++    this.renderVisualConditionGate(step, currentSubstep);
++
++    // Phase 2: Variable Boxes & Number Movement / Calculation Stage
++    this.renderVisualCalcStage(step, currentSubstep);
++    this.renderNegativeResetVisual(step, currentSubstep);
++
+     // Render Thonny Step-by-Step Expression Evaluator
+     this.renderThonnyExpressionStepper(step);
+ 
+@@ -792,7 +792,9 @@
+       }
+     }
+ 
+-    this.teachVarsNowBox.textContent = lesson.variableValuesNow;
++    // Phase 2: Show variables as labeled boxes containing their current values
++    this.renderVisualVariableBoxes(step, currentSubstep);
++
+     this.teachNextText.innerHTML = this.formatMarkdown(lesson.whatHappensNext);
+ 
+     if (lesson.finalBanner) {
+@@ -803,6 +803,311 @@
+     }
+   }
+ 
++  /* PHASE 3: Visually Return to the Loop when another iteration begins */
++  renderLoopReturnBanner(step, currentSubstep) {
++    if (!this.loopReturnBanner) return;
++    const op = step.operationDetail || {};
++    if (step.eventType === "LOOP_ITER" && op.iteration > 1) {
++      this.loopReturnBanner.classList.remove("hidden");
++      const prevPass = op.iteration - 1;
++      const iterVar = op.iterVar || "i";
++      const iterVal = op.iterVal !== undefined ? op.iterVal : "";
++      const elVal = op.indexedElementInfo ? op.indexedElementInfo.elementVal : "";
++      this.loopReturnBanner.innerHTML = `
++        <span class="loop-return-icon">↺</span>
++        <div class="loop-return-text">
++          <strong>Looping back to Line ${step.line}:</strong> Pass ${prevPass} finished! Advancing loop variable <code>${iterVar} = ${iterVal}</code> (next list element: <code>${elVal}</code>).
++        </div>
++      `;
++    } else {
++      this.loopReturnBanner.classList.add("hidden");
++      this.loopReturnBanner.innerHTML = "";
++    }
++  }
++
++  /* PHASE 3: Show the loop's current index and current list element with an active pointer */
++  renderVisualLoopStrip(step, currentSubstep) {
++    if (!this.visualLoopStrip) return;
++    const loop = step.loop || (step.eventType === "LOOP_ITER" ? step.operationDetail : null);
++    const numsRow = (step.variables || []).find((v) => Array.isArray(v.rawValue));
++    const listArr = numsRow ? numsRow.rawValue : null;
++
++    if (!listArr || !loop || loop.iterVal === undefined) {
++      this.visualLoopStrip.classList.add("hidden");
++      this.visualLoopStrip.innerHTML = "";
++      return;
++    }
++
++    this.visualLoopStrip.classList.remove("hidden");
++    const activeIdx = Number(loop.iterVal);
++    const activeVal = listArr[activeIdx];
++    const total = listArr.length;
++    const passNum = loop.iteration || activeIdx + 1;
++
++    const cellsHTML = listArr
++      .map((val, idx) => {
++        const isActive = idx === activeIdx;
++        return `
++          <div class="loop-track-item ${isActive ? "is-active-pointer" : ""}">
++            <div class="loop-track-cell">
++              <span class="loop-track-idx">[${idx}]</span>
++              <span class="loop-track-val">${val}</span>
++            </div>
++            <span class="loop-pointer-indicator">▲ pointer</span>
++          </div>
++        `;
++      })
++      .join("");
++
++    this.visualLoopStrip.innerHTML = `
++      <div class="loop-strip-header">
++        <span>Loop Pointer & List Elements (nums)</span>
++        <span class="loop-current-info-pill">Pass ${passNum}/${total} • i = ${activeIdx} • nums[${activeIdx}] = ${activeVal}</span>
++      </div>
++      <div class="loop-track-scroll">
++        ${cellsHTML}
++      </div>
++    `;
++
++    // Center active loop pointer in view
++    const activeEl = this.visualLoopStrip.querySelector(".is-active-pointer");
++    const scrollBox = this.visualLoopStrip.querySelector(".loop-track-scroll");
++    if (activeEl && scrollBox) {
++      const targetLeft =
++        activeEl.offsetLeft - scrollBox.offsetLeft - scrollBox.clientWidth / 2 + activeEl.clientWidth / 2;
++      scrollBox.scrollTo({ left: Math.max(0, targetLeft), behavior: "smooth" });
++    }
++  }
++
++  /* PHASE 3: Show comparisons using actual values, True/False badge, and highlight executing branch */
++  renderVisualConditionGate(step, currentSubstep) {
++    if (!this.visualConditionGate) return;
++    const cond = step.condition;
++
++    if (!cond || step.eventType !== "CONDITION") {
++      this.visualConditionGate.classList.add("hidden");
++      this.visualConditionGate.innerHTML = "";
++      return;
++    }
++
++    this.visualConditionGate.classList.remove("hidden");
++    const isTrue = Boolean(cond.result);
++    const leftName = cond.leftExpr || "Left";
++    const leftVal = cond.leftVal !== undefined ? cond.leftVal : "";
++    const rightName = cond.rightExpr || "Right";
++    const rightVal = cond.rightVal !== undefined ? cond.rightVal : "";
++    const op = cond.operator || "==";
++
++    const isMaxCheck = cond.expr === "c >= ans" || (leftName === "c" && rightName === "ans");
++    const isNegCheck = cond.expr === "c < 0" || (leftName === "c" && rightVal === "0" && op === "<");
++
++    let branch1Code = "ans = c";
++    let branch1Desc = `Update record: ans becomes ${leftVal}`;
++    let branch2Code = "Keep ans";
++    let branch2Desc = `ans preserves previous best sum of ${rightVal}`;
++
++    if (isNegCheck) {
++      branch1Code = "c = 0";
++      branch1Desc = "Reset negative sum to zero";
++      branch2Code = `Keep c = ${leftVal}`;
++      branch2Desc = "Keep running sum for future additions";
++    }
++
++    this.visualConditionGate.innerHTML = `
++      <div class="cond-gate-header">
++        <span>Condition Comparison Gate & Decision</span>
++        <span class="decision-badge ${isTrue ? "is-true" : "is-false"}">
++          ${isTrue ? "✓ TRUE" : "✗ FALSE"}
++        </span>
++      </div>
++      <div class="cond-balance-row">
++        <div class="cond-val-box">
++          <span class="cond-val-name">${this.escapeHTML(leftName)}</span>
++          <span class="cond-val-num">${this.escapeHTML(leftVal)}</span>
++        </div>
++        <span class="cond-op-badge">${this.escapeHTML(op)}</span>
++        <div class="cond-val-box">
++          <span class="cond-val-name">${this.escapeHTML(rightName)}</span>
++          <span class="cond-val-num">${this.escapeHTML(rightVal)}</span>
++        </div>
++      </div>
++      <div class="branch-decision-wrap">
++        <div class="branch-option ${isTrue ? "is-active-branch" : "is-skipped-branch"}">
++          <span class="branch-option-tag">${isTrue ? "✓ EXECUTES" : "SKIPPED"}</span>
++          <code>${this.escapeHTML(branch1Code)}</code>
++          <span style="font-size:12px; color:var(--text-secondary);">${this.escapeHTML(branch1Desc)}</span>
++        </div>
++        <div class="branch-option ${!isTrue ? "is-active-branch" : "is-skipped-branch"}">
++          <span class="branch-option-tag">${!isTrue ? "✓ EXECUTES" : "SKIPPED"}</span>
++          <code>${this.escapeHTML(branch2Code)}</code>
++          <span style="font-size:12px; color:var(--text-secondary);">${this.escapeHTML(branch2Desc)}</span>
++        </div>
++      </div>
++    `;
++  }
++
++  /* PHASE 2: Animate number moving into variable & show arithmetic calculation step by step */
++  renderVisualCalcStage(step, currentSubstep) {
++    if (!this.visualCalcStage) return;
++    const op = step.operationDetail || {};
++    const isAug = step.eventType === "AUG_ASSIGN";
++    const isAssign = step.eventType === "ASSIGN";
++
++    if (!isAug && !isAssign) {
++      this.visualCalcStage.classList.add("hidden");
++      this.visualCalcStage.innerHTML = "";
++      return;
++    }
++
++    this.visualCalcStage.classList.remove("hidden");
++    const target = op.target || "c";
++    const beforeVal = op.beforeVal !== undefined ? op.beforeVal : "0";
++    const afterVal = op.afterVal !== undefined ? op.afterVal : op.rhsVal || "0";
++    const rhsVal = op.rhsVal !== undefined ? op.rhsVal : afterVal;
++    const isCreated = Boolean(op.isCreated);
++    const useBeforeVars = Boolean(currentSubstep && currentSubstep.varsBeforeStep);
++
++    let stageHTML = "";
++
++    if (isAug) {
++      stageHTML = `
++        <div class="calc-stage-header">
++          <span>Step-by-Step Arithmetic Calculation</span>
++          <span class="calc-stage-badge">Addition</span>
++        </div>
++        <div class="calc-equation-row">
++          <div class="calc-operand-chip" title="Previous value of ${target}">
++            <span style="font-size:10px; display:block; color:var(--text-muted);">${target}</span>
++            <span>${beforeVal}</span>
++          </div>
++          <span class="calc-operator-chip">+</span>
++          <div class="calc-operand-chip" title="List element at current index">
++            <span style="font-size:10px; display:block; color:var(--text-muted);">${op.rhsExpr || "number"}</span>
++            <span>(${rhsVal})</span>
++          </div>
++          <span class="calc-operator-chip">=</span>
++          <div class="calc-result-chip" title="Calculated sum">
++            <span style="font-size:10px; display:block; opacity:0.85;">New Total</span>
++            <span>${afterVal}</span>
++          </div>
++        </div>
++        <div class="assign-animation-row">
++          <span class="anim-source-val">${afterVal}</span>
++          <span class="anim-move-arrow">──► stores into ──►</span>
++          <div class="var-box-card ${!useBeforeVars ? "is-updated" : ""}" style="max-width:145px;">
++            <div class="var-box-label">Variable <strong>${target}</strong></div>
++            <div class="var-box-val-slot">
++              <span class="var-box-value">${!useBeforeVars ? afterVal : beforeVal}</span>
++              <span class="var-box-prev">${!useBeforeVars ? `(was ${beforeVal})` : ""}</span>
++            </div>
++          </div>
++        </div>
++      `;
++    } else {
++      stageHTML = `
++        <div class="calc-stage-header">
++          <span>Variable Assignment & Memory Binding</span>
++          <span class="calc-stage-badge">${isCreated ? "Create" : "Update"}</span>
++        </div>
++        <div class="assign-animation-row">
++          <div style="display:flex; flex-direction:column; gap:2px;">
++            <span style="font-size:11px; color:var(--text-secondary); font-weight:700;">VALUE COMPUTED</span>
++            <span class="anim-source-val">${afterVal}</span>
++          </div>
++          <span class="anim-move-arrow">──► moves into ──►</span>
++          <div class="var-box-card ${!useBeforeVars ? "is-updated" : ""}" style="max-width:145px;">
++            <div class="var-box-label">Variable <strong>${target}</strong></div>
++            <div class="var-box-val-slot">
++              <span class="var-box-value">${!useBeforeVars ? afterVal : (beforeVal || "unbound")}</span>
++              <span class="var-box-prev">${!useBeforeVars && beforeVal ? `(was ${beforeVal})` : ""}</span>
++            </div>
++          </div>
++        </div>
++      `;
++    }
++
++    this.visualCalcStage.innerHTML = stageHTML;
++  }
++
++  /* PHASE 2: Visually show when a negative value causes c to reset to zero */
++  renderNegativeResetVisual(step, currentSubstep) {
++    if (!this.negativeResetVisual) return;
++    const op = step.operationDetail || {};
++    const cond = step.condition;
++    const isResetAssign = step.eventType === "ASSIGN" && op.target === "c" && op.afterVal === "0" && !op.isCreated;
++    const isNegCondition = step.eventType === "CONDITION" && cond && cond.expr === "c < 0" && cond.result;
++
++    if (!isResetAssign && !isNegCondition) {
++      this.negativeResetVisual.classList.add("hidden");
++      this.negativeResetVisual.innerHTML = "";
++      return;
++    }
++
++    this.negativeResetVisual.classList.remove("hidden");
++    const negVal = op.beforeVal || (cond ? cond.leftVal : "-2");
++
++    this.negativeResetVisual.innerHTML = `
++      <div class="neg-warning-header">
++        <span class="neg-warning-icon">⚠️</span>
++        <span>Negative Running Sum Detected (c = ${negVal} < 0)</span>
++      </div>
++      <div class="neg-reset-flow">
++        <span class="neg-discarded-val">c = ${negVal} (Discarded)</span>
++        <span class="neg-discard-arrow">──► Resetting to Zero ──►</span>
++        <span class="zero-reset-box">c = 0 (Fresh Start)</span>
++      </div>
++      <p style="font-size:13px; color:#7f1d1d; margin:0; line-height:1.45;">
++        <strong>Kadane's Reset Rule:</strong> A negative running total would reduce any subsequent continuous subarray sum. We discard the negative sum and reset <code>c</code> to <code>0</code> so the next number starts a clean subarray.
++      </p>
++    `;
++  }
++
++  /* PHASE 2: Show a variable as a labeled box containing its current value */
++  renderVisualVariableBoxes(step, currentSubstep) {
++    if (!this.teachVarsNowBox) return;
++    const vars = step.variables || [];
++    const beforeVarsMap = step.beforeVars || {};
++    const useBeforeVars = Boolean(currentSubstep && currentSubstep.varsBeforeStep);
++    const op = step.operationDetail || {};
++
++    const scalarVars = vars.filter((v) => !Array.isArray(v.rawValue));
++
++    if (!scalarVars.length) {
++      this.teachVarsNowBox.innerHTML = `<span style="color:var(--text-muted); font-size:13.5px;">No local variables created yet</span>`;
++      return;
++    }
++
++    const cardsHTML = scalarVars
++      .filter((v) => {
++        if (useBeforeVars && v.name === op.target && op.isCreated) {
++          return false;
++        }
++        return true;
++      })
++      .map((v) => {
++        const isChanged = !useBeforeVars && (v.status === "created" || v.status === "updated");
++        const prevVal = beforeVarsMap[v.name];
++        const displayVal = useBeforeVars && prevVal !== undefined ? prevVal : v.current;
++        const isNegWarning = v.name === "c" && Number(displayVal) < 0;
++
++        return `
++          <div class="var-box-card ${isChanged ? "is-updated" : ""} ${isNegWarning ? "is-negative-warning" : ""}">
++            <div class="var-box-label">
++              <span>Variable</span>
++              <strong>${this.escapeHTML(v.name)}</strong>
++            </div>
++            <div class="var-box-val-slot">
++              <span class="var-box-value">${this.escapeHTML(displayVal)}</span>
++              ${isChanged && prevVal !== undefined ? `<span class="var-box-prev">(was ${prevVal})</span>` : ""}
++            </div>
++          </div>
++        `;
++      })
++      .join("");
++
++    this.teachVarsNowBox.innerHTML = `<div class="var-boxes-grid">${cardsHTML}</div>`;
++  }
++
+   renderQuickIterationBar() {
+     if (!this.iterationPillsBar) return;
+     this.iterationPillsBar.innerHTML = "";
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

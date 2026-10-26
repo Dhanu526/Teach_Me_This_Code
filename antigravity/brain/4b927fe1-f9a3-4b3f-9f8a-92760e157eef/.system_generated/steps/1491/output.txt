@@ -1,0 +1,17 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\brain\4b927fe1-f9a3-4b3f-9f8a-92760e157eef\scratch\test_phase4.js. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -19,8 +19,10 @@
+     }
+   }
+ 
++  const appBuildDir = path.resolve(__dirname, '..', '..', '..', 'scratch', 'code-flow-visualizer', 'app_build');
++
+   // 1. Verify index.html contains required elements
+-  const htmlContent = fs.readFileSync(path.join(__dirname, 'app_build', 'index.html'), 'utf8');
++  const htmlContent = fs.readFileSync(path.join(appBuildDir, 'index.html'), 'utf8');
+   assert(htmlContent.includes('id="btnToggleQuiz"'), 'index.html contains #btnToggleQuiz in header');
+   assert(htmlContent.includes('id="interactivePredictCard"'), 'index.html contains #interactivePredictCard');
+   assert(htmlContent.includes('id="predictQuestionText"'), 'index.html contains #predictQuestionText');
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

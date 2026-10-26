@@ -1,0 +1,246 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app_build\styles.css. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -1308,240 +1308,6 @@
+   transition: none !important;
+ }
+ 
+-/* =========================================================
+-   PHASE 4: INTERACTIVE LEARNING & PREDICTION QUIZ CARD
+-   ========================================================= */
+-#btnToggleQuiz.active {
+-  background: #ede9fe;
+-  border-color: #8b5cf6;
+-  color: #5b21b6;
+-  font-weight: 700;
+-}
+-
+-.predict-quiz-card {
+-  background: #fbf9ff;
+-  border: 1.5px solid #c4b5fd;
+-  border-radius: var(--radius-md);
+-  padding: 14px 16px;
+-  display: flex;
+-  flex-direction: column;
+-  gap: 12px;
+-  box-shadow: 0 2px 10px rgba(139, 92, 246, 0.08);
+-  animation: slideDownFade 0.35s ease;
+-}
+-
+-.quiz-header-row {
+-  display: flex;
+-  align-items: center;
+-  justify-content: space-between;
+-}
+-
+-.quiz-badge {
+-  font-size: 11.5px;
+-  font-weight: 800;
+-  text-transform: uppercase;
+-  letter-spacing: 0.5px;
+-  color: #6d28d9;
+-  background: #ede9fe;
+-  border: 1px solid #ddd6fe;
+-  padding: 2px 9px;
+-  border-radius: 999px;
+-  display: inline-flex;
+-  align-items: center;
+-  gap: 5px;
+-}
+-
+-.quiz-score-pill {
+-  font-family: var(--font-mono);
+-  font-size: 12px;
+-  font-weight: 700;
+-  color: #4c1d95;
+-  background: #ede9fe;
+-  padding: 2px 10px;
+-  border-radius: 999px;
+-  border: 1px solid #c4b5fd;
+-}
+-
+-.quiz-question-title {
+-  font-size: 16px;
+-  font-weight: 700;
+-  color: #2e1065;
+-  line-height: 1.4;
+-  margin: 0;
+-}
+-
+-.quiz-hint-text {
+-  font-size: 13.5px;
+-  color: #5b21b6;
+-  background: #f3e8ff;
+-  border-left: 3px solid #a855f7;
+-  padding: 6px 10px;
+-  border-radius: 4px;
+-  margin: 0;
+-}
+-
+-.quiz-hint-text code {
+-  font-family: var(--font-mono);
+-  font-size: 13px;
+-  background: #ede9fe;
+-  padding: 1px 5px;
+-  border-radius: 4px;
+-  color: #4c1d95;
+-  font-weight: 700;
+-}
+-
+-.quiz-options-grid {
+-  display: flex;
+-  flex-wrap: wrap;
+-  gap: 10px;
+-  align-items: stretch;
+-}
+-
+-.quiz-option-btn {
+-  flex: 1 1 calc(50% - 10px);
+-  min-width: 140px;
+-  background: #ffffff;
+-  border: 1.5px solid #ddd6fe;
+-  color: #1e1b4b;
+-  font-family: var(--font-mono);
+-  font-size: 14.5px;
+-  font-weight: 600;
+-  padding: 10px 14px;
+-  border-radius: 8px;
+-  cursor: pointer;
+-  text-align: left;
+-  transition: all 0.15s ease;
+-  display: flex;
+-  align-items: center;
+-  justify-content: space-between;
+-  gap: 8px;
+-}
+-
+-.quiz-option-btn:hover:not(:disabled) {
+-  background: #f5f3ff;
+-  border-color: #8b5cf6;
+-  transform: translateY(-1px);
+-  box-shadow: 0 3px 8px rgba(139, 92, 246, 0.15);
+-}
+-
+-.quiz-option-btn:disabled {
+-  cursor: default;
+-}
+-
+-.quiz-option-btn.is-correct {
+-  background: #ecfdf5 !important;
+-  border: 2px solid #10b981 !important;
+-  color: #065f46 !important;
+-  font-weight: 800 !important;
+-  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+-}
+-
+-.quiz-option-btn.is-wrong {
+-  background: #fff1f2 !important;
+-  border: 2px solid #f43f5e !important;
+-  color: #9f1239 !important;
+-  font-weight: 700 !important;
+-  opacity: 0.85;
+-}
+-
+-.quiz-option-btn.is-revealed-correct {
+-  background: #ecfdf5 !important;
+-  border: 2px dashed #10b981 !important;
+-  color: #065f46 !important;
+-  font-weight: 700 !important;
+-}
+-
+-.quiz-option-tag {
+-  font-family: var(--font-sans);
+-  font-size: 11px;
+-  font-weight: 800;
+-  padding: 2px 7px;
+-  border-radius: 999px;
+-  white-space: nowrap;
+-}
+-
+-.quiz-option-tag.tag-correct {
+-  background: #10b981;
+-  color: #ffffff;
+-}
+-
+-.quiz-option-tag.tag-wrong {
+-  background: #f43f5e;
+-  color: #ffffff;
+-}
+-
+-.quiz-explanation-box {
+-  background: #ffffff;
+-  border: 1px solid #ddd6fe;
+-  border-left: 4px solid #8b5cf6;
+-  border-radius: 6px;
+-  padding: 10px 14px;
+-  font-size: 14px;
+-  color: #1e1b4b;
+-  line-height: 1.5;
+-  animation: popIn 0.35s ease;
+-}
+-
+-.quiz-explanation-box strong {
+-  color: #5b21b6;
+-}
+-
+-.quiz-explanation-box code {
+-  font-family: var(--font-mono);
+-  font-size: 13px;
+-  background: #f5f3ff;
+-  padding: 2px 6px;
+-  border-radius: 4px;
+-  color: #4338ca;
+-  font-weight: 700;
+-}
+-
+-.quiz-actions-row {
+-  display: flex;
+-  align-items: center;
+-  justify-content: space-between;
+-  gap: 10px;
+-  margin-top: 4px;
+-}
+-
+-.btn-quiz-continue {
+-  background: #7c3aed;
+-  color: #ffffff;
+-  border: none;
+-  font-family: var(--font-sans);
+-  font-size: 13.5px;
+-  font-weight: 700;
+-  padding: 7px 16px;
+-  border-radius: 6px;
+-  cursor: pointer;
+-  display: inline-flex;
+-  align-items: center;
+-  gap: 6px;
+-  transition: all 0.15s ease;
+-}
+-
+-.btn-quiz-continue:hover {
+-  background: #6d28d9;
+-  box-shadow: 0 3px 8px rgba(124, 58, 237, 0.3);
+-}
+-
+-.btn-quiz-skip {
+-  background: transparent;
+-  border: none;
+-  color: #6b7280;
+-  font-size: 12.5px;
+-  font-weight: 600;
+-  cursor: pointer;
+-  padding: 4px 8px;
+-  border-radius: 4px;
+-  transition: color 0.12s ease;
+-}
+-
+-.btn-quiz-skip:hover {
+-  color: #374151;
+-  text-decoration: underline;
+-}
+-
+ .teach-next-box {
+   background: var(--bg-subtle);
+   padding: 11px 15px;
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

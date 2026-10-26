@@ -1,0 +1,21 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app_build\app.js. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -226,7 +226,14 @@
+         chip.addEventListener("click", () => {
+           chips.forEach((c) => c.classList.remove("active"));
+           chip.classList.add("active");
+-          this.inputCode = chip.getAttribute("data-input") || "";
++          const chipInput = chip.getAttribute("data-input") || "";
++          this.inputCode = chipInput;
++          if (/^\s*nums\s*=\s*\[[^\]]*\]/m.test(this.sourceCode)) {
++            this.sourceCode = this.sourceCode.replace(/^\s*nums\s*=\s*\[[^\]]*\]/m, chipInput);
++            if (this.codeTextarea) {
++              this.codeTextarea.value = this.sourceCode;
++            }
++          }
+           this.stopAutoPlay();
+           this.analyzeAndRun();
+         });
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

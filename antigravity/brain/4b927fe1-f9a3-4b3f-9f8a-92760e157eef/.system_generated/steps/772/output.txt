@@ -1,0 +1,60 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app_build\app.js. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -32,6 +32,15 @@
+     this.showGCObjects = false;
+     this.animationsEnabled = true;
+ 
++    // Phase 5: Speed Modes & Reduced Motion Accessibility
++    this.speedModes = [
++      { label: "1x", ms: 1200, animFactor: 1 },
++      { label: "1.5x", ms: 750, animFactor: 0.65 },
++      { label: "2x", ms: 450, animFactor: 0.4 },
++      { label: "0.5x", ms: 2200, animFactor: 1.8 }
++    ];
++    this.currentSpeedIdx = 0;
++
+     this.isPlaying = false;
+     this.playInterval = null;
+     this.playSpeedMs = 1200;
+@@ -38,6 +38,7 @@
+     this.showAdvanced = false;
+ 
+     this.initDOM();
++    this.initAccessibility();
+     this.bindEvents();
+     this.codeTextarea.value = this.sourceCode;
+     this.analyzeAndRun();
+@@ -44,4 +44,16 @@
+ 
++  initAccessibility() {
++    // Phase 5: Auto-detect OS reduced motion preference
++    if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
++      this.animationsEnabled = false;
++      document.body.classList.add("no-animations");
++      if (this.btnToggleAnim) {
++        this.btnToggleAnim.textContent = "⚡ Reduced Motion: ON";
++        this.btnToggleAnim.classList.remove("active");
++      }
++    }
++  }
++
+   initDOM() {
+     // Simple Navigation Controls
+     this.stepProgressLabel = document.getElementById("stepProgressLabel");
+@@ -53,6 +53,7 @@
+ 
+     // Top Secondary Controls
+     this.btnToggleAnim = document.getElementById("btnToggleAnim");
++    this.btnSpeed = document.getElementById("btnSpeed");
+     this.btnEditCode = document.getElementById("btnEditCode");
+     this.btnAnalyzeCode = document.getElementById("btnAnalyzeCode");
+     this.btnToggleIterations = document.getElementById("btnToggleIterations");
+@@ -59,4 +59,5 @@
+     this.advancedViewPanel = document.getElementById("advancedViewPanel");
++    this.testInputChips = document.getElementById("testInputChips");
+ 
+     // Validation & Overview
+     this.validationBanner = document.getElementById("validationBanner");
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

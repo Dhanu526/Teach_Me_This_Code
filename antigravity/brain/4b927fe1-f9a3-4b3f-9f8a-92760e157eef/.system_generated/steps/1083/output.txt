@@ -1,0 +1,37 @@
+
+The command exited with code 0.
+Output:
+
+app_build\engine.js:27:        return ans`
+app_build\engine.js:43:            return self.items.pop()
+app_build\engine.js:44:        return None
+app_build\engine.js:48:            return self.items[-1]
+app_build\engine.js:49:        return None
+app_build\engine.js:52:        return len(self.items) == 0
+app_build\engine.js:55:        return len(self.items)
+app_build\engine.js:81:            return mid
+app_build\engine.js:87:    return -1`
+app_build\engine.js:96:        return 1
+app_build\engine.js:98:    return k * sub
+app_build\engine.js:106:  return Boolean(val && typeof val === "object" && !Array.isArray(val) && val.__class__);
+app_build\engine.js:148:      return addr;
+app_build\engine.js:170:      return addr;
+app_build\engine.js:189:    return addr;
+app_build\engine.js:244:    return {
+app_build\engine.js:260:      return {
+app_build\engine.js:284:          return {
+app_build\engine.js:300:        return {
+app_build\engine.js:309:      return {
+app_build\engine.js:316:    return { ok: true, line: null, message: null };
+app_build\engine.js:321:    if (!inputCode || !inputCode.trim()) return inputVars;
+app_build\engine.js:339:    return inputVars;
+app_build\engine.js:365:    return res;
+app_build\engine.js:373:      return {
+app_build\engine.js:415:      return {
+app_build\engine.js:449:    let finalReturnVal = null;
+app_build\engine.js:453:      if (suiteRes && suiteRes.returned) {
+app_build\engine.js:454:        finalReturnVal = suiteRes.value;
+app_build\engine.js:503:          if (callRes && callRes.returned) {
+
+
+

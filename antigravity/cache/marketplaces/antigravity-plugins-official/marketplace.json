@@ -43,7 +43,7 @@
     {
       "name": "gcalendar",
       "displayName": "Google Calendar",
-      "version": "0.0.5",
+      "version": "0.0.6",
       "description": "Check availability, schedule events, and RSVP.",
       "logo": "https://www.gstatic.com/images/branding/productlogos/calendar_2026/v2/web/192px.svg",
       "suggestedPrompts": [
@@ -53,14 +53,14 @@
       ],
       "source": {
         "type": "archive",
-        "url": "https://www.gstatic.com/antigravity/plugins/gcalendar/gcalendar.zip?v=f048227f0963",
-        "sha256": "f048227f096302e199b297ea50cce5560304df449079372540c17e99923bbb3f"
+        "url": "https://www.gstatic.com/antigravity/plugins/gcalendar/gcalendar.zip?v=8aa08b2c1b7d",
+        "sha256": "8aa08b2c1b7dd9e227fe895d10ba62835c0b1a7b9d4d2b89afa75154d13db2f8"
       }
     },
     {
       "name": "gdocs",
       "displayName": "Google Docs",
-      "version": "0.0.6",
+      "version": "0.0.7",
       "description": "Read, draft, and edit docs.",
       "logo": "https://www.gstatic.com/images/branding/productlogos/docs_2026/v2/web/192px.svg",
       "suggestedPrompts": [
@@ -70,14 +70,15 @@
       ],
       "source": {
         "type": "archive",
-        "url": "https://www.gstatic.com/antigravity/plugins/gdocs/gdocs.zip?v=c7686a323a29",
-        "sha256": "c7686a323a29c2911a7f21167bf5c56c30b945af594ff8ab55eaf64940075b85"
+        "url": "https://www.gstatic.com/antigravity/plugins/gdocs/gdocs.zip?v=7b795f98249b",
+        "sha256": "7b795f98249bd98cab2633f4fe08fa6171e35d6d32bfcbd1f6b5fbc410c954f8"
       }
     },
     {
+      "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
       "name": "gdrive",
       "displayName": "Google Drive",
-      "version": "0.0.5",
+      "version": "0.0.7",
       "description": "Search, upload, download, and share files.",
       "logo": "https://www.gstatic.com/images/branding/productlogos/drive_2026/v2/web/192px.svg",
       "suggestedPrompts": [
@@ -85,16 +86,40 @@
         "Move this week's design exports into the Launch folder",
         "Download the Q3 report as a PDF"
       ],
+      "extensions": {
+        "com.google.antigravity": {
+          "contextProviders": {
+            "drive": {
+              "trigger": "drive",
+              "label": "Google Drive",
+              "iconUri": "https://www.gstatic.com/images/branding/productlogos/drive_2026/v2/web/192px.svg",
+              "command": [
+                "${PLUGIN_ROOT}/skills/gdrive/scripts/gdrive",
+                "context-provider"
+              ],
+              "debounceMs": 300,
+              "options": [
+                "multi-word"
+              ],
+              "uriPatterns": [
+                "^https://docs\\.google\\.com/(?:corp/)?(?:a/[^/#?]+/)?(?:u/\\d+/)?(?:document|spreadsheets|presentation|forms|drawings|open|uc)(?:[/?#]|$)",
+                "^https://drive\\.google\\.com(?:[/?#]|$)",
+                "^https://(?:colab\\.research\\.google\\.com|colab\\.corp\\.google\\.com)/(?:corp/)?(?:a/[^/#?]+/)?(?:u/\\d+/)?drive/[a-zA-Z0-9_-]+(?:[/?#]|$)"
+              ]
+            }
+          }
+        }
+      },
       "source": {
         "type": "archive",
-        "url": "https://www.gstatic.com/antigravity/plugins/gdrive/gdrive.zip?v=c5b74fe624c0",
-        "sha256": "c5b74fe624c09c3aa1e540f20ab58590c86cc07ef41e3665c7a950d4f1196a9d"
+        "url": "https://www.gstatic.com/antigravity/plugins/gdrive/gdrive.zip?v=fe3f498c8a76",
+        "sha256": "fe3f498c8a768a41f089e5e168f3d269826dd6434611e85f981311d2c34868c0"
       }
     },
     {
       "name": "gsheets",
       "displayName": "Google Sheets",
-      "version": "0.0.5",
+      "version": "0.0.6",
       "description": "Read, write, and format spreadsheets.",
       "logo": "https://www.gstatic.com/images/branding/productlogos/sheets_2026/v2/web/192px.svg",
       "suggestedPrompts": [
@@ -104,14 +129,14 @@
       ],
       "source": {
         "type": "archive",
-        "url": "https://www.gstatic.com/antigravity/plugins/gsheets/gsheets.zip?v=e96c80396695",
-        "sha256": "e96c80396695412c69ccaa29457d0c126f3824a3fe5b885ddf0a12af8c29b7de"
+        "url": "https://www.gstatic.com/antigravity/plugins/gsheets/gsheets.zip?v=659e1c9a663e",
+        "sha256": "659e1c9a663e1eab9ec26474c3ea2777f8c69d9c740227697b3f1fc3aff2ab4f"
       }
     },
     {
       "name": "gslides",
       "displayName": "Google Slides",
-      "version": "0.0.5",
+      "version": "0.0.6",
       "description": "Read, edit, and export presentations.",
       "logo": "https://www.gstatic.com/images/branding/productlogos/slides_2026/v2/web/192px.svg",
       "suggestedPrompts": [
@@ -121,8 +146,8 @@
       ],
       "source": {
         "type": "archive",
-        "url": "https://www.gstatic.com/antigravity/plugins/gslides/gslides.zip?v=90c4fb1a1130",
-        "sha256": "90c4fb1a1130b546f912adc5f90e9658dff43e89c7886250ee9b2a6c0455cae9"
+        "url": "https://www.gstatic.com/antigravity/plugins/gslides/gslides.zip?v=41b6b3916803",
+        "sha256": "41b6b391680317ed5442e4fba573d3e28a505bbdd13adca07c5cf8b4cfb43589"
       }
     },
     {
@@ -159,7 +184,7 @@
     {
       "name": "chrome-devtools-plugin",
       "displayName": "Chrome DevTools",
-      "version": "0.21.0",
+      "version": "1.10.1",
       "description": "Reliable automation, in-depth debugging, and performance analysis in Chrome using Chrome DevTools and Puppeteer",
       "logo": "https://www.gstatic.com/images/branding/productlogos/chrome/v7/192px.svg",
       "author": {
@@ -180,8 +205,8 @@
       ],
       "source": {
         "type": "archive",
-        "url": "https://www.gstatic.com/antigravity/plugins/chrome-devtools-plugin/chrome-devtools-plugin.zip?v=382b586e1721",
-        "sha256": "382b586e172147ba49412d193e69616b2194b0b0fb40cb39177099266fd9d09c"
+        "url": "https://www.gstatic.com/antigravity/plugins/chrome-devtools-plugin/chrome-devtools-plugin.zip?v=562716fee105",
+        "sha256": "562716fee105e411533e2ef4134714a2eb30a7f8adf5907a2aca7e1c5b0c5ec9"
       }
     },
     {
@@ -302,13 +327,13 @@
     {
       "name": "science",
       "displayName": "Science",
-      "version": "1.3.0",
+      "version": "1.3.1",
       "description": "Curated collection of agent skills for science tasks.",
       "logo": "https://www.gstatic.com/antigravity/buildWithGoogle/science/logo.svg",
       "source": {
         "type": "archive",
-        "url": "https://www.gstatic.com/antigravity/plugins/science/science.zip?v=724f04e604da",
-        "sha256": "724f04e604da0353bd460d7a44ee0e0f7e2cb4f74d5cc6219d921929b379f94c"
+        "url": "https://www.gstatic.com/antigravity/plugins/science/science.zip?v=bf08c0d1f397",
+        "sha256": "bf08c0d1f39729fc4405951f577af4f2d2e2a726a495963c4eb81ff211570c5e"
       }
     },
     {
@@ -348,7 +373,7 @@
       "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
       "name": "google-cloud-developer",
       "displayName": "Google Cloud Developer",
-      "version": "1.1.10",
+      "version": "1.1.13",
       "description": "Google Cloud guidance for coding agents: first-project onboarding, authentication and credential selection, and safety-critical validation for gcloud CLI commands. Includes the Google Developer Knowledge MCP server for grounded, up-to-date Google Cloud documentation.",
       "logo": "https://www.gstatic.com/antigravity/plugins/google-cloud-developer/assets/logo.svg?v=a32f73299138",
       "author": {
@@ -371,8 +396,8 @@
       ],
       "source": {
         "type": "archive",
-        "url": "https://www.gstatic.com/antigravity/plugins/google-cloud-developer/google-cloud-developer.zip?v=b5aae22bba2b",
-        "sha256": "b5aae22bba2bd6f83cf3d134cd2f7324988f9f3ae5686a7508a4083c83349af0"
+        "url": "https://www.gstatic.com/antigravity/plugins/google-cloud-developer/google-cloud-developer.zip?v=22dc45da5fc7",
+        "sha256": "22dc45da5fc779329922f668d90b8b693615e8e202929536a4fbd288d5daf813"
       }
     },
     {
@@ -400,17 +425,17 @@
         "chrome-extensions",
         "best-practices"
       ],
-      "version": "0.0.194",
+      "version": "0.0.195",
       "source": {
         "type": "archive",
-        "url": "https://www.gstatic.com/antigravity/plugins/modern-web-guidance-plugin/modern-web-guidance-plugin.zip?v=b0fd6a36d805",
-        "sha256": "b0fd6a36d805c5cd3ac3e30c3128fc28dc9d722f3d671c22d67ed03cb1dacd17"
+        "url": "https://www.gstatic.com/antigravity/plugins/modern-web-guidance-plugin/modern-web-guidance-plugin.zip?v=c67f35a16cca",
+        "sha256": "c67f35a16ccacc4c0f4d5d1ba5344fa93f45cfac5444c79c5ad5088f8c7e70de"
       }
     },
     {
       "name": "flutter",
       "displayName": "Dart and Flutter",
-      "version": "1.0.5",
+      "version": "1.0.6",
       "description": "Official plugin for Dart and Flutter that installs Flutter/Dart Skills, Rules, Custom Agents, and Dart MCP server for building natively compiled, visually stunning applications for mobile, web, desktop, and embedded devices from a single codebase",
       "logo": "https://www.gstatic.com/images/branding/productlogos/flutter/v6/192px.svg",
       "suggestedPrompts": [
@@ -437,8 +462,8 @@
       "license": "BSD-3-Clause",
       "source": {
         "type": "archive",
-        "url": "https://www.gstatic.com/antigravity/plugins/flutter/flutter.zip?v=96d23acb8317",
-        "sha256": "96d23acb83176e1dbc6c6302ab2b52fd7c1749bcb84295ed127c8042153f6f7d"
+        "url": "https://www.gstatic.com/antigravity/plugins/flutter/flutter.zip?v=405234c23fed",
+        "sha256": "405234c23fedc7bc752458e30e774abb074bcc433099e161d9551fe52bd11003"
       }
     }
   ]

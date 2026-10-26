@@ -1,0 +1,14 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\brain\4b927fe1-f9a3-4b3f-9f8a-92760e157eef\scratch\test_phase5.js. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -60,7 +60,7 @@
+   assert(css.includes('prefers-reduced-motion'), "Reduced motion media query present");
+   assert(css.includes('.interactive-predict-card'), "Prediction card CSS present");
+   assert(css.includes('.var-box-card'), "Variable boxes CSS present");
+-  assert(css.includes('@media (max-width: 900px)'), "Mobile responsive CSS present");
++  assert(css.includes('@media (max-width: 768px)'), "Mobile responsive CSS present");
+ 
+   // --- 2. Execution Engine & Explainer Trace Tests ---
+   console.log("\n[2] Execution Engine & Explainer Verification across 5 Test Inputs:");
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.
