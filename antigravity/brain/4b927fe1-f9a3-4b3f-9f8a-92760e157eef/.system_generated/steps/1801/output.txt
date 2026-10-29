@@ -1,0 +1,15 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\brain\4b927fe1-f9a3-4b3f-9f8a-92760e157eef\scratch\generate_final.py. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -2,7 +2,8 @@
+ import json
+ import os
+ 
+-with open("scratch/problems_part4.json") as f:
++DIR = os.path.dirname(os.path.abspath(__file__))
++with open(os.path.join(DIR, "problems_part4.json"), "r", encoding="utf-8") as f:
+     problems = json.load(f)
+ 
+ def add(lc_num, title, diff, topic, pattern, desc, code, time_c="O(n)", space_c="O(1)"):
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

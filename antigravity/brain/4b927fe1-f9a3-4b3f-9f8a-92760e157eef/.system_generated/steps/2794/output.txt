@@ -1,0 +1,51 @@
+
+The command exited with code 0.
+Output:
+diff --git a/antigravity/scratch/code-flow-visualizer/app_build/index.html b/antigravity/scratch/code-flow-visualizer/app_build/index.html
+index b25c283..ba7416a 100644
+--- a/antigravity/scratch/code-flow-visualizer/app_build/index.html
++++ b/antigravity/scratch/code-flow-visualizer/app_build/index.html
+@@ -17,6 +17,10 @@
+     <div class="top-bar-primary">
+       <div class="brand-area">
+         <span class="teacher-badge">Teach Me This Code</span>
++        <div class="nav-view-switcher" role="tablist" aria-label="Main Navigation">
++          <button id="btnViewVisualizer" class="nav-tab-btn active" role="tab" aria-selected="true" title="Interactive Step-by-Step Execution Visualizer">👁️ Code Visualizer</button>
++          <button id="btnViewDsa" class="nav-tab-btn" role="tab" aria-selected="false" title="DSA Learning Dashboard & 300 Curated Problems">📚 DSA Learning</button>
++        </div>
+         <span id="stepProgressLabel" class="step-progress-label">Step 1 of 50</span>
+         <span id="activeScopeBadge" class="scope-pill scope-global">GLOBAL SCOPE</span>
+       </div>
+@@ -43,8 +47,13 @@
+     </div>
+   </header>
+ 
+-  <!-- Error / Validation Banner (Hidden unless there is an error) -->
+-  <div id="validationBanner" class="validation-banner hidden"></div>
++  <!-- Container for Code Visualizer View -->
++  <div id="visualizerViewContainer" class="visualizer-view-container">
++    <!-- Active DSA Problem Banner (shown when practicing a problem from DSA library) -->
++    <div id="dsaProblemActiveBanner" class="dsa-active-banner hidden"></div>
++
++    <!-- Error / Validation Banner (Hidden unless there is an error) -->
++    <div id="validationBanner" class="validation-banner hidden"></div>
+ 
+   <!-- Dynamic Overview Banner -->
+   <div class="overview-strip">
+@@ -330,7 +339,15 @@
+       </div>
+     </div>
+   </section>
++  </div>
++  <!-- End of visualizerViewContainer -->
++
++  <!-- Main Container for DSA Learning View -->
++  <main id="dsaLearningContainer" class="dsa-learning-container hidden" aria-label="DSA Learning Academy"></main>
+ 
++  <script src="dsa_problems.js"></script>
++  <script src="dsa_solutions_data.js"></script>
++  <script src="dsa_dashboard.js"></script>
+   <script src="engine.js"></script>
+   <script src="explainer.js"></script>
+   <script src="app.js"></script>
+

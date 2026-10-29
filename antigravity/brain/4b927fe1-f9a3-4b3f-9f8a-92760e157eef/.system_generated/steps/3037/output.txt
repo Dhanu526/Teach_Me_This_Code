@@ -1,0 +1,12 @@
+
+The command exited with code 0.
+Output:
+
+app_build\styles.css:345:  max-width: 1680px;
+app_build\styles.css:2432:@media (max-width: 1180px) {
+app_build\styles.css:3223:  max-width: 1440px;
+app_build\styles.css:5525:  max-width: 1440px;
+app_build\styles.css:5717:@media (max-width: 1024px) {
+
+
+

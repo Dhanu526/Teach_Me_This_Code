@@ -1,0 +1,6 @@
+
+The command exited with code 0.
+Output:
+572 in catalog? True
+Subtree of Another Tree in catalog? True
+

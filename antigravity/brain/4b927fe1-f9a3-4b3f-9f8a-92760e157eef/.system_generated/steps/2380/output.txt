@@ -1,0 +1,52 @@
+
+The command exited with code 0.
+Output:
+Good Code Results: {
+  total: 3,
+  passed: 3,
+  results: [
+    {
+      testIndex: 1,
+      passed: true,
+      actualOutput: '[0, 1]',
+      expectedOutput: '[0, 1]'
+    },
+    {
+      testIndex: 2,
+      passed: true,
+      actualOutput: '[1, 2]',
+      expectedOutput: '[1, 2]'
+    },
+    {
+      testIndex: 3,
+      passed: true,
+      actualOutput: '[0, 1]',
+      expectedOutput: '[0, 1]'
+    }
+  ]
+}
+Flawed Code Results: {
+  total: 3,
+  passed: 0,
+  results: [
+    {
+      testIndex: 1,
+      passed: false,
+      actualOutput: '[0, 0]',
+      expectedOutput: '[0, 1]'
+    },
+    {
+      testIndex: 2,
+      passed: false,
+      actualOutput: '[0, 0]',
+      expectedOutput: '[1, 2]'
+    },
+    {
+      testIndex: 3,
+      passed: false,
+      actualOutput: '[0, 0]',
+      expectedOutput: '[0, 1]'
+    }
+  ]
+}
+

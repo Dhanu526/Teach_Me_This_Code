@@ -1,0 +1,28 @@
+
+The command exited with code 0.
+Output:
+
+> styles.css:5524:.workspace-wrapper {
+  styles.css:5525:  max-width: 1440px;
+  styles.css:5526:  margin: 0 auto;
+  styles.css:5527:  padding: 0 4px 32px;
+  styles.css:5528:}
+  styles.css:5529:
+  styles.css:5530:.workspace-top-bar {
+  styles.css:5531:  display: flex;
+  styles.css:5532:  justify-content: space-between;
+  styles.css:5533:  align-items: center;
+  styles.css:5534:  flex-wrap: wrap;
+  styles.css:5535:  gap: 12px;
+  styles.css:5536:  margin-bottom: 14px;
+  styles.css:5537:}
+  styles.css:5538:
+  styles.css:5539:.workspace-nav-left {
+  styles.css:5540:  display: flex;
+  styles.css:5541:  align-items: center;
+  styles.css:5542:  gap: 10px;
+  styles.css:5543:  flex-wrap: wrap;
+  styles.css:5544:}
+
+
+

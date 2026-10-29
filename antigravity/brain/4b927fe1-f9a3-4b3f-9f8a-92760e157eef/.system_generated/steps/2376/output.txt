@@ -1,0 +1,28 @@
+
+The command exited with code 0.
+Output:
+lastStep keys: [
+  'stepIndex',      'line',
+  'nextLine',       'codeText',
+  'eventType',      'functionName',
+  'scopeType',      'beforeVars',
+  'variables',      'changedVars',
+  'changedSummary', 'condition',
+  'loop',           'operationDetail',
+  'exprFrames',     'scopeFrames',
+  'memoryModel',    'returnValue',
+  'stdout'
+]
+variables: [
+  {
+    name: 'test_res',
+    address: '@0x2080',
+    previous: '[0, 1]',
+    current: '[0, 1]',
+    rawValue: [ 0, 1 ],
+    rawObj: [ 0, 1 ],
+    type: 'list',
+    status: 'unchanged'
+  }
+]
+

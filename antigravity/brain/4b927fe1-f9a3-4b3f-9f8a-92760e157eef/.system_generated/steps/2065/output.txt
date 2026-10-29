@@ -1,0 +1,8 @@
+
+The command exited with code 1.
+Output:
+  File "<string>", line 5
+    print(f'{term}: {" FOUND\
+                     ^
+SyntaxError: unterminated string literal (detected at line 5)
+

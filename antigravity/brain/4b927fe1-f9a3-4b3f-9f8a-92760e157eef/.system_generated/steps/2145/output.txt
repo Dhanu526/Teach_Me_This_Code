@@ -1,0 +1,8 @@
+
+The command exited with code 1.
+Output:
+  File "<string>", line 6
+    print(num, 'in catalog?', f'" leetcodeNumber\:
+                              ^
+SyntaxError: unterminated f-string literal (detected at line 6)
+

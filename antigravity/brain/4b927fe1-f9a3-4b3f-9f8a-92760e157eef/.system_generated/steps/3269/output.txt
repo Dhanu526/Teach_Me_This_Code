@@ -1,0 +1,241 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app_build\styles.css. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -1205,7 +1205,7 @@
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+-  font-size: 11.5px;
++  font-size: 13px;
+   font-weight: 700;
+   text-transform: uppercase;
+   letter-spacing: 0.4px;
+@@ -1216,8 +1216,8 @@
+   align-items: center;
+   justify-content: center;
+   flex-wrap: wrap;
+-  gap: 6px;
+-  padding: 5px 10px;
++  gap: 8px;
++  padding: 6px 12px;
+   background: #ffffff;
+   border: 1px solid #e0f2fe;
+   border-radius: var(--radius-sm);
+@@ -1226,16 +1226,16 @@
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+-  gap: 1px;
+-  font-family: var(--font-mono);
+-  background: #f8fafc;
+-  border: 1.5px solid var(--border-medium);
+-  padding: 3px 8px;
+-  border-radius: 5px;
++  gap: 2px;
++  font-family: var(--font-mono);
++  background: #f8fafc;
++  border: 1.5px solid var(--border-medium);
++  padding: 4px 10px;
++  border-radius: 6px;
+ }
+ 
+ .cond-val-name {
+-  font-size: 10px;
++  font-size: 11.5px;
+   color: var(--text-muted);
+   font-weight: 600;
+ }
+@@ -1242,5 +1242,5 @@
+ .cond-val-num {
+-  font-size: 14.5px;
++  font-size: 18.5px;
+   font-weight: 800;
+   color: var(--text-main);
+ }
+@@ -1247,10 +1247,10 @@
+ .cond-op-badge {
+   font-family: var(--font-mono);
+-  font-size: 14px;
+-  font-weight: 900;
+-  color: #0284c7;
+-  background: #e0f2fe;
+-  padding: 3px 8px;
++  font-size: 17px;
++  font-weight: 900;
++  color: #0284c7;
++  background: #e0f2fe;
++  padding: 3px 10px;
+   border-radius: 999px;
+   border: 1px solid #7dd3fc;
+ }
+@@ -1257,12 +1257,12 @@
+ .decision-badge {
+   font-family: var(--font-sans);
+-  font-size: 11.5px;
+-  font-weight: 800;
+-  padding: 2px 9px;
+-  border-radius: 999px;
+-  display: inline-flex;
+-  align-items: center;
+-  gap: 4px;
++  font-size: 13.5px;
++  font-weight: 800;
++  padding: 3px 12px;
++  border-radius: 999px;
++  display: inline-flex;
++  align-items: center;
++  gap: 5px;
+   letter-spacing: 0.3px;
+   animation: decisionSpring calc(0.45s * var(--anim-speed-factor, 1)) cubic-bezier(0.175, 0.885, 0.32, 1.275);
+ }
+@@ -1290,7 +1290,7 @@
+ .branch-decision-wrap {
+   display: grid;
+   grid-template-columns: 1fr 1fr;
+-  gap: 8px;
++  gap: 10px;
+ }
+ 
+ .branch-option {
+@@ -1297,9 +1297,9 @@
+-  border-radius: 7px;
+-  padding: 5px 9px;
+-  background: #ffffff;
+-  display: flex;
+-  flex-direction: column;
+-  gap: 2px;
++  border-radius: 8px;
++  padding: 6px 11px;
++  background: #ffffff;
++  display: flex;
++  flex-direction: column;
++  gap: 3px;
+   transition: all 0.2s ease;
+ }
+ 
+@@ -1306,8 +1306,8 @@
+-  font-size: 10px;
+-  font-weight: 800;
+-  text-transform: uppercase;
+-  letter-spacing: 0.3px;
+-  padding: 1px 6px;
++  font-size: 11.5px;
++  font-weight: 800;
++  text-transform: uppercase;
++  letter-spacing: 0.3px;
++  padding: 2px 8px;
+   border-radius: 999px;
+   align-self: flex-start;
+ }
+@@ -1314,6 +1314,6 @@
+ .branch-option code {
+   font-family: var(--font-mono);
+-  font-size: 12.5px;
++  font-size: 14.5px;
+   font-weight: 700;
+ }
+ 
+@@ -1367,10 +1367,10 @@
+   background: #f8fafc;
+   border: 1.5px solid #cbd5e1;
+   border-radius: var(--radius-md);
+-  padding: 8px 10px;
+-  display: flex;
+-  flex-direction: column;
+-  gap: 6px;
++  padding: 10px 12px;
++  display: flex;
++  flex-direction: column;
++  gap: 8px;
+ }
+ 
+ .loop-strip-header {
+@@ -1377,6 +1377,6 @@
+   justify-content: space-between;
+   align-items: center;
+-  font-size: 11.5px;
++  font-size: 13px;
+   font-weight: 700;
+   color: var(--text-secondary);
+   text-transform: uppercase;
+@@ -1384,12 +1384,12 @@
+ 
+ .loop-current-info-pill {
+   font-family: var(--font-mono);
+-  font-size: 11px;
+-  font-weight: 700;
+-  color: #1e40af;
+-  background: #dbeafe;
+-  border: 1px solid #93c5fd;
+-  padding: 1px 8px;
++  font-size: 12.5px;
++  font-weight: 700;
++  color: #1e40af;
++  background: #dbeafe;
++  border: 1px solid #93c5fd;
++  padding: 2px 10px;
+   border-radius: 999px;
+ }
+ 
+@@ -1396,8 +1396,8 @@
+   display: flex;
+   align-items: flex-start;
+-  gap: 4px;
+-  overflow-x: auto;
+-  padding: 2px 2px 6px 2px;
++  gap: 6px;
++  overflow-x: auto;
++  padding: 4px 2px 8px 2px;
+   -webkit-overflow-scrolling: touch;
+ }
+ 
+@@ -1404,8 +1404,8 @@
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+-  gap: 2px;
+-  min-width: 36px;
++  gap: 3px;
++  min-width: 44px;
+ }
+ 
+ .loop-track-cell {
+@@ -1412,7 +1412,7 @@
+   background: #ffffff;
+-  border-radius: 5px;
+-  width: 100%;
+-  padding: 4px 2px;
++  border-radius: 6px;
++  width: 100%;
++  padding: 5px 3px;
+   text-align: center;
+   font-family: var(--font-mono);
+   transition: all 0.2s ease;
+@@ -1419,7 +1419,7 @@
+ 
+ .loop-track-idx {
+   display: block;
+-  font-size: 9.5px;
++  font-size: 11px;
+   color: var(--text-muted);
+   font-weight: 600;
+ }
+@@ -1426,6 +1426,6 @@
+ .loop-track-val {
+   display: block;
+-  font-size: 12.5px;
++  font-size: 16.5px;
+   font-weight: 700;
+   color: var(--text-main);
+ }
+@@ -1442,7 +1442,7 @@
+ }
+ 
+ .loop-pointer-indicator {
+-  font-size: 11px;
++  font-size: 13px;
+   font-weight: 800;
+   color: #2563eb;
+   display: none;
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

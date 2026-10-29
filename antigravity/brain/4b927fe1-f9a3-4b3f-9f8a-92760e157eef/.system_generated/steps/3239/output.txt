@@ -1,0 +1,185 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app_build\styles.css. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -66,7 +66,7 @@
+   min-height: 100vh;
+   display: flex;
+   flex-direction: column;
+-  font-size: 15px;
++  font-size: 16px;
+   line-height: 1.6;
+ }
+ 
+@@ -75,10 +75,10 @@
+ .top-bar {
+   background-color: var(--bg-card);
+   border-bottom: 1px solid var(--border-light);
+-  padding: 8px 24px;
+-  display: flex;
+-  flex-direction: column;
+-  gap: 8px;
++  padding: 10px 24px;
++  display: flex;
++  flex-direction: column;
++  gap: 10px;
+   position: sticky;
+   top: 0;
+   z-index: 20;
+@@ -94,11 +94,11 @@
+ .brand-area {
+   display: flex;
+   align-items: center;
+-  gap: 12px;
++  gap: 14px;
+ }
+ 
+ .teacher-badge {
+-  font-size: 16px;
++  font-size: 18.5px;
+   font-weight: 700;
+   color: var(--text-main);
+   letter-spacing: -0.02em;
+@@ -111,12 +111,12 @@
+ }
+ 
+ .step-progress-label {
+-  font-size: 12.5px;
+-  font-weight: 600;
++  font-size: 14px;
++  font-weight: 700;
+   color: var(--primary-blue);
+   background: var(--primary-blue-soft);
+   border: 1px solid var(--primary-blue-border);
+-  padding: 3px 10px;
++  padding: 4px 12px;
+   border-radius: 99px;
+   white-space: nowrap;
+ }
+@@ -123,9 +123,9 @@
+ /* Scope Pills (Global vs. Local) */
+ .scope-pill {
+   font-family: var(--font-mono);
+-  font-size: 11px;
+-  font-weight: 700;
+-  padding: 3px 8px;
++  font-size: 12.5px;
++  font-weight: 700;
++  padding: 4px 10px;
+   border-radius: 99px;
+   letter-spacing: 0.03em;
+   text-transform: uppercase;
+@@ -149,7 +149,7 @@
+   justify-content: space-between;
+   gap: 12px;
+   width: 100%;
+-  padding-top: 6px;
++  padding-top: 8px;
+   border-top: 1px solid var(--border-light);
+ }
+ 
+@@ -156,6 +156,6 @@
+   display: flex;
+   align-items: center;
+-  gap: 8px;
++  gap: 10px;
+ }
+ 
+ .kbd-hint {
+@@ -162,10 +162,10 @@
+   align-items: center;
+-  gap: 5px;
+-  font-size: 11.5px;
+-  color: var(--text-secondary);
+-  background: var(--bg-subtle);
+-  border: 1px solid var(--border-light);
+-  padding: 2px 8px;
++  gap: 6px;
++  font-size: 12.5px;
++  color: var(--text-secondary);
++  background: var(--bg-subtle);
++  border: 1px solid var(--border-light);
++  padding: 3px 9px;
+   border-radius: 6px;
+   white-space: nowrap;
+ }
+@@ -172,6 +172,6 @@
+ .kbd-hint kbd {
+   font-family: var(--font-mono);
+-  font-size: 10px;
++  font-size: 11.5px;
+   font-weight: 700;
+   background: #ffffff;
+   border: 1px solid var(--border-medium);
+@@ -178,5 +178,5 @@
+-  padding: 1px 4px;
+-  border-radius: 3px;
++  padding: 2px 5px;
++  border-radius: 4px;
+   color: var(--text-main);
+ }
+ 
+@@ -183,7 +183,7 @@
+   display: flex;
+   align-items: center;
+   justify-content: center;
+-  gap: 8px;
++  gap: 10px;
+ }
+ 
+ .btn-nav {
+@@ -190,6 +190,6 @@
+-  font-size: 13px;
+-  font-weight: 600;
+-  padding: 6px 13px;
++  font-size: 14.5px;
++  font-weight: 600;
++  padding: 7px 15px;
+   border-radius: var(--radius-sm);
+   border: 1px solid var(--border-medium);
+   background: var(--bg-card);
+@@ -222,8 +222,9 @@
+   background: var(--primary-blue);
+   border-color: var(--primary-blue);
+   color: #ffffff;
+-  padding: 7px 18px;
+-  font-size: 13.5px;
++  padding: 8px 20px;
++  font-size: 15px;
++  font-weight: 700;
+   box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+ }
+ 
+@@ -234,7 +234,7 @@
+ .secondary-actions {
+   display: flex;
+   align-items: center;
+-  gap: 6px;
++  gap: 8px;
+ }
+ 
+ .btn-subtle {
+@@ -241,6 +241,6 @@
+-  font-size: 12px;
+-  font-weight: 500;
+-  padding: 5px 10px;
++  font-size: 13.5px;
++  font-weight: 500;
++  padding: 6px 12px;
+   border-radius: var(--radius-sm);
+   border: 1px solid var(--border-light);
+   background: var(--bg-subtle);
+@@ -255,9 +255,9 @@
+ 
+ .btn-small-primary {
+   font-family: var(--font-sans);
+-  font-size: 12px;
+-  font-weight: 600;
+-  padding: 5px 12px;
++  font-size: 13.5px;
++  font-weight: 600;
++  padding: 6px 14px;
+   border-radius: var(--radius-sm);
+   border: none;
+   background: var(--primary-blue);
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

@@ -1,0 +1,28 @@
+
+The command exited with code 0.
+Output:
+Total problems: 300
+First 10 problems:
+  #1 LC 1: Two Sum (Easy) - Topic: Arrays & Hashing - Pattern: Hash Map Lookup
+  #2 LC 217: Contains Duplicate (Easy) - Topic: Arrays & Hashing - Pattern: Hash Set
+  #3 LC 242: Valid Anagram (Easy) - Topic: Arrays & Hashing - Pattern: Frequency Counter
+  #4 LC 49: Group Anagrams (Medium) - Topic: Arrays & Hashing - Pattern: Categorization by Key
+  #5 LC 347: Top K Frequent Elements (Medium) - Topic: Arrays & Hashing - Pattern: Bucket Sort / Frequency Map
+  #6 LC 238: Product of Array Except Self (Medium) - Topic: Arrays & Hashing - Pattern: Prefix & Suffix Products
+  #7 LC 36: Valid Sudoku (Medium) - Topic: Arrays & Hashing - Pattern: 2D Hash Set Tracking
+  #8 LC 128: Longest Consecutive Sequence (Medium) - Topic: Arrays & Hashing - Pattern: Hash Set Streak Building
+  #9 LC 169: Majority Element (Easy) - Topic: Arrays & Hashing - Pattern: Boyer-Moore Voting
+  #10 LC 136: Single Number (Easy) - Topic: Arrays & Hashing - Pattern: Bitwise XOR
+
+Topics distribution:
+  Trees: 32
+  Arrays & Hashing: 30
+  Graphs: 24
+  1-D Dynamic Programming: 24
+  Linked List: 22
+  Two Pointers: 20
+  Stack: 20
+  Binary Search: 20
+  Sliding Window: 18
+  Backtracking: 18
+

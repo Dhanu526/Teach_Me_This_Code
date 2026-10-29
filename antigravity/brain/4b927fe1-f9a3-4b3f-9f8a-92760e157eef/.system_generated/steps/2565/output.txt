@@ -1,0 +1,23 @@
+
+The command exited with code 0.
+Output:
+{
+  'Arrays & Hashing': 30,
+  'Two Pointers': 20,
+  'Sliding Window': 18,
+  Stack: 20,
+  'Binary Search': 20,
+  'Linked List': 22,
+  Trees: 32,
+  Tries: 8,
+  'Heap / Priority Queue': 16,
+  Backtracking: 18,
+  Graphs: 24,
+  'Advanced Graphs': 10,
+  '1-D Dynamic Programming': 24,
+  '2-D Dynamic Programming': 18,
+  Greedy: 10,
+  Intervals: 4,
+  'Bit Manipulation': 6
+}
+

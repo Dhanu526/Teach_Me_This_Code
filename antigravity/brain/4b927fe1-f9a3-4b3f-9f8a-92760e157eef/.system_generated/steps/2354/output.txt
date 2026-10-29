@@ -1,0 +1,14 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\brain\4b927fe1-f9a3-4b3f-9f8a-92760e157eef\scratch\test_dsa_phase5_workspace.js. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -218,7 +218,7 @@
+   assert(wsHtml.includes('What the Problem Asks'), "Section A explains what is asked");
+   assert(wsHtml.includes('What You Need to Calculate or Return'), "Section A highlights return goal");
+   assert(wsHtml.includes('Example 1'), "Example 1 rendered");
+-  assert(wsHtml.includes('Example 2'), "Example 2 rendered");
++  assert(wsHtml.includes('Input & Output Examples'), "Input & Output Examples section rendered");
+   assert(wsHtml.includes('Important Constraints'), "Important constraints section rendered");
+   assert(wsHtml.includes('Common Edge Cases to Consider'), "Common edge cases section rendered");
+   // Ensure reference solution is initially hidden
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

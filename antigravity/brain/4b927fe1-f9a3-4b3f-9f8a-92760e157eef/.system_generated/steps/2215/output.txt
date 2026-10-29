@@ -1,0 +1,7 @@
+
+The command exited with code 0.
+Output:
+trace ok? true steps: 13
+stdout: [ 'Result: [0, 1]' ]
+global vars: no scopes
+

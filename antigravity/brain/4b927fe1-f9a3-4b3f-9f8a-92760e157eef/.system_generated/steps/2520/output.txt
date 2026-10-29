@@ -1,0 +1,35 @@
+
+The command exited with code 0.
+Output:
+
+> app_build\dsa_dashboard.js:1397:          <div class="dsa-view-content ${this.currentSubTab === 'roadmap' ? '' : 
+'hidden'}" id="dsaSubViewRoadmap">
+  app_build\dsa_dashboard.js:1398:            ${this.renderFullRoadmap(stats)}
+  app_build\dsa_dashboard.js:1399:          </div>
+  app_build\dsa_dashboard.js:1400:
+  app_build\dsa_dashboard.js:1401:          <!-- SUB-VIEW 6: PROBLEM LEARNING WORKSPACE (PHASE 5) -->
+  app_build\dsa_dashboard.js:1402:          <div class="dsa-view-content ${this.currentSubTab === 'workspace' ? '' : 
+'hidden'}" id="dsaSubViewWorkspace">
+  app_build\dsa_dashboard.js:1403:            ${this.renderProblemWorkspace(this.activeWorkspaceProblemId || 1)}
+  app_build\dsa_dashboard.js:1404:          </div>
+  app_build\dsa_dashboard.js:1405:        </div>
+  app_build\dsa_dashboard.js:1406:      `;
+  app_build\dsa_dashboard.js:1407:    }
+  app_build\dsa_dashboard.js:1408:
+  app_build\dsa_dashboard.js:1409:    renderMetricsCards(stats) {
+  app_build\dsa_dashboard.js:1410:      return `
+  app_build\dsa_dashboard.js:1411:        <div class="dsa-metrics-grid">
+  app_build\dsa_dashboard.js:1412:          <div class="metric-card metric-total">
+  app_build\dsa_dashboard.js:1413:            <div class="metric-icon">??</div>
+  app_build\dsa_dashboard.js:1414:            <div class="metric-info">
+  app_build\dsa_dashboard.js:1415:              <div class="metric-value">${stats.total}</div>
+  app_build\dsa_dashboard.js:1416:              <div class="metric-label">Curated Problems</div>
+  app_build\dsa_dashboard.js:1417:            </div>
+  app_build\dsa_dashboard.js:1418:            <div class="metric-sublabel">30 Comprehensive Topics</div>
+  app_build\dsa_dashboard.js:1419:          </div>
+  app_build\dsa_dashboard.js:1420:
+  app_build\dsa_dashboard.js:1421:          <div class="metric-card metric-solved">
+  app_build\dsa_dashboard.js:1422:            <div class="metric-icon">?</div>
+
+
+

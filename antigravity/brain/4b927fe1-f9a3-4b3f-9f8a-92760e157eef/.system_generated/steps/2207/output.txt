@@ -1,0 +1,30 @@
+
+The command exited with code 0.
+Output:
+Total unique patterns: 300
+ - '.' and '*' 2D Transition DP
+ - '?' and '*' 2D DP
+ - 0/1 Knapsack Target Sum
+ - 1-Digit & 2-Digit Jump DP
+ - 1..N K-Subset Backtracking
+ - 2-Coloring BFS / DFS
+ - 2-Coloring Dislike Graph
+ - 2-Constraint Knapsack
+ - 2-State Buy/Sell DP
+ - 2D Alignment Matching Matrix
+ - 2D Grid Addition DP
+ - 2D Grid DFS Backtracking
+ - 2D Grid DFS with Trie Pruning
+ - 2D Grid Substring Matching
+ - 2D Hash Set Tracking
+ - 2D Subsequence Match Matrix
+ - 3-State Cycle Detection
+ - 3-State Sliding Window
+ - 32-Bit Reversal Shift
+ - 4-Directional DFS Replacement
+ - 4-Segment String Partition
+ - 8-Directional Queue BFS
+ - ASCII Weighted LCS
+ - Additive Sequence Branching
+ - Adjacency Matrix DFS
+

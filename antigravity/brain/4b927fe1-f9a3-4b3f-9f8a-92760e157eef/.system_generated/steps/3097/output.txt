@@ -1,0 +1,75 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app_build\styles.css. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -380,13 +380,14 @@
+ .three-area-workspace {
+   flex: 1;
+   display: grid;
+-  grid-template-columns: minmax(260px, 300px) minmax(460px, 1.6fr) minmax(270px, 310px);
+-  gap: 16px;
+-  padding: 14px 20px;
+-  max-width: 1680px;
+-  width: 100%;
+-  margin: 0 auto;
+-  align-items: start;
++  grid-template-columns: minmax(320px, 1.15fr) minmax(520px, 2.5fr) minmax(340px, 1.35fr);
++  gap: 18px;
++  padding: 14px 24px 28px;
++  max-width: 100%;
++  width: 100%;
++  margin: 0;
++  box-sizing: border-box;
++  align-items: stretch;
+ }
+ 
+ .area-card {
+@@ -400,8 +400,11 @@
+ .area-variables {
+   position: sticky;
+   top: 125px;
++  min-height: calc(100vh - 165px);
+   max-height: calc(100vh - 145px);
+   overflow-y: auto;
++  display: flex;
++  flex-direction: column;
+ }
+ 
+ .area-header-row {
+@@ -432,6 +432,30 @@
+   border-radius: 6px;
+ }
+ 
++/* Memory Reference Insights Footer */
++.memory-model-footer {
++  margin-top: auto;
++  padding: 10px 12px;
++  background: var(--bg-subtle);
++  border: 1px dashed var(--border-medium);
++  border-radius: var(--radius-sm);
++  display: flex;
++  flex-direction: column;
++  gap: 3px;
++}
++
++.mem-footer-title {
++  font-weight: 700;
++  font-size: 11.5px;
++  color: var(--primary-blue);
++}
++
++.mem-footer-text {
++  font-size: 11px;
++  color: var(--text-secondary);
++  line-height: 1.45;
++}
++
+ /* =========================================================
+    AREA 1: YOUR CODE (LEFT)
+    ========================================================= */
+@@ -438,3 +438,4 @@
++  flex: 1;
+   font-family: var(--font-mono);
+   font-size: 13px;
+   line-height: 1.65;
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

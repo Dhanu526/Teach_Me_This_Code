@@ -1,0 +1,11 @@
+
+The command exited with code 0.
+Output:
+33: const enginePath = path.join(appBuildDir, 'engine.js');
+39: assert(fs.existsSync(enginePath), "engine.js exists");
+85: vm.runInContext(fs.readFileSync(enginePath, 'utf8'), context);
+88: const engine = new mockWindow.PythonExecutionEngine();
+136: const rawTrace = engine.trace(pyCode, "");
+163: const rawDefault = engine.trace(kadaneCode, "");
+359: const bsTrace = engine.trace(bsCode, "");
+

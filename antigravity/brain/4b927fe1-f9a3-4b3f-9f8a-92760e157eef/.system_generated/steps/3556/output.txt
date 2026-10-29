@@ -1,0 +1,13 @@
+
+The command exited with code 0.
+Output:
+
+Name       Length LastWriteTime      
+----       ------ -------------      
+app.js      88593 29-10-2026 06:01:20
+app.js         29 10-10-2026 17:51:26
+styles.css 165377 29-10-2026 05:51:08
+styles.css     36 10-10-2026 17:51:30
+
+
+

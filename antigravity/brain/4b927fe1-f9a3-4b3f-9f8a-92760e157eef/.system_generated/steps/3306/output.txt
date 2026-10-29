@@ -1,0 +1,249 @@
+
+The command exited with code 0.
+Output:
+<truncated 1 lines>
+FullName          : C:\Users\CVT\Links
+Parent            : CVT
+Exists            : True
+Root              : C:\
+Extension         : 
+CreationTime      : 25-03-2026 06:36:22
+CreationTimeUtc   : 25-03-2026 01:06:22
+LastAccessTime    : 28-10-2026 23:02:50
+LastAccessTimeUtc : 28-10-2026 17:32:50
+LastWriteTime     : 24-03-2026 18:08:44
+LastWriteTimeUtc  : 24-03-2026 12:38:44
+Attributes        : ReadOnly, Directory
+Mode              : d-r---
+BaseName          : Links
+Target            : {}
+LinkType          : 
+
+
+PSPath            : Microsoft.PowerShell.Core\FileSystem::C:\Users\CVT\mohan
+PSParentPath      : Microsoft.PowerShell.Core\FileSystem::C:\Users\CVT
+PSChildName       : mohan
+PSDrive           : C
+PSProvider        : Microsoft.PowerShell.Core\FileSystem
+PSIsContainer     : True
+Name              : mohan
+FullName          : C:\Users\CVT\mohan
+Parent            : CVT
+Exists            : True
+Root              : C:\
+Extension         : 
+CreationTime      : 08-05-2026 17:40:07
+CreationTimeUtc   : 08-05-2026 12:10:07
+LastAccessTime    : 17-10-2026 13:04:32
+LastAccessTimeUtc : 17-10-2026 07:34:32
+LastWriteTime     : 08-05-2026 17:40:09
+LastWriteTimeUtc  : 08-05-2026 12:10:09
+Attributes        : Directory
+Mode              : d-----
+BaseName          : mohan
+Target            : {}
+LinkType          : 
+
+
+PSPath            : Microsoft.PowerShell.Core\FileSystem::C:\Users\CVT\Music
+PSParentPath      : Microsoft.PowerShell.Core\FileSystem::C:\Users\CVT
+PSChildName       : Music
+PSDrive           : C
+PSProvider        : Microsoft.PowerShell.Core\FileSystem
+PSIsContainer     : True
+Name              : Music
+FullName          : C:\Users\CVT\Music
+Parent            : CVT
+Exists            : True
+Root              : C:\
+Extension         : 
+CreationTime      : 25-03-2026 06:36:22
+CreationTimeUtc   : 25-03-2026 01:06:22
+LastAccessTime    : 28-10-2026 22:13:03
+LastAccessTimeUtc : 28-10-2026 16:43:03
+LastWriteTime     : 24-03-2026 18:08:44
+LastWriteTimeUtc  : 24-03-2026 12:38:44
+Attributes        : ReadOnly, Directory
+Mode              : d-r---
+BaseName          : Music
+Target            : {}
+LinkType          : 
+
+
+PSPath            : Microsoft.PowerShell.Core\FileSystem::C:\Users\CVT\OneDrive
+PSParentPath      : Microsoft.PowerShell.Core\FileSystem::C:\Users\CVT
+PSChildName       : OneDrive
+PSDrive           : C
+PSProvider        : Microsoft.PowerShell.Core\FileSystem
+PSIsContainer     : True
+Name              : OneDrive
+FullName          : C:\Users\CVT\OneDrive
+Parent            : CVT
+Exists            : True
+Root              : C:\
+Extension         : 
+CreationTime      : 25-03-2026 18:09:05
+CreationTimeUtc   : 25-03-2026 12:39:05
+LastAccessTime    : 28-10-2026 22:11:57
+LastAccessTimeUtc : 28-10-2026 16:41:57
+LastWriteTime     : 25-03-2026 18:09:05
+LastWriteTimeUtc  : 25-03-2026 12:39:05
+Attributes        : ReadOnly, Directory
+Mode              : d-r---
+BaseName          : OneDrive
+Target            : {}
+LinkType          : 
+
+
+PSPath            : Microsoft.PowerShell.Core\FileSystem::C:\Users\CVT\Pictures
+PSParentPath      : Microsoft.PowerShell.Core\FileSystem::C:\Users\CVT
+PSChildName       : Pictures
+PSDrive           : C
+PSProvider        : Microsoft.PowerShell.Core\FileSystem
+PSIsContainer     : True
+Name              : Pictures
+FullName          : C:\Users\CVT\Pictures
+Parent            : CVT
+Exists            : True
+Root              : C:\
+Extension         : 
+CreationTime      : 25-03-2026 06:36:22
+CreationTimeUtc   : 25-03-2026 01:06:22
+LastAccessTime    : 28-10-2026 22:13:03
+LastAccessTimeUtc : 28-10-2026 16:43:03
+LastWriteTime     : 05-10-2026 15:53:25
+LastWriteTimeUtc  : 05-10-2026 10:23:25
+Attributes        : ReadOnly, Directory
+Mode              : d-r---
+BaseName          : Pictures
+Target            : {}
+LinkType          : 
+
+
+PSPath            : Microsoft.PowerShell.Core\FileSystem::C:\Users\CVT\Postman
+PSParentPath      : Microsoft.PowerShell.Core\FileSystem::C:\Users\CVT
+PSChildName       : Postman
+PSDrive           : C
+PSProvider        : Microsoft.PowerShell.Core\FileSystem
+PSIsContainer     : True
+Name              : Postman
+FullName          : C:\Users\CVT\Postman
+Parent            : CVT
+Exists            : True
+Root              : C:\
+Extension         : 
+CreationTime      : 18-05-2026 18:43:06
+CreationTimeUtc   : 18-05-2026 13:13:06
+LastAccessTime    : 17-10-2026 13:04:38
+LastAccessTimeUtc : 17-10-2026 07:34:38
+LastWriteTime     : 18-05-2026 18:43:06
+LastWriteTimeUtc  : 18-05-2026 13:13:06
+Attributes        : Directory
+Mode              : d-----
+BaseName          : Postman
+Target            : {}
+LinkType          : 
+
+
+PSPath            : Microsoft.PowerShell.Core\FileSystem::C:\Users\CVT\Saved Games
+PSParentPath      : Microsoft.PowerShell.Core\FileSystem::C:\Users\CVT
+PSChildName       : Saved Games
+PSDrive           : C
+PSProvider        : Microsoft.PowerShell.Core\FileSystem
+PSIsContainer     : True
+Name              : Saved Games
+FullName          : C:\Users\CVT\Saved Games
+Parent            : CVT
+Exists            : True
+Root              : C:\
+Extension         : 
+CreationTime      : 25-03-2026 06:36:22
+CreationTimeUtc   : 25-03-2026 01:06:22
+LastAccessTime    : 28-10-2026 23:02:50
+LastAccessTimeUtc : 28-10-2026 17:32:50
+LastWriteTime     : 24-03-2026 18:08:44
+LastWriteTimeUtc  : 24-03-2026 12:38:44
+Attributes        : ReadOnly, Directory
+Mode              : d-r---
+BaseName          : Saved Games
+Target            : {}
+LinkType          : 
+
+
+PSPath            : Microsoft.PowerShell.Core\FileSystem::C:\Users\CVT\Searches
+PSParentPath      : Microsoft.PowerShell.Core\FileSystem::C:\Users\CVT
+PSChildName       : Searches
+PSDrive           : C
+PSProvider        : Microsoft.PowerShell.Core\FileSystem
+PSIsContainer     : True
+Name              : Searches
+FullName          : C:\Users\CVT\Searches
+Parent            : CVT
+Exists            : True
+Root              : C:\
+Extension         : 
+CreationTime      : 24-03-2026 18:08:44
+CreationTimeUtc   : 24-03-2026 12:38:44
+LastAccessTime    : 28-10-2026 23:02:50
+LastAccessTimeUtc : 28-10-2026 17:32:50
+LastWriteTime     : 29-03-2026 12:59:23
+LastWriteTimeUtc  : 29-03-2026 07:29:23
+Attributes        : ReadOnly, Directory
+Mode              : d-r---
+BaseName          : Searches
+Target            : {}
+LinkType          : 
+
+
+PSPath            : Microsoft.PowerShell.Core\FileSystem::C:\Users\CVT\Videos
+PSParentPath      : Microsoft.PowerShell.Core\FileSystem::C:\Users\CVT
+PSChildName       : Videos
+PSDrive           : C
+PSProvider        : Microsoft.PowerShell.Core\FileSystem
+PSIsContainer     : True
+Name              : Videos
+FullName          : C:\Users\CVT\Videos
+Parent            : CVT
+Exists            : True
+Root              : C:\
+Extension         : 
+CreationTime      : 25-03-2026 06:36:22
+CreationTimeUtc   : 25-03-2026 01:06:22
+LastAccessTime    : 28-10-2026 22:13:07
+LastAccessTimeUtc : 28-10-2026 16:43:07
+LastWriteTime     : 24-05-2026 21:44:36
+LastWriteTimeUtc  : 24-05-2026 16:14:36
+Attributes        : ReadOnly, Directory
+Mode              : d-r---
+BaseName          : Videos
+Target            : {}
+LinkType          : 
+
+
+PSPath            : Microsoft.PowerShell.Core\FileSystem::C:\Users\CVT\WPS Cloud
+PSParentPath      : Microsoft.PowerShell.Core\FileSystem::C:\Users\CVT
+PSChildName       : WPS Cloud
+PSDrive           : C
+PSProvider        : Microsoft.PowerShell.Core\FileSystem
+PSIsContainer     : True
+Name              : WPS Cloud
+FullName          : C:\Users\CVT\WPS Cloud
+Parent            : CVT
+Exists            : True
+Root              : C:\
+Extension         : 
+CreationTime      : 30-09-2026 15:33:02
+CreationTimeUtc   : 30-09-2026 10:03:02
+LastAccessTime    : 19-10-2026 12:22:57
+LastAccessTimeUtc : 19-10-2026 06:52:57
+LastWriteTime     : 30-09-2026 15:33:02
+LastWriteTimeUtc  : 30-09-2026 10:03:02
+Attributes        : Directory
+Mode              : d-----
+BaseName          : WPS Cloud
+Target            : {}
+LinkType          : 
+
+
+
+

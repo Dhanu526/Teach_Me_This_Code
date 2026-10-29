@@ -1,0 +1,18 @@
+
+The command exited with code 0.
+Output:
+
+> app_build\engine.js:2167:        highlightSub: trimmed,
+  app_build\engine.js:2168:        focus: "Original expression",
+  app_build\engine.js:2169:        shortCircuited: false
+  app_build\engine.js:2170:      }
+> app_build\engine.js:2173:    const pushFrame = (exprStr, highlightSub, focus, shortCircuited = false) => {
+  app_build\engine.js:2174:      const full = `${prefix}${exprStr}${suffix}`;
+  app_build\engine.js:2175:      if (frames[frames.length - 1].expr !== full || shortCircuited) {
+> app_build\engine.js:2176:        frames.push({ expr: full, highlightSub, focus, shortCircuited });
+  app_build\engine.js:2177:      }
+  app_build\engine.js:2178:    };
+  app_build\engine.js:2179:
+
+
+

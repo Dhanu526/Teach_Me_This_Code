@@ -1,0 +1,19 @@
+
+The command exited with code 0.
+Output:
+ID: 1 Title: Two Sum
+  First line: def twoSum(nums, target):
+  Last line: print("Indices:", twoSum(nums, 9))
+ID: 2 Title: Contains Duplicate
+  First line: def containsDuplicate(nums):
+  Last line: print("Has duplicate:", containsDuplicate([1, 2, 3, 1]))
+ID: 3 Title: Valid Anagram
+  First line: def isAnagram(s, t):
+  Last line: print("Is anagram:", isAnagram("anagram", "nagaram"))
+ID: 4 Title: Group Anagrams
+  First line: def groupAnagrams(strs):
+  Last line: print("Groups:", groupAnagrams(["eat", "tea", "tan", "ate", "nat", "bat"]))
+ID: 5 Title: Top K Frequent Elements
+  First line: def topKFrequent(nums, k):
+  Last line: print("Top K:", topKFrequent([1, 1, 1, 2, 2, 3], 2))
+

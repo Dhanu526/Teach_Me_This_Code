@@ -1,0 +1,71 @@
+
+The command exited with code 0.
+Output:
+
+> app_build\dsa_dashboard.js:327:      this.initRouter();
+  app_build\dsa_dashboard.js:328:      this.render();
+  app_build\dsa_dashboard.js:329:    }
+  app_build\dsa_dashboard.js:330:
+  app_build\dsa_dashboard.js:331:    // -------------------------------------------------------------------------
+  app_build\dsa_dashboard.js:332:    // LOCAL STORAGE PROGRESS (Real Data Only - Zero Fake Numbers)
+  app_build\dsa_dashboard.js:333:    // -------------------------------------------------------------------------
+  app_build\dsa_dashboard.js:334:    loadUserCodeCache() {
+  app_build\dsa_dashboard.js:335:      try {
+  app_build\dsa_dashboard.js:336:        const raw = localStorage.getItem('dsa_user_code_v1');
+  app_build\dsa_dashboard.js:337:        return raw ? JSON.parse(raw) : {};
+  app_build\dsa_dashboard.js:338:      } catch (e) {
+  app_build\dsa_dashboard.js:339:        return {};
+  app_build\dsa_dashboard.js:340:      }
+  app_build\dsa_dashboard.js:341:    }
+  app_build\dsa_dashboard.js:342:
+  app_build\dsa_dashboard.js:343:    saveUserCode(problemId, codeText) {
+  app_build\dsa_dashboard.js:344:      if (!this.userCodeCache) this.userCodeCache = {};
+  app_build\dsa_dashboard.js:345:      this.userCodeCache[problemId] = codeText;
+  app_build\dsa_dashboard.js:346:      try {
+  app_build\dsa_dashboard.js:347:        localStorage.setItem('dsa_user_code_v1', JSON.stringify(this.userCodeCache));
+  app_build\dsa_dashboard.js:348:      } catch (e) {}
+  app_build\dsa_dashboard.js:349:    }
+  app_build\dsa_dashboard.js:350:
+  app_build\dsa_dashboard.js:351:    getUserCode(problemId) {
+  app_build\dsa_dashboard.js:352:      if (this.userCodeCache && this.userCodeCache[problemId]) {
+  app_build\dsa_dashboard.js:353:        return this.userCodeCache[problemId];
+  app_build\dsa_dashboard.js:354:      }
+  app_build\dsa_dashboard.js:355:      const p = this.problemsById.get(problemId);
+  app_build\dsa_dashboard.js:356:      return p ? p.starterCode : '';
+  app_build\dsa_dashboard.js:357:    }
+> app_build\dsa_dashboard.js:2746:    initRouter() {
+  app_build\dsa_dashboard.js:2747:      if (typeof window === 'undefined') return;
+  app_build\dsa_dashboard.js:2748:
+  app_build\dsa_dashboard.js:2749:      const handleRouting = () => {
+  app_build\dsa_dashboard.js:2750:        try {
+  app_build\dsa_dashboard.js:2751:          const hash = (window.location && window.location.hash) ? 
+window.location.hash : '';
+  app_build\dsa_dashboard.js:2752:          if (!hash) return;
+  app_build\dsa_dashboard.js:2753:
+  app_build\dsa_dashboard.js:2754:          // Match #dsa/problem/:id or #problem/:id -> Opens Workspace
+  app_build\dsa_dashboard.js:2755:          const pMatch = hash.match(/^#(?:dsa\/)?problem\/(\d+)/i);
+  app_build\dsa_dashboard.js:2756:          if (pMatch) {
+  app_build\dsa_dashboard.js:2757:            const id = parseInt(pMatch[1], 10);
+  app_build\dsa_dashboard.js:2758:            if (this.problemsById && this.problemsById.has(id)) {
+  app_build\dsa_dashboard.js:2759:              this.switchView('dsa');
+  app_build\dsa_dashboard.js:2760:              if (typeof setTimeout === 'function') {
+  app_build\dsa_dashboard.js:2761:                setTimeout(() => {
+  app_build\dsa_dashboard.js:2762:                  this.openProblemWorkspace(id);
+  app_build\dsa_dashboard.js:2763:                }, 40);
+  app_build\dsa_dashboard.js:2764:              } else {
+  app_build\dsa_dashboard.js:2765:                this.openProblemWorkspace(id);
+  app_build\dsa_dashboard.js:2766:              }
+  app_build\dsa_dashboard.js:2767:              return;
+  app_build\dsa_dashboard.js:2768:            }
+  app_build\dsa_dashboard.js:2769:          }
+  app_build\dsa_dashboard.js:2770:
+  app_build\dsa_dashboard.js:2771:          // Match #dsa/topic/:topic or #topic/:topic
+  app_build\dsa_dashboard.js:2772:          const tMatch = hash.match(/^#(?:dsa\/)?topic\/(.+)/i);
+  app_build\dsa_dashboard.js:2773:          if (tMatch) {
+  app_build\dsa_dashboard.js:2774:            const decoded = decodeURIComponent(tMatch[1]).trim();
+  app_build\dsa_dashboard.js:2775:            const matchedMeta = TOPIC_METADATA_30.find(m => m.name.toLowerCase() === 
+decoded.toLowerCase());
+  app_build\dsa_dashboard.js:2776:            if (matchedMeta) {
+
+
+

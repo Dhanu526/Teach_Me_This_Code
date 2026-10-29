@@ -1,0 +1,11 @@
+{
+  "id": "outside-of-project",
+  "name": "Outside of Project",
+  "permissionGrants": {
+    "permissionGrants": {
+      "allow": [
+        "command(node -e \"\nconst fs = require('fs');\nconst vm = require('vm');\nconst path = require('path');\nconst engineCode = fs.readFileSync('app_build/engine.js', 'utf8');\nconst sb = { console, Math, Number, String, Array, Object, Set, Map, JSON, Date, window: {} };\nvm.createContext(sb);\nvm.runInContext(engineCode, sb);\nconst engine = new sb.window.PythonExecutionEngine();\n\nconst code = \\`\ndef twoSum(nums, target):\n    prevMap = {}\n    for i in range(len(nums)):\n        diff = target - nums[i]\n        if diff in prevMap:\n            return [prevMap[diff], i]\n        prevMap[nums[i]] = i\n    return []\n\n__test_out__ = twoSum([2, 7, 11, 15], 9)\n\\`;\n\nconst trace = engine.trace(code, '');\nconst last = trace.steps[trace.steps.length - 1];\nconst v = last.scopes.global.find(x => x.name === '__test_out__');\nconsole.log('Result variable:', v);\n\")"
+      ]
+    }
+  }
+}

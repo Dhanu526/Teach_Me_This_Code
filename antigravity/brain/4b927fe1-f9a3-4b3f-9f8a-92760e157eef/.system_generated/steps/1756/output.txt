@@ -1,0 +1,22 @@
+
+The command exited with code 0.
+Output:
+
+
+    Directory: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app_build
+
+
+Mode                 LastWriteTime         Length Name                                                                 
+----                 -------------         ------ ----                                                                 
+da----        25-10-2026     20:08                __pycache__                                                          
+-a----        25-10-2026     20:56          84058 app.js                                                               
+-a----        10-10-2026     18:29         100543 engine.js                                                            
+-a----        10-10-2026     18:10          41106 engine.py                                                            
+-a----        25-10-2026     20:06          95650 explainer.js                                                         
+-a----        10-10-2026     17:00           8808 explainer.py                                                         
+-a----        25-10-2026     20:44          16949 index.html                                                           
+-a----        25-10-2026     20:55          61972 styles.css                                                           
+-a----        10-10-2026     16:59            231 __init__.py                                                          
+
+
+

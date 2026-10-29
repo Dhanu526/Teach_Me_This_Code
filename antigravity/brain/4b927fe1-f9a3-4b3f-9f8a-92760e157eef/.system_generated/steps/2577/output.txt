@@ -1,0 +1,7 @@
+
+The command exited with code 0.
+Output:
+LRU: none
+Single Number: 10 Single Number
+1 bits: 295 Number of 1 Bits
+

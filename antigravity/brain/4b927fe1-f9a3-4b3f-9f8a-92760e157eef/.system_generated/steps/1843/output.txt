@@ -1,0 +1,25 @@
+
+The command exited with code 1.
+Output:
+node:fs:2483
+    return binding.writeFileUtf8(
+                   ^
+
+Error: UNKNOWN: unknown error, open 'C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app_build\index.html'
+    at Object.writeFileSync (node:fs:2483:20)
+    at [eval]:1:87
+    at runScriptInThisContext (node:internal/vm:219:10)
+    at node:internal/process/execution:451:12
+    at [eval]-wrapper:6:24
+    at runScriptInContext (node:internal/process/execution:449:60)
+    at evalFunction (node:internal/process/execution:283:30)
+    at evalTypeScript (node:internal/process/execution:295:3)
+    at node:internal/main/eval_string:71:3 {
+  errno: -4094,
+  code: 'UNKNOWN',
+  syscall: 'open',
+  path: 'C:\\Users\\CVT\\.gemini\\antigravity\\scratch\\code-flow-visualizer\\app_build\\index.html'
+}
+
+Node.js v24.19.0
+

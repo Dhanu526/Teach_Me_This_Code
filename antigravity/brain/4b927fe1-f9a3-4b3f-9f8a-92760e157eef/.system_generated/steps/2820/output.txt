@@ -1,0 +1,41 @@
+
+The command exited with code 0.
+Output:
+
+> styles.css:5710:.workspace-2col-layout {
+  styles.css:5711:  display: grid;
+  styles.css:5712:  grid-template-columns: minmax(400px, 1fr) minmax(480px, 1.15fr);
+  styles.css:5713:  gap: 18px;
+  styles.css:5714:  align-items: start;
+  styles.css:5715:}
+  styles.css:5716:
+  styles.css:5717:@media (max-width: 1024px) {
+> styles.css:5718:  .workspace-2col-layout {
+  styles.css:5719:    grid-template-columns: 1fr;
+  styles.css:5720:  }
+  styles.css:5721:}
+  styles.css:5722:
+  styles.css:5723:.workspace-col-left,
+  styles.css:5724:.workspace-col-right {
+  styles.css:5725:  background: white;
+  styles.css:5726:  border: 1px solid var(--border-light, #e2e8f0);
+  styles.css:5727:  border-radius: var(--radius-lg, 10px);
+  styles.css:5728:  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  styles.css:5729:  overflow: hidden;
+  styles.css:5730:  display: flex;
+  styles.css:5731:  flex-direction: column;
+  styles.css:5732:}
+  styles.css:5733:
+  styles.css:5734:.workspace-pane-tabs {
+  styles.css:5735:  display: flex;
+  styles.css:5736:  background: #f8fafc;
+  styles.css:5737:  border-bottom: 1px solid var(--border-light, #e2e8f0);
+  styles.css:5738:  padding: 6px 12px 0;
+  styles.css:5739:  gap: 6px;
+  styles.css:5740:}
+  styles.css:5741:
+  styles.css:5742:.workspace-pane-tab {
+  styles.css:5743:  background: transparent;
+
+
+

@@ -1,0 +1,32 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app_build\styles.css. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -3201,16 +3201,16 @@
+ .nav-tab-btn {
+   border: none;
+   background: transparent;
+-  padding: 6px 14px;
+-  font-size: 13.5px;
+-  font-weight: 600;
+-  color: var(--text-secondary);
+-  border-radius: var(--radius-sm);
+-  cursor: pointer;
+-  transition: all 0.2s ease;
+-  display: inline-flex;
+-  align-items: center;
+-  gap: 6px;
++  padding: 8px 18px;
++  font-size: 15px;
++  font-weight: 600;
++  color: var(--text-secondary);
++  border-radius: var(--radius-sm);
++  cursor: pointer;
++  transition: all 0.2s ease;
++  display: inline-flex;
++  align-items: center;
++  gap: 8px;
+ }
+ 
+ .nav-tab-btn:hover {
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

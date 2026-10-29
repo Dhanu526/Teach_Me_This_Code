@@ -1,0 +1,155 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app_build\styles.css. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -1738,7 +1738,7 @@
+ }
+ 
+ .final-answer-heading {
+-  font-size: 21px;
++  font-size: 25px;
+   font-weight: 800;
+   color: #065f46;
+ }
+@@ -1745,5 +1745,5 @@
+ .final-answer-detail {
+-  font-size: 15px;
++  font-size: 17px;
+   color: #047857;
+ }
+ 
+@@ -1750,11 +1750,11 @@
+    AREA 3: SCOPE ISOLATION & STACK/HEAP MEMORY MODEL (RIGHT)
+    ========================================================= */
+ .memory-section-block {
+-  margin-bottom: 12px;
++  margin-bottom: 14px;
+ }
+ 
+ .memory-section-title {
+-  font-size: 12px;
++  font-size: 13.5px;
+   font-weight: 700;
+   text-transform: uppercase;
+   letter-spacing: 0.04em;
+@@ -1791,8 +1791,8 @@
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+-  padding: 7px 12px;
+-  font-size: 12px;
++  padding: 8px 14px;
++  font-size: 13.5px;
+   font-weight: 700;
+ }
+ 
+@@ -1808,10 +1808,10 @@
+ }
+ 
+ .scope-active-tag {
+-  font-size: 10px;
+-  font-weight: 800;
+-  text-transform: uppercase;
+-  padding: 1px 6px;
++  font-size: 11.5px;
++  font-weight: 800;
++  text-transform: uppercase;
++  padding: 2px 7px;
+   border-radius: 99px;
+   background: rgba(15, 23, 42, 0.08);
+ }
+@@ -1824,11 +1824,11 @@
+   display: grid;
+   grid-template-columns: 1fr auto 1.1fr;
+   align-items: center;
+-  gap: 6px;
+-  padding: 5px 10px;
+-  border-bottom: 1px solid var(--border-light);
+-  font-family: var(--font-mono);
+-  font-size: 12px;
++  gap: 8px;
++  padding: 6px 12px;
++  border-bottom: 1px solid var(--border-light);
++  font-family: var(--font-mono);
++  font-size: 14.5px;
+ }
+ 
+ .scope-var-row:last-child {
+@@ -1851,12 +1851,12 @@
+   display: inline-flex;
+   align-items: center;
+   gap: 4px;
+-  font-size: 11.5px;
+-  font-weight: 700;
+-  color: var(--addr-amber-text);
+-  background: var(--addr-amber-bg);
+-  border: 1px solid var(--addr-amber-border);
+-  padding: 2px 7px;
++  font-size: 13px;
++  font-weight: 700;
++  color: var(--addr-amber-text);
++  background: var(--addr-amber-bg);
++  border: 1px solid var(--addr-amber-border);
++  padding: 2px 8px;
+   border-radius: 6px;
+ }
+ 
+@@ -1863,5 +1863,6 @@
+   text-align: right;
+   font-weight: 600;
++  font-size: 14.5px;
+   color: var(--text-secondary);
+   overflow: hidden;
+   text-overflow: ellipsis;
+@@ -1869,7 +1869,7 @@
+ 
+ .changed-pill {
+   font-family: var(--font-sans);
+-  font-size: 10px;
++  font-size: 11px;
+   font-weight: 700;
+   background: #10b981;
+   color: #ffffff;
+@@ -1886,9 +1886,9 @@
+ 
+ .btn-gc-toggle {
+   font-family: var(--font-sans);
+-  font-size: 11px;
+-  font-weight: 600;
+-  padding: 3px 8px;
++  font-size: 12.5px;
++  font-weight: 600;
++  padding: 4px 10px;
+   border-radius: 6px;
+   border: 1px solid var(--border-medium);
+   background: var(--bg-subtle);
+@@ -1904,7 +1904,7 @@
+ .heap-objects-container {
+   display: flex;
+   flex-direction: column;
+-  gap: 5px;
++  gap: 6px;
+ }
+ 
+ .heap-obj-card {
+@@ -1911,12 +1911,12 @@
+   align-items: center;
+   justify-content: space-between;
+-  gap: 6px;
+-  padding: 5px 9px;
+-  border: 1px solid var(--border-medium);
+-  border-radius: var(--radius-sm);
+-  background: var(--bg-subtle);
+-  font-family: var(--font-mono);
+-  font-size: 12.5px;
++  gap: 8px;
++  padding: 6px 11px;
++  border: 1px solid var(--border-medium);
++  border-radius: var(--radius-sm);
++  background: var(--bg-subtle);
++  font-family: var(--font-mono);
++  font-size: 14px;
+   transition: all 0.15s ease;
+ }
+ 
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

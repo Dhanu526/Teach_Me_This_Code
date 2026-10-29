@@ -1,0 +1,162 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app_build\styles.css. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -4282,7 +4282,7 @@
+ }
+ 
+ .roadmap-intro-card h2 {
+-  font-size: 20px;
++  font-size: 22px;
+   font-weight: 800;
+   margin-bottom: 6px;
+ }
+@@ -4289,6 +4289,6 @@
+ .roadmap-intro-card p {
+   color: var(--text-secondary);
+-  font-size: 14.5px;
++  font-size: 15.5px;
+   line-height: 1.5;
+ }
+ 
+@@ -4322,9 +4322,9 @@
+ .roadmap-phase-badge {
+   background: #1e293b;
+   color: white;
+-  font-size: 12px;
+-  font-weight: 700;
+-  padding: 6px 12px;
++  font-size: 13.5px;
++  font-weight: 700;
++  padding: 6px 14px;
+   border-radius: 8px;
+   white-space: nowrap;
+ }
+@@ -4333,7 +4333,7 @@
+ }
+ 
+ .roadmap-phase-title {
+-  font-size: 16.5px;
++  font-size: 18.5px;
+   font-weight: 700;
+   color: var(--text-main);
+ }
+@@ -4351,7 +4351,7 @@
+ }
+ 
+ .roadmap-stat-number {
+-  font-size: 18px;
++  font-size: 22px;
+   font-weight: 800;
+   color: var(--text-main);
+ }
+@@ -4358,5 +4358,5 @@
+ .roadmap-stat-label {
+-  font-size: 11px;
++  font-size: 12.5px;
+   color: var(--text-muted);
+ }
+ 
+@@ -4363,4 +4363,4 @@
+-  font-size: 14px;
++  font-size: 15px;
+   color: var(--text-secondary);
+   margin-bottom: 14px;
+   line-height: 1.5;
+@@ -4375,7 +4375,7 @@
+ .roadmap-progress-labels {
+   display: flex;
+   justify-content: space-between;
+-  font-size: 12px;
++  font-size: 13.5px;
+   color: var(--text-muted);
+ }
+ 
+@@ -4384,7 +4384,7 @@
+ }
+ 
+ .roadmap-starters-heading {
+-  font-size: 12.5px;
++  font-size: 14px;
+   font-weight: 700;
+   color: var(--text-secondary);
+   margin-bottom: 8px;
+@@ -4420,11 +4420,11 @@
+ .status-solved-dot {
+   color: #10b981;
+   font-weight: 800;
+-  font-size: 14px;
++  font-size: 16px;
+ }
+ 
+ .starter-chip-title {
+-  font-size: 13px;
++  font-size: 14.5px;
+   font-weight: 600;
+   color: var(--text-main);
+ }
+@@ -4431,5 +4431,5 @@
+ .starter-chip-pattern {
+-  font-size: 11px;
++  font-size: 12px;
+   color: #64748b;
+ }
+ 
+@@ -4436,9 +4436,9 @@
+   background: white;
+   border: 1px solid var(--border-medium);
+   color: var(--primary-blue);
+-  font-size: 11.5px;
+-  font-weight: 600;
+-  padding: 4px 8px;
++  font-size: 13px;
++  font-weight: 600;
++  padding: 5px 10px;
+   border-radius: 4px;
+   cursor: pointer;
+   width: fit-content;
+@@ -4494,7 +4494,7 @@
+ }
+ 
+ .dsa-modal-title {
+-  font-size: 18px;
++  font-size: 20px;
+   font-weight: 700;
+   color: var(--text-main);
+ }
+@@ -4501,7 +4501,7 @@
+ .dsa-modal-close-btn {
+   background: transparent;
+   border: none;
+-  font-size: 18px;
++  font-size: 20px;
+   color: var(--text-muted);
+   cursor: pointer;
+ }
+@@ -4518,7 +4518,7 @@
+ }
+ 
+ .dsa-section-label {
+-  font-size: 12.5px;
++  font-size: 13.5px;
+   font-weight: 700;
+   text-transform: uppercase;
+   color: var(--text-secondary);
+@@ -4525,6 +4525,6 @@
+ 
+ .dsa-desc-text {
+-  font-size: 14px;
++  font-size: 15.5px;
+   line-height: 1.5;
+   color: var(--text-main);
+ }
+@@ -4532,7 +4532,7 @@
+   background: #1e293b;
+   color: #f8fafc;
+   font-family: var(--font-mono);
+-  font-size: 12.5px;
++  font-size: 14px;
+   line-height: 1.5;
+   padding: 16px;
+   border-radius: var(--radius-sm);
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

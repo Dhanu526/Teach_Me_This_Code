@@ -1,0 +1,91 @@
+
+The command exited with code 0.
+Output:
+
+> dsa_dashboard.js:3578:      return this.getFilteredProblems(overrideTopic);
+  dsa_dashboard.js:3579:    }
+  dsa_dashboard.js:3580:
+> dsa_dashboard.js:3581:    getFilteredProblems(overrideTopic = null) {
+  dsa_dashboard.js:3582:      let list = this.problems.slice();
+  dsa_dashboard.js:3583:      const activeTopic = overrideTopic || this.selectedTopic;
+  dsa_dashboard.js:3584:
+  dsa_dashboard.js:3585:      // 1. Search query (title, LC#, pattern, description, summary, topic)
+  dsa_dashboard.js:3586:      if (this.searchQuery) {
+  dsa_dashboard.js:3587:        const q = this.searchQuery;
+  dsa_dashboard.js:3588:        list = list.filter(p => {
+  dsa_dashboard.js:3589:          const matchTitle = p.title && p.title.toLowerCase().includes(q);
+  dsa_dashboard.js:3590:          const matchNum = p.leetcodeNumber && String(p.leetcodeNumber).includes(q);
+  dsa_dashboard.js:3591:          const matchPattern = p.pattern && p.pattern.toLowerCase().includes(q);
+  dsa_dashboard.js:3592:          const matchDesc = p.description && p.description.toLowerCase().includes(q);
+  dsa_dashboard.js:3593:          const matchSummary = p.summary && p.summary.toLowerCase().includes(q);
+  dsa_dashboard.js:3594:          const matchTopic = (p.topics && p.topics.some(t => t.toLowerCase().includes(q))) || 
+(p.topic && p.topic.toLowerCase().includes(q));
+  dsa_dashboard.js:3595:          return matchTitle || matchNum || matchPattern || matchDesc || matchSummary || 
+matchTopic;
+  dsa_dashboard.js:3596:        });
+  dsa_dashboard.js:3597:      }
+  dsa_dashboard.js:3598:
+  dsa_dashboard.js:3599:      // 2. Topic filter (multi-topic matching across all 30 topics!)
+  dsa_dashboard.js:3600:      if (activeTopic && activeTopic !== 'all') {
+  dsa_dashboard.js:3601:        list = list.filter(p => (p.topics && p.topics.includes(activeTopic)) || p.topic === 
+activeTopic);
+  dsa_dashboard.js:3602:      }
+  dsa_dashboard.js:3603:
+  dsa_dashboard.js:3604:      // Stage filter (Phase 7: Beginner Roadmap 10 Stages)
+  dsa_dashboard.js:3605:      if (this.selectedStage && this.selectedStage !== 'all') {
+  dsa_dashboard.js:3606:        const stageNum = parseInt(this.selectedStage, 10);
+  dsa_dashboard.js:3607:        const stageObj = BEGINNER_ROADMAP_10_STAGES.find(s => s.stage === stageNum);
+  dsa_dashboard.js:3608:        if (stageObj) {
+  dsa_dashboard.js:3609:          list = list.filter(p => {
+  dsa_dashboard.js:3610:            return stageObj.topics.some(t => (p.topics && p.topics.includes(t)) || p.topic === 
+t || p.primaryTopic === t);
+  dsa_dashboard.js:3611:          });
+  dsa_dashboard.js:3612:        }
+  dsa_dashboard.js:3613:      }
+  dsa_dashboard.js:3614:
+  dsa_dashboard.js:3615:      // 3. Algorithmic Pattern filter
+  dsa_dashboard.js:3616:      if (this.selectedPattern && this.selectedPattern !== 'all') {
+> dsa_dashboard.js:3675:      const filtered = this.getFilteredProblems(topicOverride);
+  dsa_dashboard.js:3676:      const totalFiltered = filtered.length;
+  dsa_dashboard.js:3677:
+  dsa_dashboard.js:3678:      const isAll = this.pageSize === 'all';
+  dsa_dashboard.js:3679:      const effectivePageSize = isAll ? Math.max(1, totalFiltered) : this.pageSize;
+  dsa_dashboard.js:3680:      const totalPages = Math.max(1, Math.ceil(totalFiltered / effectivePageSize));
+  dsa_dashboard.js:3681:      if (this.currentPage > totalPages) this.currentPage = totalPages;
+  dsa_dashboard.js:3682:      const startIdx = (this.currentPage - 1) * effectivePageSize;
+  dsa_dashboard.js:3683:      const paginated = isAll ? filtered : filtered.slice(startIdx, startIdx + 
+effectivePageSize);
+  dsa_dashboard.js:3684:
+  dsa_dashboard.js:3685:      if (totalFiltered === 0) {
+  dsa_dashboard.js:3686:        let emptyMsg = 'No problems match your current search and filter criteria.';
+  dsa_dashboard.js:3687:        let tipMsg = 'Try clearing your search query or choosing a broader difficulty or 
+topic.';
+  dsa_dashboard.js:3688:
+  dsa_dashboard.js:3689:        if (this.selectedStatus === 'bookmarked') {
+  dsa_dashboard.js:3690:          emptyMsg = 'No bookmarked problems found.';
+  dsa_dashboard.js:3691:          tipMsg = 'Click the ? icon on any problem in the catalog to bookmark it for quick 
+practice!';
+  dsa_dashboard.js:3692:        } else if (this.selectedStatus === 'review') {
+  dsa_dashboard.js:3693:          emptyMsg = 'Your review list is currently empty.';
+  dsa_dashboard.js:3694:          tipMsg = 'Click the ?? icon on problems you want to flag for targeted revision!';
+  dsa_dashboard.js:3695:        } else if (this.selectedStatus === 'with_notes') {
+  dsa_dashboard.js:3696:          emptyMsg = 'No problems with personal notes found.';
+  dsa_dashboard.js:3697:          tipMsg = 'Open any problem workspace and write notes to reinforce your learning!';
+  dsa_dashboard.js:3698:        } else if (this.selectedStatus === 'solved') {
+  dsa_dashboard.js:3699:          emptyMsg = 'No solved problems in this selection yet.';
+  dsa_dashboard.js:3700:          tipMsg = 'Pick a beginner problem from the roadmap to get your first green 
+checkmark!';
+  dsa_dashboard.js:3701:        } else if (this.searchQuery && this.searchQuery.trim()) {
+  dsa_dashboard.js:3702:          emptyMsg = `No problems found matching "${this.escapeHTML(this.searchQuery)}".`;
+  dsa_dashboard.js:3703:          tipMsg = 'Check your spelling or try searching by algorithmic pattern (e.g. "Two 
+Pointers", "Sliding Window").';
+  dsa_dashboard.js:3704:        }
+  dsa_dashboard.js:3705:
+  dsa_dashboard.js:3706:        return `
+  dsa_dashboard.js:3707:          <div class="empty-state-box dsa-empty-state-card">
+  dsa_dashboard.js:3708:            <div class="empty-state-icon">??</div>
+  dsa_dashboard.js:3709:            <h3 class="empty-state-heading">${emptyMsg}</h3>
+  dsa_dashboard.js:3710:            <p class="empty-state-text">${tipMsg}</p>
+
+
+

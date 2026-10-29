@@ -1,0 +1,17 @@
+
+The command exited with code 0.
+Output:
+
+app_build\app.js:76:    this.stepProgressLabel = document.getElementById("stepProgressLabel");
+app_build\app.js:77:    this.activeScopeBadge = document.getElementById("activeScopeBadge");
+app_build\app.js:762:      this.stepProgressLabel.textContent = "No steps";
+app_build\app.js:782:    this.stepProgressLabel.textContent = `Step ${this.currentStepIdx + 1} of ${total}  Substep 
+${this.currentSubstepIdx + 1}/${substeps.length}`;
+app_build\app.js:791:    [this.activeScopeBadge, this.teachScopeBadge].forEach((badge) => {
+app_build\dsa_dashboard.js:2593:      const navControls = document.querySelector('.nav-controls');
+app_build\dsa_dashboard.js:2594:      const secondaryActions = document.querySelector('.top-bar-secondary');
+app_build\dsa_dashboard.js:2595:      const stepLabel = document.getElementById('stepProgressLabel');
+app_build\dsa_dashboard.js:2596:      const scopeBadge = document.getElementById('activeScopeBadge');
+
+
+

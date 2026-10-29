@@ -1,0 +1,13 @@
+
+The command exited with code 0.
+Output:
+C:\Users\CVT\.gemini\antigravity\builtin\skills\ui-extension\references\template\sidecars\panel\styles.css
+C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\styles.css
+C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app_build\styles.css
+C:\Users\CVT\Desktop\portfolio\styles.css
+C:\Users\CVT\Desktop\portfolio_22_10_2026\styles.css
+C:\Users\CVT\Desktop\scripts\code_flow\.gemini\antigravity\builtin\skills\ui-extension\references\template\sidecars\panel\styles.css
+C:\Users\CVT\Desktop\scripts\code_flow\.gemini\antigravity\scratch\code-flow-visualizer\styles.css
+C:\Users\CVT\Desktop\scripts\friday_backup\portfolio\styles.css
+C:\Users\CVT\Desktop\scripts\portfolio\styles.css
+

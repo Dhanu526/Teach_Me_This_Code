@@ -1,0 +1,15 @@
+
+The command exited with code 1.
+Output:
+At line:27 char:25
++       constraints: [\"1 <= sentence.length <= 1000\"],
++                         ~
+The '<' operator is reserved for future use.
+At line:27 char:44
++       constraints: [\"1 <= sentence.length <= 1000\"],
++                                            ~
+The '<' operator is reserved for future use.
+    + CategoryInfo          : ParserError: (:) [], ParentContainsErrorRecordException
+    + FullyQualifiedErrorId : RedirectionNotSupported
+ 
+

@@ -1,0 +1,29 @@
+
+The command exited with code 0.
+Output:
+Result ok: true
+Steps count: 14
+Last step stdout: [ 'Indices: [0, 1]' ]
+Last step global scope: [
+  {
+    name: 'nums',
+    address: '@0x2000',
+    previous: '[2, 7, 11, 15]',
+    current: '[2, 7, 11, 15]',
+    rawValue: [ 2, 7, 11, 15 ],
+    rawObj: [ 2, 7, 11, 15 ],
+    type: 'list',
+    status: 'unchanged'
+  },
+  {
+    name: 'res',
+    address: '@0x2080',
+    previous: '[0, 1]',
+    current: '[0, 1]',
+    rawValue: [ 0, 1 ],
+    rawObj: [ 0, 1 ],
+    type: 'list',
+    status: 'unchanged'
+  }
+]
+

@@ -1,0 +1,40 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app_build\styles.css. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -6262,18 +6262,20 @@
+ 
+ .workspace-code-textarea {
+   width: 100%;
+-  min-height: 250px;
++  min-height: 480px;
++  height: 520px;
+   font-family: 'Fira Code', 'JetBrains Mono', 'Consolas', monospace;
+   font-size: 15.5px;
+-  line-height: 1.6;
+-  padding: 14px;
+-  border: 1px solid #cbd5e1;
+-  border-radius: var(--radius-md, 6px);
+-  background: #0f172a;
+-  color: #f8fafc;
++  line-height: 1.65;
++  padding: 18px 20px;
++  border: 1px solid #334155;
++  border-radius: var(--radius-md, 8px);
++  background: #131722;
++  color: #f1f5f9;
+   resize: vertical;
+   box-sizing: border-box;
+   tab-size: 4;
++  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.35);
+ }
+ 
+ .workspace-code-textarea:focus {
+@@ -6280,5 +6280,5 @@
+   border-color: #3b82f6;
+-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
++  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.35), 0 0 0 3px rgba(59, 130, 246, 0.3);
+ }
+ 
+ /* Test Results Panel */
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

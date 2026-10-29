@@ -1,0 +1,12 @@
+
+The command exited with code 0.
+Output:
+
+app_build\dsa_dashboard.js:1040:            if (!isNaN(id)) this.showProblemModal(id);
+app_build\dsa_dashboard.js:2513:    showProblemModal(id) {
+app_build\dsa_dashboard.js:2710:          this.showProblemModal(p.id);
+app_build\dsa_dashboard.js:2731:          this.showProblemModal(p.id);
+app_build\dsa_dashboard.js:2734:          this.showProblemModal(p.id);
+
+
+

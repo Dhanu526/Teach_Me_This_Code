@@ -1,0 +1,18 @@
+
+The command exited with code 0.
+Output:
+Total problems: 300
+1 1 Two Sum Arrays & Hashing
+3 242 Valid Anagram Arrays & Hashing
+33 15 3Sum Two Pointers
+52 3 Longest Substring Without Repeating Characters Sliding Window
+89 704 Binary Search Binary Search
+109 206 Reverse Linked List Linked List
+69 20 Valid Parentheses Stack
+187 78 Subsets Backtracking
+132 104 Maximum Depth of Binary Tree Trees
+205 200 Number of Islands Graphs
+239 70 Climbing Stairs 1-D Dynamic Programming
+251 53 Maximum Subarray 1-D Dynamic Programming
+10 136 Single Number Arrays & Hashing
+

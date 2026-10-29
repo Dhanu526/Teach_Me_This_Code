@@ -1,0 +1,23 @@
+Task: 4b927fe1-f9a3-4b3f-9f8a-92760e157eef/task-1845
+Status: RUNNING
+Log: C:\Users\CVT\.gemini\antigravity\brain\4b927fe1-f9a3-4b3f-9f8a-92760e157eef\.system_generated\tasks\task-1845.log
+Log output:
+<truncated 1521 lines>
+me of a cmdlet, function, script file, or operable 
+program. Check the spelling of the name, or if a path was included, verify that the path is correct and try again.
+At line:1 char:30
++ Get-Process | Where-Object { .ProcessName -match 'node|python|chrome| ...
++                              ~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+.ProcessName : The term '.ProcessName' is not recognized as the name of a cmdlet, function, script file, or operable 
+program. Check the spelling of the name, or if a path was included, verify that the path is correct and try again.
+At line:1 char:30
++ Get-Process | Where-Object { .ProcessName -match 'node|python|chrome| ...
++                              ~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (.ProcessName:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+
+Last progress: 0s ago

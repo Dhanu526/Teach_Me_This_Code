@@ -1,0 +1,17 @@
+
+The command exited with code 0.
+Output:
+
+app_build\styles.css:613:.code-textarea {
+app_build\styles.css:2750:  .code-textarea {
+app_build\styles.css:5285:.modal-notes-textarea {
+app_build\styles.css:5300:.modal-notes-textarea:focus {
+app_build\styles.css:5602:.import-json-textarea {
+app_build\styles.css:5617:.import-json-textarea:focus {
+app_build\styles.css:6263:.workspace-code-textarea {
+app_build\styles.css:6281:.workspace-code-textarea:focus {
+app_build\styles.css:7751:.import-progress-textarea {
+app_build\styles.css:7764:.import-progress-textarea:focus {
+
+
+

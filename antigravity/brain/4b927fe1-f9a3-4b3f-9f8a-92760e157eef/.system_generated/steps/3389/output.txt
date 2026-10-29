@@ -1,0 +1,356 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app_build\styles.css. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -6005,7 +6005,7 @@
+   color: white;
+   padding: 3px 9px;
+   border-radius: 12px;
+-  font-size: 10.5px;
++  font-size: 12px;
+   font-weight: 700;
+   text-transform: uppercase;
+   display: inline-block;
+@@ -6012,6 +6012,6 @@
+ 
+ .pattern-title-lg {
+-  font-size: 17px;
++  font-size: 20px;
+   font-weight: 700;
+   color: #166534;
+   margin: 8px 0 4px;
+@@ -6018,6 +6018,6 @@
+ 
+ .pattern-desc-lead {
+-  font-size: 13px;
++  font-size: 15px;
+   color: #14532d;
+   margin: 0;
+   line-height: 1.5;
+@@ -6043,7 +6043,7 @@
+ }
+ 
+ .pattern-subcard h4 {
+-  font-size: 12.5px;
++  font-size: 14.5px;
+   font-weight: 700;
+   margin: 0 0 6px 0;
+   color: #1e293b;
+@@ -6050,6 +6050,6 @@
+ 
+ .pattern-subcard p {
+-  font-size: 12.5px;
++  font-size: 14px;
+   color: #475569;
+   margin: 0;
+   line-height: 1.5;
+@@ -6063,9 +6063,9 @@
+ 
+ .pattern-steps-list li {
+   position: relative;
+-  padding-left: 28px;
+-  margin-bottom: 10px;
+-  font-size: 13px;
++  padding-left: 32px;
++  margin-bottom: 10px;
++  font-size: 15px;
+   color: #334155;
+   line-height: 1.5;
+ }
+@@ -6075,12 +6075,12 @@
+   position: absolute;
+   left: 0;
+   top: 1px;
+-  width: 18px;
+-  height: 18px;
+-  background: var(--primary-blue, #2563eb);
+-  color: white;
+-  border-radius: 50%;
+-  font-size: 10.5px;
++  width: 22px;
++  height: 22px;
++  background: var(--primary-blue, #2563eb);
++  color: white;
++  border-radius: 50%;
++  font-size: 12px;
+   font-weight: 700;
+   display: flex;
+   align-items: center;
+@@ -6091,7 +6091,7 @@
+   border: 1px dashed #cbd5e1;
+   border-radius: var(--radius-md, 6px);
+   padding: 14px;
+-  font-size: 12.5px;
++  font-size: 14.5px;
+   line-height: 1.6;
+   color: #334155;
+ }
+@@ -6116,7 +6116,7 @@
+ }
+ 
+ .editor-lang-badge {
+-  font-size: 11px;
++  font-size: 12.5px;
+   font-weight: 700;
+   background: var(--primary-blue, #2563eb);
+   color: white;
+@@ -6125,7 +6125,7 @@
+ }
+ 
+ .editor-autosave-indicator {
+-  font-size: 11px;
++  font-size: 12.5px;
+   color: #64748b;
+   font-style: italic;
+ }
+@@ -6133,10 +6133,10 @@
+   background: #16a34a;
+   color: white;
+   font-weight: 600;
+-  padding: 6px 14px;
+-  border-radius: var(--radius-md, 6px);
+-  border: none;
+-  font-size: 12.5px;
++  padding: 7px 16px;
++  border-radius: var(--radius-md, 6px);
++  border: none;
++  font-size: 14.5px;
+   cursor: pointer;
+   transition: all 0.15s;
+ }
+@@ -6148,10 +6148,10 @@
+   background: var(--primary-blue, #2563eb);
+   color: white;
+   font-weight: 600;
+-  padding: 6px 14px;
+-  border-radius: var(--radius-md, 6px);
+-  border: none;
+-  font-size: 12.5px;
++  padding: 7px 16px;
++  border-radius: var(--radius-md, 6px);
++  border: none;
++  font-size: 14.5px;
+   cursor: pointer;
+   transition: all 0.15s;
+ }
+@@ -6163,10 +6163,10 @@
+   background: #f1f5f9;
+   color: #475569;
+   font-weight: 500;
+-  padding: 6px 10px;
+-  border-radius: var(--radius-md, 6px);
+-  border: 1px solid #cbd5e1;
+-  font-size: 12px;
++  padding: 7px 12px;
++  border-radius: var(--radius-md, 6px);
++  border: 1px solid #cbd5e1;
++  font-size: 13.5px;
+   cursor: pointer;
+   transition: all 0.15s;
+ }
+@@ -6180,9 +6180,9 @@
+   color: #b45309;
+   border: 1px solid #fde68a;
+   font-weight: 600;
+-  padding: 6px 11px;
+-  border-radius: var(--radius-md, 6px);
+-  font-size: 12px;
++  padding: 7px 14px;
++  border-radius: var(--radius-md, 6px);
++  font-size: 13.5px;
+   cursor: pointer;
+   transition: all 0.15s;
+ }
+@@ -6195,9 +6195,9 @@
+   color: #7e22ce;
+   border: 1px solid #e9d5ff;
+   font-weight: 600;
+-  padding: 6px 11px;
+-  border-radius: var(--radius-md, 6px);
+-  font-size: 12px;
++  padding: 7px 14px;
++  border-radius: var(--radius-md, 6px);
++  font-size: 13.5px;
+   cursor: pointer;
+   transition: all 0.15s;
+ }
+@@ -6209,9 +6209,9 @@
+   width: 100%;
+   min-height: 250px;
+   font-family: 'Fira Code', 'JetBrains Mono', 'Consolas', monospace;
+-  font-size: 13px;
+-  line-height: 1.5;
+-  padding: 12px;
++  font-size: 15.5px;
++  line-height: 1.6;
++  padding: 14px;
+   border: 1px solid #cbd5e1;
+   border-radius: var(--radius-md, 6px);
+   background: #0f172a;
+@@ -6240,7 +6240,7 @@
+   justify-content: space-between;
+   align-items: center;
+   margin-bottom: 10px;
+-  font-size: 13px;
++  font-size: 15.5px;
+   font-weight: 700;
+   color: #1e293b;
+ }
+@@ -6247,6 +6247,6 @@
+ .tests-status-badge {
+-  font-size: 11.5px;
+-  padding: 2px 9px;
++  font-size: 13px;
++  padding: 2px 10px;
+   border-radius: 12px;
+   font-weight: 700;
+ }
+@@ -6267,9 +6267,9 @@
+ }
+ 
+ .test-result-card {
+-  padding: 10px 12px;
+-  border-radius: 6px;
+-  font-size: 12px;
++  padding: 10px 14px;
++  border-radius: 6px;
++  font-size: 14px;
+   border-left: 4px solid #cbd5e1;
+   background: white;
+   border-top: 1px solid #f1f5f9;
+@@ -6289,12 +6289,12 @@
+ .test-card-top {
+   font-weight: 700;
+   margin-bottom: 4px;
+-  font-size: 12px;
++  font-size: 14px;
+ }
+ 
+ .test-detail-row {
+-  margin-bottom: 2px;
+-  font-size: 12px;
++  margin-bottom: 3px;
++  font-size: 14px;
+   color: #334155;
+ }
+ 
+@@ -6301,8 +6301,8 @@
+   font-family: var(--font-mono, monospace);
+   background: rgba(0,0,0,0.05);
+-  padding: 1px 4px;
+-  border-radius: 3px;
+-  font-size: 11.5px;
++  padding: 2px 5px;
++  border-radius: 3px;
++  font-size: 13.5px;
+ }
+ 
+ .expected-code {
+@@ -6311,7 +6311,7 @@
+ 
+ .test-error-msg {
+   color: #dc2626;
+-  font-size: 12px;
++  font-size: 13.5px;
+   margin-top: 4px;
+   font-weight: 600;
+ }
+@@ -6331,7 +6331,7 @@
+   padding: 6px 12px;
+   background: #1e293b;
+   color: #94a3b8;
+-  font-size: 11px;
++  font-size: 12px;
+   font-weight: 600;
+   text-transform: uppercase;
+   letter-spacing: 0.5px;
+@@ -6340,7 +6340,7 @@
+   background: transparent;
+   border: none;
+   color: #94a3b8;
+-  font-size: 11px;
++  font-size: 12px;
+   cursor: pointer;
+   padding: 2px 6px;
+   border-radius: 3px;
+@@ -6354,7 +6354,7 @@
+ .workspace-console-body {
+   padding: 12px;
+   font-family: var(--font-mono, monospace);
+-  font-size: 12px;
++  font-size: 14px;
+   color: #e2e8f0;
+   max-height: 160px;
+   overflow-y: auto;
+@@ -6391,7 +6391,7 @@
+ }
+ 
+ .hint-badge {
+-  font-size: 11px;
++  font-size: 12.5px;
+   font-weight: 700;
+   color: #b45309;
+   text-transform: uppercase;
+@@ -6398,7 +6398,7 @@
+ }
+ 
+ .hint-content {
+-  font-size: 12.5px;
++  font-size: 14.5px;
+   color: #78350f;
+   line-height: 1.5;
+ }
+@@ -6408,9 +6408,9 @@
+   background: #fef3c7;
+   color: #92400e;
+   border: 1px solid #fde68a;
+-  padding: 4px 10px;
+-  border-radius: 4px;
+-  font-size: 11.5px;
++  padding: 5px 12px;
++  border-radius: 4px;
++  font-size: 13px;
+   font-weight: 600;
+   cursor: pointer;
+ }
+@@ -6435,7 +6435,7 @@
+ }
+ 
+ .verified-sol-badge {
+-  font-size: 11px;
++  font-size: 12.5px;
+   font-weight: 700;
+   color: #6b21a8;
+   background: #f3e8ff;
+@@ -6449,7 +6449,7 @@
+ }
+ 
+ .complexity-chip {
+-  font-size: 11px;
++  font-size: 12.5px;
+   font-weight: 600;
+   background: white;
+   border: 1px solid #e9d5ff;
+@@ -6460,7 +6460,7 @@
+ 
+ .ref-code-block {
+   font-family: var(--font-mono, monospace);
+-  font-size: 12.5px;
++  font-size: 14.5px;
+   background: #1e1e2e;
+   color: #cdd6f4;
+   padding: 12px;
+@@ -6480,9 +6480,9 @@
+   background: white;
+   border: 1px solid #cbd5e1;
+   color: #334155;
+-  padding: 6px 12px;
+-  border-radius: var(--radius-md, 6px);
+-  font-size: 12px;
++  padding: 6px 14px;
++  border-radius: var(--radius-md, 6px);
++  font-size: 13.5px;
+   font-weight: 600;
+   cursor: pointer;
+   transition: all 0.15s;
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

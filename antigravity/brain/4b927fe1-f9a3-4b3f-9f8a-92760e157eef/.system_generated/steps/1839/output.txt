@@ -1,0 +1,1 @@
+Encountered error in step execution: open C:/Users/CVT/.gemini/antigravity/scratch/code-flow-visualizer/app_build/index.html: The requested operation cannot be performed on a file with a user-mapped section open.

@@ -1,0 +1,7 @@
+
+The command exited with code 0.
+Output:
+LC 700 (Search in a Binary Search Tree): in catalog? num=True, title=True
+LC 1832 (Check if the Sentence Is Pangram): in catalog? num=False, title=False
+LC 2269 (Find the K-Beauty of a Number): in catalog? num=False, title=False
+

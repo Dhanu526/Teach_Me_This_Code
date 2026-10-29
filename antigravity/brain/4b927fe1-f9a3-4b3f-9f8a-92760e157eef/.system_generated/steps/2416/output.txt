@@ -1,0 +1,17 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app_build\dsa_dashboard.js. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -2746,9 +2746,9 @@
+     initRouter() {
+       if (typeof window === 'undefined') return;
+ 
+-      const handleRouting = () => {
++      this.handleHashRouting = (hashOverride) => {
+         try {
+-          const hash = (window.location && window.location.hash) ? window.location.hash : '';
++          const hash = hashOverride || ((window.location && window.location.hash) ? window.location.hash : '');
+           if (!hash) return;
+ 
+           // Match #dsa/problem/:id or #problem/:id -> Opens Workspace
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

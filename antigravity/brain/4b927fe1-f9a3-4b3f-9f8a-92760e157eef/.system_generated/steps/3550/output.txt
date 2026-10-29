@@ -1,0 +1,158 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app_build\app.js. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -841,9 +841,12 @@
+       }
+ 
+       const pointerHTML = isCurrent ? `<span class="code-gutter-pointer">▶</span>` : "";
++      const codeHtml = isCurrent
++        ? this.highlightLineWithFocus(rawLine, this.getActiveFocusSnippet(step, currentSubstep, rawLine))
++        : this.highlightPythonSyntax(rawLine);
+       row.innerHTML = `
+         <div class="code-gutter">${pointerHTML}<span>${lineNum}</span></div>
+-        <div class="code-syntax">${this.highlightPythonSyntax(rawLine)}${branchBadge}</div>
++        <div class="code-syntax">${codeHtml}${branchBadge}</div>
+       `;
+ 
+       row.addEventListener("click", () => {
+@@ -866,7 +866,8 @@
+   }
+ 
+   highlightPythonSyntax(line) {
+-    if (!line) return " ";
++    if (line === undefined || line === null) return " ";
++    if (line === "") return "";
+     let commentPart = "";
+     let codePart = line;
+     const hashIdx = line.indexOf("#");
+@@ -894,6 +894,117 @@
+     return highlighted + commentPart;
+   }
+ 
++  getActiveFocusSnippet(step, currentSubstep, rawLine) {
++    if (!step || !rawLine) return null;
++    const lineTrimmed = rawLine.trim();
++
++    // 1. Check active exprFrames (Thonny sub-expression frame)
++    if (step.exprFrames && step.exprFrames.length > 0) {
++      const subIdx = Math.max(0, Math.min(this.currentSubStepIdx || 0, step.exprFrames.length - 1));
++      const activeFrame = step.exprFrames[subIdx];
++      if (activeFrame) {
++        if (activeFrame.highlightSub && rawLine.includes(activeFrame.highlightSub.trim())) {
++          return activeFrame.highlightSub.trim();
++        }
++        if (activeFrame.expr && rawLine.includes(activeFrame.expr.trim())) {
++          return activeFrame.expr.trim();
++        }
++      }
++    }
++
++    // 2. Condition steps: highlight the comparison expression (e.g., "c >= ans", "c < 0", "k <= 1", "arr[mid] == target")
++    if (step.condition && step.condition.expr) {
++      const condExpr = step.condition.expr.trim();
++      if (rawLine.includes(condExpr)) {
++        return condExpr;
++      }
++      if (step.condition.leftExpr && rawLine.includes(step.condition.leftExpr.trim())) {
++        return step.condition.leftExpr.trim();
++      }
++    }
++
++    // 3. Assignment steps: highlight the RHS being computed or the target variable being updated
++    if (step.operationDetail) {
++      const op = step.operationDetail;
++      if (op.rhsExpr && rawLine.includes(op.rhsExpr.trim())) {
++        return op.rhsExpr.trim();
++      }
++      if (op.target && rawLine.includes(op.target.trim())) {
++        const aug = `${op.target} +=`;
++        if (rawLine.includes(aug)) {
++          const afterAug = rawLine.slice(rawLine.indexOf(aug) + aug.length).replace(/#.*$/, "").trim();
++          if (afterAug && rawLine.includes(afterAug)) return afterAug;
++        }
++      }
++    }
++
++    // 4. Return statement: highlight what is being returned
++    const returnMatch = lineTrimmed.match(/^return\s+(.+)$/);
++    if (returnMatch && returnMatch[1]) {
++      const retPart = returnMatch[1].replace(/#.*$/, "").trim();
++      if (rawLine.includes(retPart)) {
++        return retPart;
++      }
++    }
++
++    // 5. Loop statement: highlight loop variable or range
++    if (step.loop) {
++      if (step.loop.iterableExpr && rawLine.includes(step.loop.iterableExpr.trim())) {
++        return step.loop.iterableExpr.trim();
++      }
++      if (step.loop.iterVar && rawLine.includes(step.loop.iterVar.trim())) {
++        return step.loop.iterVar.trim();
++      }
++    }
++
++    // 6. Function / Method calls on this line (e.g., fact(3), factorial(k-1), print(...), s.push(10))
++    const callMatch = lineTrimmed.match(/([a-zA-Z_]\w*\s*\([^)]*\))/);
++    if (callMatch && rawLine.includes(callMatch[1])) {
++      return callMatch[1].trim();
++    }
++
++    // 7. If line contains an assignment '=', highlight RHS
++    const eqIdx = rawLine.indexOf("=");
++    if (eqIdx !== -1 && !rawLine.includes("==") && !rawLine.includes("<=") && !rawLine.includes(">=") && !rawLine.includes("!=")) {
++      const rhs = rawLine.slice(eqIdx + 1).replace(/#.*$/, "").trim();
++      if (rhs && rawLine.includes(rhs)) {
++        return rhs;
++      }
++    }
++
++    return null;
++  }
++
++  highlightLineWithFocus(line, activeSnippet) {
++    if (line === undefined || line === null) return " ";
++    if (line === "") return "";
++    if (!activeSnippet || !line.includes(activeSnippet)) {
++      return this.highlightPythonSyntax(line);
++    }
++
++    let commentPart = "";
++    let codePart = line;
++    const hashIdx = line.indexOf("#");
++    if (hashIdx !== -1) {
++      codePart = line.slice(0, hashIdx);
++      commentPart = `<span class="syn-com">${this.escapeHTML(line.slice(hashIdx))}</span>`;
++    }
++
++    const snippetIdx = codePart.indexOf(activeSnippet);
++    if (snippetIdx === -1) {
++      return this.highlightPythonSyntax(line);
++    }
++
++    const before = codePart.slice(0, snippetIdx);
++    const after = codePart.slice(snippetIdx + activeSnippet.length);
++
++    const beforeHtml = this.highlightPythonSyntax(before);
++    const snippetHtml = `<span class="thonny-token-box">${this.highlightPythonSyntax(activeSnippet)}</span>`;
++    const afterHtml = this.highlightPythonSyntax(after);
++
++    return beforeHtml + snippetHtml + afterHtml + commentPart;
++  }
++
+   /* =========================================================
+      AREA 2: TEACHING AREA, QUICK ITERATION BAR & THONNY STEPPER
+      ========================================================= */
+@@ -903,7 +903,9 @@
+     this.renderQuickIterationBar();
+ 
+     this.teachStepTitle.textContent = lesson.title || step.teacherLesson.title;
+-    this.teachCodeBox.innerHTML = this.highlightPythonSyntax(lesson.codeSnippet || step.codeText);
++    const teachLine = lesson.codeSnippet || step.codeText;
++    const teachFocus = this.getActiveFocusSnippet(step, currentSubstep, teachLine);
++    this.teachCodeBox.innerHTML = this.highlightLineWithFocus(teachLine, teachFocus);
+ 
+     // Phase 4: Interactive Learning Prediction Card (Optional)
+     this.renderInteractivePredictCard(step, currentSubstep);
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

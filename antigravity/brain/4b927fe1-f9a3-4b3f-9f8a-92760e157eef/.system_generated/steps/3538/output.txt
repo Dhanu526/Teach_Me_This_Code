@@ -1,0 +1,23 @@
+
+The command exited with code 0.
+Output:
+
+  app_build\styles.css:570:
+  app_build\styles.css:571:/* Thonny-Style Active Sub-Expression / Word Box */
+> app_build\styles.css:572:.thonny-token-box {
+  app_build\styles.css:573:  display: inline-block;
+  app_build\styles.css:574:  padding: 1px 6px;
+  app_build\styles.css:575:  margin: 0 2px;
+  app_build\styles.css:576:  border: 1.5px solid #0f172a;
+  app_build\styles.css:577:  background: #fef08a;
+  app_build\styles.css:578:  color: #0f172a;
+  app_build\styles.css:579:  font-weight: 700;
+  app_build\styles.css:580:  border-radius: 4px;
+  app_build\styles.css:581:  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(254, 240, 138, 0.5);
+  app_build\styles.css:582:  animation: thonnyTokenPop calc(0.3s * var(--anim-speed-factor, 1)) cubic-bezier(0.34, 
+1.56, 0.64, 1);
+  app_build\styles.css:583:  vertical-align: baseline;
+  app_build\styles.css:584:  position: relative;
+
+
+

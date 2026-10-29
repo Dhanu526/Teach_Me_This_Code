@@ -1,0 +1,12 @@
+
+The command exited with code 0.
+Output:
+611: this.openProblemWorkspace(stats.nextUnsolved.id);
+613: this.openProblemWorkspace(stage.milestoneId);
+995: if (!isNaN(id)) this.openProblemWorkspace(id);
+1422: this.openProblemWorkspace(this.activeVisualizerProblemId);
+1463: openProblemWorkspace(problemId) {
+3263: this.openProblemWorkspace(p.id);
+3301: this.openProblemWorkspace(id);
+3304: this.openProblemWorkspace(id);
+

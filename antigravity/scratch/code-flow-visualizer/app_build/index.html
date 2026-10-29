@@ -17,11 +17,13 @@
     <div class="top-bar-primary">
       <div class="brand-area">
         <span class="teacher-badge">Teach Me This Code</span>
-        <span id="stepProgressLabel" class="step-progress-label">Step 1 of 50</span>
-        <span id="activeScopeBadge" class="scope-pill scope-global">GLOBAL SCOPE</span>
+        <div class="nav-view-switcher" role="tablist" aria-label="Main Navigation">
+          <button id="btnViewVisualizer" class="nav-tab-btn active" role="tab" aria-selected="true" title="Interactive Step-by-Step Execution Visualizer">👁️ Code Visualizer</button>
+          <button id="btnViewDsa" class="nav-tab-btn" role="tab" aria-selected="false" title="DSA Learning Dashboard & 300 Curated Problems">📚 DSA Learning</button>
+        </div>
       </div>
 
-      <!-- Simple Navigation Controls + Thonny Sub-Expression Stepper -->
+      <!-- Centered Step Navigation Controls + Thonny Sub-Expression Stepper -->
       <nav class="nav-controls" aria-label="Step Navigation">
         <button id="btnPrev" class="btn-nav" title="Go back one step (Left Arrow)">← Previous</button>
         <button id="btnSubStep" class="btn-nav btn-substep" title="Step through internal sub-expressions on this line (F7)">🔍 Sub-Expr (F7)</button>
@@ -29,9 +31,20 @@
         <button id="btnAutoPlay" class="btn-nav" title="Automatically step through the code">▶ Auto Play</button>
         <button id="btnRestart" class="btn-nav" title="Start over from Step 1">↺ Restart</button>
       </nav>
+
+      <div class="top-bar-status-area">
+        <span id="stepProgressLabel" class="step-progress-label">Step 1 of 50</span>
+        <span id="activeScopeBadge" class="scope-pill scope-global">GLOBAL SCOPE</span>
+      </div>
     </div>
 
     <div class="top-bar-secondary">
+      <div class="top-bar-hints" aria-label="Keyboard Shortcuts">
+        <span class="kbd-hint"><kbd>←</kbd> Prev</span>
+        <span class="kbd-hint"><kbd>→</kbd> Next Step</span>
+        <span class="kbd-hint"><kbd>F7</kbd> Sub-Expr</span>
+        <span class="kbd-hint"><kbd>Space</kbd> Auto Play</span>
+      </div>
       <div class="secondary-actions">
         <button id="btnToggleAnim" class="btn-subtle active" title="Toggle visual animations on or off">✨ Animations: ON</button>
         <button id="btnToggleQuiz" class="btn-subtle" title="Toggle interactive prediction questions on or off">🎯 Predict: OFF</button>
@@ -43,8 +56,13 @@
     </div>
   </header>
 
-  <!-- Error / Validation Banner (Hidden unless there is an error) -->
-  <div id="validationBanner" class="validation-banner hidden"></div>
+  <!-- Container for Code Visualizer View -->
+  <div id="visualizerViewContainer" class="visualizer-view-container">
+    <!-- Active DSA Problem Banner (shown when practicing a problem from DSA library) -->
+    <div id="dsaProblemActiveBanner" class="dsa-active-banner hidden"></div>
+
+    <!-- Error / Validation Banner (Hidden unless there is an error) -->
+    <div id="validationBanner" class="validation-banner hidden"></div>
 
   <!-- Dynamic Overview Banner -->
   <div class="overview-strip">
@@ -247,6 +265,12 @@
         <div class="memory-section-title">3. Console Output (print)</div>
         <pre id="stdoutBox" class="stdout-box"></pre>
       </div>
+
+      <!-- Memory Reference Model Insights Footer (fills vertical workspace cleanly) -->
+      <div class="memory-model-footer">
+        <span class="mem-footer-title">🧠 Memory Reference Insights</span>
+        <span class="mem-footer-text">Variables are lightweight name bindings storing memory addresses. They point to heap objects; reassignments update the pointer address.</span>
+      </div>
     </section>
 
   </main>
@@ -330,7 +354,15 @@
       </div>
     </div>
   </section>
+  </div>
+  <!-- End of visualizerViewContainer -->
 
+  <!-- Main Container for DSA Learning View -->
+  <main id="dsaLearningContainer" class="dsa-learning-container hidden" aria-label="DSA Learning Academy"></main>
+
+  <script src="dsa_problems.js"></script>
+  <script src="dsa_solutions_data.js"></script>
+  <script src="dsa_dashboard.js"></script>
   <script src="engine.js"></script>
   <script src="explainer.js"></script>
   <script src="app.js"></script>

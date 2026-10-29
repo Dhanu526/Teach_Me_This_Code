@@ -1,0 +1,7 @@
+
+The command exited with code 0.
+Output:
+Kadane with indented blocks: true Steps: 47
+Binary Search with indented blocks: true Steps: 15
+Valid Palindrome with indented blocks: false Steps: 5
+

@@ -1,0 +1,12 @@
+
+The command exited with code 0.
+Output:
+Cleaned up examples for all 300 problems!
+Problem #1 example: [
+  {
+    "input": "nums = [2, 7, 11, 15]",
+    "output": "Computed via twoSum(nums, 9)",
+    "explanation": "Step through the execution in the visualizer to inspect how variables mutate to produce the result."
+  }
+]
+

@@ -1,0 +1,18 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\brain\4b927fe1-f9a3-4b3f-9f8a-92760e157eef\scratch\test_dsa_phase2.js. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -216,9 +216,10 @@
+   // 4C: Browse by Algorithmic Pattern
+   dash.selectedTopic = "all";
+   dash.selectedDifficulty = "all";
+-  dash.selectedPattern = "Two Pointers: Left & Right Converge";
++  const samplePattern = dash.getAllAlgorithmicPatterns()[0];
++  dash.selectedPattern = samplePattern;
+   let patternResults = dash.getFilteredProblems();
+-  assert(patternResults.length > 0 && patternResults.every(p => p.pattern === "Two Pointers: Left & Right Converge"), "Browse by Algorithmic Pattern: correctly filters by specific pattern");
++  assert(patternResults.length > 0 && patternResults.every(p => p.pattern === samplePattern), `Browse by Algorithmic Pattern: correctly filters by specific pattern ('${samplePattern}')`);
+ 
+   // 4D: Browse by Learning Status
+   dash.selectedPattern = "all";
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

@@ -1,0 +1,24 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app_build\dsa_dashboard.js. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -3460,6 +3460,11 @@
+                   <div class="workspace-solution-card" id="workspaceSolutionCard">
+                     <div class="solution-card-header">
+                       <span class="solution-unlocked-tag">🔓 Reference Solution Unlocked</span>
++                      <div class="solution-meta-chips">
++                        <span class="complexity-chip">Time: ${this.escapeHTML(p.timeComplexity || 'O(n)')}</span>
++                        <span class="complexity-chip">Space: ${this.escapeHTML(p.spaceComplexity || 'O(n)')}</span>
++                        <span class="verified-sol-badge">${p.solutionVerified ? '✅ Verified Python Reference' : '💡 Optimal Reference'}</span>
++                      </div>
+                       <div class="solution-header-actions">
+                         <button class="btn-copy-sol" id="btnCopyRefSolution">📋 Copy to Editor</button>
+                         <button class="btn-vis-sol" id="btnVisRefSolution">▶ Step in Visualizer</button>
+@@ -3466,5 +3466,5 @@
+                     </div>
+-                    <pre class="dsa-code-preview"><code>${this.escapeHTML(p.referenceSolution || p.starterCode)}</code></pre>
++                    <pre class="dsa-code-preview ref-code-block"><code>${this.escapeHTML(p.referenceSolution || p.starterCode)}</code></pre>
+                   </div>
+                 ` : ''}
+ 
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

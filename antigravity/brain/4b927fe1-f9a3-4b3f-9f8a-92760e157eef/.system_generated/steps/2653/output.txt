@@ -1,0 +1,16 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app_build\dsa_dashboard.js. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -1391,6 +1391,10 @@
+             this.selectedPattern = e.target.value;
+             this.currentPage = 1;
+             this.renderProblemTableOnly();
++          } else if (e.target.id === 'dsaStageSelect') {
++            this.selectedStage = e.target.value;
++            this.currentPage = 1;
++            this.renderProblemTableOnly();
+           } else if (e.target.id === 'dsaSortSelect' || e.target.id === 'topicDetailSortSelect') {
+             this.selectedSort = e.target.value;
+             this.currentPage = 1;
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

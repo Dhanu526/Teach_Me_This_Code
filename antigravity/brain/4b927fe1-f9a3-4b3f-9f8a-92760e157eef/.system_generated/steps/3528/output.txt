@@ -1,0 +1,144 @@
+
+The command exited with code 0.
+Output:
+
+> app_build\engine.js:523:        exprFrames: [
+  app_build\engine.js:524:          {
+  app_build\engine.js:525:            expr: rawLines[errLine - 1] ? rawLines[errLine - 1].trim() : "",
+  app_build\engine.js:526:            focus: `Error: ${errMsg}`,
+  app_build\engine.js:527:            shortCircuited: false
+  app_build\engine.js:528:          }
+> app_build\engine.js:599:      exprFrames:
+> app_build\engine.js:600:        payload.exprFrames && payload.exprFrames.length
+> app_build\engine.js:601:          ? payload.exprFrames
+  app_build\engine.js:602:          : [{ expr: payload.codeText, focus: "Statement executed", shortCircuited: false }],
+  app_build\engine.js:603:      scopeFrames,
+  app_build\engine.js:604:      memoryModel,
+  app_build\engine.js:605:      returnValue: payload.returnValue !== undefined ? payload.returnValue : null,
+  app_build\engine.js:606:      stdout: payload.stdout || []
+> app_build\engine.js:865:        exprFrames: [{ expr: node.text, focus: `Register class ${node.className}`, 
+shortCircuited: false }],
+  app_build\engine.js:866:        returnValue: null,
+  app_build\engine.js:867:        stdout: [...stdout]
+  app_build\engine.js:868:      });
+  app_build\engine.js:869:
+  app_build\engine.js:870:      for (const child of node.body) {
+> app_build\engine.js:891:            exprFrames: [{ expr: child.text, focus: `Bind method 
+${node.className}.${child.funcName}`, shortCircuited: false }],
+  app_build\engine.js:892:            returnValue: null,
+  app_build\engine.js:893:            stdout: [...stdout]
+  app_build\engine.js:894:          });
+  app_build\engine.js:895:        }
+  app_build\engine.js:896:      }
+> app_build\engine.js:913:        exprFrames: [{ expr: node.text, focus: `Register function ${node.funcName} in Global 
+Scope`, shortCircuited: false }],
+  app_build\engine.js:914:        returnValue: null,
+  app_build\engine.js:915:        stdout: [...stdout]
+  app_build\engine.js:916:      });
+  app_build\engine.js:917:      return null;
+  app_build\engine.js:918:    }
+> app_build\engine.js:942:            exprFrames: [
+  app_build\engine.js:943:              { expr: "else:", focus: "All previous if/elif conditions evaluated to False", 
+shortCircuited: false }
+  app_build\engine.js:944:            ],
+  app_build\engine.js:945:            returnValue: null,
+  app_build\engine.js:946:            stdout: [...stdout]
+  app_build\engine.js:947:          });
+> app_build\engine.js:976:            exprFrames: evalRes.frames,
+  app_build\engine.js:977:            returnValue: null,
+  app_build\engine.js:978:            stdout: [...stdout]
+  app_build\engine.js:979:          });
+  app_build\engine.js:980:          if (condInfo.result) {
+  app_build\engine.js:981:            return this.executeSuite(branch.body, callStack, functions, classes, steps, 
+stdout, loopStack);
+> app_build\engine.js:1123:          exprFrames: loopFrames,
+  app_build\engine.js:1124:          returnValue: null,
+  app_build\engine.js:1125:          stdout: [...stdout]
+  app_build\engine.js:1126:        });
+  app_build\engine.js:1127:
+  app_build\engine.js:1128:        const bodyRes = this.executeSuite(
+> app_build\engine.js:1184:        exprFrames: [
+  app_build\engine.js:1185:          {
+  app_build\engine.js:1186:            expr: node.text,
+  app_build\engine.js:1187:            focus: `Sequence ${node.iterExpr} exhausted 
+(${listItems.length}/${listItems.length} items done)`,
+  app_build\engine.js:1188:            shortCircuited: false
+  app_build\engine.js:1189:          }
+> app_build\engine.js:1249:          exprFrames: evalRes.frames,
+  app_build\engine.js:1250:          returnValue: null,
+  app_build\engine.js:1251:          stdout: [...stdout]
+  app_build\engine.js:1252:        });
+  app_build\engine.js:1253:
+  app_build\engine.js:1254:        if (!condInfo.result) break;
+> app_build\engine.js:1328:        exprFrames: [{ expr: "break", focus: "Exit active loop immediately", 
+shortCircuited: false }],
+  app_build\engine.js:1329:        returnValue: null,
+  app_build\engine.js:1330:        stdout: [...stdout]
+  app_build\engine.js:1331:      });
+  app_build\engine.js:1332:      return { broke: true };
+  app_build\engine.js:1333:    }
+> app_build\engine.js:1348:        exprFrames: [{ expr: "continue", focus: "Jump to next loop iteration", 
+shortCircuited: false }],
+  app_build\engine.js:1349:        returnValue: null,
+  app_build\engine.js:1350:        stdout: [...stdout]
+  app_build\engine.js:1351:      });
+  app_build\engine.js:1352:      return { continued: true };
+  app_build\engine.js:1353:    }
+> app_build\engine.js:1391:        exprFrames: evalRes.frames,
+  app_build\engine.js:1392:        returnValue: this.formatVal(retVal),
+  app_build\engine.js:1393:        stdout: [...stdout]
+  app_build\engine.js:1394:      });
+  app_build\engine.js:1395:      return { returned: true, value: retVal };
+  app_build\engine.js:1396:    }
+> app_build\engine.js:1447:        exprFrames: printFrames,
+  app_build\engine.js:1448:        returnValue: null,
+  app_build\engine.js:1449:        stdout: [...stdout]
+  app_build\engine.js:1450:      });
+  app_build\engine.js:1451:      return null;
+  app_build\engine.js:1452:    }
+> app_build\engine.js:1508:          exprFrames: [
+  app_build\engine.js:1509:            { expr: text, focus: `Call .${methodName}() on ${objPath}`, shortCircuited: 
+false },
+  app_build\engine.js:1510:            {
+  app_build\engine.js:1511:              expr: `${objPath} = ${this.formatVal(targetObj)}`,
+  app_build\engine.js:1512:              focus: `Heap list ${objPath} mutated in-place  ${this.formatVal(targetObj)}`,
+  app_build\engine.js:1513:              shortCircuited: false
+> app_build\engine.js:1612:        exprFrames: frames,
+  app_build\engine.js:1613:        returnValue: null,
+  app_build\engine.js:1614:        stdout: [...stdout]
+  app_build\engine.js:1615:      });
+  app_build\engine.js:1616:      return null;
+  app_build\engine.js:1617:    }
+> app_build\engine.js:1706:          exprFrames: tupleFrames,
+  app_build\engine.js:1707:          returnValue: null,
+  app_build\engine.js:1708:          stdout: [...stdout]
+  app_build\engine.js:1709:        });
+  app_build\engine.js:1710:        return null;
+  app_build\engine.js:1711:      }
+> app_build\engine.js:1759:            exprFrames: evalRes.frames,
+  app_build\engine.js:1760:            returnValue: null,
+  app_build\engine.js:1761:            stdout: [...stdout]
+  app_build\engine.js:1762:          });
+  app_build\engine.js:1763:        }
+  app_build\engine.js:1764:        return null;
+> app_build\engine.js:1822:            exprFrames: evalRes.frames,
+  app_build\engine.js:1823:            returnValue: null,
+  app_build\engine.js:1824:            stdout: [...stdout]
+  app_build\engine.js:1825:          });
+  app_build\engine.js:1826:        }
+  app_build\engine.js:1827:        return null;
+> app_build\engine.js:1884:        exprFrames: evalRes.frames,
+  app_build\engine.js:1885:        returnValue: null,
+  app_build\engine.js:1886:        stdout: [...stdout]
+  app_build\engine.js:1887:      });
+  app_build\engine.js:1888:      return null;
+  app_build\engine.js:1889:    }
+> app_build\engine.js:2002:      exprFrames: [
+  app_build\engine.js:2003:        {
+  app_build\engine.js:2004:          expr: `${qualifiedName}(${rawArgs.join(", ")})`,
+  app_build\engine.js:2005:          focus: `Enter Local Scope for ${qualifiedName}()`,
+  app_build\engine.js:2006:          shortCircuited: false
+  app_build\engine.js:2007:        },
+
+
+

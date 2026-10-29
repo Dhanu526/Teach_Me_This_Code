@@ -1,0 +1,16 @@
+
+The command exited with code 0.
+Output:
+Added beginnerMode to constructor
+Added beginnerMode: true to loadSettings()
+Added toggleBeginnerMode, formatComplexityForBeginner, formatEducationalError, renderBreadcrumbs
+Added Beginner Mode toggle button to header
+Added breadcrumbs to <div class="dsa-view-content ${this.curr...
+Added breadcrumbs to <div class="dsa-view-content ${this.curr...
+Added breadcrumbs to <div class="dsa-view-content ${this.curr...
+Added breadcrumbs to <div class="dsa-view-content ${this.curr...
+Added breadcrumbs to <div class="dsa-view-content ${this.curr...
+Added prev/next navigation to workspace
+Updated workspace complexities with beginner formatting
+[SUCCESS] Phase 9 additions successfully written to dsa_dashboard.js
+

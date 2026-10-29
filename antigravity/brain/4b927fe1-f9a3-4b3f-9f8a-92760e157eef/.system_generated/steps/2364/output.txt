@@ -1,0 +1,6 @@
+
+The command exited with code 0.
+Output:
+Total: 300
+Has def: 300
+

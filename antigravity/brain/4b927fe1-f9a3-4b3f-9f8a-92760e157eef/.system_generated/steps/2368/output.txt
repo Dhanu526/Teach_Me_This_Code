@@ -1,0 +1,24 @@
+
+The command exited with code 0.
+Output:
+ID: 1 Title: Two Sum
+  Ref lines count: 11
+  Ref first line: def twoSum(nums, target):
+  Ref last line: print("Indices:", twoSum(nums, 9))
+ID: 2 Title: Contains Duplicate
+  Ref lines count: 9
+  Ref first line: def containsDuplicate(nums):
+  Ref last line: print("Has duplicate:", containsDuplicate([1, 2, 3, 1]))
+ID: 3 Title: Valid Anagram
+  Ref lines count: 12
+  Ref first line: def isAnagram(s, t):
+  Ref last line: print("Is anagram:", isAnagram("anagram", "nagaram"))
+ID: 4 Title: Group Anagrams
+  Ref lines count: 10
+  Ref first line: def groupAnagrams(strs):
+  Ref last line: print("Groups:", groupAnagrams(["eat", "tea", "tan", "ate", "nat", "bat"]))
+ID: 5 Title: Top K Frequent Elements
+  Ref lines count: 8
+  Ref first line: def topKFrequent(nums, k):
+  Ref last line: print("Top K:", topKFrequent([1, 1, 1, 2, 2, 3], 2))
+

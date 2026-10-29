@@ -1,0 +1,10 @@
+
+The command exited with code 0.
+Output:
+750: if (!isNaN(id)) this.openProblemWorkspace(id);
+1131: this.openProblemWorkspace(this.activeVisualizerProblemId);
+1172: openProblemWorkspace(problemId) {
+2754: this.openProblemWorkspace(p.id);
+2792: this.openProblemWorkspace(id);
+2795: this.openProblemWorkspace(id);
+
