@@ -1,0 +1,67 @@
+
+The command exited with code 0.
+Output:
+
+dsa_dashboard.js:14:    constructor(dbName = 'TeachMeThisCode_DSA_DB', storeName = 'progress_snapshots') {
+dsa_dashboard.js:21:    init() {
+dsa_dashboard.js:39:    saveSnapshot(key, payload) {
+dsa_dashboard.js:54:    loadSnapshot(key) {
+dsa_dashboard.js:466:    constructor(options = {}) {
+dsa_dashboard.js:532:    loadSettings() {
+dsa_dashboard.js:550:    saveSettings(newSettings) {
+dsa_dashboard.js:565:    exportProgressData() {
+dsa_dashboard.js:609:    downloadProgressBackup() {
+dsa_dashboard.js:637:    copyProgressBackupToClipboard() {
+dsa_dashboard.js:646:    validateProgressImport(rawInput) {
+dsa_dashboard.js:822:    importProgress(rawInput, options = { mode: 'merge' }) {
+dsa_dashboard.js:918:    resetProgress(confirmedPassword) {
+dsa_dashboard.js:947:    showProgressStorageModal() {
+dsa_dashboard.js:1314:    loadUserCodeCache() {
+dsa_dashboard.js:1323:    saveUserCode(problemId, codeText) {
+dsa_dashboard.js:1331:    getUserCode(problemId) {
+dsa_dashboard.js:1339:    loadProgress() {
+dsa_dashboard.js:1368:    saveProgress() {
+dsa_dashboard.js:1378:    loadActiveStage() {
+dsa_dashboard.js:1387:    setActiveStage(stageNum) {
+dsa_dashboard.js:1397:    getStageProblems(stage) {
+dsa_dashboard.js:1415:    getStageStats(stage) {
+dsa_dashboard.js:1467:    practiceNextInStage(stageNum) {
+dsa_dashboard.js:1478:    exploreStageProblems(stageNum) {
+dsa_dashboard.js:1494:    renderRoadmapTimelineOnly() {
+dsa_dashboard.js:1503:    getProblemStatus(id) {
+dsa_dashboard.js:1510:    isBookmarked(id) {
+dsa_dashboard.js:1514:    isReview(id) {
+dsa_dashboard.js:1518:    toggleReview(id) {
+dsa_dashboard.js:1531:    markReview(id) {
+dsa_dashboard.js:1541:    unmarkReview(id) {
+dsa_dashboard.js:1552:    updateReviewMetricsUI() {
+dsa_dashboard.js:1559:    getNote(id) {
+dsa_dashboard.js:1563:    hasNote(id) {
+dsa_dashboard.js:1567:    saveNote(id, noteText) {
+dsa_dashboard.js:1579:    toggleBookmark(id) {
+dsa_dashboard.js:1590:    markAttempted(id) {
+dsa_dashboard.js:1600:    markSolved(id) {
+dsa_dashboard.js:1615:    toggleSolved(id) {
+dsa_dashboard.js:1629:    addHistoryEntry(id, action) {
+dsa_dashboard.js:1646:    computeStats() {
+dsa_dashboard.js:1683:    computeTopicStats(topicName) {
+dsa_dashboard.js:1737:    getAllAlgorithmicPatterns() {
+dsa_dashboard.js:1748:    initDOM() {
+dsa_dashboard.js:1761:    bindEvents() {
+dsa_dashboard.js:2309:    updateFilterPillUI(selector, activeValue) {
+dsa_dashboard.js:2322:    openTopicDetailPage(topicName) {
+dsa_dashboard.js:2338:    openProblemWorkspace(problemId) {
+dsa_dashboard.js:2372:    switchView(viewName) {
+dsa_dashboard.js:2409:    setVisualizerControlsVisible(visible) {
+dsa_dashboard.js:2424:    loadAndVisualizeProblem(id, codeOverride = null) {
+dsa_dashboard.js:2450:    updateVisualizerActiveBanner() {
+dsa_dashboard.js:2493:    render() {
+dsa_dashboard.js:2589:    renderMetricsCards(stats) {
+dsa_dashboard.js:2649:    renderContinueLearningCard(stats) {
+dsa_dashboard.js:2706:    renderDifficultyCard(stats) {
+dsa_dashboard.js:2757:    renderRecentActivityCard() {
+dsa_dashboard.js:2813:    renderRoadmapOverviewCard(stats) {
+dsa_dashboard.js:2870:    renderDashboardTopicHighlights() {
+
+
+

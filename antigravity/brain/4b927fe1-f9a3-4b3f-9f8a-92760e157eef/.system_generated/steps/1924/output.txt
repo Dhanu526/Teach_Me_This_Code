@@ -1,0 +1,52 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\brain\4b927fe1-f9a3-4b3f-9f8a-92760e157eef\scratch\test_dsa_phase1.js. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -216,25 +216,30 @@
+   const PythonExecutionEngine = sandbox.window.PythonExecutionEngine;
+   const engine = new PythonExecutionEngine();
+ 
+-  // Test 1: Two Sum (Arrays & Hashing)
+-  const twoSumProb = library.find(p => p.title === "Two Sum");
++  // Test 1: Two Sum (LC 1 - Arrays & Hashing)
++  const twoSumProb = library.find(p => p.leetcodeNumber === 1);
+   const twoSumTrace = engine.trace(twoSumProb.starterCode, "");
+-  assert(twoSumTrace.ok === true && twoSumTrace.steps && twoSumTrace.steps.length > 5, "Two Sum executes successfully through engine");
+-
+-  // Test 2: Valid Palindrome (Two Pointers)
+-  const palProb = library.find(p => p.title === "Valid Palindrome");
+-  const palTrace = engine.trace(palProb.starterCode, "");
+-  assert(palTrace.ok === true && palTrace.steps && palTrace.steps.length > 5, "Valid Palindrome executes successfully through engine");
+-
+-  // Test 3: Binary Search
+-  const bsProb = library.find(p => p.title === "Binary Search");
++  assert(twoSumTrace.ok === true && twoSumTrace.steps && twoSumTrace.steps.length > 5, "Two Sum (LC 1) executes successfully through engine");
++
++  // Test 2: Best Time to Buy and Sell Stock (LC 121 - Arrays / Sliding Window)
++  const stockProb = library.find(p => p.leetcodeNumber === 121);
++  const stockTrace = engine.trace(stockProb.starterCode, "");
++  assert(stockTrace.ok === true && stockTrace.steps && stockTrace.steps.length > 5, "Best Time to Buy and Sell Stock (LC 121) executes successfully through engine");
++
++  // Test 3: Container With Most Water (LC 11 - Two Pointers)
++  const containerProb = library.find(p => p.leetcodeNumber === 11);
++  const containerTrace = engine.trace(containerProb.starterCode, "");
++  assert(containerTrace.ok === true && containerTrace.steps && containerTrace.steps.length > 5, "Container With Most Water (LC 11) executes successfully through engine");
++
++  // Test 4: Binary Search (LC 704 - Binary Search)
++  const bsProb = library.find(p => p.leetcodeNumber === 704);
+   const bsTrace = engine.trace(bsProb.starterCode, "");
+-  assert(bsTrace.ok === true && bsTrace.steps && bsTrace.steps.length > 5, "Binary Search executes successfully through engine");
+-
+-  // Test 4: Kadane Subarray
+-  const kadaneProb = library.find(p => p.title === "Maximum Subarray");
++  assert(bsTrace.ok === true && bsTrace.steps && bsTrace.steps.length > 5, "Binary Search (LC 704) executes successfully through engine");
++
++  // Test 5: Maximum Subarray (LC 53 - Kadane / Dynamic Programming)
++  const kadaneProb = library.find(p => p.leetcodeNumber === 53);
+   const kadaneTrace = engine.trace(kadaneProb.starterCode, "");
+-  assert(kadaneTrace.ok === true && kadaneTrace.steps && kadaneTrace.steps.length > 5, "Maximum Subarray executes successfully through engine");
++  assert(kadaneTrace.ok === true && kadaneTrace.steps && kadaneTrace.steps.length > 5, "Maximum Subarray (LC 53) executes successfully through engine");
+ 
+   console.log("\n===================================================================");
+   console.log(`PHASE 1 TEST AUDIT COMPLETE: ${passedCount}/${testCount} TESTS PASSED`);
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

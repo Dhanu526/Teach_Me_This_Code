@@ -1,0 +1,5 @@
+
+The command exited with code 0.
+Output:
+[SUCCESS] Appended Phase 8 styles to styles.css
+

@@ -1,0 +1,30 @@
+
+The command exited with code 0.
+Output:
+
+> app_build\app.js:909:    this.renderVisualVariableBoxes(step, currentSubstep);
+  app_build\app.js:910:
+  app_build\app.js:911:    this.teachNextText.innerHTML = this.formatMarkdown(lesson.whatHappensNext);
+  app_build\app.js:912:
+  app_build\app.js:913:    if (lesson.finalBanner) {
+  app_build\app.js:914:      this.finalAnswerBanner.classList.remove("hidden");
+  app_build\app.js:915:      this.finalAnswerHeading.textContent = `Final answer: ${lesson.finalBanner.answer}`;
+  app_build\app.js:916:      this.finalAnswerDetail.innerHTML = this.formatMarkdown(lesson.finalBanner.summary);
+  app_build\app.js:917:    } else {
+  app_build\app.js:918:      this.finalAnswerBanner.classList.add("hidden");
+  app_build\app.js:919:    }
+> app_build\app.js:1231:  renderVisualVariableBoxes(step, currentSubstep) {
+  app_build\app.js:1232:    if (!this.teachVarsNowBox) return;
+  app_build\app.js:1233:    const vars = step.variables || [];
+  app_build\app.js:1234:    const beforeVarsMap = step.beforeVars || {};
+  app_build\app.js:1235:    const useBeforeVars = Boolean(currentSubstep && currentSubstep.varsBeforeStep);
+  app_build\app.js:1236:    const op = step.operationDetail || {};
+  app_build\app.js:1237:
+  app_build\app.js:1238:    const scalarVars = vars.filter((v) => !Array.isArray(v.rawValue));
+  app_build\app.js:1239:
+  app_build\app.js:1240:    if (!scalarVars.length) {
+  app_build\app.js:1241:      this.teachVarsNowBox.innerHTML = `<span style="color:var(--text-muted); 
+font-size:13.5px;">No local variables created yet</span>`;
+
+
+

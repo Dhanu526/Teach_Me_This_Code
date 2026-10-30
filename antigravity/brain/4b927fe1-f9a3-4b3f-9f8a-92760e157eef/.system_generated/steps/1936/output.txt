@@ -1,0 +1,39 @@
+
+The command exited with code 0.
+Output:
+Loaded 300 problems
+
+--- 30 TOPICS PROBLEM DISTRIBUTION ---
+  Arrays                        : 165 problems
+  Strings                       : 59 problems
+  Hashing and Hash Maps         : 162 problems
+  Two Pointers                  : 20 problems
+  Sliding Window                : 18 problems
+  Prefix Sum                    : 7 problems
+  Binary Search                 : 20 problems
+  Sorting                       : 68 problems
+  Linked Lists                  : 22 problems
+  Stacks                        : 21 problems
+  Queues and Deques             : 17 problems
+  Recursion                     : 221 problems
+  Backtracking                  : 18 problems
+  Trees and Binary Trees        : 52 problems
+  Binary Search Trees           : 19 problems
+  Heaps and Priority Queues     : 16 problems
+  Graphs                        : 38 problems
+  Breadth-First Search (BFS)    : 16 problems
+  Depth-First Search (DFS)      : 86 problems
+  Greedy Algorithms             : 10 problems
+  Dynamic Programming           : 42 problems
+  Bit Manipulation              : 6 problems
+  Tries                         : 8 problems
+  Union-Find                    : 13 problems
+  Topological Sorting           : 4 problems
+  Intervals                     : 4 problems
+  Monotonic Stack and Queue     : 10 problems
+  Math and Number Theory        : 51 problems
+  Matrix Problems               : 24 problems
+  Advanced Data Structures      : 10 problems
+
+Topics with 0 problems: []
+

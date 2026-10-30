@@ -1,0 +1,9 @@
+
+The command exited with code 0.
+Output:
+
+app_build\app.js:918:    this.renderVisualConditionGate(step, currentSubstep);
+app_build\app.js:1175:  renderVisualConditionGate(step, currentSubstep) {
+
+
+

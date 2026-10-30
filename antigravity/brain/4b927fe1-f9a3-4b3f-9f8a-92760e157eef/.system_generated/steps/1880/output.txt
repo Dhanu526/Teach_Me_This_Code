@@ -1,0 +1,25 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app_build\dsa_dashboard.js. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -1462,11 +1462,13 @@
+     }
+   }
+ 
+-  // Initialize once DOM is loaded
+-  window.addEventListener('DOMContentLoaded', () => {
+-    window.dsaDashboard = new DsaDashboard();
+-  });
+-
+-  window.DsaDashboard = DsaDashboard;
++  if (typeof window !== 'undefined') {
++    window.DsaDashboard = DsaDashboard;
++    if (typeof window.addEventListener === 'function') {
++      window.addEventListener('DOMContentLoaded', () => {
++        window.dsaDashboard = new DsaDashboard();
++      });
++    }
++  }
+ })();
+ 
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

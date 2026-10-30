@@ -1,0 +1,16 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app_build\dsa_dashboard.js. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -4983,6 +4983,10 @@
+       const hintsCount = this.revealedHints[p.id] || 0;
+       const isSolutionUnlocked = this.revealedSolutions[p.id] || false;
+ 
++      const curIdx = this.problems.findIndex(x => x.id === p.id);
++      const prevProb = curIdx > 0 ? this.problems[curIdx - 1] : this.problems[this.problems.length - 1];
++      const nextProb = curIdx < this.problems.length - 1 ? this.problems[curIdx + 1] : this.problems[0];
++
+       const topicChips = (p.topics && p.topics.length > 0 ? p.topics : [p.topic]).map(t => {
+         return `<button class="mini-topic-chip" data-open-topic="${this.escapeHTML(t)}">${this.escapeHTML(t)}</button>`;
+       }).join(' ');
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

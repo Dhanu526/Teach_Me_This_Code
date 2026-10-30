@@ -1,0 +1,76 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app_build\styles.css. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -2046,10 +2046,10 @@
+   background: #f8fafc;
+   border: 1px solid var(--border-light);
+   border-radius: var(--radius-md);
+-  padding: 10px 14px;
+-  display: flex;
+-  flex-direction: column;
+-  gap: 8px;
++  padding: 6px 10px;
++  display: flex;
++  flex-direction: column;
++  gap: 5px;
+ }
+ 
+ .iteration-jump-header {
+@@ -2056,10 +2056,10 @@
+   justify-content: space-between;
+   align-items: center;
+-  gap: 8px;
++  gap: 6px;
+ }
+ 
+ .iteration-jump-label {
+-  font-size: 12px;
++  font-size: 11px;
+   font-weight: 700;
+   text-transform: uppercase;
+   letter-spacing: 0.4px;
+@@ -2067,12 +2067,12 @@
+ 
+ .iteration-active-badge {
+   font-family: var(--font-mono);
+-  font-size: 11.5px;
+-  font-weight: 700;
+-  color: var(--primary-blue);
+-  background: #eff6ff;
+-  border: 1px solid #bfdbfe;
+-  padding: 2px 9px;
++  font-size: 10.5px;
++  font-weight: 700;
++  color: var(--primary-blue);
++  background: #eff6ff;
++  border: 1px solid #bfdbfe;
++  padding: 1px 7px;
+   border-radius: 999px;
+ }
+ 
+@@ -2079,8 +2079,8 @@
+   display: flex;
+   align-items: center;
+-  gap: 6px;
+-  overflow-x: auto;
+-  padding-bottom: 4px;
++  gap: 4px;
++  overflow-x: auto;
++  padding-bottom: 2px;
+ }
+ 
+ .iter-pill-btn {
+@@ -2087,7 +2087,7 @@
+-  font-size: 12px;
+-  font-weight: 600;
+-  padding: 5px 11px;
+-  border-radius: 7px;
++  font-size: 11px;
++  font-weight: 600;
++  padding: 3px 8px;
++  border-radius: 6px;
+   border: 1px solid var(--border-medium);
+   background: #ffffff;
+   color: var(--text-secondary);
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

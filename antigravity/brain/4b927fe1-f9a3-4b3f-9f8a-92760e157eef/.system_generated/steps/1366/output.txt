@@ -1,0 +1,13 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app_build\index.html. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -31,6 +31,7 @@
+ 
+     <div class="secondary-actions">
+       <button id="btnToggleAnim" class="btn-subtle active" title="Toggle visual animations on or off">✨ Animations: ON</button>
++      <button id="btnToggleQuiz" class="btn-subtle" title="Toggle interactive prediction questions on or off">🎯 Predict: OFF</button>
+       <button id="btnSpeed" class="btn-subtle" title="Adjust Auto Play & Animation Speed">⚡ Speed: 1x</button>
+       <button id="btnEditCode" class="btn-small-primary">✏️ Paste / Edit Code</button>
+       <button id="btnToggleIterations" class="btn-subtle" title="Show or hide the complete Iteration & All-Steps history">📋 Execution History</button>
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

@@ -1,0 +1,72 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app_build\styles.css. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -977,7 +977,7 @@
+   border-radius: 6px;
+   display: inline-flex;
+   align-items: center;
+-  animation: slideRightToBox calc(0.45s * var(--anim-speed-factor, 1)) ease;
++  animation: numberGlide calc(0.45s * var(--anim-speed-factor, 1)) cubic-bezier(0.16, 1, 0.3, 1);
+ }
+ 
+ .anim-move-arrow {
+@@ -987,7 +987,7 @@
+   font-weight: 700;
+   color: #2563eb;
+   letter-spacing: 0.3px;
+-  animation: arrowPulse calc(0.9s * var(--anim-speed-factor, 1)) infinite alternate;
++  animation: arrowGlide calc(0.8s * var(--anim-speed-factor, 1)) infinite alternate ease-in-out;
+ }
+ 
+ .calc-equation-row {
+@@ -1005,6 +1005,7 @@
+   border: 1.5px solid var(--border-medium);
+   font-weight: 700;
+   color: var(--text-main);
++  animation: operandAppear calc(0.3s * var(--anim-speed-factor, 1)) ease-out;
+ }
+ 
+ .calc-operator-chip {
+@@ -1020,7 +1020,7 @@
+   border: 2px solid var(--changed-green-border);
+   color: var(--changed-green-text);
+   font-weight: 800;
+-  animation: popIn calc(0.4s * var(--anim-speed-factor, 1)) ease;
++  animation: calcResultPop calc(0.4s * var(--anim-speed-factor, 1)) cubic-bezier(0.175, 0.885, 0.32, 1.275);
+ }
+ 
+ /* 3. Negative Value Reset Visual Warning (Phase 2) */
+@@ -1031,6 +1031,7 @@
+   display: flex;
+   flex-direction: column;
+   gap: 10px;
++  animation: varCardPop calc(0.35s * var(--anim-speed-factor, 1)) ease-out;
+ }
+ 
+ .neg-warning-header {
+@@ -1064,6 +1064,7 @@
+   text-decoration: line-through;
+   opacity: 0.75;
+   font-weight: 700;
++  animation: discardNegative calc(0.5s * var(--anim-speed-factor, 1)) ease;
+ }
+ 
+ .neg-discard-arrow {
+@@ -1070,5 +1070,6 @@
+   font-weight: 800;
+   font-size: 13px;
++  animation: arrowGlide calc(0.8s * var(--anim-speed-factor, 1)) infinite alternate ease-in-out;
+ }
+ 
+ .zero-reset-box {
+@@ -1078,7 +1078,7 @@
+   border-radius: 6px;
+   font-weight: 800;
+   font-size: 15px;
+-  animation: popIn calc(0.45s * var(--anim-speed-factor, 1)) ease;
++  animation: freshZeroPop calc(0.45s * var(--anim-speed-factor, 1)) cubic-bezier(0.175, 0.885, 0.32, 1.275);
+ }
+ 
+ /* 4. Condition Gate & Decision Visualizer (Phase 3) */
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

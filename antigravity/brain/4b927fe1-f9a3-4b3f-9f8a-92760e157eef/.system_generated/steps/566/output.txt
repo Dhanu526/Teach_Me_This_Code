@@ -1,0 +1,219 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app_build\explainer.js. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -1428,14 +1428,205 @@
+     return substeps;
+   }
+ 
+-  explainSymbolsInLine(codeText) {
+-    const matches = [];
+-    for (const item of PYTHON_SYMBOLS_LIBRARY) {
+-      if (codeText.includes(item.token)) {
+-        matches.push(`• \`${item.label}\`: ${item.desc}`);
+-      }
+-    }
+-    return matches.length ? matches.slice(0, 3).join("<br>") : "• Standard Python statement.";
++  /* =========================================================
++     PHASE 4: INTERACTIVE PREDICTION QUESTION GENERATOR
++     Asks learners to predict outcomes before selected steps:
++     1. "What will c become after this addition?"
++     2. "Will this condition be True or False?"
++     3. "Will ans change?"
++     4. Kadane negative reset prediction ("What will happen to c?")
++     ========================================================= */
++  buildPredictionQuestion(step, prevStep, nextStep) {
++    if (!step) return null;
++    const op = step.operationDetail || {};
++    const cond = step.condition;
++    const eventType = step.eventType;
++    const code = (step.codeText || "").trim();
++
++    // 1. Condition Steps (e.g. if c >= ans:, if c < 0:, or any conditional expression)
++    if (eventType === "CONDITION" && cond) {
++      const isAnsCheck = cond.expr === "c >= ans" || (cond.leftExpr === "c" && cond.rightExpr === "ans");
++      const isNegCheck = cond.expr === "c < 0" || (cond.leftExpr === "c" && cond.operator === "<" && String(cond.rightVal) === "0");
++
++      // Variation: "Will ans change?" vs "Will this condition be True or False?"
++      if (isAnsCheck) {
++        const askWillAnsChange = (step.stepIndex % 2 === 0);
++        if (askWillAnsChange) {
++          const willChange = Boolean(cond.result);
++          const newAnsVal = cond.leftVal;
++          const currentAns = cond.rightVal;
++          return {
++            id: `q_${step.stepIndex}`,
++            type: "ans_change",
++            title: "Predict Variable Update",
++            question: "Will ans change?",
++            hint: `Comparing current running sum c (${cond.leftVal}) with record ans (${cond.rightVal}).`,
++            options: [
++              {
++                text: `Yes, ans will update to ${newAnsVal}`,
++                isCorrect: willChange
++              },
++              {
++                text: `No, ans stays ${currentAns}`,
++                isCorrect: !willChange
++              }
++            ],
++            correctAnswer: willChange ? `Yes, ans will update to ${newAnsVal}` : `No, ans stays ${currentAns}`,
++            explanation: willChange
++              ? `✓ Correct! c (${cond.leftVal}) is greater than or equal to current ans (${cond.rightVal}), so the condition passes and ans updates to ${newAnsVal}!`
++              : `✓ Correct! c (${cond.leftVal}) is less than current ans (${cond.rightVal}), so this sum is not a new record and ans stays ${currentAns}.`
++          };
++        } else {
++          const isTrue = Boolean(cond.result);
++          return {
++            id: `q_${step.stepIndex}`,
++            type: "condition_tf",
++            title: "Predict Condition Outcome",
++            question: "Will this condition be True or False?",
++            hint: `Evaluating: is ${cond.leftVal} >= ${cond.rightVal}?`,
++            options: [
++              { text: "True", isCorrect: isTrue },
++              { text: "False", isCorrect: !isTrue }
++            ],
++            correctAnswer: isTrue ? "True" : "False",
++            explanation: isTrue
++              ? `✓ Correct! ${cond.leftVal} >= ${cond.rightVal} is True, so Python enters the if-block.`
++              : `✓ Correct! ${cond.leftVal} >= ${cond.rightVal} is False, so Python skips the if-block.`
++          };
++        }
++      }
++
++      if (isNegCheck) {
++        const isTrue = Boolean(cond.result);
++        return {
++          id: `q_${step.stepIndex}`,
++          type: "condition_tf",
++          title: "Predict Negative Check",
++          question: "Will this condition be True or False?",
++          hint: `Testing if c (${cond.leftVal}) is less than 0.`,
++          options: [
++            { text: "True", isCorrect: isTrue },
++            { text: "False", isCorrect: !isTrue }
++          ],
++          correctAnswer: isTrue ? "True" : "False",
++          explanation: isTrue
++            ? `✓ Correct! c is ${cond.leftVal} (negative). The condition is True, so c will be reset to 0 in the next line!`
++            : `✓ Correct! c is ${cond.leftVal} (non-negative). The condition is False, so c retains its sum and no reset occurs.`
++        };
++      }
++
++      // General condition (e.g. while left <= right, if arr[mid] == target, if not self.is_empty())
++      const isTrue = Boolean(cond.result);
++      const leftStr = cond.leftVal !== undefined ? `${cond.leftExpr || 'Left'} (${cond.leftVal})` : (cond.leftExpr || 'Condition');
++      const rightStr = cond.rightVal !== undefined ? ` with ${cond.rightExpr || 'Right'} (${cond.rightVal})` : '';
++      return {
++        id: `q_${step.stepIndex}`,
++        type: "condition_tf",
++        title: "Predict Condition Outcome",
++        question: "Will this condition be True or False?",
++        hint: `Testing: \`${cond.expr || code}\` comparing ${leftStr}${rightStr}.`,
++        options: [
++          { text: "True", isCorrect: isTrue },
++          { text: "False", isCorrect: !isTrue }
++        ],
++        correctAnswer: isTrue ? "True" : "False",
++        explanation: isTrue
++          ? `✓ Correct! \`${cond.expr || code}\` evaluates to True.`
++          : `✓ Correct! \`${cond.expr || code}\` evaluates to False.`
++      };
++    }
++
++    // 2. Addition / Augmented Assignment (e.g. c += nums[i] or any arithmetic assignment)
++    if (eventType === "AUG_ASSIGN" || (eventType === "ASSIGN" && op.isArithmetic)) {
++      const target = op.target || "c";
++      const beforeNum = Number(op.beforeVal !== undefined ? op.beforeVal : 0);
++      const rhsNum = Number(op.rhsVal !== undefined ? op.rhsVal : 0);
++      const afterNum = Number(op.afterVal !== undefined ? op.afterVal : (beforeNum + rhsNum));
++      const correctStr = String(afterNum);
++
++      // Create distinct, plausible option distractors
++      const optSet = new Set();
++      optSet.add(correctStr);
++      optSet.add(String(beforeNum)); // Kept old value
++      optSet.add(String(rhsNum)); // Replaced with current number
++      optSet.add(String(beforeNum - rhsNum)); // Subtracted
++
++      if (optSet.size < 4) {
++        optSet.add(String(afterNum + 1));
++        optSet.add(String(afterNum - 1));
++      }
++
++      const optionsList = Array.from(optSet).slice(0, 4);
++      optionsList.sort((a, b) => Number(a) - Number(b));
++
++      return {
++        id: `q_${step.stepIndex}`,
++        type: "addition",
++        title: "Predict Addition Calculation",
++        question: `What will ${target} become after this addition?`,
++        hint: `${target} is currently ${beforeNum}, and we are adding ${rhsNum} (${target} = ${beforeNum} + (${rhsNum})).`,
++        options: optionsList.map((val) => ({
++          text: val,
++          isCorrect: val === correctStr
++        })),
++        correctAnswer: correctStr,
++        explanation: `✓ Correct! ${target} was ${beforeNum}. Adding ${rhsNum} gives: ${beforeNum} + (${rhsNum}) = ${afterNum}.`
++      };
++    }
++
++    // 3. Negative Reset Assignment: c = 0
++    if (eventType === "ASSIGN" && op.target === "c" && String(op.afterVal) === "0" && !op.isCreated) {
++      return {
++        id: `q_${step.stepIndex}`,
++        type: "reset",
++        title: "Predict Reset Action",
++        question: "What will happen to c in this step?",
++        hint: `c reached a negative sum (${op.beforeVal !== undefined ? op.beforeVal : -2}) in the previous line.`,
++        options: [
++          {
++            text: "c resets to 0 (discards negative sum)",
++            isCorrect: true
++          },
++          {
++            text: `c keeps its negative value (${op.beforeVal || -2})`,
++            isCorrect: false
++          },
++          {
++            text: "c is doubled",
++            isCorrect: false
++          }
++        ],
++        correctAnswer: "c resets to 0 (discards negative sum)",
++        explanation: "✓ Correct! Kadane's algorithm discards negative running sums because adding a negative sum to future numbers will only reduce their total. Resetting to 0 starts a clean new subarray."
++      };
++    }
++
++    // 4. Return Statement
++    if (eventType === "RETURN" && op.returnVal !== undefined && op.returnVal !== null) {
++      const correctVal = String(op.returnVal);
++      const retSet = new Set();
++      retSet.add(correctVal);
++      retSet.add("0");
++      retSet.add("1");
++      retSet.add("-1");
++      const retOptions = Array.from(retSet).slice(0, 4).sort((a, b) => Number(a) - Number(b));
++
++      return {
++        id: `q_${step.stepIndex}`,
++        type: "return",
++        title: "Predict Final Output",
++        question: "What final value will be returned by this function?",
++        hint: `The algorithm has inspected all numbers in the array.`,
++        options: retOptions.map((v) => ({
++          text: v,
++          isCorrect: v === correctVal
++        })),
++        correctAnswer: correctVal,
++        explanation: `✓ Correct! The maximum subarray sum found across all continuous slices is ${correctVal}.`
++      };
++    }
++
++    return null;
+   }
+ 
+   buildExecutionSummary(traceResult) {
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

@@ -1,0 +1,10 @@
+
+The command exited with code 0.
+Output:
+1033: const clearBtn = e.target.closest('[data-action="clear-filters"]');
+2016: ${this.searchQuery ? `<button class="search-clear-btn" data-action="clear-filters">✕</button>` : ''}
+2070: <button class="btn-clear-filters" data-action="clear-filters" title="Reset all search filters">
+2099: ${this.searchQuery ? `<button class="search-clear-btn" data-action="clear-filters">✕</button>` : ''}
+2166: <button class="btn-clear-filters" data-action="clear-filters" title="Reset all search filters">
+2287: <button class="btn-hero-primary" data-action="clear-filters">Reset All Filters</button>
+

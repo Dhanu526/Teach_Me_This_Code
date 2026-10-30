@@ -1,0 +1,42 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app_build\app.js. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -1251,7 +1251,9 @@
+         return true;
+       })
+       .map((v) => {
+-        const isChanged = !useBeforeVars && (v.status === "created" || v.status === "updated");
++        const isCreated = !useBeforeVars && v.status === "created";
++        const isUpdated = !useBeforeVars && v.status === "updated";
++        const isChanged = isCreated || isUpdated;
+         const prevVal = beforeVarsMap[v.name];
+         const displayVal = useBeforeVars && prevVal !== undefined ? prevVal : v.current;
+         const isNegWarning = v.name === "c" && Number(displayVal) < 0;
+@@ -1258,12 +1258,22 @@
+-        return `
+-          <div class="var-box-card ${isChanged ? "is-updated" : ""} ${isNegWarning ? "is-negative-warning" : ""}">
++        let statusBadge = "";
++        if (isCreated) {
++          statusBadge = `<span class="var-status-badge is-created">+ Created</span>`;
++        } else if (isUpdated) {
++          statusBadge = `<span class="var-status-badge is-updated">Updated</span>`;
++        } else if (isNegWarning) {
++          statusBadge = `<span class="var-status-badge is-negative">⚠ Negative</span>`;
++        }
++
++        return `
++          <div class="var-box-card ${isCreated ? "is-created" : isUpdated ? "is-updated" : ""} ${isNegWarning ? "is-negative-warning" : ""}">
+             <div class="var-box-label">
+               <span>Variable</span>
+               <strong>${this.escapeHTML(v.name)}</strong>
++              ${statusBadge}
+             </div>
+             <div class="var-box-val-slot">
+               <span class="var-box-value">${this.escapeHTML(displayVal)}</span>
+-              ${isChanged && prevVal !== undefined ? `<span class="var-box-prev">(was ${prevVal})</span>` : ""}
++              ${isUpdated && prevVal !== undefined ? `<span class="var-box-prev">(was ${prevVal})</span>` : ""}
+             </div>
+           </div>
+         `;
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

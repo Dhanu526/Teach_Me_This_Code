@@ -1,0 +1,60 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app_build\index.html. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -14,28 +14,32 @@
+ 
+   <!-- Clean, Simple Top Navigation Bar -->
+   <header class="top-bar">
+-    <div class="brand-area">
+-      <span class="teacher-badge">Teach Me This Code</span>
+-      <span id="stepProgressLabel" class="step-progress-label">Step 1 of 50</span>
+-      <span id="activeScopeBadge" class="scope-pill scope-global">GLOBAL SCOPE</span>
+-    </div>
+-
+-    <!-- Simple Navigation Controls + Thonny Sub-Expression Stepper -->
+-    <nav class="nav-controls" aria-label="Step Navigation">
+-      <button id="btnPrev" class="btn-nav" title="Go back one step (Left Arrow)">← Previous</button>
+-      <button id="btnSubStep" class="btn-nav btn-substep" title="Step through internal sub-expressions on this line (F7)">🔍 Sub-Expr (F7)</button>
+-      <button id="btnNext" class="btn-nav btn-next-prominent" title="Explain the next step (Right Arrow)">Next Step →</button>
+-      <button id="btnAutoPlay" class="btn-nav" title="Automatically step through the code">▶ Auto Play</button>
+-      <button id="btnRestart" class="btn-nav" title="Start over from Step 1">↺ Restart</button>
+-    </nav>
+-
+-    <div class="secondary-actions">
+-      <button id="btnToggleAnim" class="btn-subtle active" title="Toggle visual animations on or off">✨ Animations: ON</button>
+-      <button id="btnToggleQuiz" class="btn-subtle" title="Toggle interactive prediction questions on or off">🎯 Predict: OFF</button>
+-      <button id="btnSpeed" class="btn-subtle" title="Adjust Auto Play & Animation Speed">⚡ Speed: 1x</button>
+-      <button id="btnEditCode" class="btn-small-primary">✏️ Paste / Edit Code</button>
+-      <button id="btnToggleIterations" class="btn-subtle" title="Show or hide the complete Iteration & All-Steps history">📋 Execution History</button>
+-      <button id="btnToggleAdvanced" class="btn-subtle">Advanced View</button>
++    <div class="top-bar-primary">
++      <div class="brand-area">
++        <span class="teacher-badge">Teach Me This Code</span>
++        <span id="stepProgressLabel" class="step-progress-label">Step 1 of 50</span>
++        <span id="activeScopeBadge" class="scope-pill scope-global">GLOBAL SCOPE</span>
++      </div>
++
++      <!-- Simple Navigation Controls + Thonny Sub-Expression Stepper -->
++      <nav class="nav-controls" aria-label="Step Navigation">
++        <button id="btnPrev" class="btn-nav" title="Go back one step (Left Arrow)">← Previous</button>
++        <button id="btnSubStep" class="btn-nav btn-substep" title="Step through internal sub-expressions on this line (F7)">🔍 Sub-Expr (F7)</button>
++        <button id="btnNext" class="btn-nav btn-next-prominent" title="Explain the next step (Right Arrow)">Next Step →</button>
++        <button id="btnAutoPlay" class="btn-nav" title="Automatically step through the code">▶ Auto Play</button>
++        <button id="btnRestart" class="btn-nav" title="Start over from Step 1">↺ Restart</button>
++      </nav>
++    </div>
++
++    <div class="top-bar-secondary">
++      <div class="secondary-actions">
++        <button id="btnToggleAnim" class="btn-subtle active" title="Toggle visual animations on or off">✨ Animations: ON</button>
++        <button id="btnToggleQuiz" class="btn-subtle" title="Toggle interactive prediction questions on or off">🎯 Predict: OFF</button>
++        <button id="btnSpeed" class="btn-subtle" title="Adjust Auto Play & Animation Speed">⚡ Speed: 1x</button>
++        <button id="btnEditCode" class="btn-small-primary">✏️ Paste / Edit Code</button>
++        <button id="btnToggleIterations" class="btn-subtle" title="Show or hide the complete Iteration & All-Steps history">📋 Execution History</button>
++        <button id="btnToggleAdvanced" class="btn-subtle">Advanced View</button>
++      </div>
+     </div>
+   </header>
+ 
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

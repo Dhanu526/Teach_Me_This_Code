@@ -1,0 +1,57 @@
+
+The command exited with code 0.
+Output:
+
+> app_build\engine.js:968:            eventType: "CONDITION",
+  app_build\engine.js:969:            callStack,
+  app_build\engine.js:970:            beforeVars: this.cloneVarsMap(activeFrame.vars),
+  app_build\engine.js:971:            changedVars: [],
+  app_build\engine.js:972:            changedSummary: "Condition evaluated  " + (condInfo.result ? "True" : "False"),
+  app_build\engine.js:973:            condition: condInfo,
+> app_build\engine.js:1097:          eventType: "LOOP_ITER",
+  app_build\engine.js:1098:          callStack,
+  app_build\engine.js:1099:          beforeVars: beforeMap,
+  app_build\engine.js:1100:          changedVars: changedVarsList,
+  app_build\engine.js:1101:          changedSummary: summaryParts.join(", "),
+  app_build\engine.js:1102:          condition: {
+> app_build\engine.js:1379:        eventType: "RETURN",
+  app_build\engine.js:1380:        callStack,
+  app_build\engine.js:1381:        beforeVars: beforeMap,
+  app_build\engine.js:1382:        changedVars: [],
+  app_build\engine.js:1383:        changedSummary: `Returns ${this.formatVal(retVal)} from ${activeFrame.frameName}`,
+  app_build\engine.js:1384:        condition: null,
+> app_build\engine.js:1492:          eventType: "ASSIGN",
+  app_build\engine.js:1493:          callStack,
+  app_build\engine.js:1494:          beforeVars: beforeMap,
+  app_build\engine.js:1495:          changedVars: [changeObj],
+  app_build\engine.js:1496:          changedSummary: `${objPath}.${methodName}(${argVals.map((v) => 
+this.formatVal(v)).join(", ")})  ${this.formatVal(targetObj)}`,
+  app_build\engine.js:1497:          condition: null,
+> app_build\engine.js:1690:          eventType: "ASSIGN",
+  app_build\engine.js:1691:          callStack,
+  app_build\engine.js:1692:          beforeVars: beforeMap,
+  app_build\engine.js:1693:          changedVars: changedVarsList,
+  app_build\engine.js:1694:          changedSummary: summaryParts.join(", "),
+  app_build\engine.js:1695:          condition: null,
+> app_build\engine.js:1743:            eventType: "ASSIGN",
+  app_build\engine.js:1744:            callStack,
+  app_build\engine.js:1745:            beforeVars: beforeMap,
+  app_build\engine.js:1746:            changedVars: [changeObj],
+  app_build\engine.js:1747:            changedSummary: `${cleanTarget} = ${this.formatVal(newVal)}`,
+  app_build\engine.js:1748:            condition: null,
+> app_build\engine.js:1806:            eventType: "ASSIGN",
+  app_build\engine.js:1807:            callStack,
+  app_build\engine.js:1808:            beforeVars: beforeMap,
+  app_build\engine.js:1809:            changedVars: [changeObj],
+  app_build\engine.js:1810:            changedSummary: `${arrPath}[${this.formatVal(idxVal)}] = 
+${this.formatVal(newVal)}`,
+  app_build\engine.js:1811:            condition: null,
+> app_build\engine.js:1866:        eventType: "ASSIGN",
+  app_build\engine.js:1867:        callStack,
+  app_build\engine.js:1868:        beforeVars: this.cloneVarsMap(activeFrame.vars),
+  app_build\engine.js:1869:        changedVars: [changeObj],
+  app_build\engine.js:1870:        changedSummary: isCreated
+  app_build\engine.js:1871:          ? `${varName}: (created)  ${this.formatVal(newVal)}`
+
+
+

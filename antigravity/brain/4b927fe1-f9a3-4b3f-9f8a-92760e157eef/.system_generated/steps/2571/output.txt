@@ -1,0 +1,26 @@
+
+The command exited with code 0.
+Output:
+Backtracking primary: 21
+  [72] Generate Parentheses
+  [151] Path Sum II
+  [164] Design Add and Search Words Data Structure
+  [187] Subsets
+  [188] Subsets II
+  [189] Combination Sum
+  [190] Combination Sum II
+  [191] Permutations
+  [192] Permutations II
+  [193] Word Search
+  [194] Palindrome Partitioning
+  [195] Letter Combinations of a Phone Number
+  [196] N-Queens
+  [197] N-Queens II
+  [198] Sudoku Solver
+  [199] Combinations
+  [200] Combination Sum III
+  [201] Restore IP Addresses
+  [202] Split Array into Fibonacci Sequence
+  [203] Non-decreasing Subsequences
+  [204] Letter Case Permutation
+

@@ -1,0 +1,258 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app_build\styles.css. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -7458,9 +7458,9 @@
+ .storage-health-tag {
+   background: #f1f5f9;
+   color: #475569;
+-  font-size: 11.5px;
+-  font-weight: 600;
+-  padding: 4px 10px;
++  font-size: 13px;
++  font-weight: 600;
++  padding: 4px 12px;
+   border-radius: 6px;
+   border: 1px solid #cbd5e1;
+   display: inline-flex;
+@@ -7471,9 +7471,9 @@
+   background: #eff6ff;
+   border: 1px solid #93c5fd;
+   color: #1d4ed8;
+-  font-size: 12px;
+-  font-weight: 700;
+-  padding: 5px 12px;
++  font-size: 13.5px;
++  font-weight: 700;
++  padding: 6px 14px;
+   border-radius: 6px;
+   cursor: pointer;
+   display: inline-flex;
+@@ -7517,7 +7517,7 @@
+ }
+ 
+ .storage-notice-banner .notice-icon {
+-  font-size: 20px;
++  font-size: 22px;
+   flex-shrink: 0;
+   margin-top: 1px;
+ }
+@@ -7524,5 +7524,5 @@
+ .storage-notice-banner .notice-content {
+-  font-size: 13px;
++  font-size: 14.5px;
+   line-height: 1.5;
+   color: #1e3a8a;
+ }
+@@ -7529,6 +7529,6 @@
+ .storage-notice-banner .notice-content strong {
+   display: block;
+-  font-size: 13.5px;
++  font-size: 15px;
+   margin-bottom: 3px;
+   color: #1e40af;
+ }
+@@ -7539,7 +7539,7 @@
+ 
+ /* Section Headings */
+ .storage-section-title {
+-  font-size: 14.5px;
++  font-size: 16px;
+   font-weight: 700;
+   color: #1e293b;
+   margin: 0 0 12px 0;
+@@ -7565,7 +7565,7 @@
+ }
+ 
+ .storage-stat-item .stat-icon {
+-  font-size: 20px;
++  font-size: 22px;
+   flex-shrink: 0;
+ }
+ 
+@@ -7575,7 +7575,8 @@
+ }
+ 
+ .storage-stat-item .stat-val {
+-  font-size: 14px;
++  font-size: 15.5px;
++  font-weight: 700;
+   color: #0f172a;
+ }
+ 
+@@ -7582,4 +7582,4 @@
+-  font-size: 11px;
++  font-size: 12.5px;
+   color: #64748b;
+ }
+ 
+@@ -7620,7 +7620,7 @@
+ }
+ 
+ .card-box-title {
+-  font-size: 14px;
++  font-size: 16px;
+   font-weight: 700;
+   color: #1e293b;
+   margin: 0;
+@@ -7627,8 +7627,8 @@
+ 
+ .card-box-badge {
+-  font-size: 10px;
+-  font-weight: 700;
+-  padding: 2px 6px;
++  font-size: 11.5px;
++  font-weight: 700;
++  padding: 2px 7px;
+   border-radius: 4px;
+   background: #f1f5f9;
+   color: #475569;
+@@ -7635,7 +7635,7 @@
+ }
+ 
+ .card-box-desc {
+-  font-size: 12.5px;
++  font-size: 14px;
+   color: #64748b;
+   line-height: 1.45;
+   margin: 0;
+@@ -7648,7 +7648,7 @@
+ }
+ 
+ .export-feedback-toast, .pref-feedback-toast {
+-  font-size: 11.5px;
++  font-size: 12.5px;
+   font-weight: 600;
+   color: #16a34a;
+   text-align: center;
+@@ -7660,7 +7660,7 @@
+   align-items: center;
+   flex-wrap: wrap;
+   gap: 8px;
+-  font-size: 12px;
++  font-size: 13.5px;
+ }
+ 
+ .import-mode-select {
+@@ -7676,9 +7676,9 @@
+   background: #f8fafc;
+   border: 1px dashed #94a3b8;
+   color: #334155;
+-  font-size: 11.5px;
+-  font-weight: 600;
+-  padding: 4px 10px;
++  font-size: 13px;
++  font-weight: 600;
++  padding: 5px 12px;
+   border-radius: 4px;
+   cursor: pointer;
+   display: inline-block;
+@@ -7694,7 +7694,7 @@
+   width: 100%;
+   height: 90px;
+   font-family: var(--font-mono, monospace);
+-  font-size: 11.5px;
++  font-size: 13.5px;
+   padding: 8px 10px;
+   border: 1px solid #cbd5e1;
+   border-radius: 6px;
+@@ -7712,7 +7712,7 @@
+ .storage-validation-box {
+   border-radius: 6px;
+   padding: 10px 12px;
+-  font-size: 12px;
++  font-size: 13.5px;
+ }
+ 
+ .storage-validation-box.validation-ok {
+@@ -7728,7 +7728,7 @@
+ 
+ .validation-title {
+   font-weight: 700;
+-  font-size: 12.5px;
++  font-size: 14px;
+   margin-bottom: 4px;
+ }
+ 
+@@ -7735,11 +7735,11 @@
+   display: flex;
+   gap: 6px;
+   flex-wrap: wrap;
+-  font-size: 11.5px;
++  font-size: 13px;
+ }
+ 
+ .validation-errors {
+-  font-size: 11.5px;
++  font-size: 13px;
+   line-height: 1.4;
+   margin-bottom: 4px;
+ }
+@@ -7746,5 +7746,5 @@
+ .validation-warns {
+-  font-size: 11px;
++  font-size: 12.5px;
+   color: #854d0e;
+   margin-top: 4px;
+ }
+@@ -7751,5 +7751,5 @@
+ .validation-guard-msg {
+-  font-size: 10.5px;
++  font-size: 12px;
+   font-weight: 600;
+   color: #b91c1c;
+   margin-top: 4px;
+@@ -7776,7 +7776,7 @@
+ }
+ 
+ .pref-label {
+-  font-size: 12px;
++  font-size: 13.5px;
+   font-weight: 600;
+   color: #475569;
+ }
+@@ -7784,8 +7784,8 @@
+   background: white;
+   border: 1px solid #cbd5e1;
+   border-radius: 6px;
+-  padding: 6px 10px;
+-  font-size: 12.5px;
++  padding: 6px 12px;
++  font-size: 14px;
+   color: #1e293b;
+ }
+ 
+@@ -7799,8 +7799,8 @@
+   color: white;
+   border: none;
+   border-radius: 6px;
+-  padding: 7px 14px;
+-  font-size: 12.5px;
++  padding: 8px 16px;
++  font-size: 13.5px;
+   font-weight: 600;
+   cursor: pointer;
+   transition: background 0.15s;
+@@ -7829,11 +7829,11 @@
+ }
+ 
+ .danger-icon {
+-  font-size: 22px;
++  font-size: 24px;
+ }
+ 
+ .danger-title {
+-  font-size: 13.5px;
++  font-size: 15px;
+   font-weight: 700;
+   color: #991b1b;
+   margin: 0 0 2px 0;
+@@ -7840,6 +7840,6 @@
+ 
+ .danger-desc {
+-  font-size: 12px;
++  font-size: 13.5px;
+   color: #7f1d1d;
+   margin: 0;
+ }
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

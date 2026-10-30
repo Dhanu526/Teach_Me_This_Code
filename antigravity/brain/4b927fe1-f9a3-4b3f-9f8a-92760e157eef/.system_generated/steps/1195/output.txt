@@ -1,0 +1,65 @@
+
+The command exited with code 1.
+Output:
+warning: in the working copy of 'antigravity/scratch/code-flow-visualizer/app_build/explainer.js', LF will be replaced by CRLF the next time Git touches it
+diff --git a/antigravity/scratch/code-flow-visualizer/app_build/explainer.js b/antigravity/scratch/code-flow-visualizer/app_build/explainer.js
+index fde3bac..113222c 100644
+--- a/antigravity/scratch/code-flow-visualizer/app_build/explainer.js
++++ b/antigravity/scratch/code-flow-visualizer/app_build/explainer.js
+@@ -39,6 +39,7 @@ class RuleBasedExplainer {
+       const nextStep = i + 1 < steps.length ? steps[i + 1] : null;
+ 
+       step.teacherLesson = this.buildTeacherLesson(step, prevStep, nextStep, bestSubarrayInfo);
++      step.teachingSubsteps = this.buildTeachingSubsteps(step, prevStep, nextStep, bestSubarrayInfo);
+       step.explanations = this.buildStepExplanation(step, prevStep, nextStep);
+     }
+ 
+@@ -510,6 +511,1216 @@ class RuleBasedExplainer {
+     };
+   }
+ 
++  formatSubstepVars(step, useBeforeVars = false) {
++    const vars = step.variables || [];
++    const beforeVars = step.beforeVars || {};
++    const op = step.operationDetail || {};
++
++    if (useBeforeVars) {
++      const keys = Object.keys(beforeVars);
++      if (keys.length === 0) return "No variables created yet";
++      const parts = keys
++        .filter((k) => k !== "nums" && k !== "arr")
++        .map((k) => `${k} = ${beforeVars[k]}`);
++      if (step.loop && step.loop.indexedElementInfo) {
++        const el = step.loop.indexedElementInfo;
++        parts.push(`${el.arrayName}[${el.indexVal}] = ${el.elementVal}`);
++      }
++      return parts.length ? parts.join("   •   ") : keys.map((k) => `${k} = ${beforeVars[k]}`).join("   •   ");
++    }
++
++    return this.formatRelevantVariablesNow(step);
++  }
++
++  buildTeachingSubsteps(step, prevStep, nextStep, bestSubarrayInfo) {
++    const n = step.stepIndex;
++    const op = step.operationDetail || {};
++    const cond = step.condition;
++    const nextSentence = this.buildFriendlyWhatNext(step, nextStep);
++    const varsBefore = this.formatSubstepVars(step, true);
++    const varsAfter = this.formatSubstepVars(step, false);
++    const beforeVarsMap = step.beforeVars || {};
++    const exprFrames = step.exprFrames || [];
++
++    const substeps = [];
++
++    // Helper to push a substep
++    const addSubstep = (data) => {
++      substeps.push({
++        substepIndex: substeps.length + 1,
++        totalSubsteps: 0, // will be populated at the end
++        substepLabel: data.substepLabel || "",
++        title: `Step ${n}: ${data.substepLabel || data.title}`,
++        codeSnippet: data.codeSnippet || step.codeText,
++        whatIsHappening: data.whatIsHappening || "",
++        symbolsMeaning: data.symbolsMeaning || this.explainSymbolsInLine(data.codeSnippet || step.codeText),
++        currentValues: data.currentValues || varsBefore,
+

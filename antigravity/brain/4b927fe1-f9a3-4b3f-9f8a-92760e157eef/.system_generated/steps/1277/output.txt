@@ -1,0 +1,12 @@
+
+The command exited with code 0.
+Output:
+
+> app_build\styles.css:1614:.scope-var-row.var-row-changed {
+  app_build\styles.css:1615:  background: var(--changed-green-bg);
+  app_build\styles.css:1616:}
+  app_build\styles.css:1617:
+  app_build\styles.css:1618:.var-name-cell {
+
+
+

@@ -1,0 +1,11 @@
+
+The command exited with code 1.
+Output:
+At line:1 char:32
++ node -c app_build/explainer.js && node -c app_build/app.js
++                                ~~
+The token '&&' is not a valid statement separator in this version.
+    + CategoryInfo          : ParserError: (:) [], ParentContainsErrorRecordException
+    + FullyQualifiedErrorId : InvalidEndOfLine
+ 
+

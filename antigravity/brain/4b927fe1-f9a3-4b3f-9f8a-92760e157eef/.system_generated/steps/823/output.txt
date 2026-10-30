@@ -1,0 +1,29 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app_build\styles.css. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -1234,7 +1234,7 @@
+   font-weight: 800;
+   color: #2563eb;
+   display: none;
+-  animation: bounceDown 0.6s infinite alternate;
++  animation: bounceDown calc(0.6s * var(--anim-speed-factor, 1)) infinite alternate;
+ }
+ 
+ .loop-track-item.is-active-pointer .loop-pointer-indicator {
+@@ -1251,7 +1251,7 @@
+   gap: 10px;
+   font-size: 13.5px;
+   color: #0e7490;
+-  animation: slideDownFade 0.4s ease;
++  animation: slideDownFade calc(0.4s * var(--anim-speed-factor, 1)) ease;
+ }
+ 
+ .loop-return-icon {
+@@ -1258,4 +1258,4 @@
+-  animation: spinOnce 0.6s ease-out;
++  animation: spinOnce calc(0.6s * var(--anim-speed-factor, 1)) ease-out;
+ }
+ 
+ /* Animations Keyframes */
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

@@ -1,0 +1,180 @@
+
+The command exited with code 0.
+Output:
+<truncated 1587 lines>
++        symbolsMeaning: `Registering class in memory.`,
++        currentValues: `class Solution defined`,
++        whyNecessary: `Before we can call methods, Python must register their class container.`,
++        whatHappensNext: nextSentence
++      });
++    } else if (step.eventType === "METHOD_DEF" || step.eventType === "FUNC_DEF") {
++      const funcName = op.funcName || "function";
++      addSubstep({
++        substepLabel: `What is a function definition?`,
++        codeSnippet: step.codeText,
++        varsBeforeStep: false,
++        whatIsHappening: `Python encounters \`def ${funcName}(...)\`. A **function** is a reusable set of instructions that takes inputs, performs calculations, and returns an answer.`,
++        symbolsMeaning: `\`def\` is short for "define". It tells Python: "Remember these instructions under the name \`${funcName}\`."`,
++        currentValues: `Global Scope`,
++        whyNecessary: `Functions make code reusable, organized, and testable with different inputs.`,
++        whatHappensNext: `Python registers \`${funcName}\` and prepares to run it when called.`
++      });
++
++      addSubstep({
++        substepLabel: `Register ${funcName}() in scope`,
++        codeSnippet: step.codeText,
++        varsBeforeStep: false,
++        whatIsHappening: `Python registers function \`${funcName}\`. The lines inside \`${funcName}\` do not run yet—they only execute when we explicitly call \`${funcName}()\`.`,
++        symbolsMeaning: `Function registration.`,
++        currentValues: `def ${funcName} registered`,
++        whyNecessary: `Python must store the function definition before it can be invoked.`,
++        whatHappensNext: nextSentence
++      });
++    }
++
++    // 7. FUNCTION CALL
++    else if (step.eventType === "FUNC_CALL") {
++      const funcName = op.funcName || "function";
++      addSubstep({
++        substepLabel: `Call ${funcName}()`,
++        codeSnippet: `${funcName}(nums)`,
++        varsBeforeStep: false,
++        whatIsHappening: `We call \`${funcName}()\` and pass our list \`nums\` as the argument!`,
++        symbolsMeaning: `Parentheses \`()\` invoke (call) a function.`,
++        currentValues: varsAfter,
++        whyNecessary: `Calling the function actually begins execution of the algorithm instructions.`,
++        whatHappensNext: `Python creates a Local Scope stack frame for this call.`
++      });
++
++      addSubstep({
++        substepLabel: `Create Local Scope frame`,
++        codeSnippet: `Local Scope: ${funcName}`,
++        varsBeforeStep: false,
++        whatIsHappening: `Python opens a new **Local Scope** stack frame! Variables created inside \`${funcName}\` (like \`c\` and \`ans\`) are isolated inside this scope.`,
++        symbolsMeaning: `Local Scope isolates variables so they do not collide with outside code.`,
++        currentValues: `Local Scope entered`,
++        whyNecessary: `Scope isolation keeps functions self-contained and free from side effects.`,
++        whatHappensNext: nextSentence
++      });
++    }
++
++    // 8. RETURN STATEMENT
++    else if (step.eventType === "RETURN") {
++      const returnVal = op.returnVal !== undefined ? op.returnVal : step.returnValue !== undefined ? step.returnValue : "6";
++      const subSummary =
++        bestSubarrayInfo && bestSubarrayInfo.subarray
++          ? `The continuous section \`[${bestSubarrayInfo.subarray.join(", ")}]\` has the largest sum: **${returnVal}**.`
++          : `The function finished and returned: **${returnVal}**.`;
++
++      addSubstep({
++        substepLabel: `Read return value ans = ${returnVal}`,
++        codeSnippet: `return ans (${returnVal})`,
++        varsBeforeStep: false,
++        whatIsHappening: `Python evaluates the return statement: \`ans\` holds our best answer **\`${returnVal}\`**!`,
++        symbolsMeaning: `\`return\` finishes the function and sends the result back to the caller.`,
++        currentValues: `ans = ${returnVal}`,
++        calculationCard: {
++          currentNumber: null,
++          before: `Finished algorithm`,
++          calculation: `return ans`,
++          after: `Final answer = ${returnVal}`
++        },
++        whyNecessary: `The return statement delivers the result of the function to whoever requested it.`,
++        whatHappensNext: `Python destroys the local scope frame and outputs the final answer.`
++      });
++
++      addSubstep({
++        substepLabel: `Final answer: ${returnVal}`,
++        codeSnippet: `return ${returnVal}`,
++        varsBeforeStep: false,
++        whatIsHappening: `The program is complete! The maximum continuous subarray sum is **${returnVal}**.`,
++        symbolsMeaning: `Function execution completed.`,
++        currentValues: `Final answer = ${returnVal}`,
++        whyNecessary: `Why am I learning this? Kadane's algorithm solved this problem in linear time (O(n)), visiting each element just once!`,
++        whatHappensNext: `You can click Restart to step through again or paste new code to learn!`,
++        finalBanner: {
++          answer: returnVal,
++          summary: subSummary
++        }
++      });
++    }
++
++    // 9. PRINT STATEMENT
++    else if (step.eventType === "PRINT") {
++      const output = op.output !== undefined ? op.output : "";
++      addSubstep({
++        substepLabel: `Evaluate expression in print()`,
++        codeSnippet: step.codeText,
++        varsBeforeStep: true,
++        whatIsHappening: `Python evaluates the expression inside \`${step.codeText}\`, which resolves to **\`${output}\`**.`,
++        symbolsMeaning: `\`print()\` outputs text or values to the console.`,
++        currentValues: varsBefore,
++        calculationCard: {
++          currentNumber: null,
++          before: `print statement`,
++          calculation: `Evaluate argument`,
++          after: `${output}`
++        },
++        whyNecessary: `The print function allows developers to see values and inspect results.`,
++        whatHappensNext: `Python prints the value to the screen.`
++      });
++
++      addSubstep({
++        substepLabel: `Print "${output}" to console`,
++        codeSnippet: `print → ${output}`,
++        varsBeforeStep: false,
++        whatIsHappening: `Python prints **\`${output}\`** to standard output!`,
++        symbolsMeaning: `Console output display.`,
++        currentValues: varsAfter,
++        calculationCard: {
++          currentNumber: null,
++          before: `Console before`,
++          calculation: `Write to stdout`,
++          after: `Printed: ${output}`
++        },
++        whyNecessary: `Displaying output confirms the code's real behavior.`,
++        whatHappensNext: nextSentence,
++        finalBanner: !nextStep ? { answer: output, summary: `Program finished! Printed: ${output}` } : null
++      });
++    }
++
++    // 10. GENERAL FALLBACK (Requirement 12)
++    else {
++      addSubstep({
++        substepLabel: `Execute line ${step.line}`,
++        codeSnippet: step.codeText,
++        varsBeforeStep: true,
++        whatIsHappening: `Python executes Line ${step.line}: \`${step.codeText}\`.`,
++        symbolsMeaning: this.explainSymbolsInLine(step.codeText),
++        currentValues: varsBefore,
++        whyNecessary: `Python executes code sequentially line-by-line.`,
++        whatHappensNext: `Python checks the outcome of this line.`
++      });
++
++      addSubstep({
++        substepLabel: `Line ${step.line} complete`,
++        codeSnippet: step.codeText,
++        varsBeforeStep: false,
++        whatIsHappening: `Line ${step.line} finished executing! Variables in scope: ${varsAfter}.`,
++        symbolsMeaning: `Statement complete.`,
++        currentValues: varsAfter,
++        whyNecessary: `State updated for the next instruction.`,
++        whatHappensNext: nextSentence
++      });
++    }
++
++    // Update totalSubsteps on all substeps
++    const totalCount = substeps.length;
++    substeps.forEach((s, idx) => {
++      s.substepIndex = idx + 1;
++      s.totalSubsteps = totalCount;
++      s.title = `Step ${n} (Substep ${idx + 1}/${totalCount}): ${s.substepLabel}`;
++    });
++
++    return substeps;
++  }
++
+   explainSymbolsInLine(codeText) {
+     const matches = [];
+     for (const item of PYTHON_SYMBOLS_LIBRARY) {
+

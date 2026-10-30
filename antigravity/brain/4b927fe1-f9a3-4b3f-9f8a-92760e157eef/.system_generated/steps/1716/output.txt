@@ -1,0 +1,41 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app_build\styles.css. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -1754,11 +1754,11 @@
+   display: grid;
+   grid-template-columns: 1fr auto 1.1fr;
+   align-items: center;
+-  gap: 8px;
+-  padding: 8px 12px;
+-  border-bottom: 1px solid var(--border-light);
+-  font-family: var(--font-mono);
+-  font-size: 13px;
++  gap: 6px;
++  padding: 5px 10px;
++  border-bottom: 1px solid var(--border-light);
++  font-family: var(--font-mono);
++  font-size: 12px;
+ }
+ 
+ .scope-var-row:last-child {
+@@ -1838,7 +1838,7 @@
+ .heap-objects-container {
+   display: flex;
+   flex-direction: column;
+-  gap: 7px;
++  gap: 5px;
+ }
+ 
+ .heap-obj-card {
+@@ -1845,7 +1845,7 @@
+   align-items: center;
+   justify-content: space-between;
+-  gap: 8px;
+-  padding: 8px 11px;
++  gap: 6px;
++  padding: 5px 9px;
+   border: 1px solid var(--border-medium);
+   border-radius: var(--radius-sm);
+   background: var(--bg-subtle);
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

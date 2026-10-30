@@ -1,0 +1,35 @@
+
+The command exited with code 0.
+Output:
+finalResult type: string 6
+Step 0 1 nums = [-2, 1, -3, 4, -1, 2, 1, -5, 4] assign_calc What will nums become after calculating [-2, 1, -3, 4, -1, 2, 1, -5, 4]?
+Step 4 5 c += nums[i] addition What will c become after this addition?
+Step 5 6 if c >= ans: condition_record Will ans update to a new record sum?
+Step 7 8 if c < 0: condition_negative Will this condition be True or False?
+Step 8 9 c = 0 assign_reset What will c reset to because it became negative?
+Step 10 5 c += nums[i] addition What will c become after this addition?
+Step 11 6 if c >= ans: condition_record Will ans update to a new record sum?
+Step 13 8 if c < 0: condition_negative Will this condition be True or False?
+Step 15 5 c += nums[i] addition What will c become after this addition?
+Step 16 6 if c >= ans: condition_record Will ans update to a new record sum?
+Step 17 8 if c < 0: condition_negative Will this condition be True or False?
+Step 18 9 c = 0 assign_reset What will c reset to because it became negative?
+Step 20 5 c += nums[i] addition What will c become after this addition?
+Step 21 6 if c >= ans: condition_record Will ans update to a new record sum?
+Step 23 8 if c < 0: condition_negative Will this condition be True or False?
+Step 25 5 c += nums[i] addition What will c become after this addition?
+Step 26 6 if c >= ans: condition_record Will ans update to a new record sum?
+Step 27 8 if c < 0: condition_negative Will this condition be True or False?
+Step 29 5 c += nums[i] addition What will c become after this addition?
+Step 30 6 if c >= ans: condition_record Will ans update to a new record sum?
+Step 32 8 if c < 0: condition_negative Will this condition be True or False?
+Step 34 5 c += nums[i] addition What will c become after this addition?
+Step 35 6 if c >= ans: condition_record Will ans update to a new record sum?
+Step 37 8 if c < 0: condition_negative Will this condition be True or False?
+Step 39 5 c += nums[i] addition What will c become after this addition?
+Step 40 6 if c >= ans: condition_record Will ans update to a new record sum?
+Step 41 8 if c < 0: condition_negative Will this condition be True or False?
+Step 43 5 c += nums[i] addition What will c become after this addition?
+Step 44 6 if c >= ans: condition_record Will ans update to a new record sum?
+Step 45 8 if c < 0: condition_negative Will this condition be True or False?
+

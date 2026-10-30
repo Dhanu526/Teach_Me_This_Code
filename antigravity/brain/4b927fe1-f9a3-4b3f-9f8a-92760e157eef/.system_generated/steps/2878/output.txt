@@ -1,0 +1,35 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app_build\dsa_dashboard.js. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -2338,6 +2338,29 @@
+           }
+         });
+       }
++
++      // Phase 9: Global Keyboard Shortcuts (Escape to dismiss modals, Ctrl+Enter to run code)
++      if (typeof window !== 'undefined' && !this._phase9KeyHandlersBound) {
++        this._phase9KeyHandlersBound = true;
++        window.addEventListener('keydown', (e) => {
++          if (e.key === 'Escape') {
++            const openModal = document.querySelector('.modal-overlay, .storage-modal-overlay');
++            if (openModal) openModal.remove();
++          }
++          if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
++            const activeEditor = document.getElementById('workspaceCodeEditor');
++            if (activeEditor && document.activeElement === activeEditor) {
++              e.preventDefault();
++              const btnTests = document.getElementById('btnWsRunTests');
++              if (btnTests) btnTests.click();
++              else {
++                const btnRun = document.getElementById('btnWsRunCode');
++                if (btnRun) btnRun.click();
++              }
++            }
++          }
++        });
++      }
+     }
+ 
+     updateFilterPillUI(selector, activeValue) {
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

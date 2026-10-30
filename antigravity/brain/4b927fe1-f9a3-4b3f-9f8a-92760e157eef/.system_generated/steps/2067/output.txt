@@ -1,0 +1,31 @@
+
+The command exited with code 1.
+Output:
+At line:1 char:57
++ python -c "exec(\"with open('app_build/styles.css', 'r', encoding='ut ...
++                                                         ~
+Missing expression after ','.
+At line:1 char:58
++ ... xec(\"with open('app_build/styles.css', 'r', encoding='utf-8') as f:\ ...
++                                                  ~~~~~~~~~~~~~~~~
+Unexpected token 'encoding='utf-8'' in expression or statement.
+At line:1 char:57
++ python -c "exec(\"with open('app_build/styles.css', 'r', encoding='ut ...
++                                                         ~
+Missing closing ')' in expression.
+At line:1 char:74
++ ... ec(\"with open('app_build/styles.css', 'r', encoding='utf-8') as f:\n ...
++                                                                 ~
+Unexpected token ')' in expression or statement.
+At line:1 char:98
++ ... ld/styles.css', 'r', encoding='utf-8') as f:\n    c = f.read()\nterms ...
++                                                                  ~
+An expression was expected after '('.
+At line:1 char:226
++ ... ter-select', 'table-meta-bar']\nfor t in terms:\n    print(t, 'FOUND' ...
++                                                                 ~
+Missing argument in parameter list.
+    + CategoryInfo          : ParserError: (:) [], ParentContainsErrorRecordException
+    + FullyQualifiedErrorId : MissingExpressionAfterToken
+ 
+

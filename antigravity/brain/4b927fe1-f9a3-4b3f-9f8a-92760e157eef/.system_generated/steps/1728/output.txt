@@ -1,0 +1,154 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app_build\styles.css. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -2904,10 +2904,10 @@
+   background: linear-gradient(135deg, #fffdfa 0%, #fef8ee 100%);
+   border: 2px solid #fde68a;
+   border-radius: var(--radius-md);
+-  padding: 15px 18px;
+-  display: flex;
+-  flex-direction: column;
+-  gap: 12px;
++  padding: 9px 12px;
++  display: flex;
++  flex-direction: column;
++  gap: 7px;
+   box-shadow: 0 4px 14px rgba(245, 158, 11, 0.08);
+   animation: predictEntrance calc(0.35s * var(--anim-speed-factor, 1)) cubic-bezier(0.16, 1, 0.3, 1) both;
+ }
+@@ -2926,7 +2926,7 @@
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+-  gap: 10px;
++  gap: 8px;
+   flex-wrap: wrap;
+ }
+ 
+@@ -2933,6 +2933,6 @@
+   display: flex;
+   align-items: center;
+-  gap: 8px;
++  gap: 6px;
+   flex-wrap: wrap;
+ }
+ 
+@@ -2939,10 +2939,10 @@
+-  font-size: 11.5px;
+-  font-weight: 700;
+-  text-transform: uppercase;
+-  letter-spacing: 0.05em;
+-  background: #f59e0b;
+-  color: #ffffff;
+-  padding: 3px 9px;
++  font-size: 10.5px;
++  font-weight: 700;
++  text-transform: uppercase;
++  letter-spacing: 0.05em;
++  background: #f59e0b;
++  color: #ffffff;
++  padding: 2px 7px;
+   border-radius: 999px;
+ }
+ 
+@@ -2949,8 +2949,8 @@
+   font-family: var(--font-mono);
+-  font-size: 12.5px;
+-  color: #78350f;
+-  background: #fef3c7;
+-  padding: 2px 8px;
++  font-size: 11.5px;
++  color: #78350f;
++  background: #fef3c7;
++  padding: 1px 6px;
+   border-radius: var(--radius-sm);
+   font-weight: 600;
+ }
+@@ -2957,6 +2957,6 @@
+ .btn-predict-skip {
+   font-family: var(--font-sans);
+-  font-size: 12px;
++  font-size: 11px;
+   font-weight: 600;
+   background: transparent;
+   color: #b45309;
+@@ -2963,4 +2963,4 @@
+-  padding: 4px 10px;
++  padding: 2px 8px;
+   border-radius: var(--radius-sm);
+   cursor: pointer;
+   transition: all 0.2s ease;
+@@ -2971,7 +2971,7 @@
+ }
+ 
+ .predict-question-text {
+-  font-size: 16px;
++  font-size: 14px;
+   font-weight: 700;
+   color: #1e293b;
+   line-height: 1.35;
+@@ -2979,7 +2979,7 @@
+ .predict-choices-wrap {
+   display: flex;
+   flex-wrap: wrap;
+-  gap: 10px;
++  gap: 6px;
+ }
+ 
+ .predict-choice-btn {
+@@ -2986,6 +2986,6 @@
+-  font-size: 13.5px;
+-  font-weight: 600;
+-  padding: 9px 16px;
++  font-size: 12.5px;
++  font-weight: 600;
++  padding: 5px 12px;
+   border-radius: var(--radius-sm);
+   border: 1.5px solid #cbd5e1;
+   background: #ffffff;
+@@ -2993,7 +2993,7 @@
+   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+   display: inline-flex;
+   align-items: center;
+-  gap: 8px;
++  gap: 6px;
+ }
+ 
+ .predict-choice-btn:hover:not(:disabled) {
+@@ -3029,10 +3029,10 @@
+   border-radius: var(--radius-sm);
+   border: 1px solid #e2e8f0;
+   border-left: 4px solid #10b981;
+-  padding: 12px 14px;
+-  display: flex;
+-  flex-direction: column;
+-  gap: 4px;
++  padding: 7px 10px;
++  display: flex;
++  flex-direction: column;
++  gap: 2px;
+   animation: predictResultPop calc(0.3s * var(--anim-speed-factor, 1)) ease-out both;
+ }
+ 
+@@ -3055,7 +3055,7 @@
+ }
+ 
+ .predict-result-header {
+-  font-size: 13.5px;
++  font-size: 12.5px;
+   font-weight: 700;
+   color: #0f172a;
+ }
+@@ -3062,7 +3062,7 @@
+ .predict-result-body {
+-  font-size: 13px;
+-  color: #475569;
+-  line-height: 1.45;
++  font-size: 12px;
++  color: #475569;
++  line-height: 1.4;
+ }
+ 
+ 
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

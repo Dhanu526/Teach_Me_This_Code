@@ -1,0 +1,245 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app_build\styles.css. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -864,8 +864,8 @@
+ }
+ 
+ .teach-why-text {
+-  font-size: 13px;
+-  line-height: 1.45;
++  font-size: 15px;
++  line-height: 1.55;
+   color: #166534;
+ }
+ 
+@@ -872,7 +872,7 @@
+   font-family: var(--font-mono);
+-  font-size: 13.5px;
+-  background: #dcfce7;
+-  padding: 2px 6px;
++  font-size: 15px;
++  background: #dcfce7;
++  padding: 2px 7px;
+   border-radius: 5px;
+   color: #14532d;
+   font-weight: 600;
+@@ -886,7 +886,7 @@
+ .var-boxes-grid {
+   display: flex;
+   flex-wrap: wrap;
+-  gap: 6px;
++  gap: 8px;
+   align-items: stretch;
+ }
+ 
+@@ -893,12 +893,13 @@
+-  flex: 1 1 80px;
+-  max-width: 130px;
++  flex: 1 1 95px;
++  max-width: 160px;
++  min-height: 52px;
+   border: 2px solid var(--border-medium);
+   border-radius: var(--radius-md);
+   background: #ffffff;
+-  padding: 4px 8px;
+-  display: flex;
+-  flex-direction: column;
+-  gap: 3px;
++  padding: 6px 10px;
++  display: flex;
++  flex-direction: column;
++  gap: 4px;
+   box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05);
+   transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+   position: relative;
+@@ -910,7 +910,7 @@
+ }
+ 
+ .var-box-label {
+-  font-size: 10px;
++  font-size: 12px;
+   font-weight: 700;
+   text-transform: uppercase;
+   letter-spacing: 0.3px;
+@@ -923,11 +923,11 @@
+ 
+ .var-box-label strong {
+   font-family: var(--font-mono);
+-  font-size: 11px;
+-  color: var(--primary-blue);
+-  background: #eff6ff;
+-  border: 1px solid #bfdbfe;
+-  padding: 0 4px;
++  font-size: 13.5px;
++  color: var(--primary-blue);
++  background: #eff6ff;
++  border: 1px solid #bfdbfe;
++  padding: 1px 5px;
+   border-radius: 4px;
+ }
+ 
+@@ -934,6 +934,6 @@
+-  font-size: 9.5px;
+-  font-weight: 700;
+-  padding: 1px 5px;
++  font-size: 11px;
++  font-weight: 700;
++  padding: 1px 6px;
+   border-radius: 999px;
+   text-transform: uppercase;
+   letter-spacing: 0.2px;
+@@ -966,9 +966,9 @@
+   gap: 4px;
+   background: var(--bg-subtle);
+   border: 1px solid var(--border-light);
+-  border-radius: 5px;
+-  padding: 2px 6px;
+-  min-height: 26px;
++  border-radius: 6px;
++  padding: 3px 8px;
++  min-height: 32px;
+ }
+ 
+ .var-box-value {
+@@ -975,4 +975,4 @@
+-  font-size: 14px;
++  font-size: 19px;
+   font-weight: 800;
+   color: var(--text-main);
+   animation: numPopIn calc(0.35s * var(--anim-speed-factor, 1)) cubic-bezier(0.175, 0.885, 0.32, 1.275);
+@@ -979,7 +979,7 @@
+ 
+ .var-box-prev {
+   font-family: var(--font-mono);
+-  font-size: 10px;
++  font-size: 11.5px;
+   color: var(--text-muted);
+   white-space: nowrap;
+ }
+@@ -1012,10 +1012,10 @@
+   background: #f8fafc;
+   border: 1.5px solid #cbd5e1;
+   border-radius: var(--radius-md);
+-  padding: 8px 12px;
+-  display: flex;
+-  flex-direction: column;
+-  gap: 6px;
++  padding: 10px 14px;
++  display: flex;
++  flex-direction: column;
++  gap: 8px;
+ }
+ 
+ .calc-stage-header {
+@@ -1022,6 +1022,6 @@
+   align-items: center;
+   justify-content: space-between;
+-  font-size: 11.5px;
++  font-size: 13px;
+   font-weight: 700;
+   text-transform: uppercase;
+   letter-spacing: 0.4px;
+@@ -1029,9 +1029,9 @@
+ 
+ .calc-stage-badge {
+   font-family: var(--font-mono);
+-  font-size: 10.5px;
+-  font-weight: 700;
+-  padding: 1px 6px;
++  font-size: 12px;
++  font-weight: 700;
++  padding: 2px 8px;
+   border-radius: 999px;
+   background: #eff6ff;
+   color: #1d4ed8;
+@@ -1041,8 +1041,8 @@
+   display: flex;
+   align-items: center;
+   flex-wrap: wrap;
+-  gap: 8px;
+-  padding: 5px 9px;
++  gap: 10px;
++  padding: 6px 12px;
+   background: #ffffff;
+   border: 1px solid var(--border-light);
+   border-radius: var(--radius-sm);
+@@ -1049,7 +1049,7 @@
+ 
+ .anim-source-val {
+   font-family: var(--font-mono);
+-  font-size: 14px;
++  font-size: 18px;
+   font-weight: 800;
+   color: #1e40af;
+   background: #dbeafe;
+@@ -1056,5 +1056,5 @@
+-  padding: 3px 8px;
+-  border-radius: 5px;
++  padding: 4px 10px;
++  border-radius: 6px;
+   display: inline-flex;
+   align-items: center;
+   animation: numberGlide calc(0.45s * var(--anim-speed-factor, 1)) cubic-bezier(0.16, 1, 0.3, 1);
+@@ -1062,8 +1062,8 @@
+ .anim-move-arrow {
+   display: flex;
+   align-items: center;
+-  gap: 4px;
+-  font-size: 11.5px;
++  gap: 5px;
++  font-size: 13px;
+   font-weight: 700;
+   color: #2563eb;
+   letter-spacing: 0.3px;
+@@ -1073,17 +1073,18 @@
+   display: flex;
+   align-items: center;
+   flex-wrap: wrap;
+-  gap: 6px;
+-  font-family: var(--font-mono);
+-  font-size: 13px;
++  gap: 8px;
++  font-family: var(--font-mono);
++  font-size: 16px;
+ }
+ 
+ .calc-operand-chip {
+-  padding: 3px 8px;
+-  border-radius: 5px;
+-  background: #ffffff;
+-  border: 1.5px solid var(--border-medium);
+-  font-weight: 700;
++  padding: 4px 10px;
++  border-radius: 6px;
++  background: #ffffff;
++  border: 1.5px solid var(--border-medium);
++  font-weight: 700;
++  font-size: 16px;
+   color: var(--text-main);
+   animation: operandAppear calc(0.3s * var(--anim-speed-factor, 1)) ease-out;
+ }
+@@ -1090,16 +1090,17 @@
+ .calc-operator-chip {
+   font-weight: 900;
+-  font-size: 14px;
+-  color: #2563eb;
+-  padding: 0 3px;
++  font-size: 17px;
++  color: #2563eb;
++  padding: 0 4px;
+ }
+ 
+ .calc-result-chip {
+-  padding: 3px 9px;
+-  border-radius: 5px;
++  padding: 4px 12px;
++  border-radius: 6px;
+   background: var(--changed-green-bg);
+   border: 2px solid var(--changed-green-border);
+   color: var(--changed-green-text);
++  font-size: 18px;
+   font-weight: 800;
+   animation: calcResultPop calc(0.4s * var(--anim-speed-factor, 1)) cubic-bezier(0.175, 0.885, 0.32, 1.275);
+ }
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

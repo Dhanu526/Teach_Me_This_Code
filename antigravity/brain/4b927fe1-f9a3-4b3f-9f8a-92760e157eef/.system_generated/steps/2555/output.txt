@@ -1,0 +1,8 @@
+
+The command exited with code 0.
+Output:
+223: const ROADMAP_PHASES = [
+996: const phase = ROADMAP_PHASES.find(p => p.phase === phaseNum);
+1632: const phaseItems = ROADMAP_PHASES.map(p => {
+2449: const phaseCards = ROADMAP_PHASES.map(p => {
+

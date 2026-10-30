@@ -1,0 +1,47 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\brain\4b927fe1-f9a3-4b3f-9f8a-92760e157eef\scratch\test_dsa_phase5_workspace.js. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -356,9 +356,9 @@
+   assert(dsa.activeVisualizerProblemId === 1, "activeVisualizerProblemId set to 1");
+ 
+   // Verify Kadane Maximum Subarray output remains 6
+-  console.log("\n[10] Verifying Kadane Maximum Subarray (Problem 53) Output = 6:");
+-  const kadaneProb = dsa.problemsById.get(53);
+-  assert(kadaneProb && kadaneProb.title === 'Maximum Subarray', "Problem 53 found: 'Maximum Subarray'");
++  console.log("\n[10] Verifying Kadane Maximum Subarray (Problem 251, LC 53) Output = 6:");
++  const kadaneProb = dsa.problems.find(p => p.leetcodeNumber === 53 || p.title === 'Maximum Subarray');
++  assert(kadaneProb && kadaneProb.title === 'Maximum Subarray', "Maximum Subarray problem found");
+   const kadaneTrace = dsa.engine.trace(kadaneProb.starterCode, "");
+   assert(kadaneTrace.ok === true, "Kadane starter code traced successfully");
+   const kadaneLastStep = kadaneTrace.steps[kadaneTrace.steps.length - 1];
+@@ -365,6 +365,6 @@
+-  if (kadaneLastStep.scopes && kadaneLastStep.scopes.global) {
+-    const v = kadaneLastStep.scopes.global.find(x => x.name === 'max_so_far' || x.name === 'max_sum');
+-    if (v) maxFound = v.rawValue;
++  if (kadaneLastStep.variables) {
++    const v = kadaneLastStep.variables.find(x => x.name === 'max_so_far' || x.name === 'max_sum');
++    if (v) maxFound = v.rawValue !== undefined ? v.rawValue : parseInt(v.current, 10);
+   }
+   if (maxFound === null && kadaneLastStep.stdout) {
+     const match = kadaneLastStep.stdout.join(' ').match(/(\d+)/);
+@@ -373,12 +373,12 @@
+ 
+   // [11] Test URL Hash Routing to Workspace
+   console.log("\n[11] Testing URL Hash Routing to Workspace (#dsa/problem/:id):");
+-  dsa.handleHashRouting('#dsa/problem/15'); // 3Sum
+-  assert(dsa.activeWorkspaceProblemId === 15, "Router navigated to problem 15 ('3Sum')");
+-  assert(dsa.currentSubTab === 'workspace', "Router switched to workspace view");
+-
+-  dsa.handleHashRouting('#dsa/problem/53'); // Maximum Subarray
+-  assert(dsa.activeWorkspaceProblemId === 53, "Router navigated to problem 53 ('Maximum Subarray')");
++  dsa.handleHashRouting('#dsa/problem/33'); // 3Sum
++  assert(dsa.activeWorkspaceProblemId === 33, "Router navigated to problem 33 ('3Sum')");
++  assert(dsa.currentSubTab === 'workspace', "Router switched to workspace view");
++
++  dsa.handleHashRouting('#dsa/problem/251'); // Maximum Subarray
++  assert(dsa.activeWorkspaceProblemId === 251, "Router navigated to problem 251 ('Maximum Subarray')");
+   assert(dsa.currentSubTab === 'workspace', "Router switched to workspace view");
+ 
+   console.log("\n===================================================================");
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

@@ -1,0 +1,43 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app_build\dsa_dashboard.js. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -3549,11 +3549,32 @@
+       const paginated = isAll ? filtered : filtered.slice(startIdx, startIdx + effectivePageSize);
+ 
+       if (totalFiltered === 0) {
+-        return `
+-          <div class="empty-state-box">
+-            <div class="empty-state-icon">🔍</div>
+-            <p class="empty-state-text">No problems match your current search and filter criteria.</p>
+-            <button class="btn-hero-primary" data-action="clear-filters">Reset All Filters</button>
++        let emptyMsg = 'No problems match your current search and filter criteria.';
++        let tipMsg = 'Try clearing your search query or choosing a broader difficulty or topic.';
++
++        if (this.selectedStatus === 'bookmarked') {
++          emptyMsg = 'No bookmarked problems found.';
++          tipMsg = 'Click the ☆ icon on any problem in the catalog to bookmark it for quick practice!';
++        } else if (this.selectedStatus === 'review') {
++          emptyMsg = 'Your review list is currently empty.';
++          tipMsg = 'Click the 🔖 icon on problems you want to flag for targeted revision!';
++        } else if (this.selectedStatus === 'with_notes') {
++          emptyMsg = 'No problems with personal notes found.';
++          tipMsg = 'Open any problem workspace and write notes to reinforce your learning!';
++        } else if (this.selectedStatus === 'solved') {
++          emptyMsg = 'No solved problems in this selection yet.';
++          tipMsg = 'Pick a beginner problem from the roadmap to get your first green checkmark!';
++        } else if (this.searchQuery && this.searchQuery.trim()) {
++          emptyMsg = `No problems found matching "${this.escapeHTML(this.searchQuery)}".`;
++          tipMsg = 'Check your spelling or try searching by algorithmic pattern (e.g. "Two Pointers", "Sliding Window").';
++        }
++
++        return `
++          <div class="empty-state-box dsa-empty-state-card">
++            <div class="empty-state-icon">🔍</div>
++            <h3 class="empty-state-heading">${emptyMsg}</h3>
++            <p class="empty-state-text">${tipMsg}</p>
++            <button class="btn-hero-primary btn-clear-empty-filters" data-action="clear-filters">Reset All Filters</button>
+           </div>
+         `;
+       }
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

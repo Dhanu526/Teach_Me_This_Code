@@ -1,0 +1,59 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\test_phase4.js. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -229,32 +229,27 @@
+ 
+   // 7. Verify step answer caching (backward/forward navigation state preservation)
+   const stepAnswers = new Map();
+-  // Simulate user answering step 3 correctly
+-  const q3 = defaultEnriched.steps[3].predictQuestion;
+-  if (q3) {
+-    stepAnswers.set(3, {
+-      selectedChoice: q3.correctValue,
+-      selectedIndex: q3.correctIndex,
+-      isCorrect: true,
+-      revealed: true,
+-      mode: "correct"
+-    });
+-  }
+-  // Simulate user skipping step 4
+-  const q4 = defaultEnriched.steps[4].predictQuestion;
+-  if (q4) {
+-    stepAnswers.set(4, {
+-      selectedChoice: null,
+-      isCorrect: null,
+-      revealed: true,
+-      mode: "revealed"
+-    });
+-  }
+-  // Verify state is retrieved faithfully on step navigation
+-  const ans3 = stepAnswers.get(3);
+-  assert(ans3 && ans3.isCorrect === true && ans3.mode === "correct", "User answer preserved when moving back to Step 3");
+-  const ans4 = stepAnswers.get(4);
+-  assert(ans4 && ans4.mode === "revealed", "User skip state preserved when moving to Step 4");
++  const qSteps = defaultEnriched.steps.map((s, idx) => ({ step: s, idx })).filter(item => Boolean(item.step.predictQuestion));
++  const qItem1 = qSteps[0];
++  const qItem2 = qSteps[1];
++  stepAnswers.set(qItem1.idx, {
++    selectedChoice: qItem1.step.predictQuestion.correctValue,
++    selectedIndex: qItem1.step.predictQuestion.correctIndex,
++    isCorrect: true,
++    revealed: true,
++    mode: "correct"
++  });
++  stepAnswers.set(qItem2.idx, {
++    selectedChoice: null,
++    isCorrect: null,
++    revealed: true,
++    mode: "revealed"
++  });
++
++  const ans1 = stepAnswers.get(qItem1.idx);
++  assert(ans1 && ans1.isCorrect === true && ans1.mode === "correct", `User answer preserved when moving back to Step ${qItem1.idx}`);
++  const ans2 = stepAnswers.get(qItem2.idx);
++  assert(ans2 && ans2.mode === "revealed", `User skip state preserved when moving to Step ${qItem2.idx}`);
+ 
+   console.log(`\n=== PHASE 4 VERIFICATION COMPLETE: ${passedCount}/${testCount} TESTS PASSED ===`);
+   if (passedCount === testCount) {
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

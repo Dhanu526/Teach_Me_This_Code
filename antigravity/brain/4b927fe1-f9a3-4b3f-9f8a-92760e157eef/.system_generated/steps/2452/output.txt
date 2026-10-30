@@ -1,0 +1,61 @@
+
+The command exited with code 0.
+Output:
+Testing Sample Dual Approaches:
+1. Two Sum (Baseline): {
+  name: 'TwoSum Baseline',
+  ok: true,
+  actual: '[0, 1]',
+  expected: '[0, 1]',
+  steps: 8
+}
+1. Two Sum (Optimized): {
+  name: 'TwoSum Optimized',
+  ok: true,
+  actual: '[0, 1]',
+  expected: '[0, 1]',
+  steps: 12
+}
+2. Contains Duplicate (Baseline): {
+  name: 'ContainsDup Baseline',
+  ok: true,
+  actual: 'True',
+  expected: 'True',
+  steps: 12
+}
+2. Contains Duplicate (Optimized): {
+  name: 'ContainsDup Optimized',
+  ok: true,
+  actual: 'True',
+  expected: 'True',
+  steps: 16
+}
+3. Max Profit (Baseline): {
+  name: 'MaxProfit Baseline',
+  ok: true,
+  actual: '5',
+  expected: '5',
+  steps: 66
+}
+3. Max Profit (Optimized): {
+  name: 'MaxProfit Optimized',
+  ok: true,
+  actual: '5',
+  expected: '5',
+  steps: 27
+}
+4. Max Subarray (Baseline): {
+  name: 'MaxSubArray Baseline',
+  ok: true,
+  actual: '6',
+  expected: '6',
+  steps: 177
+}
+4. Max Subarray (Optimized): {
+  name: 'MaxSubArray Optimized',
+  ok: true,
+  actual: '6',
+  expected: '6',
+  steps: 49
+}
+

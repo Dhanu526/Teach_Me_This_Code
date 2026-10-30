@@ -1,0 +1,51 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\brain\4b927fe1-f9a3-4b3f-9f8a-92760e157eef\scratch\test_dsa_phase8_storage.js. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -73,6 +73,9 @@
+ 
+   scrollIntoView() {}
+   remove() {}
++  appendChild(child) { this.children.push(child); }
++  removeChild(child) { this.children = this.children.filter(c => c !== child); }
++  click() {}
+ }
+ 
+ const mockLocalStorage = {
+@@ -82,6 +82,15 @@
+   clear() { this.store = {}; }
+ };
+ 
++const mockBlob = typeof Blob !== 'undefined' ? Blob : class MockBlob {
++  constructor(parts, opts) { this.parts = parts; this.opts = opts; }
++};
++
++const mockUrl = {
++  createObjectURL: () => 'blob:http://localhost/mock-uuid',
++  revokeObjectURL: () => {}
++};
++
+ const sandbox = {
+   window: {
+     location: { hash: '', origin: 'http://localhost', pathname: '/' },
+@@ -90,7 +90,9 @@
+     scrollTo: () => {},
+     confirm: () => true,
+     prompt: () => 'RESET',
+-    alert: () => {}
++    alert: () => {},
++    Blob: mockBlob,
++    URL: mockUrl
+   },
+   document: {
+     body: new MockElement('body'),
+@@ -98,6 +98,8 @@
+     querySelectorAll: () => [],
+     createElement: (tag) => new MockElement(tag)
+   },
++  Blob: mockBlob,
++  URL: mockUrl,
+   localStorage: mockLocalStorage,
+   console: console,
+   setTimeout: (fn) => fn(),
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

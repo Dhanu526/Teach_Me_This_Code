@@ -1,0 +1,26 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\brain\4b927fe1-f9a3-4b3f-9f8a-92760e157eef\scratch\test_dsa_phase5_workspace.js. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -142,6 +142,9 @@
+     window: {
+       localStorage: mockLocalStorage,
+       location: mockLocation,
++      history: { replaceState: (state, title, url) => { mockLocation.hash = url; } },
++      navigator: { clipboard: { writeText: () => Promise.resolve() } },
++      scrollTo: () => {},
+       addEventListener: () => {}
+     },
+     document: {
+@@ -161,8 +161,8 @@
+   assert(typeof sandbox.window.PythonExecutionEngine === 'function', "PythonExecutionEngine class loaded in sandbox");
+ 
+   vm.runInContext(problemsCode, sandbox);
+-  assert(Array.isArray(sandbox.window.DSA_PROBLEMS_CATALOG), "DSA_PROBLEMS_CATALOG loaded in sandbox");
+-  assert(sandbox.window.DSA_PROBLEMS_CATALOG.length === 300, "Catalog has 300 problems");
++  assert(Array.isArray(sandbox.window.DSA_PROBLEMS_LIBRARY), "DSA_PROBLEMS_LIBRARY loaded in sandbox");
++  assert(sandbox.window.DSA_PROBLEMS_LIBRARY.length === 300, "Catalog has 300 problems");
+ 
+   // Mock teachMeApp
+   let teachMeAnalyzedCount = 0;
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

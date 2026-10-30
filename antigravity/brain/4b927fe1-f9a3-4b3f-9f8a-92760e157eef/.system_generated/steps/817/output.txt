@@ -1,0 +1,32 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app_build\styles.css. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -883,7 +883,7 @@
+   font-weight: 700;
+   color: #2563eb;
+   letter-spacing: 0.3px;
+-  animation: arrowPulse 0.9s infinite alternate;
++  animation: arrowPulse calc(0.9s * var(--anim-speed-factor, 1)) infinite alternate;
+ }
+ 
+ .calc-equation-row {
+@@ -942,7 +942,7 @@
+ 
+ .neg-warning-icon {
+   font-size: 18px;
+-  animation: shake 0.6s ease;
++  animation: shake calc(0.6s * var(--anim-speed-factor, 1)) ease;
+ }
+ 
+ .neg-reset-flow {
+@@ -978,7 +978,7 @@
+   border-radius: 6px;
+   font-weight: 800;
+   font-size: 15px;
+-  animation: popIn 0.45s ease;
++  animation: popIn calc(0.45s * var(--anim-speed-factor, 1)) ease;
+ }
+ 
+ /* 4. Condition Gate & Decision Visualizer (Phase 3) */
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

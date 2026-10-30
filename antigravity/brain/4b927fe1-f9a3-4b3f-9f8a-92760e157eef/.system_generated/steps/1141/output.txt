@@ -1,0 +1,301 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app_build\explainer.js. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -1205,6 +1205,93 @@
+           whyNecessary: `Prepares the running sum so the next number in the list can begin a fresh subarray.`,
+           whatHappensNext: nextSentence
+         });
++      } else if (/\.(append|pop|remove|extend|insert|sort|reverse|clear)\s*\(/.test(step.codeText)) {
++        // List in-place mutating method (e.g. self.items.append(item), stack.pop())
++        const methodMatch = step.codeText.match(/\.([a-zA-Z_]\w*)\s*\((.*)\)/);
++        const methodName = methodMatch ? methodMatch[1] : "method";
++        const argStr = methodMatch ? methodMatch[2].trim() : "";
++
++        addSubstep({
++          substepLabel: `Inspect ${target} before .${methodName}()`,
++          codeSnippet: target,
++          varsBeforeStep: true,
++          whatIsHappening: `Python is about to execute \`.${methodName}()\` on list \`${target}\`. Current list content: \`${beforeVal || "[]"}\`.`,
++          symbolsMeaning: `Calling a method on an existing list modifies the object directly in heap memory.`,
++          currentValues: `${target} = ${beforeVal || "[]"}`,
++          whyNecessary: `Inspecting list contents before mutation helps track exactly what changed.`,
++          whatHappensNext: `Python executes the \`.${methodName}()\` operation in-place.`
++        });
++
++        addSubstep({
++          substepLabel: `Call .${methodName}(${argStr}) in-place`,
++          codeSnippet: step.codeText,
++          varsBeforeStep: false,
++          whatIsHappening: `Python executes \`.${methodName}(${argStr})\` directly on \`${target}\`. The list is now updated in memory to **\`${afterVal}\`**!`,
++          symbolsMeaning: `In-place list modification.`,
++          currentValues: `${target} = ${afterVal}`,
++          calculationCard: {
++            currentNumber: null,
++            before: `${target} was ${beforeVal || "[]"}`,
++            calculation: `.${methodName}(${argStr})`,
++            after: `${target} is now ${afterVal}`
++          },
++          whyNecessary: `List methods modify the underlying list without needing to allocate a new list.`,
++          whatHappensNext: nextSentence
++        });
++      } else if (op.substituted && op.substituted !== afterVal && op.substituted !== rhsExpr) {
++        // Arithmetic / formula assignment (e.g. mid = (left + right) // 2)
++        addSubstep({
++          substepLabel: `Evaluate operands in ${rhsExpr || "formula"}`,
++          codeSnippet: rhsExpr || step.codeText,
++          varsBeforeStep: true,
++          whatIsHappening: `Python evaluates the variables inside \`${rhsExpr || step.codeText}\`. Substituting their current values yields: \`${op.substituted}\`.`,
++          symbolsMeaning: `Operand lookup and variable substitution.`,
++          currentValues: varsBefore,
++          calculationCard: {
++            currentNumber: null,
++            before: `Formula: ${rhsExpr || step.codeText}`,
++            calculation: `Substitute actual values`,
++            after: `${op.substituted}`
++          },
++          whyNecessary: `Python retrieves the value of each variable in the expression before computing the result.`,
++          whatHappensNext: `Python computes the arithmetic result.`
++        });
++
++        addSubstep({
++          substepLabel: `Calculate ${op.substituted} = ${afterVal}`,
++          codeSnippet: `${op.substituted} → ${afterVal}`,
++          varsBeforeStep: true,
++          whatIsHappening: `Python calculates the arithmetic expression: \`${op.substituted}\` evaluates to **\`${afterVal}\`**!`,
++          symbolsMeaning: `Arithmetic calculation with concrete values.`,
++          currentValues: `Calculated value = ${afterVal}`,
++          calculationCard: {
++            currentNumber: null,
++            before: `${op.substituted}`,
++            calculation: `Arithmetic evaluation`,
++            after: `${afterVal}`
++          },
++          whyNecessary: `Computes the final number to store in variable \`${target}\`.`,
++          whatHappensNext: `Python stores the result in variable \`${target}\`.`
++        });
++
++        addSubstep({
++          substepLabel: `${isCreated ? "Create" : "Update"} ${target} = ${afterVal}`,
++          codeSnippet: `${target} = ${afterVal}`,
++          varsBeforeStep: false,
++          whatIsHappening: isCreated
++            ? `Python creates a new variable named \`${target}\` and stores **\`${afterVal}\`** inside it.`
++            : `Python updates existing variable \`${target}\` from \`${beforeVal || "unknown"}\` to **\`${afterVal}\`**.`,
++          symbolsMeaning: `Assignment operator \`=\`.`,
++          currentValues: varsAfter,
++          calculationCard: {
++            currentNumber: null,
++            before: isCreated ? `Create ${target}` : `${target} was ${beforeVal}`,
++            calculation: `${target} = ${afterVal}`,
++            after: `${target} is now ${afterVal}`
++          },
++          whyNecessary: `Stores the calculated value into variable memory for subsequent steps.`,
++          whatHappensNext: nextSentence
++        });
+       } else {
+         // General assignment
+         addSubstep({
+@@ -1244,7 +1244,7 @@
+       }
+     }
+ 
+-    // 4. FOR LOOP ITERATION (Requirement 7)
++    // 4. FOR & WHILE LOOP ITERATIONS (Requirement 7)
+     else if (step.eventType === "LOOP_ITER" && op.kind === "for_iter") {
+       const iterVar = op.iterVar || "i";
+       const iterVal = op.iterVal !== undefined ? op.iterVal : 0;
+@@ -1301,7 +1301,75 @@
+           whyNecessary: `Knowing both the index and the element value allows us to track exactly what the loop is inspecting.`,
+           whatHappensNext: nextSentence
+         });
+-      }
++      } else {
++        addSubstep({
++          substepLabel: `Loop pass ${iteration} ready`,
++          codeSnippet: step.codeText,
++          varsBeforeStep: false,
++          whatIsHappening: `Loop variable \`${iterVar}\` is set to **\`${iterVal}\`**. What causes the next iteration? When all statements in this pass finish, Python automatically fetches the next value from the sequence until all ${total} items are completed!`,
++          symbolsMeaning: `Iteration sequence progression.`,
++          currentValues: varsAfter,
++          whyNecessary: `Prepares the loop body to execute with this iteration's value.`,
++          whatHappensNext: nextSentence
++        });
++      }
++    }
++
++    else if (step.eventType === "LOOP_ITER" && op.kind === "while_check") {
++      const iteration = op.iteration || 1;
++      const leftExpr = cond?.leftExpr || "condition";
++      const leftVal = cond?.leftVal !== undefined ? cond.leftVal : "";
++      const rightExpr = cond?.rightExpr || "";
++      const rightVal = cond?.rightVal !== undefined ? cond.rightVal : "";
++      const opSym = cond?.operator || "";
++
++      // Substep 1: Inspect condition operands
++      addSubstep({
++        substepLabel: `Check while condition operands`,
++        codeSnippet: cond ? `${leftExpr} ${opSym} ${rightExpr}` : step.codeText,
++        varsBeforeStep: true,
++        whatIsHappening: `Python evaluates the while condition before running pass #${iteration}: \`${leftExpr}\` is **\`${leftVal}\`** and \`${rightExpr}\` is **\`${rightVal}\`**.`,
++        symbolsMeaning: `\`while\` repeats an indented block as long as its condition remains True.`,
++        currentValues: varsBefore,
++        calculationCard: {
++          currentNumber: null,
++          before: `${leftExpr} = ${leftVal}`,
++          calculation: `Evaluate condition operands`,
++          after: `${rightExpr} = ${rightVal}`
++        },
++        whyNecessary: `A while loop must test its condition before every pass to decide whether to continue or stop.`,
++        whatHappensNext: `Python evaluates the comparison.`
++      });
++
++      // Substep 2: Evaluate condition boolean
++      addSubstep({
++        substepLabel: `Condition evaluates to True`,
++        codeSnippet: `${leftVal} ${opSym} ${rightVal} → True`,
++        varsBeforeStep: false,
++        whatIsHappening: `The comparison \`${leftVal} ${opSym} ${rightVal}\` evaluates to **True**! Because the condition is True, the loop enters pass #${iteration}.`,
++        symbolsMeaning: `Condition outcome: True allows the loop to continue.`,
++        currentValues: varsAfter,
++        calculationCard: {
++          currentNumber: null,
++          before: `${leftVal} ${opSym} ${rightVal}`,
++          calculation: `Boolean test`,
++          after: `True`
++        },
++        whyNecessary: `The loop body only executes when the loop condition evaluates to True.`,
++        whatHappensNext: `Python enters the loop body for pass #${iteration}.`
++      });
++
++      // Substep 3: What causes next iteration
++      addSubstep({
++        substepLabel: `Start pass #${iteration} of while loop`,
++        codeSnippet: step.codeText,
++        varsBeforeStep: false,
++        whatIsHappening: `Python begins pass #${iteration}. What causes the next iteration? Once all statements in this pass finish, Python will loop right back to Line ${step.line} to re-evaluate the condition!`,
++        symbolsMeaning: `Loop control flow cycle.`,
++        currentValues: varsAfter,
++        whyNecessary: `Understanding the loop cycle ensures you know how variables must change inside the loop to avoid infinite loops.`,
++        whatHappensNext: nextSentence
++      });
+     }
+ 
+     // 5. LOOP FINISHED
+@@ -1308,24 +1308,60 @@
+-      addSubstep({
+-        substepLabel: `All iterations complete`,
+-        codeSnippet: step.codeText,
+-        varsBeforeStep: false,
+-        whatIsHappening: `We have checked every single number in the list! The loop has completed all passes.`,
+-        symbolsMeaning: `Loop termination.`,
+-        currentValues: varsAfter,
+-        whyNecessary: `Once the sequence in \`range()\` is exhausted, the loop ends automatically.`,
+-        whatHappensNext: `Python leaves the loop and moves to the \`return\` statement.`
+-      });
+-
+-      addSubstep({
+-        substepLabel: `Exit loop block`,
+-        codeSnippet: step.codeText,
+-        varsBeforeStep: false,
+-        whatIsHappening: `Python exits the indented loop body and moves to Line ${nextStep?.line || step.line + 1}.`,
+-        symbolsMeaning: `Exiting loop control block.`,
+-        currentValues: varsAfter,
+-        whyNecessary: `The program is ready to return the final answer.`,
+-        whatHappensNext: nextSentence
+-      });
++      if (op.kind === "while_check") {
++        const leftVal = cond?.leftVal !== undefined ? cond.leftVal : "";
++        const rightVal = cond?.rightVal !== undefined ? cond.rightVal : "";
++        const opSym = cond?.operator || "";
++
++        addSubstep({
++          substepLabel: `While condition evaluated to False`,
++          codeSnippet: `${leftVal} ${opSym} ${rightVal} → False`,
++          varsBeforeStep: false,
++          whatIsHappening: `The condition \`${leftVal} ${opSym} ${rightVal}\` evaluated to **False**! The loop condition is no longer met.`,
++          symbolsMeaning: `\`False\` terminates the while loop.`,
++          currentValues: varsAfter,
++          calculationCard: {
++            currentNumber: null,
++            before: `${leftVal} ${opSym} ${rightVal}`,
++            calculation: `Condition check`,
++            after: `False (Stop)`
++          },
++          whyNecessary: `A while loop stops running immediately once its condition becomes False, preventing infinite loops.`,
++          whatHappensNext: `Python exits the while loop and moves past the indented block.`
++        });
++
++        addSubstep({
++          substepLabel: `Exit while loop`,
++          codeSnippet: step.codeText,
++          varsBeforeStep: false,
++          whatIsHappening: `Python exits the loop and advances to Line ${nextStep?.line || step.line + 1}.`,
++          symbolsMeaning: `Exiting while loop body.`,
++          currentValues: varsAfter,
++          whyNecessary: `The loop has finished its work; the program proceeds to the next instructions.`,
++          whatHappensNext: nextSentence
++        });
++      } else {
++        const total = op.total || (step.loop ? step.loop.totalIterations : null);
++        const countMsg = total ? `all ${total} passes` : `all passes`;
++        addSubstep({
++          substepLabel: `All iterations complete`,
++          codeSnippet: step.codeText,
++          varsBeforeStep: false,
++          whatIsHappening: `We have checked every single item in the sequence! The loop has completed ${countMsg}.`,
++          symbolsMeaning: `Loop sequence exhausted.`,
++          currentValues: varsAfter,
++          whyNecessary: `Once the sequence in \`range()\` or the list is exhausted, the loop ends automatically.`,
++          whatHappensNext: `Python leaves the loop and moves to the \`return\` statement.`
++        });
++
++        addSubstep({
++          substepLabel: `Exit loop block`,
++          codeSnippet: step.codeText,
++          varsBeforeStep: false,
++          whatIsHappening: `Python exits the indented loop body and moves to Line ${nextStep?.line || step.line + 1}.`,
++          symbolsMeaning: `Exiting loop control block.`,
++          currentValues: varsAfter,
++          whyNecessary: `The program is ready to proceed to the next statement.`,
++          whatHappensNext: nextSentence
++        });
++      }
+     }
+ 
+     // 6. CLASS & FUNCTION DEFINITIONS
+@@ -1332,8 +1332,10 @@
++      const clsMatch = step.codeText.match(/class\s+([A-Za-z0-9_]+)/);
++      const clsName = op.className || (clsMatch ? clsMatch[1] : "Solution");
+       addSubstep({
+         substepLabel: `What is a class?`,
+-        codeSnippet: `class Solution:`,
+-        varsBeforeStep: false,
+-        whatIsHappening: `Python encounters \`class Solution:\`. A **class** is a blueprint that groups related functions (called methods) together under one name.`,
++        codeSnippet: `class ${clsName}:`,
++        varsBeforeStep: false,
++        whatIsHappening: `Python encounters \`class ${clsName}:\`. A **class** is a blueprint that groups related functions (called methods) together under one name.`,
+         symbolsMeaning: `\`class\` defines a new class blueprint in Global Scope.`,
+         currentValues: `Global Scope`,
+         whyNecessary: `Why am I learning this? Object-Oriented Programming (OOP) groups functions and data together for clean organization.`,
+@@ -1340,13 +1340,13 @@
+       });
+ 
+       addSubstep({
+-        substepLabel: `Register Solution class`,
+-        codeSnippet: `class Solution:`,
+-        varsBeforeStep: false,
+-        whatIsHappening: `Python registers \`Solution\` in Global Scope. Creating the class does not execute the algorithm yet—it simply prepares the blueprint.`,
++        substepLabel: `Register ${clsName} class`,
++        codeSnippet: `class ${clsName}:`,
++        varsBeforeStep: false,
++        whatIsHappening: `Python registers \`${clsName}\` in Global Scope. Creating the class does not execute the algorithm yet—it simply prepares the blueprint.`,
+         symbolsMeaning: `Registering class in memory.`,
+-        currentValues: `class Solution defined`,
+-        whyNecessary: `Before we can call methods, Python must register their class container.`,
++        currentValues: `class ${clsName} defined`,
++        whyNecessary: `Before we can call methods or instantiate objects, Python must register their class container.`,
+         whatHappensNext: nextSentence
+       });
+     } else if (step.eventType === "METHOD_DEF" || step.eventType === "FUNC_DEF") {
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

@@ -1,0 +1,180 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app_build\app.js. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -836,174 +836,6 @@
+     }
+   }
+ 
+-  /* =========================================================
+-     PHASE 4: INTERACTIVE LEARNING & PREDICTION QUIZ
+-     Asks learners to predict outcomes before selected steps:
+-     - What will c become after this addition?
+-     - Will this condition be True or False?
+-     - Will ans change?
+-     Reveals correct result and explanation. Feature is optional.
+-     ========================================================= */
+-  renderInteractiveQuiz(step, currentSubstep) {
+-    if (!this.predictQuizCard) return;
+-
+-    if (!this.quizModeEnabled || !step.quizQuestion) {
+-      this.predictQuizCard.classList.add("hidden");
+-      this.predictQuizCard.innerHTML = "";
+-      return;
+-    }
+-
+-    const q = step.quizQuestion;
+-    const answerState = this.quizAnswers.get(step.stepIndex);
+-    const isAnswered = Boolean(answerState && answerState.answered);
+-
+-    // If Auto Play is running and an unanswered question appears, pause Auto Play so learner can answer!
+-    if (this.isPlaying && !isAnswered) {
+-      this.stopAutoPlay();
+-    }
+-
+-    this.predictQuizCard.classList.remove("hidden");
+-
+-    const totalQuestions = (this.traceResult.steps || []).filter((s) => Boolean(s.quizQuestion)).length;
+-    const currentQNum = (this.traceResult.steps || [])
+-      .slice(0, step.stepIndex + 1)
+-      .filter((s) => Boolean(s.quizQuestion)).length;
+-
+-    const scoreDisplay =
+-      this.quizScore.total > 0
+-        ? `Score: ${this.quizScore.correct}/${this.quizScore.total} (${Math.round(
+-            (this.quizScore.correct / this.quizScore.total) * 100
+-          )}%) ⭐`
+-        : `Question ${currentQNum} of ${totalQuestions}`;
+-
+-    // Options rendering
+-    const optionsHTML = q.options
+-      .map((opt, idx) => {
+-        let btnClass = "quiz-option-btn";
+-        let tagHTML = "";
+-
+-        if (isAnswered) {
+-          const isSelected = answerState.selectedIdx === idx;
+-          if (isSelected) {
+-            if (answerState.isCorrect) {
+-              btnClass += " is-correct";
+-              tagHTML = `<span class="quiz-option-tag tag-correct">✓ Your Answer</span>`;
+-            } else {
+-              btnClass += " is-wrong";
+-              tagHTML = `<span class="quiz-option-tag tag-wrong">✗ Your Answer</span>`;
+-            }
+-          } else if (opt.isCorrect) {
+-            btnClass += " is-revealed-correct";
+-            tagHTML = `<span class="quiz-option-tag tag-correct">✓ Correct Answer</span>`;
+-          }
+-        }
+-
+-        return `
+-          <button type="button" class="${btnClass}" data-idx="${idx}" ${isAnswered ? "disabled" : ""}>
+-            <span>${this.escapeHTML(opt.text)}</span>
+-            ${tagHTML}
+-          </button>
+-        `;
+-      })
+-      .join("");
+-
+-    let feedbackBoxHTML = "";
+-    if (isAnswered) {
+-      const feedbackHeading = answerState.skipped
+-        ? "<strong>Result & Explanation Revealed:</strong>"
+-        : answerState.isCorrect
+-        ? "<strong>🎉 Excellent Prediction!</strong>"
+-        : "<strong>💡 Good Try! Here is how it works:</strong>";
+-
+-      feedbackBoxHTML = `
+-        <div class="quiz-explanation-box">
+-          <div style="margin-bottom: 4px;">${feedbackHeading}</div>
+-          <div>${this.formatMarkdown(q.explanation)}</div>
+-        </div>
+-      `;
+-    }
+-
+-    let actionsHTML = "";
+-    if (isAnswered) {
+-      actionsHTML = `
+-        <div class="quiz-actions-row">
+-          <span style="font-size:12.5px; color:#6d28d9; font-weight:600;">Prediction recorded! Inspect the execution flow below.</span>
+-          <button type="button" id="btnQuizContinue" class="btn-quiz-continue">
+-            Continue Step ➔
+-          </button>
+-        </div>
+-      `;
+-    } else {
+-      actionsHTML = `
+-        <div class="quiz-actions-row">
+-          <span style="font-size:12px; color:var(--text-muted);">Pick your prediction above or skip to reveal immediately:</span>
+-          <button type="button" id="btnQuizSkip" class="btn-quiz-skip">Skip & Reveal</button>
+-        </div>
+-      `;
+-    }
+-
+-    this.predictQuizCard.innerHTML = `
+-      <div class="quiz-header-row">
+-        <span class="quiz-badge">🎯 ${this.escapeHTML(q.title || "Interactive Prediction")}</span>
+-        <span class="quiz-score-pill">${this.escapeHTML(scoreDisplay)}</span>
+-      </div>
+-      <h3 class="quiz-question-title">${this.escapeHTML(q.question)}</h3>
+-      ${q.hint ? `<p class="quiz-hint-text"><strong>Context:</strong> ${this.escapeHTML(q.hint)}</p>` : ""}
+-      <div class="quiz-options-grid">
+-        ${optionsHTML}
+-      </div>
+-      ${feedbackBoxHTML}
+-      ${actionsHTML}
+-    `;
+-
+-    // Bind option click handlers if unanswered
+-    if (!isAnswered) {
+-      const optionButtons = this.predictQuizCard.querySelectorAll(".quiz-option-btn");
+-      optionButtons.forEach((btn) => {
+-        btn.addEventListener("click", () => {
+-          const idx = Number(btn.getAttribute("data-idx"));
+-          const selectedOpt = q.options[idx];
+-          if (!selectedOpt) return;
+-
+-          const isCorrect = Boolean(selectedOpt.isCorrect);
+-          this.quizScore.total++;
+-          if (isCorrect) {
+-            this.quizScore.correct++;
+-          }
+-
+-          this.quizAnswers.set(step.stepIndex, {
+-            selectedIdx: idx,
+-            isCorrect,
+-            answered: true,
+-            skipped: false
+-          });
+-
+-          this.renderStep();
+-        });
+-      });
+-
+-      const btnSkip = this.predictQuizCard.querySelector("#btnQuizSkip");
+-      if (btnSkip) {
+-        btnSkip.addEventListener("click", () => {
+-          this.quizAnswers.set(step.stepIndex, {
+-            selectedIdx: -1,
+-            isCorrect: false,
+-            answered: true,
+-            skipped: true
+-          });
+-          this.renderStep();
+-        });
+-      }
+-    } else {
+-      const btnContinue = this.predictQuizCard.querySelector("#btnQuizContinue");
+-      if (btnContinue) {
+-        btnContinue.addEventListener("click", () => {
+-          this.goToNextSubstep();
+-        });
+-      }
+-    }
+-  }
+-
+   /* PHASE 3: Visually Return to the Loop when another iteration begins */
+   renderLoopReturnBanner(step, currentSubstep) {
+     if (!this.loopReturnBanner) return;
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

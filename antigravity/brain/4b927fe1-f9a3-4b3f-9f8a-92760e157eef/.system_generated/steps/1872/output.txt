@@ -1,0 +1,60 @@
+
+The command exited with code 1.
+Output:
+===================================================================
+PHASE 1: DSA LEARNING DASHBOARD & CURATED 300 PROBLEMS AUDIT
+===================================================================
+
+[1] Verifying Static Files & UI Structure:
+  ✓ [PASS] index.html exists
+  ✓ [PASS] styles.css exists
+  ✓ [PASS] dsa_problems.js exists
+  ✓ [PASS] dsa_dashboard.js exists
+  ✓ [PASS] Visualizer tab button present
+  ✓ [PASS] DSA Learning tab button present
+  ✓ [PASS] Visualizer view container present
+  ✓ [PASS] Active DSA problem banner present
+  ✓ [PASS] DSA learning container present
+  ✓ [PASS] dsa_problems.js script included
+  ✓ [PASS] dsa_dashboard.js script included
+  ✓ [PASS] nav-view-switcher styles present in CSS
+  ✓ [PASS] dsa-learning-container styles present in CSS
+  ✓ [PASS] dsa-metrics-grid styles present in CSS
+  ✓ [PASS] continue-hero-card styles present in CSS
+  ✓ [PASS] topic-mastery-card styles present in CSS
+  ✓ [PASS] problem-table styles present in CSS
+  ✓ [PASS] roadmap-timeline styles present in CSS
+
+[2] Verifying Curated 300 DSA Problems Integrity:
+  ✓ [PASS] DSA_PROBLEMS_LIBRARY is an array
+  ✓ [PASS] Exactly 300 problems curated (found 300)
+  ✓ [PASS] All 300 problem IDs are distinct and unique
+  ✓ [PASS] All 300 problem titles are distinct and unique
+  ✓ [PASS] Every problem has complete schema (ID, LC#, Title, Difficulty, Topic, Pattern, Description, StarterCode)
+  ✓ [PASS] Easy problems count is 78 (found 78)
+  ✓ [PASS] Medium problems count is 194 (found 194)
+  ✓ [PASS] Hard problems count is 28 (found 28)
+  ✓ [PASS] All 17 core DSA topics are represented
+  ✓ [PASS] Arrays & Hashing has 30 problems
+  ✓ [PASS] Trees has 32 problems
+  ✓ [PASS] 1-D Dynamic Programming has 24 problems
+
+[3] Verifying DsaDashboard LocalStorage & Progress Computation:
+evalmachine.<anonymous>:1466
+  window.addEventListener('DOMContentLoaded', () => {
+         ^
+
+TypeError: window.addEventListener is not a function
+    at evalmachine.<anonymous>:1466:10
+    at evalmachine.<anonymous>:1471:3
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at runDsaPhase1Tests (C:\Users\CVT\.gemini\antigravity\brain\4b927fe1-f9a3-4b3f-9f8a-92760e157eef\scratch\test_dsa_phase1.js:146:6)
+    at Object.<anonymous> (C:\Users\CVT\.gemini\antigravity\brain\4b927fe1-f9a3-4b3f-9f8a-92760e157eef\scratch\test_dsa_phase1.js:250:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+
+Node.js v24.19.0
+

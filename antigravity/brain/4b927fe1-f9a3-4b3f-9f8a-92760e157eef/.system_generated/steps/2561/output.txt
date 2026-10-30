@@ -1,0 +1,64 @@
+
+The command exited with code 0.
+Output:
+=== Stage 1: Python Fundamentals and Arrays (165 problems) ===
+  [1] LC#1 Two Sum (Easy) - Arrays & Hashing
+  [2] LC#217 Contains Duplicate (Easy) - Arrays & Hashing
+  [3] LC#242 Valid Anagram (Easy) - Arrays & Hashing
+  [4] LC#49 Group Anagrams (Medium) - Arrays & Hashing
+  [5] LC#347 Top K Frequent Elements (Medium) - Arrays & Hashing
+=== Stage 2: Strings and Hashing (185 problems) ===
+  [1] LC#1 Two Sum (Easy) - Arrays & Hashing
+  [2] LC#217 Contains Duplicate (Easy) - Arrays & Hashing
+  [3] LC#242 Valid Anagram (Easy) - Arrays & Hashing
+  [4] LC#49 Group Anagrams (Medium) - Arrays & Hashing
+  [5] LC#347 Top K Frequent Elements (Medium) - Arrays & Hashing
+=== Stage 3: Two Pointers and Sliding Windows (38 problems) ===
+  [31] LC#125 Valid Palindrome (Easy) - Two Pointers
+  [32] LC#167 Two Sum II - Input Array Is Sorted (Medium) - Two Pointers
+  [33] LC#15 3Sum (Medium) - Two Pointers
+  [34] LC#16 3Sum Closest (Medium) - Two Pointers
+  [35] LC#18 4Sum (Medium) - Two Pointers
+=== Stage 4: Prefix Sums, Sorting, and Binary Search (86 problems) ===
+  [4] LC#49 Group Anagrams (Medium) - Arrays & Hashing
+  [5] LC#347 Top K Frequent Elements (Medium) - Arrays & Hashing
+  [6] LC#238 Product of Array Except Self (Medium) - Arrays & Hashing
+  [13] LC#283 Move Zeroes (Easy) - Arrays & Hashing
+  [16] LC#560 Subarray Sum Equals K (Medium) - Arrays & Hashing
+=== Stage 5: Linked Lists, Stacks, and Queues (60 problems) ===
+  [37] LC#42 Trapping Rain Water (Hard) - Two Pointers
+  [69] LC#20 Valid Parentheses (Easy) - Stack
+  [70] LC#155 Min Stack (Medium) - Stack
+  [71] LC#150 Evaluate Reverse Polish Notation (Medium) - Stack
+  [72] LC#22 Generate Parentheses (Medium) - Stack
+=== Stage 6: Recursion and Backtracking (221 problems) ===
+  [1] LC#1 Two Sum (Easy) - Arrays & Hashing
+  [2] LC#217 Contains Duplicate (Easy) - Arrays & Hashing
+  [4] LC#49 Group Anagrams (Medium) - Arrays & Hashing
+  [5] LC#347 Top K Frequent Elements (Medium) - Arrays & Hashing
+  [6] LC#238 Product of Array Except Self (Medium) - Arrays & Hashing
+=== Stage 7: Trees and Binary Search Trees (52 problems) ===
+  [52] LC#3 Longest Substring Without Repeating Characters (Medium) - Sliding Window
+  [53] LC#424 Longest Repeating Character Replacement (Medium) - Sliding Window
+  [54] LC#567 Permutation in String (Medium) - Sliding Window
+  [55] LC#76 Minimum Window Substring (Hard) - Sliding Window
+  [58] LC#1456 Maximum Number of Vowels in a Substring of Given Length (Medium) - Sliding Window
+=== Stage 8: Heaps and Graphs (105 problems) ===
+  [8] LC#128 Longest Consecutive Sequence (Medium) - Arrays & Hashing
+  [72] LC#22 Generate Parentheses (Medium) - Stack
+  [131] LC#226 Invert Binary Tree (Easy) - Trees
+  [132] LC#104 Maximum Depth of Binary Tree (Easy) - Trees
+  [133] LC#543 Diameter of Binary Tree (Easy) - Trees
+=== Stage 9: Greedy Algorithms and Dynamic Programming (56 problems) ===
+  [239] LC#70 Climbing Stairs (Easy) - 1-D Dynamic Programming
+  [240] LC#746 Min Cost Climbing Stairs (Easy) - 1-D Dynamic Programming
+  [241] LC#198 House Robber (Medium) - 1-D Dynamic Programming
+  [242] LC#213 House Robber II (Medium) - 1-D Dynamic Programming
+  [243] LC#5 Longest Palindromic Substring (Medium) - 1-D Dynamic Programming
+=== Stage 10: Advanced Patterns and Data Structures (81 problems) ===
+  [1] LC#1 Two Sum (Easy) - Arrays & Hashing
+  [10] LC#136 Single Number (Easy) - Arrays & Hashing
+  [11] LC#448 Find All Numbers Disappeared in an Array (Easy) - Arrays & Hashing
+  [12] LC#268 Missing Number (Easy) - Arrays & Hashing
+  [14] LC#66 Plus One (Easy) - Arrays & Hashing
+

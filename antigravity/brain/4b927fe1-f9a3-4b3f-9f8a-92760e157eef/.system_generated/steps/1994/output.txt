@@ -1,0 +1,53 @@
+
+The command exited with code 0.
+Output:
+Loaded 300 problems
+Sample problem #1 enriched schema:
+{
+  "id": 1,
+  "leetcodeNumber": 1,
+  "title": "Two Sum",
+  "difficulty": "Easy",
+  "topic": "Arrays & Hashing",
+  "pattern": "Hash Map Lookup",
+  "description": "Find indices of two numbers that add up to a target using a dictionary for instant lookups.",
+  "timeComplexity": "O(n)",
+  "spaceComplexity": "O(n)",
+  "starterCode": "def twoSum(nums, target):\n    prevMap = {}\n    for i in range(len(nums)):\n        diff = target - nums[i]\n        if diff in prevMap:\n            return [prevMap[diff], i]\n        prevMap[nums[i]] = i\n    return []\n\nnums = [2, 7, 11, 15]\nprint(\"Indices:\", twoSum(nums, 9))",
+  "topics": [
+    "Arrays",
+    "Hashing and Hash Maps",
+    "Math and Number Theory",
+    "Recursion"
+  ],
+  "sourceUrl": "https://leetcode.com/problems/two-sum/",
+  "primaryTopic": "Arrays & Hashing",
+  "topicTags": [
+    "Arrays",
+    "Hashing and Hash Maps",
+    "Math and Number Theory",
+    "Recursion"
+  ],
+  "summary": "Find indices of two numbers that add up to a target using a dictionary for instant lookups.",
+  "examples": [
+    {
+      "input": "twoSum(nums, 9",
+      "output": "See live trace in visualizer",
+      "explanation": "Evaluates twoSum(nums, 9 to produce the verified indices result."
+    }
+  ],
+  "constraints": [
+    "1 <= nums.length <= 10^4",
+    "-10^4 <= nums[i] <= 10^4",
+    "Memory limit: 256 MB, Time limit: 2.0 seconds"
+  ],
+  "prerequisites": [
+    "Array Indexing & Iteration",
+    "Hash Map / Dict Key Lookup",
+    "Recursive Call Stack & Base Cases"
+  ],
+  "referenceSolution": "def twoSum(nums, target):\n    prevMap = {}\n    for i in range(len(nums)):\n        diff = target - nums[i]\n        if diff in prevMap:\n            return [prevMap[diff], i]\n        prevMap[nums[i]] = i\n    return []\n\nnums = [2, 7, 11, 15]\nprint(\"Indices:\", twoSum(nums, 9))",
+  "verificationStatus": "Verified"
+}
+Successfully enriched all 300 problems with Phase 3 structured schema in C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app_build\dsa_problems.js!
+

@@ -1,0 +1,11 @@
+
+The command exited with code 0.
+Output:
+
+> app_build\app.js:409:    this.traceResult = this.explainer.enrichTraceWithExplanations(rawTrace);
+  app_build\app.js:410:    this.collapsedGroupIds.clear();
+  app_build\app.js:411:    this.allGroupsCollapsed = false;
+  app_build\app.js:412:    this.buildIterationGroups(this.traceResult.steps || []);
+
+
+

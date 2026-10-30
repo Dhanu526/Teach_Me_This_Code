@@ -1,0 +1,28 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\brain\4b927fe1-f9a3-4b3f-9f8a-92760e157eef\scratch\test_phase4.js. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -31,7 +31,7 @@
+   assert(htmlContent.includes('id="predictResultBox"'), 'index.html contains #predictResultBox');
+ 
+   // 2. Verify styles.css contains required Phase 4 styles
+-  const cssContent = fs.readFileSync(path.join(__dirname, 'app_build', 'styles.css'), 'utf8');
++  const cssContent = fs.readFileSync(path.join(appBuildDir, 'styles.css'), 'utf8');
+   assert(cssContent.includes('#btnToggleQuiz.active'), 'styles.css contains #btnToggleQuiz.active');
+   assert(cssContent.includes('.interactive-predict-card'), 'styles.css contains .interactive-predict-card');
+   assert(cssContent.includes('.predict-choice-btn.is-correct'), 'styles.css contains .predict-choice-btn.is-correct');
+@@ -57,11 +57,11 @@
+     JSON: JSON
+   });
+ 
+-  const engineCode = fs.readFileSync(path.join(__dirname, 'app_build', 'engine.js'), 'utf8');
++  const engineCode = fs.readFileSync(path.join(appBuildDir, 'engine.js'), 'utf8');
+   vm.runInContext(engineCode, context);
+   assert(typeof mockWindow.PythonExecutionEngine === 'function', 'PythonExecutionEngine loaded successfully');
+ 
+-  const explainerCode = fs.readFileSync(path.join(__dirname, 'app_build', 'explainer.js'), 'utf8');
++  const explainerCode = fs.readFileSync(path.join(appBuildDir, 'explainer.js'), 'utf8');
+   vm.runInContext(explainerCode, context);
+   assert(typeof mockWindow.RuleBasedExplainer === 'function', 'RuleBasedExplainer loaded successfully');
+ 
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

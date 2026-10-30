@@ -11,6 +11,7 @@ seen_nuxs: {
   uids: 59
 }
 agent_onboarding_completed: AGENT_ONBOARDING_STATE_COMPLETED
+last_selected_agent_model: MODEL_PLACEHOLDER_M318
 migrate_convos_into_projects: MIGRATION_STATUS_COMPLETED
 installation_uuid: "ce4f5927-c11f-4e09-b690-a8de8e10bded"
 migrate_retroactive_projects: RETROACTIVE_MIGRATION_STATUS_COMPLETED_UNNECESSARY

@@ -1,0 +1,33 @@
+
+The command exited with code 0.
+Output:
+
+  app_build\styles.css:6261:}
+  app_build\styles.css:6262:
+> app_build\styles.css:6263:.workspace-code-textarea {
+  app_build\styles.css:6264:  width: 100%;
+  app_build\styles.css:6265:  min-height: 480px;
+  app_build\styles.css:6266:  height: 520px;
+  app_build\styles.css:6267:  font-family: 'Fira Code', 'JetBrains Mono', 'Consolas', monospace;
+  app_build\styles.css:6268:  font-size: 15.5px;
+  app_build\styles.css:6269:  line-height: 1.65;
+  app_build\styles.css:6270:  padding: 18px 20px;
+  app_build\styles.css:6271:  border: 1px solid #334155;
+  app_build\styles.css:6272:  border-radius: var(--radius-md, 8px);
+  app_build\styles.css:6273:  background: #131722;
+  app_build\styles.css:6279:}
+  app_build\styles.css:6280:
+> app_build\styles.css:6281:.workspace-code-textarea:focus {
+  app_build\styles.css:6282:  outline: none;
+  app_build\styles.css:6283:  border-color: #3b82f6;
+  app_build\styles.css:6284:  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.35), 0 0 0 3px rgba(59, 130, 246, 0.3);
+  app_build\styles.css:6285:}
+  app_build\styles.css:6286:
+  app_build\styles.css:6287:/* Test Results Panel */
+  app_build\styles.css:6288:.workspace-tests-panel {
+  app_build\styles.css:6289:  margin-top: 14px;
+  app_build\styles.css:6290:  border: 1px solid #e2e8f0;
+  app_build\styles.css:6291:  border-radius: var(--radius-md, 6px);
+
+
+

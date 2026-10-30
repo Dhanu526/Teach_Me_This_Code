@@ -1,0 +1,54 @@
+
+The command exited with code 1.
+Output:
+=== STARTING PHASE 4 VERIFICATION ===
+  ✓ [PASS] index.html contains #btnToggleQuiz in header
+  ✓ [PASS] index.html contains #interactivePredictCard
+  ✓ [PASS] index.html contains #predictQuestionText
+  ✓ [PASS] index.html contains #predictChoicesWrap
+  ✓ [PASS] index.html contains #btnSkipPredict
+  ✓ [PASS] index.html contains #predictResultBox
+  ✓ [PASS] styles.css contains #btnToggleQuiz.active
+  ✓ [PASS] styles.css contains .interactive-predict-card
+  ✓ [PASS] styles.css contains .predict-choice-btn.is-correct
+  ✓ [PASS] styles.css contains .predict-choice-btn.is-incorrect
+  ✓ [PASS] styles.css contains .predict-result-box
+  ✓ [PASS] PythonExecutionEngine loaded successfully
+  ✓ [PASS] RuleBasedExplainer loaded successfully
+  ✓ [PASS] Execution succeeded for input: Mixed [-2, 1, -3, 4, -1, 2, 1, -5, 4]
+  ✗ [FAIL] Output for Mixed [-2, 1, -3, 4, -1, 2, 1, -5, 4] is 6 (expected 6)
+  ✓ [PASS] Generated 30 prediction questions for Mixed [-2, 1, -3, 4, -1, 2, 1, -5, 4]
+  ✓ [PASS] All prediction questions in Mixed [-2, 1, -3, 4, -1, 2, 1, -5, 4] have valid structure, choices, and explanations
+  ✓ [PASS] Execution succeeded for input: All-Negative [-5, -2, -8, -1, -4]
+  ✗ [FAIL] Output for All-Negative [-5, -2, -8, -1, -4] is -1 (expected -1)
+  ✓ [PASS] Generated 21 prediction questions for All-Negative [-5, -2, -8, -1, -4]
+  ✓ [PASS] All prediction questions in All-Negative [-5, -2, -8, -1, -4] have valid structure, choices, and explanations
+  ✓ [PASS] Execution succeeded for input: All-Positive [1, 2, 3, 4, 5]
+  ✗ [FAIL] Output for All-Positive [1, 2, 3, 4, 5] is 15 (expected 15)
+  ✓ [PASS] Generated 15 prediction questions for All-Positive [1, 2, 3, 4, 5]
+  ✓ [PASS] All prediction questions in All-Positive [1, 2, 3, 4, 5] have valid structure, choices, and explanations
+  ✓ [PASS] Execution succeeded for input: Single Negative [-7]
+  ✗ [FAIL] Output for Single Negative [-7] is -7 (expected -7)
+  ✓ [PASS] Generated 5 prediction questions for Single Negative [-7]
+  ✓ [PASS] All prediction questions in Single Negative [-7] have valid structure, choices, and explanations
+  ✓ [PASS] Execution succeeded for input: Single Positive [42]
+  ✗ [FAIL] Output for Single Positive [42] is 42 (expected 42)
+  ✓ [PASS] Generated 3 prediction questions for Single Positive [42]
+  ✓ [PASS] All prediction questions in Single Positive [42] have valid structure, choices, and explanations
+  ✓ [PASS] Generated 9 'What will c become after this addition?' questions
+    Sample addition question: "What will c become after this addition?" | Sub: "Current c = 0, adding (-2)" | Choices: [-2, 0, 2] | Correct: "-2"
+  ✓ [PASS] Addition question prompt is clear
+  ✓ [PASS] Addition choices contain the correct value
+  ✓ [PASS] Generated 9 'Will ans update to a new record sum?' questions
+    Sample record question: "Will ans update to a new record sum?" | Sub: "Comparing current sum (c = -2) with best sum (ans = -2)" | Choices: [Yes, ans will update, No, ans stays the same] | Correct: "Yes, ans will update"
+  ✓ [PASS] Record question has Yes/No choices
+  ✓ [PASS] Generated 9 'Will this condition be True or False?' (c < 0) questions
+    Sample condition question: "Will this condition be True or False?" | Sub: "Testing if c (-2) is negative (< 0)" | Choices: [True (c < 0), False (c >= 0)] | Correct: "True (c < 0)"
+  ✓ [PASS] Condition question has True/False choices
+  ✓ [PASS] Binary search executes successfully
+  ✓ [PASS] Generated 12 prediction questions for binary search
+  ✗ [FAIL] User answer preserved when moving back to Step 3
+  ✓ [PASS] User skip state preserved when moving to Step 4
+
+=== PHASE 4 VERIFICATION COMPLETE: 38/44 TESTS PASSED ===
+

@@ -1,0 +1,34 @@
+
+The command exited with code 0.
+Output:
+
+> app_build\styles.css:388:.code-row {
+  app_build\styles.css:389:  display: flex;
+  app_build\styles.css:390:  align-items: center;
+  app_build\styles.css:391:  padding: 2px 14px 2px 0;
+  app_build\styles.css:392:  border-left: 4px solid transparent;
+  app_build\styles.css:393:  cursor: pointer;
+> app_build\styles.css:397:.code-row.is-dimmed {
+  app_build\styles.css:398:  opacity: 0.58;
+  app_build\styles.css:399:}
+  app_build\styles.css:400:
+> app_build\styles.css:401:.code-row.is-dimmed:hover {
+  app_build\styles.css:402:  opacity: 0.9;
+  app_build\styles.css:403:  background: #f1f5f9;
+  app_build\styles.css:404:}
+  app_build\styles.css:405:
+> app_build\styles.css:406:.code-row.is-current-line {
+  app_build\styles.css:407:  opacity: 1;
+  app_build\styles.css:408:  background-color: var(--current-line-bg);
+  app_build\styles.css:409:  border-left-color: var(--current-line-border);
+  app_build\styles.css:410:  font-weight: 600;
+  app_build\styles.css:411:}
+> app_build\styles.css:2359:  .code-row {
+  app_build\styles.css:2360:    padding: 3px 8px;
+  app_build\styles.css:2361:  }
+  app_build\styles.css:2362:
+  app_build\styles.css:2363:  .code-gutter {
+  app_build\styles.css:2364:    width: 28px;
+
+
+

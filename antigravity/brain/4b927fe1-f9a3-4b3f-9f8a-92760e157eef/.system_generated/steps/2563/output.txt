@@ -1,0 +1,32 @@
+
+The command exited with code 0.
+Output:
+Two Sum topic: Arrays & Hashing topics: [
+  'Arrays',
+  'Hashing and Hash Maps',
+  'Math and Number Theory',
+  'Recursion'
+]
+Invert Binary Tree topic: Trees topics: [
+  'Depth-First Search (DFS)',
+  'Hashing and Hash Maps',
+  'Recursion',
+  'Trees and Binary Trees'
+]
+Subsets topic: Backtracking topics: [
+  'Arrays',
+  'Backtracking',
+  'Depth-First Search (DFS)',
+  'Hashing and Hash Maps',
+  'Recursion'
+]
+Longest Substring topic: Sliding Window topics: [
+  'Arrays',
+  'Binary Search Trees',
+  'Hashing and Hash Maps',
+  'Recursion',
+  'Sliding Window',
+  'Strings',
+  'Trees and Binary Trees'
+]
+

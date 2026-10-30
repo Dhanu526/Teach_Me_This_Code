@@ -1,0 +1,65 @@
+
+The command exited with code 1.
+Output:
+===================================================================
+PHASE 7 TEST SUITE: BEGINNER ROADMAP (10 STAGES)
+===================================================================
+
+[1] Testing 10-Stage Learning Roadmap Structure & Order:
+  ✓ [PASS] Found exactly 10 structured stages in BEGINNER_ROADMAP_10_STAGES
+  ✓ [PASS] ROADMAP_PHASES backwards compatibility alias verified
+  ✓ [PASS] Stage 1: 'Stage 1: Python fundamentals and arrays' verified with milestone and starters
+  ✓ [PASS] Stage 2: 'Stage 2: Strings and hashing' verified with milestone and starters
+  ✓ [PASS] Stage 3: 'Stage 3: Two pointers and sliding windows' verified with milestone and starters
+  ✓ [PASS] Stage 4: 'Stage 4: Prefix sums, sorting, and binary search' verified with milestone and starters
+  ✓ [PASS] Stage 5: 'Stage 5: Linked lists, stacks, and queues' verified with milestone and starters
+  ✓ [PASS] Stage 6: 'Stage 6: Recursion and backtracking' verified with milestone and starters
+  ✓ [PASS] Stage 7: 'Stage 7: Trees and binary search trees' verified with milestone and starters
+  ✓ [PASS] Stage 8: 'Stage 8: Heaps and graphs' verified with milestone and starters
+  ✓ [PASS] Stage 9: 'Stage 9: Greedy algorithms and dynamic programming' verified with milestone and starters
+  ✓ [PASS] Stage 10: 'Stage 10: Advanced patterns and data structures' verified with milestone and starters
+
+[2] Testing 30-Topic Coverage Across the 10 Stages:
+  ✓ [PASS] All 30 topics are completely covered across the 10 stages without omission
+  ✓ [PASS] All 10 milestone problems and 40 starter problems exist in the curated catalog
+
+[3] Testing Freedom to Skip, Revisit & Select Custom Learning Order:
+  ✓ [PASS] Default active focus stage is Stage 1
+  ✓ [PASS] User can freely jump to Stage 5 without any gating or lock
+  ✓ [PASS] User can freely skip ahead to Stage 10 (zero forced linear restrictions)
+  ✓ [PASS] User can freely revisit Stage 2 anytime
+
+[4] Testing Meaningful Completion Rules (No fake mastery on simple open):
+  ✓ [PASS] Stage 1 begins as not_started with 0 solved
+  ✓ [PASS] Opening a problem in workspace does NOT mark the stage as mastered (Strict Compliance)
+  ✓ [PASS] Solving only 1 problem does not grant mastery
+  ✓ [PASS] Stage progress dynamically tracks 4 solved problems
+  ✓ [PASS] practiceNextInStage correctly identifies next unsolved problem: #242 Valid Anagram
+
+[5] Testing Problem Table Stage Filter & Explorer Integration:
+  ✓ [PASS] Stage 3 filter accurately returns 38 matching problems
+  ✓ [PASS] exploreStageProblems(4) navigates to problem table filtered to Stage 4
+  ✓ [PASS] clearFilters resets selectedStage to all
+
+[6] Testing UI Rendering for Overview Card & Full 10-Stage Roadmap:
+  ✓ [PASS] Overview card renders all 10 stages with Active Focus spotlight
+  ✓ [PASS] Full Roadmap renders all 10 Stage cards with concepts, milestones, and starters
+  ✓ [PASS] Roadmap stage filter toolbar works smoothly
+
+[7] Testing Visualizer Execution & Non-Negotiables:
+C:\Users\CVT\.gemini\antigravity\brain\4b927fe1-f9a3-4b3f-9f8a-92760e157eef\scratch\test_dsa_phase7_roadmap.js:358
+const result = engine.execute(kadaneCode);
+                      ^
+
+TypeError: engine.execute is not a function
+    at Object.<anonymous> (C:\Users\CVT\.gemini\antigravity\brain\4b927fe1-f9a3-4b3f-9f8a-92760e157eef\scratch\test_dsa_phase7_roadmap.js:358:23)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+
+Node.js v24.19.0
+

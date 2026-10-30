@@ -1,0 +1,35 @@
+
+The command exited with code 0.
+Output:
+30 Topics count: 30
+Arrays                           165
+Strings                          59
+Hashing and Hash Maps            162
+Two Pointers                     20
+Sliding Window                   18
+Prefix Sum                       7
+Binary Search                    20
+Sorting                          68
+Linked Lists                     22
+Stacks                           21
+Queues and Deques                17
+Recursion                        221
+Backtracking                     18
+Trees and Binary Trees           52
+Binary Search Trees              19
+Heaps and Priority Queues        16
+Graphs                           38
+Breadth-First Search (BFS)       16
+Depth-First Search (DFS)         86
+Greedy Algorithms                10
+Dynamic Programming              42
+Bit Manipulation                 6
+Tries                            8
+Union-Find                       13
+Topological Sorting              4
+Intervals                        4
+Monotonic Stack and Queue        10
+Math and Number Theory           51
+Matrix Problems                  24
+Advanced Data Structures         10
+

@@ -1,0 +1,130 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app_build\app.js. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -999,8 +999,10 @@
+   renderVisualConditionGate(step, currentSubstep) {
+     if (!this.visualConditionGate) return;
+     const cond = step.condition;
+-
+-    if (!cond || step.eventType !== "CONDITION") {
++    const op = step.operationDetail || {};
++    const isWhileCheck = op.kind === "while_check";
++
++    if (!cond || (step.eventType !== "CONDITION" && !isWhileCheck)) {
+       this.visualConditionGate.classList.add("hidden");
+       this.visualConditionGate.innerHTML = "";
+       return;
+@@ -1011,17 +1011,27 @@
+     const leftVal = cond.leftVal !== undefined ? cond.leftVal : "";
+     const rightName = cond.rightExpr || "Right";
+     const rightVal = cond.rightVal !== undefined ? cond.rightVal : "";
+-    const op = cond.operator || "==";
++    const opSym = cond.operator || "==";
+ 
+     const isMaxCheck = cond.expr === "c >= ans" || (leftName === "c" && rightName === "ans");
+-    const isNegCheck = cond.expr === "c < 0" || (leftName === "c" && rightVal === "0" && op === "<");
+-
+-    let branch1Code = "ans = c";
+-    let branch1Desc = `Update record: ans becomes ${leftVal}`;
+-    let branch2Code = "Keep ans";
+-    let branch2Desc = `ans preserves previous best sum of ${rightVal}`;
+-
+-    if (isNegCheck) {
++    const isNegCheck = cond.expr === "c < 0" || (leftName === "c" && rightVal === "0" && opSym === "<");
++
++    let branch1Code = "Enter branch";
++    let branch1Desc = `Condition is True: execute indented block`;
++    let branch2Code = "Skip branch";
++    let branch2Desc = `Condition is False: skip indented block`;
++
++    if (isWhileCheck) {
++      branch1Code = `Enter loop body (Pass #${op.iteration || 1})`;
++      branch1Desc = "Condition is True: continue while loop";
++      branch2Code = "Exit loop";
++      branch2Desc = "Condition is False: terminate while loop";
++    } else if (isMaxCheck) {
++      branch1Code = "ans = c";
++      branch1Desc = `Update record: ans becomes ${leftVal}`;
++      branch2Code = "Keep ans";
++      branch2Desc = `ans preserves previous best sum of ${rightVal}`;
++    } else if (isNegCheck) {
+       branch1Code = "c = 0";
+       branch1Desc = "Reset negative sum to zero";
+       branch2Code = `Keep c = ${leftVal}`;
+@@ -1039,7 +1039,7 @@
+           <span class="cond-val-name">${this.escapeHTML(leftName)}</span>
+           <span class="cond-val-num">${this.escapeHTML(leftVal)}</span>
+         </div>
+-        <span class="cond-op-badge">${this.escapeHTML(op)}</span>
++        <span class="cond-op-badge">${this.escapeHTML(opSym)}</span>
+         <div class="cond-val-box">
+           <span class="cond-val-name">${this.escapeHTML(rightName)}</span>
+           <span class="cond-val-num">${this.escapeHTML(rightVal)}</span>
+@@ -1083,10 +1083,15 @@
+     let stageHTML = "";
+ 
+     if (isAug) {
++      const augOpMatch = step.codeText.match(/(\+=|-=|\*=|\/\/=|%=)/);
++      const augOp = augOpMatch ? augOpMatch[1] : "+=";
++      const baseOp = augOp.slice(0, -1) || "+";
++      const augOpName = baseOp === "+" ? "Addition" : baseOp === "-" ? "Subtraction" : baseOp === "*" ? "Multiplication" : "Arithmetic Calculation";
++
+       stageHTML = `
+         <div class="calc-stage-header">
+           <span>Step-by-Step Arithmetic Calculation</span>
+-          <span class="calc-stage-badge">Addition</span>
++          <span class="calc-stage-badge">${augOpName}</span>
+         </div>
+         <div class="calc-equation-row">
+           <div class="calc-operand-chip" title="Previous value of ${target}">
+@@ -1093,7 +1093,7 @@
+             <span>${beforeVal}</span>
+           </div>
+-          <span class="calc-operator-chip">+</span>
+-          <div class="calc-operand-chip" title="List element at current index">
++          <span class="calc-operator-chip">${baseOp}</span>
++          <div class="calc-operand-chip" title="Operand value">
+             <span style="font-size:10px; display:block; color:var(--text-muted);">${op.rhsExpr || "number"}</span>
+             <span>(${rhsVal})</span>
+           </div>
+@@ -1114,6 +1114,38 @@
+           </div>
+         </div>
+       `;
++    } else if (op.substituted && op.substituted !== afterVal && op.substituted !== op.rhsExpr) {
++      stageHTML = `
++        <div class="calc-stage-header">
++          <span>Step-by-Step Formula Calculation</span>
++          <span class="calc-stage-badge">${isCreated ? "Create" : "Update"}</span>
++        </div>
++        <div class="calc-equation-row" style="margin-bottom:8px;">
++          <div class="calc-operand-chip" title="Formula with substituted values">
++            <span style="font-size:10px; display:block; color:var(--text-muted);">${this.escapeHTML(op.rhsExpr || "formula")}</span>
++            <span>${this.escapeHTML(op.substituted)}</span>
++          </div>
++          <span class="calc-operator-chip">=</span>
++          <div class="calc-result-chip" title="Calculated result">
++            <span style="font-size:10px; display:block; opacity:0.85;">Result</span>
++            <span>${this.escapeHTML(afterVal)}</span>
++          </div>
++        </div>
++        <div class="assign-animation-row">
++          <div style="display:flex; flex-direction:column; gap:2px;">
++            <span style="font-size:11px; color:var(--text-secondary); font-weight:700;">VALUE COMPUTED</span>
++            <span class="anim-source-val">${afterVal}</span>
++          </div>
++          <span class="anim-move-arrow">──► moves into ──►</span>
++          <div class="var-box-card ${!useBeforeVars ? "is-updated" : ""}" style="max-width:145px;">
++            <div class="var-box-label">Variable <strong>${target}</strong></div>
++            <div class="var-box-val-slot">
++              <span class="var-box-value">${!useBeforeVars ? afterVal : (beforeVal || "unbound")}</span>
++              <span class="var-box-prev">${!useBeforeVars && beforeVal ? `(was ${beforeVal})` : ""}</span>
++            </div>
++          </div>
++        </div>
++      `;
+     } else {
+       stageHTML = `
+         <div class="calc-stage-header">
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

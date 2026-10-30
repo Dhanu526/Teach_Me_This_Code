@@ -1,0 +1,54 @@
+
+The command exited with code 1.
+Output:
+===================================================================
+PHASE 10 MASTER VALIDATION SUITE: END-TO-END VERIFICATION
+===================================================================
+
+[1] Validating Catalog Record Uniqueness & Schema Integrity:
+  ✓ [PASS] Verified catalog contains exactly 300 real curated problems (found 300)
+  ✓ [PASS] All 300 problem IDs are 100% unique (1 to 300)
+  ✓ [PASS] All 300 problem titles are 100% distinct with zero duplicates
+  ✓ [PASS] All 300 LeetCode URLs are verified, valid, and 100% unique
+  ✓ [PASS] All 300 problem records adhere strictly to the complete structured catalog schema
+
+[2] Validating 30-Topic Coverage & Multi-Topic Tags:
+  ✓ [PASS] All 30 DSA topics have verified problems assigned (zero empty/orphan topics)
+  ✓ [PASS] Multi-topic tagging verified: 290/300 problems belong to multiple topic categories
+
+[3] Validating Problem Search & Filtering Engine:
+  ✓ [PASS] Search by title, algorithmic pattern, and topic verified
+
+[4] Validating Difficulty Distribution:
+  ✓ [PASS] Verified difficulty distribution: Easy: 78, Medium: 194, Hard: 28 (Total: 300)
+  ✓ [PASS] Difficulty filters operate with 100% accuracy
+
+[5] Validating Problem Learning Workspace:
+node:assert:152
+  throw new AssertionError(obj);
+  ^
+
+AssertionError [ERR_ASSERTION]: URL route updated to #dsa/problem/1
++ actual - expected
+
++ ''
+- '#dsa/problem/1'
+
+    at Object.<anonymous> (C:\Users\CVT\.gemini\antigravity\brain\4b927fe1-f9a3-4b3f-9f8a-92760e157eef\scratch\test_dsa_phase10_validation.js:298:8)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: '',
+  expected: '#dsa/problem/1',
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.19.0
+

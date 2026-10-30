@@ -1,0 +1,44 @@
+
+The command exited with code 0.
+Output:
+1 LC#1 Two Sum
+2 LC#217 Contains Duplicate
+6 LC#238 Product of Array Except Self
+13 LC#283 Move Zeroes
+3 LC#242 Valid Anagram
+4 LC#49 Group Anagrams
+8 LC#128 Longest Consecutive Sequence
+25 LC#14 Longest Common Prefix
+31 LC#125 Valid Palindrome
+32 LC#167 Two Sum II - Input Array Is Sorted
+33 LC#15 3Sum
+52 LC#3 Longest Substring Without Repeating Characters
+16 LC#560 Subarray Sum Equals K
+22 LC#75 Sort Colors
+89 LC#704 Binary Search
+91 LC#240 Search a 2D Matrix II
+69 LC#20 Valid Parentheses
+70 LC#155 Min Stack
+109 LC#206 Reverse Linked List
+110 LC#21 Merge Two Sorted Lists
+187 LC#78 Subsets
+189 LC#39 Combination Sum
+191 LC#46 Permutations
+193 LC#79 Word Search
+131 LC#226 Invert Binary Tree
+132 LC#104 Maximum Depth of Binary Tree
+143 LC#230 Kth Smallest Element in a BST
+163 LC#208 Implement Trie (Prefix Tree)
+161 LC#662 Maximum Width of Binary Tree
+205 LC#200 Number of Islands
+206 LC#133 Clone Graph
+229 LC#332 Reconstruct Itinerary
+239 LC#70 Climbing Stairs
+251 LC#53 Maximum Subarray
+241 LC#198 House Robber
+281 LC#55 Jump Game
+10 LC#136 Single Number
+19 LC#48 Rotate Image
+273 LC#72 Edit Distance
+119 LC#25 Reverse Nodes in k-Group
+

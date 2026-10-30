@@ -1,0 +1,99 @@
+
+The command exited with code 1.
+Output:
+===================================================================
+PHASE 4: SEARCH, FILTERS, SORTING, PAGINATION, ROUTES & DEDUP AUDIT
+===================================================================
+
+[1] Verifying Phase 4 CSS Styles & UI Classes:
+  ✓ [PASS] col-review CSS style present
+  ✓ [PASS] review-btn CSS style present
+  ✓ [PASS] review-badge-pill CSS style present
+  ✓ [PASS] filter-review CSS style present
+  ✓ [PASS] page-size-selector-wrap CSS style present
+  ✓ [PASS] btn-page-nav CSS style present
+  ✓ [PASS] modal-route-bar CSS style present
+  ✓ [PASS] route-badge CSS style present
+  ✓ [PASS] btn-copy-route CSS style present
+  ✓ [PASS] btn-hero-review CSS style present
+  ✓ [PASS] btn-import-problems CSS style present
+  ✓ [PASS] import-modal-card CSS style present
+
+[2] Testing Functional Problem Search Engine:
+  ✓ [PASS] Search by Title 'two sum' returns matching problems
+  ✓ [PASS] Search by LeetCode # '53' returns Maximum Subarray
+  ✓ [PASS] Search by pattern 'monotonic stack' returns matching problems
+  ✓ [PASS] Search by keyword 'dynamic programming' returns 42 problems
+
+[3] Testing Multi-Dimensional Filters (Topic, Difficulty, Status, Pattern, Bookmarks):
+  ✓ [PASS] Filter by Topic 'Graphs' returns 38 problems
+  ✓ [PASS] Filter by Difficulty 'Easy' returns exactly 78 problems (found 78)
+  ✓ [PASS] Filter by Difficulty 'Medium' returns exactly 194 problems (found 194)
+  ✓ [PASS] Filter by Difficulty 'Hard' returns exactly 28 problems (found 28)
+  ✓ [PASS] Initial 'not_started' status filter returns 300 problems (found 300)
+  ✓ [PASS] Problem 1 status is 'attempted'
+  ✓ [PASS] Status filter 'attempted' returns only problem 1
+  ✓ [PASS] Problem 1 status is 'solved'
+  ✓ [PASS] Status filter 'solved' returns only problem 1
+  ✓ [PASS] Problem 1 initially isReview = false
+  ✓ [PASS] Problem 1 markReview(1) sets isReview = true
+  ✓ [PASS] Problem 2 markReview(2) sets isReview = true
+  ✓ [PASS] Review array contains 2 problems
+  ✓ [PASS] Status filter 'review' returns exactly the 2 review problems
+  ✓ [PASS] toggleReview(2) toggles review back to false
+  ✓ [PASS] Status filter 'review' updates dynamically after toggle
+  ✓ [PASS] Status filter 'bookmarked' returns problem 3
+  ✓ [PASS] Independent onlyBookmarked toggle returns only bookmarked problems
+  ✓ [PASS] Pattern filter correctly isolates 'Hash Map Lookup' pattern
+
+[4] Testing Catalog Sorting Engine (Title, Difficulty, Learning Order, LC #):
+  ✓ [PASS] Sort by Learning Order (order_asc) orders problems 1 to 300
+  ✓ [PASS] Sort by Learning Order Reverse (order_desc) orders problems 300 to 1
+  ✓ [PASS] Sort by Title (title_asc) alphabetically sorts titles A to Z
+  ✓ [PASS] Sort by Title (title_desc) reverse sorts titles Z to A
+  ✓ [PASS] First 78 items in diff_asc are Easy
+  ✓ [PASS] Next items in diff_asc are Medium
+  ✓ [PASS] Last items in diff_asc are Hard
+  ✓ [PASS] First 28 items in diff_desc are Hard
+  ✓ [PASS] Next items in diff_desc are Medium
+  ✓ [PASS] Last items in diff_desc are Easy
+
+[5] Testing Pagination Controls & Page Size Options:
+  ✓ [PASS] Default page size 25 shows 1–25 of 300
+  ✓ [PASS] Page 1 of 12 calculated for 300 problems with pageSize=25
+  ✓ [PASS] Pagination bar includes First (|←) and Last (→|) buttons
+  ✓ [PASS] Page 2 shows 26–50 of 300
+  ✓ [PASS] Page size 50 shows 1–50 of 300
+  ✓ [PASS] Page 1 of 6 calculated for 300 problems with pageSize=50
+  ✓ [PASS] Page size 'all' displays all 300 problems in responsive list view
+
+[6] Testing Unique URL Route & Problem Detail View:
+  ✓ [PASS] Opening Problem 1 detail modal sets URL hash to '#dsa/problem/1'
+  ✓ [PASS] Modal renders unique route bar
+  ✓ [PASS] Modal displays unique route '#dsa/problem/1'
+  ✓ [PASS] Modal provides 'Copy Problem Link' button
+  ✓ [PASS] Modal provides 'Mark for Review' button
+  ✓ [PASS] Router responds to '#dsa/problem/15' hash change
+
+[7] Testing Duplicate Prevention Engine on Problem Import:
+  ✓ [PASS] Catalog starts at 300 problems
+  ✓ [PASS] Import processed 5 input candidates
+  ✗ [FAIL] Detected exactly 4 duplicates (found 5)
+C:\Users\CVT\.gemini\antigravity\brain\4b927fe1-f9a3-4b3f-9f8a-92760e157eef\scratch\test_dsa_phase4.js:23
+      throw new Error(`Assertion failed: ${message}`);
+      ^
+
+Error: Assertion failed: Detected exactly 4 duplicates (found 5)
+    at assert (C:\Users\CVT\.gemini\antigravity\brain\4b927fe1-f9a3-4b3f-9f8a-92760e157eef\scratch\test_dsa_phase4.js:23:13)
+    at runDsaPhase4Tests (C:\Users\CVT\.gemini\antigravity\brain\4b927fe1-f9a3-4b3f-9f8a-92760e157eef\scratch\test_dsa_phase4.js:380:3)
+    at Object.<anonymous> (C:\Users\CVT\.gemini\antigravity\brain\4b927fe1-f9a3-4b3f-9f8a-92760e157eef\scratch\test_dsa_phase4.js:408:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+
+Node.js v24.19.0
+

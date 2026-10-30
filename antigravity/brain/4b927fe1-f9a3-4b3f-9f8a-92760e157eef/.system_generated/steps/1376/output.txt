@@ -1,0 +1,210 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app_build\styles.css. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -2832,6 +2832,204 @@
+     margin: 0 10px 16px 10px;
+     padding: 12px;
+   }
++
++  .predict-choices-wrap {
++    flex-direction: column;
++  }
++
++  .predict-choice-btn {
++    width: 100%;
++    justify-content: center;
++  }
++}
++
++/* =========================================================
++   PHASE 4: INTERACTIVE LEARNING & PREDICTION SYSTEM
++   ========================================================= */
++#btnToggleQuiz.active {
++  background: #fef3c7;
++  color: #92400e;
++  border-color: #f59e0b;
++  font-weight: 600;
++  box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.25);
++}
++
++.interactive-predict-card {
++  background: linear-gradient(135deg, #fffdfa 0%, #fef8ee 100%);
++  border: 2px solid #fde68a;
++  border-radius: var(--radius-md);
++  padding: 15px 18px;
++  display: flex;
++  flex-direction: column;
++  gap: 12px;
++  box-shadow: 0 4px 14px rgba(245, 158, 11, 0.08);
++  animation: predictEntrance calc(0.35s * var(--anim-speed-factor, 1)) cubic-bezier(0.16, 1, 0.3, 1) both;
++}
++
++@keyframes predictEntrance {
++  from {
++    opacity: 0;
++    transform: translateY(-8px) scale(0.99);
++  }
++  to {
++    opacity: 1;
++    transform: translateY(0) scale(1);
++  }
++}
++
++.predict-card-header {
++  display: flex;
++  align-items: center;
++  justify-content: space-between;
++  gap: 10px;
++  flex-wrap: wrap;
++}
++
++.predict-badge-group {
++  display: flex;
++  align-items: center;
++  gap: 8px;
++  flex-wrap: wrap;
++}
++
++.predict-badge {
++  font-size: 11.5px;
++  font-weight: 700;
++  text-transform: uppercase;
++  letter-spacing: 0.05em;
++  background: #f59e0b;
++  color: #ffffff;
++  padding: 3px 9px;
++  border-radius: 999px;
++}
++
++.predict-subprompt {
++  font-family: var(--font-mono);
++  font-size: 12.5px;
++  color: #78350f;
++  background: #fef3c7;
++  padding: 2px 8px;
++  border-radius: var(--radius-sm);
++  font-weight: 600;
++}
++
++.btn-predict-skip {
++  font-family: var(--font-sans);
++  font-size: 12px;
++  font-weight: 600;
++  background: transparent;
++  color: #b45309;
++  border: 1px dashed #d97706;
++  padding: 4px 10px;
++  border-radius: var(--radius-sm);
++  cursor: pointer;
++  transition: all 0.2s ease;
++}
++
++.btn-predict-skip:hover {
++  background: #fde68a;
++  color: #78350f;
++}
++
++.predict-question-text {
++  font-size: 16px;
++  font-weight: 700;
++  color: #1e293b;
++  line-height: 1.35;
++}
++
++.predict-choices-wrap {
++  display: flex;
++  flex-wrap: wrap;
++  gap: 10px;
++}
++
++.predict-choice-btn {
++  font-family: var(--font-sans);
++  font-size: 13.5px;
++  font-weight: 600;
++  padding: 9px 16px;
++  border-radius: var(--radius-sm);
++  border: 1.5px solid #cbd5e1;
++  background: #ffffff;
++  color: #334155;
++  cursor: pointer;
++  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
++  display: inline-flex;
++  align-items: center;
++  gap: 8px;
++}
++
++.predict-choice-btn:hover:not(:disabled) {
++  border-color: #2563eb;
++  background: #eff6ff;
++  color: #1d4ed8;
++  transform: translateY(-2px);
++  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.12);
++}
++
++.predict-choice-btn:disabled {
++  cursor: default;
++  opacity: 0.9;
++}
++
++.predict-choice-btn.is-correct {
++  border-color: #10b981;
++  background: #ecfdf5;
++  color: #065f46;
++  font-weight: 700;
++  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.25);
++}
++
++.predict-choice-btn.is-incorrect {
++  border-color: #ef4444;
++  background: #fef2f2;
++  color: #991b1b;
++  text-decoration: line-through;
++  opacity: 0.75;
++}
++
++.predict-result-box {
++  background: #ffffff;
++  border-radius: var(--radius-sm);
++  border: 1px solid #e2e8f0;
++  border-left: 4px solid #10b981;
++  padding: 12px 14px;
++  display: flex;
++  flex-direction: column;
++  gap: 4px;
++  animation: predictResultPop calc(0.3s * var(--anim-speed-factor, 1)) ease-out both;
++}
++
++.predict-result-box.was-wrong {
++  border-left-color: #f59e0b;
++}
++
++.predict-result-box.was-revealed {
++  border-left-color: #3b82f6;
++}
++
++@keyframes predictResultPop {
++  from {
++    opacity: 0;
++    transform: translateY(4px);
++  }
++  to {
++    opacity: 1;
++    transform: translateY(0);
++  }
++}
++
++.predict-result-header {
++  font-size: 13.5px;
++  font-weight: 700;
++  color: #0f172a;
++}
++
++.predict-result-body {
++  font-size: 13px;
++  color: #475569;
++  line-height: 1.45;
+ }
+ 
+ 
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

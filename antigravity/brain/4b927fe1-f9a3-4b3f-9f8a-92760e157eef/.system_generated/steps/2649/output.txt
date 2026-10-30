@@ -1,0 +1,7 @@
+
+The command exited with code 0.
+Output:
+1390: } else if (e.target.id === 'dsaPatternSelect' || e.target.id === 'topicDetailPatternSelect') {
+2407: <label for="dsaPatternSelect" class="filter-label">Pattern:</label>
+2408: <select id="dsaPatternSelect" class="filter-select pattern-select">
+

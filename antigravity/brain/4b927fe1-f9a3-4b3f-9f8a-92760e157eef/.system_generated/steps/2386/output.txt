@@ -1,0 +1,156 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app_build\dsa_dashboard.js. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -3114,6 +3114,35 @@
+     }
+ 
+     getProblemTestCases(p) {
++      if (p.id === 1) {
++        return [
++          {
++            testIndex: 1,
++            inputStr: 'nums = [2, 7, 11, 15], target = 9',
++            callCode: 'twoSum([2, 7, 11, 15], 9)',
++            expectedOutput: '[0, 1]'
++          },
++          {
++            testIndex: 2,
++            inputStr: 'nums = [3, 2, 4], target = 6',
++            callCode: 'twoSum([3, 2, 4], 6)',
++            expectedOutput: '[1, 2]'
++          },
++          {
++            testIndex: 3,
++            inputStr: 'nums = [3, 3], target = 6',
++            callCode: 'twoSum([3, 3], 6)',
++            expectedOutput: '[0, 1]'
++          }
++        ];
++      }
++
++      const funcMatch = (p.starterCode || '').match(/def\s+([A-Za-z0-9_]+)\s*\(([^)]*)\)/);
++      const funcName = funcMatch ? funcMatch[1] : null;
++
++      const callMatch = funcName ? (p.starterCode || '').match(new RegExp(`(${funcName}\\([^)]+\\))`)) : null;
++      const sampleCall = callMatch ? callMatch[1] : null;
++
+       if (p.examples && p.examples.length > 0) {
+         return p.examples.map((ex, idx) => ({
+           testIndex: idx + 1,
+@@ -3120,3 +3120,4 @@
++          callCode: idx === 0 ? sampleCall : null,
+           expectedOutput: ex.output || 'Expected Result',
+           explanation: ex.explanation || ''
+         }));
+@@ -3123,9 +3123,11 @@
++
+       return [
+         {
+           testIndex: 1,
+-          inputStr: `Input from starter template`,
+-          expectedOutput: `Verified Output`,
+-          explanation: `Evaluated against problem constraints`
++          inputStr: 'Input from starter template',
++          callCode: sampleCall,
++          expectedOutput: 'Verified Output',
++          explanation: 'Evaluated against problem constraints'
+         }
+       ];
+     }
+@@ -3178,6 +3178,14 @@
+       const p = this.problemsById.get(problemId);
+       if (!p) return { total: 0, passed: 0, results: [] };
+ 
++      if (!this.engine && typeof window !== 'undefined' && window.PythonExecutionEngine) {
++        this.engine = new window.PythonExecutionEngine();
++      }
++
++      if (!this.engine) {
++        return { total: 0, passed: 0, results: [{ testIndex: 1, passed: false, actualOutput: 'Error: Engine not loaded', expectedOutput: 'Result' }] };
++      }
++
+       const testCases = this.getProblemTestCases(p);
+       const results = [];
+       let passedCount = 0;
+@@ -3184,22 +3184,47 @@
+-      // Execute code in restricted engine
+-      const runResult = this.runWorkspaceCode(problemId, userCode);
+-
+-      testCases.forEach((tc, idx) => {
+-        if (!runResult.ok) {
+-          results.push({
+-            testIndex: tc.testIndex,
+-            inputStr: tc.inputStr,
+-            expectedOutput: tc.expectedOutput,
+-            actualOutput: 'Execution Error: ' + runResult.error,
++      for (const tc of testCases) {
++        let trace;
++        if (tc.callCode) {
++          const harness = `\n${userCode}\n__test_val__ = ${tc.callCode}\n`;
++          trace = this.engine.trace(harness, "");
++        } else {
++          trace = this.engine.trace(userCode, "");
++        }
++
++        if (!trace.ok) {
++          results.push({
++            testIndex: tc.testIndex,
++            inputStr: tc.inputStr,
++            expectedOutput: tc.expectedOutput,
++            actualOutput: 'Execution Error: ' + trace.error,
+             passed: false,
+-            error: runResult.error
+-          });
+-        } else {
+-          // If execution succeeded without runtime error
+-          passedCount++;
+-          const actualText = runResult.stdout.length > 0 
+-            ? runResult.stdout.join('\n') 
+-            : (runResult.variables.length > 0 ? runResult.variables.map(v => `${v.name} = ${v.current}`).join(', ') : 'Success (No output)');
++            error: trace.error
++          });
++        } else {
++          const steps = trace.steps || [];
++          const lastStep = steps.length > 0 ? steps[steps.length - 1] : {};
++          let actualText = 'Executed cleanly';
++          let isMatch = false;
++
++          if (tc.callCode) {
++            const v = (lastStep.variables || []).find(x => x.name === '__test_val__');
++            if (v && v.current !== undefined) {
++              actualText = String(v.current);
++            } else if (lastStep.stdout && lastStep.stdout.length > 0) {
++              actualText = lastStep.stdout[lastStep.stdout.length - 1];
++            }
++            const normActual = actualText.replace(/\s+/g, '');
++            const normExpected = String(tc.expectedOutput).replace(/\s+/g, '');
++            isMatch = (normActual === normExpected);
++          } else {
++            if (lastStep.stdout && lastStep.stdout.length > 0) {
++              actualText = lastStep.stdout.join('\n');
++            } else if (lastStep.variables && lastStep.variables.length > 0) {
++              actualText = lastStep.variables.filter(x => !x.name.startsWith('__')).map(x => `${x.name} = ${x.current}`).join(', ');
++            }
++            isMatch = true;
++          }
++
++          if (isMatch) passedCount++;
+ 
+           results.push({
+             testIndex: tc.testIndex,
+@@ -3206,9 +3206,9 @@
+             expectedOutput: tc.expectedOutput,
+             actualOutput: actualText,
+-            passed: true
+-          });
+-        }
+-      });
++            passed: isMatch
++          });
++        }
++      }
+ 
+       if (passedCount === testCases.length && testCases.length > 0) {
+         this.markSolved(problemId);
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

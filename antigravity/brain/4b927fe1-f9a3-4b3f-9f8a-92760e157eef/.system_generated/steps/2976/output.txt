@@ -1,0 +1,16 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\brain\4b927fe1-f9a3-4b3f-9f8a-92760e157eef\scratch\test_dsa_phase10_validation.js. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -407,8 +407,8 @@
+ assert.strictEqual(String(trace.finalResult), '6', 'Kadane final result is 6');
+ 
+ // Explainer backward restoration
+-const explainer = new sandbox.window.TeachingExplainer(trace);
+-const enriched = explainer.enrichTrace();
++const explainer = new sandbox.window.RuleBasedExplainer();
++const enriched = explainer.enrichTraceWithExplanations(trace);
+ assert(enriched.steps.length > 10, 'Trace has enriched steps');
+ 
+ // Forward then backward step navigation simulation
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

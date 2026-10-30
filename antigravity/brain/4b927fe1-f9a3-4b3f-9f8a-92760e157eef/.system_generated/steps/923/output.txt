@@ -1,0 +1,9 @@
+
+The command exited with code 0.
+Output:
+
+app_build\app.js:882:      ? `${mainMeaning}<br><br><span style="font-size:13.5px; color:var(--text-secondary); 
+display:block; padding-top:4px;"><strong>Symbols in this step:</strong><br>${lesson.symbolsMeaning}</span>`
+
+
+

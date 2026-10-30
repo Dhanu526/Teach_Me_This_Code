@@ -1,0 +1,61 @@
+
+The command exited with code 1.
+Output:
+===================================================================
+PHASE 2: 30-TOPIC SEARCHABLE LIBRARY & MULTI-FACETED BROWSING AUDIT
+===================================================================
+
+[1] Verifying 30-Topic Architecture & CSS Styles:
+  ✓ [PASS] topic-30-grid CSS class present
+  ✓ [PASS] topic-30-card CSS class present
+  ✓ [PASS] topic-detail-hero CSS class present
+  ✓ [PASS] topic-recommended-card CSS class present
+  ✓ [PASS] pattern-select CSS class present
+  ✓ [PASS] mini-topic-chip CSS class present
+  ✓ [PASS] TOPIC_METADATA_30 is defined as an array
+  ✓ [PASS] TOPIC_METADATA_30 contains exactly 30 topics (found 30)
+  ✓ [PASS] All 30 specific topics requested by the user are defined in TOPIC_METADATA_30
+
+[2] Verifying Multi-Topic Tagging Across 300 Problems:
+  ✓ [PASS] Every problem has an array of topics (p.topics)
+  ✓ [PASS] Problems belong to multiple topics (found 290 multi-topic problems)
+  ✓ [PASS] Two Sum (LC 1) tagged with both 'Arrays' and 'Hashing and Hash Maps'
+  ✓ [PASS] Number of Islands (LC 200) tagged with 'Graphs' and 'Matrix Problems'
+  ✓ [PASS] Course Schedule (LC 207) tagged with 'Graphs' and 'Topological Sorting'
+  ✓ [PASS] Daily Temperatures (LC 739) tagged with 'Stacks' and 'Monotonic Stack and Queue'
+
+[3] Testing Topic Page Metrics, Difficulty Distributions & Recommended Next Problem:
+  ✓ [PASS] Every one of the 30 topics has at least 1 real curated problem (zero empty topics)
+  ✓ [PASS] Every topic page correctly calculates difficulty distribution (Easy, Medium, Hard breakdown)
+  ✓ [PASS] Every topic page identifies a valid recommended next problem
+  ✓ [PASS] Arrays topic contains 165 problems
+  ✓ [PASS] Arrays initial recommended next problem is 'Two Sum'
+  ✓ [PASS] Arrays solved count increments to 1
+  ✓ [PASS] Next recommended problem dynamically shifts away from solved Two Sum (now #217)
+
+[4] Testing Multi-Faceted Browsing (Topic, Difficulty, Pattern, Status):
+  ✓ [PASS] Browse by Topic: 'Binary Search' returns all 20 binary search problems
+  ✓ [PASS] Browse by Difficulty: 'Binary Search' + 'Medium' accurately filters
+  ✗ [FAIL] Browse by Algorithmic Pattern: correctly filters by specific pattern
+  ✓ [PASS] Browse by Learning Status: 'solved' accurately returns problem 1
+  ✓ [PASS] Search within Topic: finds 'Invert Binary Tree' within Trees topic
+
+[5] Testing Dedicated Topic Page Rendering & Navigation:
+evalmachine.<anonymous>:746
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+             ^
+
+TypeError: window.scrollTo is not a function
+    at DsaDashboard.openTopicDetailPage (evalmachine.<anonymous>:746:14)
+    at runDsaPhase2Tests (C:\Users\CVT\.gemini\antigravity\brain\4b927fe1-f9a3-4b3f-9f8a-92760e157eef\scratch\test_dsa_phase2.js:238:8)
+    at Object.<anonymous> (C:\Users\CVT\.gemini\antigravity\brain\4b927fe1-f9a3-4b3f-9f8a-92760e157eef\scratch\test_dsa_phase2.js:259:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+
+Node.js v24.19.0
+

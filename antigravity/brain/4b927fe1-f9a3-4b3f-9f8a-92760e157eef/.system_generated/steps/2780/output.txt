@@ -1,0 +1,33 @@
+
+The command exited with code 0.
+Output:
+
+
+    Directory: C:\Users\CVT\.gemini\antigravity\brain\4b927fe1-f9a3-4b3f-9f8a-92760e157eef\scratch
+
+
+Mode                 LastWriteTime         Length Name                                                                 
+----                 -------------         ------ ----                                                                 
+-a----        27-10-2026     15:36           1219 debug_harness.js                                                     
+-a----        27-10-2026     15:36           1043 debug_laststep.js                                                    
+-a----        27-10-2026     11:46          23142 generate_dataset.js                                                  
+-a----        27-10-2026     12:37          12451 test_dsa_phase1.js                                                   
+-a----        27-10-2026     12:56          11282 test_dsa_phase2.js                                                   
+-a----        27-10-2026     13:12          10262 test_dsa_phase3.js                                                   
+-a----        27-10-2026     14:58          18357 test_dsa_phase4.js                                                   
+-a----        27-10-2026     16:02          19653 test_dsa_phase5_workspace.js                                         
+-a----        27-10-2026     16:30          16261 test_dsa_phase6_solutions.js                                         
+-a----        27-10-2026     18:23          17750 test_dsa_phase7_roadmap.js                                           
+-a----        27-10-2026     18:38          16273 test_dsa_phase8_storage.js                                           
+-a----        27-10-2026     15:34           1301 test_engine_run.js                                                   
+-a----        27-10-2026     15:59           2084 test_harness_check.js                                                
+-a----        27-10-2026     12:36           2070 test_indented_blocks.js                                              
+-a----        25-10-2026     20:57           1881 test_layout.js                                                       
+-a----        25-10-2026     20:11           9999 test_phase4.js                                                       
+-a----        25-10-2026     20:17          14486 test_phase5.js                                                       
+-a----        27-10-2026     16:17           4413 test_phase6_solutions_engine.js                                      
+-a----        27-10-2026     15:35           2455 test_runner_prototype.js                                             
+-a----        27-10-2026     12:36           1194 test_trace_debug.js                                                  
+
+
+

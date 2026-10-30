@@ -1,0 +1,42 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app_build\app.js. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -266,7 +266,7 @@
+       this.analyzeAndRun();
+     });
+ 
+-    // Keyboard shortcuts: Left / Right arrows + F7 for Thonny sub-expression stepping
++    // Keyboard shortcuts: Left / Right arrows + F7 for Thonny sub-expression stepping, 1-4 for Quiz options
+     window.addEventListener("keydown", (e) => {
+       if (document.activeElement === this.codeTextarea) {
+         return;
+@@ -273,3 +273,27 @@
++      if (this.quizModeEnabled && ["1", "2", "3", "4"].includes(e.key)) {
++        const step = this.traceResult && this.traceResult.steps ? this.traceResult.steps[this.currentStepIdx] : null;
++        if (step && step.quizQuestion) {
++          const answerState = this.quizAnswers.get(step.stepIndex);
++          if (!answerState || !answerState.answered) {
++            const optIdx = Number(e.key) - 1;
++            const opt = step.quizQuestion.options[optIdx];
++            if (opt) {
++              e.preventDefault();
++              const isCorrect = Boolean(opt.isCorrect);
++              this.quizScore.total++;
++              if (isCorrect) this.quizScore.correct++;
++              this.quizAnswers.set(step.stepIndex, {
++                selectedIdx: optIdx,
++                isCorrect,
++                answered: true,
++                skipped: false
++              });
++              this.renderStep();
++              return;
++            }
++          }
++        }
++      }
+       if (e.key === "ArrowRight") {
+         e.preventDefault();
+         this.stopAutoPlay();
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

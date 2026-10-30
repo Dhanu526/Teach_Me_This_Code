@@ -1,0 +1,13 @@
+
+The command exited with code 0.
+Output:
+
+> app_build\app.js:12:    this.explainer = new window.RuleBasedExplainer();
+  app_build\app.js:13:
+  app_build\app.js:14:    this.currentPresetKey = "max_subarray";
+  app_build\app.js:15:    const defaultProg =
+  app_build\app.js:16:      window.PRELOADED_PROGRAMS[this.currentPresetKey] ||
+  app_build\app.js:17:      window.PRELOADED_PROGRAMS["stack_class"];
+
+
+

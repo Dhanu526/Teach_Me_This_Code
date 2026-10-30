@@ -1,0 +1,77 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app_build\styles.css. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -1311,6 +1311,71 @@
+   transition: none !important;
+ }
+ 
++/* Reduced-Motion Accessibility Compliance (Phase 5) */
++@media (prefers-reduced-motion: reduce) {
++  *,
++  *::before,
++  *::after {
++    animation-duration: 0.001s !important;
++    animation-iteration-count: 1 !important;
++    transition-duration: 0.001s !important;
++    scroll-behavior: auto !important;
++  }
++}
++
++/* Quick Test Inputs Strip (Phase 5: Test all-negative, positive, and single-element inputs) */
++.test-inputs-strip {
++  display: flex;
++  align-items: center;
++  flex-wrap: wrap;
++  gap: 8px 12px;
++  padding: 8px 24px;
++  background: #ffffff;
++  border-bottom: 1px solid var(--border-light);
++  font-size: 13px;
++}
++
++.test-inputs-label {
++  font-weight: 700;
++  color: var(--text-secondary);
++  white-space: nowrap;
++}
++
++.test-input-chips {
++  display: flex;
++  align-items: center;
++  flex-wrap: wrap;
++  gap: 6px;
++}
++
++.test-chip {
++  font-family: var(--font-mono);
++  font-size: 12px;
++  font-weight: 600;
++  padding: 4px 10px;
++  border-radius: 6px;
++  border: 1px solid var(--border-medium);
++  background: var(--bg-subtle);
++  color: var(--text-main);
++  cursor: pointer;
++  transition: all 0.15s ease;
++}
++
++.test-chip:hover {
++  background: #eff6ff;
++  border-color: #93c5fd;
++  color: #1d4ed8;
++  transform: translateY(-1px);
++}
++
++.test-chip.active {
++  background: #dbeafe;
++  border-color: #2563eb;
++  color: #1e40af;
++  font-weight: 700;
++  box-shadow: 0 1px 3px rgba(37, 99, 235, 0.15);
++}
++
+ .teach-next-box {
+   background: var(--bg-subtle);
+   padding: 11px 15px;
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

@@ -1,0 +1,61 @@
+
+The command exited with code 1.
+Output:
+===================================================================
+PHASE 8 TEST SUITE: LOCAL PROGRESS STORAGE, BACKUP & PREFERENCES
+===================================================================
+
+[1] Testing Local Storage Persistence Components:
+  ✓ [PASS] IndexedDB offline backup manager instantiated
+  ✓ [PASS] All progress facets successfully stored in local computer storage
+
+[2] Testing State Restoration Across Page Refresh / App Restart:
+  ✓ [PASS] Complete learning state survives application reload with 100% fidelity
+
+[3] Testing Export Progress Backup Generation:
+File download failed, offering fallback clipboard copy: ReferenceError: Blob is not defined
+    at DsaDashboard.downloadProgressBackup (evalmachine.<anonymous>:618:24)
+    at Object.<anonymous> (C:\Users\CVT\.gemini\antigravity\brain\4b927fe1-f9a3-4b3f-9f8a-92760e157eef\scratch\test_dsa_phase8_storage.js:198:36)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+  ✓ [PASS] Export Progress produces structured, comprehensive JSON backup
+
+[4] Testing Pre-Import Validation & Corruption Protection:
+  ✓ [PASS] Validation rejects empty input
+  ✓ [PASS] Validation rejects malformed JSON without crashing
+  ✓ [PASS] Validation rejects invalid root schema
+  ✓ [PASS] Validation rejects empty backup file without progress
+node:assert:152
+  throw new AssertionError(obj);
+  ^
+
+AssertionError [ERR_ASSERTION]: Existing solved list remained uncorrupted
+
+[
+  1,
+  3
+]
+
+    at Object.<anonymous> (C:\Users\CVT\.gemini\antigravity\brain\4b927fe1-f9a3-4b3f-9f8a-92760e157eef\scratch\test_dsa_phase8_storage.js:239:8)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: [ 1, 3 ],
+  expected: [ 1, 3 ],
+  operator: 'deepStrictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.19.0
+

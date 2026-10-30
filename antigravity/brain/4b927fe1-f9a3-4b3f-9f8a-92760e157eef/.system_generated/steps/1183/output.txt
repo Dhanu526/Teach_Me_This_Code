@@ -1,0 +1,12 @@
+
+The command exited with code 0.
+Output:
+
+> app_build\app.js:387:    let rawTrace = this.engine.trace(this.sourceCode, this.inputCode);
+  app_build\app.js:388:
+  app_build\app.js:389:    // Hybrid execution: if running via server.py (http/https) and the browser engine hits 
+complex Python syntax,
+  app_build\app.js:390:    // automatically use the real Python `sys.settrace` + `ast` backend (`/api/trace`)!
+
+
+

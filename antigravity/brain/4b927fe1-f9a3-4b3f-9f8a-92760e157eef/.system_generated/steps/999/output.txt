@@ -1,0 +1,27 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app_build\app.js. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -1719,13 +1719,14 @@
+ 
+   formatMarkdown(str) {
+     if (!str) return "";
+-    return String(str)
+-      .replace(/&/g, "&amp;")
+-      .replace(/</g, "&lt;")
+-      .replace(/>/g, "&gt;")
+-      .replace(/&lt;br&gt;/g, "<br>")
+-      .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
+-      .replace(/`([^`]+)`/g, "<code>$1</code>");
++    let s = String(str);
++    // Convert markdown bold: **text** -> <strong>text</strong>
++    s = s.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
++    // Convert markdown inline code: `code` -> <code>code</code>
++    s = s.replace(/`([^`]+)`/g, "<code>$1</code>");
++    // Convert newlines to linebreaks
++    s = s.replace(/\r?\n/g, "<br>");
++    return s;
+   }
+ 
+   escapeHTML(str) {
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

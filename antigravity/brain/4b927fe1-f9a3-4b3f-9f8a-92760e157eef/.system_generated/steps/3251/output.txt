@@ -1,0 +1,174 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app_build\styles.css. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -576,7 +576,7 @@
+   width: 100%;
+   min-height: 340px;
+   font-family: var(--font-mono);
+-  font-size: 13.5px;
++  font-size: 15px;
+   line-height: 1.7;
+   padding: 14px;
+   border: 1px solid var(--primary-blue);
+@@ -596,7 +596,7 @@
+ .teaching-card-inner {
+   display: flex;
+   flex-direction: column;
+-  gap: 10px;
++  gap: 12px;
+ }
+ 
+ .teach-header-row {
+@@ -606,10 +606,10 @@
+ }
+ 
+ .teach-step-title {
+-  font-size: 18px;
+-  font-weight: 700;
+-  color: var(--text-main);
+-  line-height: 1.25;
++  font-size: 22px;
++  font-weight: 700;
++  color: var(--text-main);
++  line-height: 1.3;
+ }
+ 
+ .teach-title-group {
+@@ -616,6 +616,6 @@
+   align-items: center;
+   flex-wrap: wrap;
+-  gap: 8px;
++  gap: 10px;
+ }
+ 
+ .substep-pill {
+@@ -622,6 +622,6 @@
+-  font-size: 11.5px;
+-  font-weight: 700;
+-  padding: 2px 8px;
++  font-size: 13px;
++  font-weight: 700;
++  padding: 3px 10px;
+   border-radius: 999px;
+   background: #eff6ff;
+   color: #1d4ed8;
+@@ -631,11 +631,11 @@
+ .teach-section {
+   display: flex;
+   flex-direction: column;
+-  gap: 4px;
++  gap: 6px;
+ }
+ 
+ .teach-label {
+-  font-size: 12px;
++  font-size: 14px;
+   font-weight: 700;
+   color: var(--text-secondary);
+ }
+@@ -642,10 +642,10 @@
+ .teach-code-box {
+   font-family: var(--font-mono);
+-  font-size: 14px;
++  font-size: 16.5px;
+   font-weight: 600;
+   background: var(--bg-subtle);
+   border-left: 4px solid var(--primary-blue);
+-  padding: 7px 12px;
++  padding: 8px 14px;
+   border-radius: var(--radius-sm);
+   color: var(--text-main);
+ }
+@@ -654,10 +654,10 @@
+   background: #fffbeb;
+   border: 1px solid #fde68a;
+   border-radius: var(--radius-md);
+-  padding: 12px 16px;
+-  display: flex;
+-  flex-direction: column;
+-  gap: 8px;
++  padding: 14px 18px;
++  display: flex;
++  flex-direction: column;
++  gap: 10px;
+ }
+ 
+ .thonny-expr-card.is-short-circuited {
+@@ -668,7 +668,7 @@
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+-  font-size: 12px;
++  font-size: 13.5px;
+ }
+ 
+ .thonny-badge {
+@@ -679,10 +679,11 @@
+ 
+ .thonny-subcounter {
+   font-family: var(--font-mono);
+-  font-weight: 600;
+-  color: #92400e;
+-  background: #fef3c7;
+-  padding: 2px 8px;
++  font-weight: 700;
++  font-size: 13px;
++  color: #92400e;
++  background: #fef3c7;
++  padding: 2px 9px;
+   border-radius: 99px;
+ }
+ 
+@@ -689,10 +689,10 @@
+   font-family: var(--font-mono);
+-  font-size: 15px;
+-  font-weight: 700;
+-  background: #ffffff;
+-  border: 1.5px solid #f59e0b;
+-  border-radius: 6px;
+-  padding: 8px 12px;
++  font-size: 17px;
++  font-weight: 700;
++  background: #ffffff;
++  border: 1.5px solid #f59e0b;
++  border-radius: 6px;
++  padding: 10px 14px;
+   color: var(--text-main);
+ }
+ 
+@@ -699,4 +699,4 @@
+-  font-size: 13.5px;
++  font-size: 15px;
+   color: #78350f;
+   font-weight: 500;
+ }
+@@ -704,8 +704,8 @@
+   display: flex;
+   flex-wrap: wrap;
+   align-items: center;
+-  gap: 6px;
+-  margin-top: 2px;
++  gap: 8px;
++  margin-top: 4px;
+ }
+ 
+ .thonny-chip {
+@@ -712,5 +712,5 @@
+-  font-size: 12px;
+-  padding: 3px 9px;
++  font-size: 13.5px;
++  padding: 4px 11px;
+   border-radius: 6px;
+   border: 1px solid #fcd34d;
+   background: #ffffff;
+@@ -734,7 +734,7 @@
+ 
+ .thonny-arrow {
+   color: #d97706;
+-  font-size: 12px;
++  font-size: 13.5px;
+   font-weight: 700;
+ }
+ 
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

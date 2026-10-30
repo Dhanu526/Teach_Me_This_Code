@@ -1,0 +1,154 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app_build\app.js. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -514,10 +514,14 @@
+       .join("  •  ");
+   }
+ 
+-  goToStep(idx) {
++  goToStep(idx, substepIdx = 0) {
+     if (!this.traceResult || !this.traceResult.steps.length) return;
+     this.currentStepIdx = Math.max(0, Math.min(idx, this.traceResult.steps.length - 1));
+     const step = this.traceResult.steps[this.currentStepIdx];
++    const substeps = step.teachingSubsteps && step.teachingSubsteps.length > 0
++      ? step.teachingSubsteps
++      : [step.teacherLesson];
++    this.currentSubstepIdx = Math.max(0, Math.min(substepIdx, substeps.length - 1));
+     const frames = step.exprFrames || [];
+     this.currentSubStepIdx = Math.max(0, frames.length - 1);
+     this.renderStep();
+@@ -524,23 +524,42 @@
+ 
+-  advanceSubExpression() {
+-    if (!this.traceResult || !this.traceResult.steps.length) return;
+-    const step = this.traceResult.steps[this.currentStepIdx];
+-    const frames = step.exprFrames || [];
+-
+-    if (frames.length > 1 && this.currentSubStepIdx < frames.length - 1) {
+-      this.currentSubStepIdx++;
+-      this.renderStep();
+-      return;
+-    }
+-
+-    if (this.currentStepIdx < this.traceResult.steps.length - 1) {
++  goToNextSubstep() {
++    if (!this.traceResult || !this.traceResult.steps.length) return;
++    const step = this.traceResult.steps[this.currentStepIdx];
++    const substeps = step.teachingSubsteps && step.teachingSubsteps.length > 0
++      ? step.teachingSubsteps
++      : [step.teacherLesson];
++
++    if (this.currentSubstepIdx < substeps.length - 1) {
++      this.currentSubstepIdx++;
++      this.renderStep();
++    } else if (this.currentStepIdx < this.traceResult.steps.length - 1) {
+       this.currentStepIdx++;
+-      this.currentSubStepIdx = 0;
+-      this.renderStep();
+-    } else {
+-      this.currentSubStepIdx = 0;
+-      this.renderStep();
+-    }
++      this.currentSubstepIdx = 0;
++      this.renderStep();
++    } else {
++      this.stopAutoPlay();
++    }
++  }
++
++  goToPrevSubstep() {
++    if (!this.traceResult || !this.traceResult.steps.length) return;
++
++    if (this.currentSubstepIdx > 0) {
++      this.currentSubstepIdx--;
++      this.renderStep();
++    } else if (this.currentStepIdx > 0) {
++      this.currentStepIdx--;
++      const prevStep = this.traceResult.steps[this.currentStepIdx];
++      const prevSubsteps = prevStep.teachingSubsteps && prevStep.teachingSubsteps.length > 0
++        ? prevStep.teachingSubsteps
++        : [prevStep.teacherLesson];
++      this.currentSubstepIdx = Math.max(0, prevSubsteps.length - 1);
++      this.renderStep();
++    }
++  }
++
++  advanceSubExpression() {
++    this.goToNextSubstep();
+   }
+ 
+   startAutoPlay() {
+@@ -547,6 +547,9 @@
+-    if (this.currentStepIdx >= this.traceResult.steps.length - 1) {
++    const total = this.traceResult.steps.length;
++    const lastStep = this.traceResult.steps[total - 1];
++    const lastSubsteps = lastStep.teachingSubsteps || [lastStep.teacherLesson];
++    if (this.currentStepIdx >= total - 1 && this.currentSubstepIdx >= lastSubsteps.length - 1) {
+       this.currentStepIdx = 0;
+-      this.currentSubStepIdx = 0;
++      this.currentSubstepIdx = 0;
+       this.renderStep();
+     }
+     this.isPlaying = true;
+@@ -553,7 +553,12 @@
+ 
+     this.playInterval = setInterval(() => {
+-      if (this.currentStepIdx < this.traceResult.steps.length - 1) {
+-        this.goToStep(this.currentStepIdx + 1);
++      const step = this.traceResult.steps[this.currentStepIdx];
++      const substeps = step.teachingSubsteps || [step.teacherLesson];
++      const isLastStep = this.currentStepIdx >= total - 1;
++      const isLastSubstep = this.currentSubstepIdx >= substeps.length - 1;
++
++      if (!isLastStep || !isLastSubstep) {
++        this.goToNextSubstep();
+       } else {
+         this.stopAutoPlay();
+       }
+@@ -580,13 +580,27 @@
+     }
+ 
+     const step = steps[this.currentStepIdx];
++    const substeps = step.teachingSubsteps && step.teachingSubsteps.length > 0
++      ? step.teachingSubsteps
++      : [step.teacherLesson];
++    this.currentSubstepIdx = Math.max(0, Math.min(this.currentSubstepIdx, substeps.length - 1));
++    const currentSubstep = substeps[this.currentSubstepIdx];
++
+     const isLocal = step.scopeType === "LOCAL" || (step.functionName && step.functionName !== "Global Scope");
+     const scopeLabel = isLocal ? `LOCAL SCOPE: ${step.functionName.split("(")[0]}()` : "GLOBAL SCOPE";
+ 
+-    // Update Top Bar & Scope Indicators
+-    this.stepProgressLabel.textContent = `Step ${this.currentStepIdx + 1} of ${total}`;
+-    this.btnPrev.disabled = this.currentStepIdx <= 0;
+-    this.btnNext.disabled = this.currentStepIdx >= total - 1;
++    const isFirst = this.currentStepIdx === 0 && this.currentSubstepIdx === 0;
++    const isLast = this.currentStepIdx === total - 1 && this.currentSubstepIdx === substeps.length - 1;
++
++    // Requirement 10: Progress indicator distinguishing teaching substeps from actual execution steps
++    this.stepProgressLabel.textContent = `Step ${this.currentStepIdx + 1} of ${total} • Substep ${this.currentSubstepIdx + 1}/${substeps.length}`;
++    this.btnPrev.disabled = isFirst;
++    this.btnNext.disabled = isLast;
++
++    if (this.teachSubstepPill) {
++      this.teachSubstepPill.textContent = `Substep ${this.currentSubstepIdx + 1} of ${substeps.length}`;
++      this.teachSubstepPill.title = currentSubstep.substepLabel || "";
++    }
+ 
+     [this.activeScopeBadge, this.teachScopeBadge].forEach((badge) => {
+       if (!badge) return;
+@@ -598,9 +598,9 @@
+         : "Scope: Global (<module>)";
+     }
+ 
+-    this.renderArea1Code(step);
+-    this.renderArea2Teaching(step);
+-    this.renderArea3MemoryAndScopes(step);
++    this.renderArea1Code(step, currentSubstep);
++    this.renderArea2Teaching(step, currentSubstep);
++    this.renderArea3MemoryAndScopes(step, currentSubstep);
+     this.renderArea4AllIterations(step);
+ 
+     if (this.showAdvanced) {
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

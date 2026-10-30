@@ -1,0 +1,30 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app_build\app.js. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -157,8 +157,6 @@
+ 
+     this.btnRestart.addEventListener("click", () => {
+       this.stopAutoPlay();
+-      this.quizAnswers.clear();
+-      this.quizScore = { correct: 0, total: 0 };
+       this.goToStep(0, 0);
+     });
+ 
+@@ -170,15 +170,6 @@
+       });
+     }
+ 
+-    if (this.btnToggleQuiz) {
+-      this.btnToggleQuiz.addEventListener("click", () => {
+-        this.quizModeEnabled = !this.quizModeEnabled;
+-        this.btnToggleQuiz.textContent = this.quizModeEnabled ? "🎯 Quiz Mode: ON" : "🎯 Quiz Mode: OFF";
+-        this.btnToggleQuiz.classList.toggle("active", this.quizModeEnabled);
+-        this.renderStep();
+-      });
+-    }
+-
+     if (this.btnToggleGC) {
+       this.btnToggleGC.addEventListener("click", () => {
+         this.showGCObjects = !this.showGCObjects;
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

@@ -1,0 +1,89 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app_build\dsa_dashboard.js. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -1932,7 +1932,7 @@
+             return;
+           }
+ 
+-          // Workspace Action: Run Tests
++          // Workspace Action: Run Tests (with Loading Feedback & Hints)
+           const btnWsTests = e.target.closest('#btnWsRunTests');
+           if (btnWsTests) {
+             const editor = document.getElementById('workspaceCodeEditor');
+@@ -1940,34 +1940,46 @@
+             const testsBadge = document.getElementById('workspaceTestsBadge');
+             const testCards = document.getElementById('workspaceTestCards');
+             if (editor && testsPanel && testCards) {
+-              const codeText = editor.value;
+-              this.saveUserCode(this.activeWorkspaceProblemId, codeText);
+-              const testReport = this.runWorkspaceTests(this.activeWorkspaceProblemId, codeText);
+-              testsPanel.classList.remove('hidden');
+-              if (testsBadge) {
+-                const allPassed = testReport.passed === testReport.total && testReport.total > 0;
+-                testsBadge.textContent = `${testReport.passed}/${testReport.total} Passed (${Math.round((testReport.passed / testReport.total) * 100)}%)`;
+-                testsBadge.className = `tests-status-badge ${allPassed ? 'badge-passed' : 'badge-failed'}`;
+-                if (allPassed) {
+-                  this.markSolved(this.activeWorkspaceProblemId);
+-                } else {
+-                  this.markAttempted(this.activeWorkspaceProblemId);
+-                }
+-              }
+-              testCards.innerHTML = testReport.results.map(r => `
+-                <div class="test-result-card ${r.passed ? 'card-passed' : 'card-failed'}">
+-                  <div class="test-card-top">
+-                    <span class="test-badge">${r.passed ? '✅ Test Case ' + r.testIndex + ' Passed' : '❌ Test Case ' + r.testIndex + ' Failed'}</span>
+-                  </div>
+-                  <div class="test-detail-row"><strong>Input:</strong> <code>${this.escapeHTML(r.inputStr)}</code></div>
+-                  <div class="test-detail-row"><strong>Expected:</strong> <code class="expected-code">${this.escapeHTML(r.expectedOutput)}</code></div>
+-                  <div class="test-detail-row"><strong>Actual Output:</strong> <code>${this.escapeHTML(r.actualOutput)}</code></div>
+-                  ${r.error ? `<div class="test-error-msg">⚠️ Error: ${this.escapeHTML(r.error)}</div>` : ''}
+-                </div>
+-              `).join('');
+-              if (consoleOutput) {
+-                consoleOutput.textContent = `Executed ${testReport.total} test case(s). Passed: ${testReport.passed}/${testReport.total}.`;
+-              }
++              const origText = btnWsTests.innerHTML;
++              btnWsTests.innerHTML = '🧪 Testing...';
++              btnWsTests.disabled = true;
++
++              setTimeout(() => {
++                try {
++                  const codeText = editor.value;
++                  this.saveUserCode(this.activeWorkspaceProblemId, codeText);
++                  const testReport = this.runWorkspaceTests(this.activeWorkspaceProblemId, codeText);
++                  testsPanel.classList.remove('hidden');
++                  if (testsBadge) {
++                    const allPassed = testReport.passed === testReport.total && testReport.total > 0;
++                    testsBadge.textContent = `${testReport.passed}/${testReport.total} Passed (${Math.round((testReport.passed / testReport.total) * 100)}%)`;
++                    testsBadge.className = `tests-status-badge ${allPassed ? 'badge-passed' : 'badge-failed'}`;
++                    if (allPassed) {
++                      this.markSolved(this.activeWorkspaceProblemId);
++                    } else {
++                      this.markAttempted(this.activeWorkspaceProblemId);
++                    }
++                  }
++                  testCards.innerHTML = testReport.results.map(r => `
++                    <div class="test-result-card ${r.passed ? 'card-passed' : 'card-failed'}">
++                      <div class="test-card-top">
++                        <span class="test-badge">${r.passed ? '✅ Test Case ' + r.testIndex + ' Passed' : '❌ Test Case ' + r.testIndex + ' Failed'}</span>
++                      </div>
++                      <div class="test-detail-row"><strong>Input:</strong> <code>${this.escapeHTML(r.inputStr)}</code></div>
++                      <div class="test-detail-row"><strong>Expected:</strong> <code class="expected-code">${this.escapeHTML(r.expectedOutput)}</code></div>
++                      <div class="test-detail-row"><strong>Actual Output:</strong> <code>${this.escapeHTML(r.actualOutput)}</code></div>
++                      ${r.error ? `<div class="test-error-msg">⚠️ Error: ${this.escapeHTML(r.error)}</div>` : ''}
++                      ${!r.passed ? `<div class="test-error-hint">💡 <em>Tip: Inspect loop termination, empty list checks, or off-by-one indices.</em></div>` : ''}
++                    </div>
++                  `).join('');
++                  if (consoleOutput) {
++                    consoleOutput.textContent = `Executed ${testReport.total} test case(s). Passed: ${testReport.passed}/${testReport.total}.`;
++                  }
++                } finally {
++                  btnWsTests.innerHTML = origText;
++                  btnWsTests.disabled = false;
++                }
++              }, 40);
+             }
+             return;
+           }
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

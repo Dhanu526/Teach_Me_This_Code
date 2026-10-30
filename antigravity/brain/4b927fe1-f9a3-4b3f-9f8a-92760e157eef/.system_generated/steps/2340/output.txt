@@ -1,0 +1,36 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\brain\4b927fe1-f9a3-4b3f-9f8a-92760e157eef\scratch\test_dsa_phase5_workspace.js. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -215,12 +215,12 @@
+   // [4] Test Section A: Understand the Problem
+   console.log("\n[4] Testing Section A: Understand the Problem (Rule-Based, No AI APIs):");
+   assert(wsHtml.includes('Understand the Problem'), "Section A header present");
+-  assert(wsHtml.includes('What The Problem Asks'), "Section A explains what is asked");
+-  assert(wsHtml.includes('What You Need To Return'), "Section A highlights return goal");
++  assert(wsHtml.includes('What the Problem Asks'), "Section A explains what is asked");
++  assert(wsHtml.includes('What You Need to Calculate or Return'), "Section A highlights return goal");
+   assert(wsHtml.includes('Example 1'), "Example 1 rendered");
+   assert(wsHtml.includes('Example 2'), "Example 2 rendered");
+-  assert(wsHtml.includes('Key Constraints'), "Key constraints section rendered");
+-  assert(wsHtml.includes('Important Edge Cases'), "Important edge cases section rendered");
++  assert(wsHtml.includes('Important Constraints'), "Important constraints section rendered");
++  assert(wsHtml.includes('Common Edge Cases to Consider'), "Common edge cases section rendered");
+   // Ensure reference solution is initially hidden
+   assert(!wsHtml.includes('ref-code-block'), "Reference solution is hidden initially in Understand tab");
+ 
+@@ -232,10 +232,10 @@
+   // [5] Test Section B: Learn the Pattern
+   console.log("\n[5] Testing Section B: Learn the Pattern (DSA Teaching Content):");
+   assert(wsHtml.includes('Learn the Pattern'), "Section B tab header present");
+-  assert(wsHtml.includes('Why This Pattern Is Useful'), "Explains why pattern is useful");
++  assert(wsHtml.includes('Why This Pattern is Useful'), "Explains why pattern is useful");
+   assert(wsHtml.includes('Prerequisite Concepts'), "Prerequisites explained");
+-  assert(wsHtml.includes('Small Walkthrough Example'), "Illustrative walkthrough example present");
+-  assert(wsHtml.includes('How To Approach The Solution (Step-by-Step)'), "Intended 3-step approach present");
++  assert(wsHtml.includes('Illustrative Walkthrough'), "Illustrative walkthrough example present");
++  assert(wsHtml.includes('Intended Approach'), "Intended 3-step approach present");
+   assert(guide1.whyUseful.includes('O('), "Why useful explains algorithmic complexity O(...)");
+   assert(guide1.intendedApproach.length === 3, "Intended approach has 3 clear actionable steps");
+ 
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

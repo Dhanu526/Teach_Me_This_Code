@@ -1,0 +1,17 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\brain\4b927fe1-f9a3-4b3f-9f8a-92760e157eef\scratch\update_dsa_phase7.py. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -190,9 +190,9 @@
+ old_roadmap_pattern = r'  const ROADMAP_PHASES = \[\s*\{[\s\S]*?\n  \];'
+ if re.search(old_roadmap_pattern, content):
+     content = re.sub(old_roadmap_pattern, ten_stages_def, content, count=1)
+-    print("✓ Replaced ROADMAP_PHASES with BEGINNER_ROADMAP_10_STAGES (10 stages)")
++    print("[SUCCESS] Replaced ROADMAP_PHASES with BEGINNER_ROADMAP_10_STAGES (10 stages)")
+ else:
+-    print("❌ Failed to match old ROADMAP_PHASES")
++    print("[ERROR] Failed to match old ROADMAP_PHASES")
+ 
+ with open(target_file + '.tmp', 'w', encoding='utf-8') as f:
+     f.write(content)
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

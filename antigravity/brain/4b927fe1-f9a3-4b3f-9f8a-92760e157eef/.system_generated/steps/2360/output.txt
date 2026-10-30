@@ -1,0 +1,72 @@
+
+The command exited with code 0.
+Output:
+
+> app_build\dsa_dashboard.js:3116:    getProblemTestCases(p) {
+  app_build\dsa_dashboard.js:3117:      if (p.examples && p.examples.length > 0) {
+  app_build\dsa_dashboard.js:3118:        return p.examples.map((ex, idx) => ({
+  app_build\dsa_dashboard.js:3119:          testIndex: idx + 1,
+  app_build\dsa_dashboard.js:3120:          inputStr: ex.input || 'Sample Input',
+  app_build\dsa_dashboard.js:3121:          expectedOutput: ex.output || 'Expected Result',
+  app_build\dsa_dashboard.js:3122:          explanation: ex.explanation || ''
+  app_build\dsa_dashboard.js:3123:        }));
+  app_build\dsa_dashboard.js:3124:      }
+  app_build\dsa_dashboard.js:3125:      return [
+  app_build\dsa_dashboard.js:3126:        {
+  app_build\dsa_dashboard.js:3127:          testIndex: 1,
+  app_build\dsa_dashboard.js:3128:          inputStr: `Input from starter template`,
+  app_build\dsa_dashboard.js:3129:          expectedOutput: `Verified Output`,
+  app_build\dsa_dashboard.js:3130:          explanation: `Evaluated against problem constraints`
+  app_build\dsa_dashboard.js:3131:        }
+  app_build\dsa_dashboard.js:3132:      ];
+  app_build\dsa_dashboard.js:3133:    }
+  app_build\dsa_dashboard.js:3134:
+  app_build\dsa_dashboard.js:3135:    // -------------------------------------------------------------------------
+  app_build\dsa_dashboard.js:3136:    // PHASE 5: SAFE RESTRICTED CODE EXECUTION (CLIENT-SIDE VM)
+  app_build\dsa_dashboard.js:3137:    // -------------------------------------------------------------------------
+  app_build\dsa_dashboard.js:3138:    runWorkspaceCode(problemId, userCode) {
+  app_build\dsa_dashboard.js:3139:      try {
+  app_build\dsa_dashboard.js:3140:        if (!userCode || !userCode.trim()) {
+  app_build\dsa_dashboard.js:3141:          return { ok: false, error: 'Editor is empty. Write or paste Python code 
+before running.' };
+  app_build\dsa_dashboard.js:3142:        }
+  app_build\dsa_dashboard.js:3143:
+  app_build\dsa_dashboard.js:3144:        if (!this.engine && typeof window !== 'undefined' && 
+window.PythonExecutionEngine) {
+  app_build\dsa_dashboard.js:3145:          this.engine = new window.PythonExecutionEngine();
+  app_build\dsa_dashboard.js:3146:        }
+> app_build\dsa_dashboard.js:3184:      const testCases = this.getProblemTestCases(p);
+  app_build\dsa_dashboard.js:3185:      const results = [];
+  app_build\dsa_dashboard.js:3186:      let passedCount = 0;
+  app_build\dsa_dashboard.js:3187:
+  app_build\dsa_dashboard.js:3188:      // Execute code in restricted engine
+  app_build\dsa_dashboard.js:3189:      const runResult = this.runWorkspaceCode(problemId, userCode);
+  app_build\dsa_dashboard.js:3190:
+  app_build\dsa_dashboard.js:3191:      testCases.forEach((tc, idx) => {
+  app_build\dsa_dashboard.js:3192:        if (!runResult.ok) {
+  app_build\dsa_dashboard.js:3193:          results.push({
+  app_build\dsa_dashboard.js:3194:            testIndex: tc.testIndex,
+  app_build\dsa_dashboard.js:3195:            inputStr: tc.inputStr,
+  app_build\dsa_dashboard.js:3196:            expectedOutput: tc.expectedOutput,
+  app_build\dsa_dashboard.js:3197:            actualOutput: 'Execution Error: ' + runResult.error,
+  app_build\dsa_dashboard.js:3198:            passed: false,
+  app_build\dsa_dashboard.js:3199:            error: runResult.error
+  app_build\dsa_dashboard.js:3200:          });
+  app_build\dsa_dashboard.js:3201:        } else {
+  app_build\dsa_dashboard.js:3202:          // If execution succeeded without runtime error
+  app_build\dsa_dashboard.js:3203:          passedCount++;
+  app_build\dsa_dashboard.js:3204:          const actualText = runResult.stdout.length > 0 
+  app_build\dsa_dashboard.js:3205:            ? runResult.stdout.join('\n') 
+  app_build\dsa_dashboard.js:3206:            : (runResult.variables.length > 0 ? runResult.variables.map(v => 
+`${v.name} = ${v.current}`).join(', ') : 'Success (No output)');
+  app_build\dsa_dashboard.js:3207:
+  app_build\dsa_dashboard.js:3208:          results.push({
+  app_build\dsa_dashboard.js:3209:            testIndex: tc.testIndex,
+  app_build\dsa_dashboard.js:3210:            inputStr: tc.inputStr,
+  app_build\dsa_dashboard.js:3211:            expectedOutput: tc.expectedOutput,
+  app_build\dsa_dashboard.js:3212:            actualOutput: actualText,
+  app_build\dsa_dashboard.js:3213:            passed: true
+  app_build\dsa_dashboard.js:3214:          });
+
+
+

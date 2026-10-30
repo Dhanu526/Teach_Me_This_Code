@@ -1,0 +1,10 @@
+
+The command exited with code 0.
+Output:
+Testing program: Maximum Subarray (Kadane's Algorithm)
+Engine trace ok: true steps: 50
+Best subarray max sum: 6
+All explanations clean: ZERO raw HTML found!
+Total steps: 50
+SUCCESS: Phase 1 verification passed!
+

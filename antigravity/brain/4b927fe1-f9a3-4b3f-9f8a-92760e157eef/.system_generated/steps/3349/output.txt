@@ -1,0 +1,293 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app_build\styles.css. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -3873,13 +3873,13 @@
+   align-items: center;
+ }
+ 
+-.topic-icon { font-size: 20px; }
++.topic-icon { font-size: 24px; }
+ 
+ .topic-count-badge {
+-  font-size: 11.5px;
+-  font-weight: 700;
+-  background: var(--bg-subtle);
+-  padding: 2px 8px;
++  font-size: 13px;
++  font-weight: 700;
++  background: var(--bg-subtle);
++  padding: 3px 9px;
+   border-radius: 999px;
+   color: var(--text-secondary);
+ }
+@@ -3886,5 +3886,5 @@
+ .topic-card-name {
+-  font-size: 14px;
++  font-size: 16.5px;
+   font-weight: 700;
+   color: var(--text-main);
+ }
+@@ -3891,7 +3891,7 @@
+ .topic-card-footer {
+   display: flex;
+   justify-content: space-between;
+-  font-size: 11.5px;
++  font-size: 13px;
+   color: var(--text-muted);
+   font-weight: 500;
+ }
+@@ -3932,7 +3932,7 @@
+   border: none;
+   background: transparent;
+   width: 100%;
+-  font-size: 14.5px;
++  font-size: 16px;
+   color: var(--text-main);
+   outline: none;
+ }
+@@ -3939,7 +3939,7 @@
+ .search-clear-btn {
+   background: transparent;
+   border: none;
+-  font-size: 14px;
++  font-size: 15px;
+   color: var(--text-muted);
+   cursor: pointer;
+ }
+@@ -3957,7 +3957,7 @@
+ }
+ 
+ .filter-label {
+-  font-size: 12.5px;
++  font-size: 13.5px;
+   font-weight: 600;
+   color: var(--text-secondary);
+ }
+@@ -3965,8 +3965,8 @@
+   border: 1px solid var(--border-medium);
+   background: white;
+   border-radius: var(--radius-sm);
+-  padding: 6px 10px;
+-  font-size: 13px;
++  padding: 6px 12px;
++  font-size: 14px;
+   color: var(--text-main);
+   outline: none;
+ }
+@@ -3978,10 +3978,10 @@
+ .filter-pill {
+   border: 1px solid var(--border-light);
+   background: white;
+-  font-size: 12px;
+-  font-weight: 600;
+-  color: var(--text-secondary);
+-  padding: 4px 10px;
++  font-size: 13px;
++  font-weight: 600;
++  color: var(--text-secondary);
++  padding: 5px 12px;
+   border-radius: 999px;
+   cursor: pointer;
+   transition: all 0.15s;
+@@ -4000,9 +4000,9 @@
+   background: transparent;
+   border: 1px solid var(--border-medium);
+   color: var(--text-secondary);
+-  padding: 6px 12px;
+-  border-radius: var(--radius-sm);
+-  font-size: 12px;
++  padding: 6px 14px;
++  border-radius: var(--radius-sm);
++  font-size: 13.5px;
+   font-weight: 600;
+   cursor: pointer;
+   margin-left: auto;
+@@ -4016,7 +4016,7 @@
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+-  font-size: 13px;
++  font-size: 14.5px;
+   color: var(--text-secondary);
+   margin: 4px 0;
+ }
+@@ -4035,7 +4035,7 @@
+   width: 100%;
+   border-collapse: collapse;
+   text-align: left;
+-  font-size: 13.5px;
++  font-size: 15px;
+ }
+ 
+ .problem-table th {
+@@ -4042,5 +4042,5 @@
+-  padding: 10px 14px;
+-  font-size: 12px;
++  padding: 11px 15px;
++  font-size: 13.5px;
+   font-weight: 700;
+   color: var(--text-secondary);
+   border-bottom: 1px solid var(--border-light);
+@@ -4047,7 +4047,7 @@
+ }
+ 
+ .problem-table td {
+-  padding: 10px 14px;
++  padding: 11px 15px;
+   border-bottom: 1px solid var(--border-light);
+   vertical-align: middle;
+ }
+@@ -4062,7 +4062,7 @@
+ .star-btn {
+   background: transparent;
+   border: none;
+-  font-size: 16px;
++  font-size: 18px;
+   color: var(--text-muted);
+   cursor: pointer;
+ }
+@@ -4072,11 +4072,11 @@
+ 
+ .lc-badge {
+   font-family: var(--font-mono);
+-  font-size: 12px;
+-  font-weight: 700;
+-  color: #475569;
+-  background: #f1f5f9;
+-  padding: 2px 7px;
++  font-size: 14px;
++  font-weight: 700;
++  color: #475569;
++  background: #f1f5f9;
++  padding: 3px 8px;
+   border-radius: 4px;
+   white-space: nowrap;
+ }
+@@ -4089,6 +4089,7 @@
+ 
+ .problem-title-link {
+   font-weight: 600;
++  font-size: 15.5px;
+   color: var(--text-main);
+   text-decoration: none;
+ }
+@@ -4098,10 +4098,10 @@
+ }
+ 
+ .pattern-chip {
+-  font-size: 11px;
+-  background: #f1f5f9;
+-  color: #64748b;
+-  padding: 2px 6px;
++  font-size: 12.5px;
++  background: #f1f5f9;
++  color: #64748b;
++  padding: 2px 7px;
+   border-radius: 4px;
+ }
+ 
+@@ -4108,8 +4108,8 @@
+-  font-size: 11.5px;
+-  font-weight: 600;
+-  color: var(--text-secondary);
+-  background: var(--bg-subtle);
+-  padding: 2px 8px;
++  font-size: 13px;
++  font-weight: 600;
++  color: var(--text-secondary);
++  background: var(--bg-subtle);
++  padding: 3px 9px;
+   border-radius: 999px;
+   white-space: nowrap;
+ }
+@@ -4116,9 +4116,9 @@
+ .pattern-tag {
+-  font-size: 11.5px;
+-  color: #64748b;
+-  background: #f8fafc;
+-  border: 1px solid var(--border-light);
+-  padding: 2px 8px;
++  font-size: 13px;
++  color: #64748b;
++  background: #f8fafc;
++  border: 1px solid var(--border-light);
++  padding: 3px 9px;
+   border-radius: 999px;
+   white-space: nowrap;
+ }
+@@ -4125,7 +4125,7 @@
+ .diff-badge {
+-  font-size: 11px;
+-  font-weight: 700;
+-  padding: 3px 8px;
++  font-size: 12.5px;
++  font-weight: 700;
++  padding: 3px 9px;
+   border-radius: 4px;
+   display: inline-block;
+   white-space: nowrap;
+@@ -4135,9 +4135,9 @@
+ .diff-hard { background: #fee2e2; color: #991b1b; }
+ 
+ .status-badge {
+-  font-size: 11px;
+-  font-weight: 700;
+-  padding: 2px 8px;
++  font-size: 12.5px;
++  font-weight: 700;
++  padding: 3px 9px;
+   border-radius: 999px;
+   white-space: nowrap;
+ }
+@@ -4154,9 +4154,9 @@
+ .status-toggle-btn {
+   border: 1px solid var(--border-light);
+   background: white;
+-  font-size: 11.5px;
+-  font-weight: 600;
+-  padding: 3px 8px;
++  font-size: 13px;
++  font-weight: 600;
++  padding: 4px 10px;
+   border-radius: 999px;
+   cursor: pointer;
+   white-space: nowrap;
+@@ -4180,10 +4180,10 @@
+ 
+ .complexity-tag {
+   font-family: var(--font-mono);
+-  font-size: 11px;
+-  background: #f1f5f9;
+-  color: #475569;
+-  padding: 2px 6px;
++  font-size: 12.5px;
++  background: #f1f5f9;
++  color: #475569;
++  padding: 3px 7px;
+   border-radius: 4px;
+   margin-right: 4px;
+   white-space: nowrap;
+@@ -4192,9 +4192,9 @@
+   background: var(--primary-blue);
+   color: white;
+   border: none;
+-  font-size: 12px;
+-  font-weight: 600;
+-  padding: 6px 12px;
++  font-size: 14px;
++  font-weight: 600;
++  padding: 7px 14px;
+   border-radius: var(--radius-sm);
+   cursor: pointer;
+   white-space: nowrap;
+@@ -4213,7 +4213,7 @@
+ .btn-page {
+   border: 1px solid var(--border-light);
+   background: white;
+-  font-size: 12px;
++  font-size: 13.5px;
+   font-weight: 600;
+   color: var(--text-secondary);
+   padding: 4px 10px;
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

@@ -1,0 +1,50 @@
+
+The command exited with code 0.
+Output:
+
+.btn-table-visualize:hover {
+  background: var(--primary-blue-hover);
+}
+
+.pagination-bar {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.btn-page {
+  border: 1px solid var(--border-light);
+  background: white;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+
+.btn-page:hover:not(:disabled) {
+  background: var(--bg-subtle);
+  color: var(--text-main);
+}
+
+.btn-page.active {
+  background: var(--primary-blue);
+  color: white;
+  border-color: var(--primary-blue);
+}
+
+.btn-page:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.page-ellipsis {
+  padding: 0 4px;
+  color: var(--text-muted);
+}
+
+/* Roadmap 8-Phase View */
+.dsa-full-roadmap-wrap {
+
+

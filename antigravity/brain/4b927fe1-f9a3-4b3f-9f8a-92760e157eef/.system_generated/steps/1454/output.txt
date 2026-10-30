@@ -1,0 +1,25 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app_build\explainer.js. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -1874,8 +1874,17 @@
+       };
+     }
+ 
+-    // 6. Assignment with arithmetic formula (e.g. mid = (l + r) // 2)
+-    if (step.eventType === "ASSIGN" && op.target && op.rhsExpr && /[+\-*/%]|\/\//.test(op.rhsExpr) && op.afterVal !== undefined) {
++    // 6. Assignment with arithmetic formula (e.g. mid = (l + r) // 2 or count = count + 1)
++    if (
++      step.eventType === "ASSIGN" &&
++      op.target &&
++      op.rhsExpr &&
++      !op.rhsExpr.trim().startsWith("[") &&
++      !Array.isArray(op.afterVal) &&
++      !/^-\d+$/.test(op.rhsExpr.trim()) &&
++      /(?:\w+|\))\s*(?:[+\-*/%]|(?:\/\/))\s*(?:\w+|\()/.test(op.rhsExpr) &&
++      op.afterVal !== undefined
++    ) {
+       const question = `What will ${op.target} become after calculating ${op.rhsExpr}?`;
+       const subPrompt = `Evaluating ${op.substituted || op.rhsExpr}`;
+       const correctStr = String(op.afterVal);
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

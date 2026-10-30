@@ -1,0 +1,24 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app_build\styles.css. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -1171,7 +1171,7 @@
+   align-items: center;
+   gap: 6px;
+   letter-spacing: 0.4px;
+-  animation: popIn calc(0.35s * var(--anim-speed-factor, 1)) cubic-bezier(0.175, 0.885, 0.32, 1.275);
++  animation: decisionSpring calc(0.45s * var(--anim-speed-factor, 1)) cubic-bezier(0.175, 0.885, 0.32, 1.275);
+ }
+ 
+ .decision-badge.is-true {
+@@ -1223,7 +1223,8 @@
+ .branch-option.is-active-branch {
+   border: 2px solid #10b981;
+   background: #f0fdf4;
+-  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.15);
++  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
++  animation: activeBranchPop calc(0.4s * var(--anim-speed-factor, 1)) ease-out;
+ }
+ 
+ .branch-option.is-active-branch .branch-option-tag {
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

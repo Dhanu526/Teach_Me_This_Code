@@ -1,0 +1,35 @@
+
+The command exited with code 0.
+Output:
+3589: .fill-phase { background: var(--primary-blue); }
+3653: .roadmap-summary-list {
+3659: .roadmap-summary-item {
+3668: .roadmap-summary-bullet {
+3682: .roadmap-summary-info {
+3689: .roadmap-summary-title {
+3696: .roadmap-summary-counts {
+3702: .btn-phase-jump {
+3713: .btn-phase-jump:hover {
+4167: .dsa-full-roadmap-wrap {
+4173: .roadmap-intro-card {
+4180: .roadmap-intro-card h2 {
+4186: .roadmap-intro-card p {
+4192: .roadmap-timeline {
+4198: .roadmap-card {
+4207: .roadmap-card.phase-completed {
+4212: .roadmap-card-header {
+4220: .roadmap-phase-badge {
+4230: .roadmap-header-main {
+4234: .roadmap-phase-title {
+4240: .roadmap-topics-list {
+4247: .roadmap-phase-stat {
+4253: .roadmap-stat-number {
+4259: .roadmap-stat-label {
+4264: .roadmap-desc {
+4271: .roadmap-progress-wrap {
+4278: .roadmap-progress-labels {
+4290: .roadmap-starters-heading {
+4297: .roadmap-starters-grid {
+4304: .roadmap-starter-chip {
+4314: .roadmap-starter-chip.chip-solved {
+

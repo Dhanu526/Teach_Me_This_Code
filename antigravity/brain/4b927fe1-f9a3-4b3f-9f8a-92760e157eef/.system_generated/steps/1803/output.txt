@@ -1,0 +1,14 @@
+The following changes were made by the replace_file_content tool to: C:\Users\CVT\.gemini\antigravity\brain\4b927fe1-f9a3-4b3f-9f8a-92760e157eef\scratch\generate_final.py. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -924,7 +924,7 @@
+ assert len(set(titles)) == 300, "Duplicate titles found!"
+ 
+ # Write out to app_build/dsa_problems.js
+-target_path = os.path.abspath("app_build/dsa_problems.js")
++target_path = r"C:\Users\CVT\.gemini\antigravity\scratch\code-flow-visualizer\app_build\dsa_problems.js"
+ js_content = f"// app_build/dsa_problems.js — 300 Curated, Distinct LeetCode & DSA Problems\n// Real, identifiable problems across 18 core DSA topics\nwindow.DSA_PROBLEMS_LIBRARY = {json.dumps(problems, indent=2)};\n"
+ 
+ with open(target_path, "w", encoding="utf-8") as f:
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.
